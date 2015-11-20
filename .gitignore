@@ -1,0 +1,4 @@
+node_modules/*
+npm-debug.log
+client/src/assets/libs/*
+.sass-cache/*

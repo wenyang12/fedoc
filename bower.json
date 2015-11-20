@@ -1,0 +1,14 @@
+{
+	"name": "xx",
+	"author": ["TerryZhang"],
+	"version": "1.0.0",
+	"dependencies": {
+		"angular": "1.4.7",
+		"angular-ui-router": "0.2.15",
+		"restangular": "1.5.1",
+		"bootstrap": "3.3.5",
+		"angular-ui-bootstrap": "0.13.3",
+		"angular-route": "latest",
+		"angular-toasty": "1.0.4"
+	}
+}
