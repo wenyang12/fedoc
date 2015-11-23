@@ -3,9 +3,7 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
 var config = context.config,
-	util = context.util,
-	dirPath = context.dirPath,
-	filePath = context.filePath;
+	util = context.util;
 	
 var config = context.config;
 var superadmins = config.USERS.superadmins;

@@ -2,14 +2,27 @@ module.exports = function(app) {
 	app.controller('ArticleListController', [
 		'$scope',
 		'$state',
-		function($scope, $state) {
-			
+		'ArticleService',
+		function($scope, $state, ArticleService) {
+			$scope.list = function(_query) {
+				var query = _query||{};
+				ArticleService.list(query).then(function(data) {
+					$scope.articles = data.msg.articles;
+					$scope.pagination = data.msg.pagination;
+					$scope.count = data.msg.count;
+				});
+			};
+
+			$scope.init = function(){
+				$scope.list();
+			};
 		}
-	]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-		$stateProvider.state('site.articles', {
+	]);
+	app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+		$stateProvider.state('articles', {
 			url: '/articles',
 			templateUrl: '/site/tpls/articles/index.html',
-			pageTitle: '用户管理',
+			pageTitle: '文档列表',
 			controller: 'ArticleListController'
 		});
 	}]);

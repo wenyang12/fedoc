@@ -1,15 +1,12 @@
 module.exports = function(app) {
 
-	require('site/tpls/articles/index')(app);
-	require('site/tpls/signin/index')(app);
-
 	app.controller('SiteController', ['$scope', '$rootScope', '$http', '$state',
 		function($scope, $rootScope, $http, $state) {
 			$scope.user = {
 				email: 'zhangc@fxiaoke.com',
 				pwd: '123456'
 			};
-	
+
 			$scope.isLogin = function() {
 				$http({
 					method: 'post',
@@ -26,15 +23,20 @@ module.exports = function(app) {
 				});
 			};
 			$scope.isLogin();
-			$state.go('site.articles');
+			$state.go('articles');
 		}
 	]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
 		$stateProvider
 			.state('site', {
 				url: '/site',
 				templateUrl: '/site/index.html',
-				pageTitle: '主页'
+				pageTitle: '主页',
+				controller: 'SiteController'
 			});
 	}]);
+
+	require('site/tpls/articles/index')(app);
+	require('site/tpls/article/index')(app);
+	require('site/tpls/signin/index')(app);
 
 };

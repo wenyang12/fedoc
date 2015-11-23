@@ -1,0 +1,46 @@
+
+	<!--编辑，新增,查看-->
+	<form class="form-horizontal" ng-if="article.isAuthor||article.isAdd">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">标题</label>
+				<div class="col-sm-10">
+					<input  class="form-control" type="title" autocomplete="off" name="title" ng-model="article.title" placeholder="标题" required />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">内容</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" type="content" autocomplete="off" name="content" ng-model="article.content" placeholder="内容" required>
+					</textarea>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default"ng-click="update()" ng-if="article.isAuthor">保存</button>
+					<button type="submit" class="btn btn-default"ng-click="create()" ng-if="article.isAdd">新增</button>
+				</div>
+			</div>
+</form>
+<div class="article-box"  ng-if="!article.isAdd &&!article.isAuthor">
+	<div class="row page-header">
+		<div class="article-title col-md-6"  ng-bind="article.title">
+		
+		</div>
+		<div class="col-md-3" >
+			<span ng-if="article.tags.length === 0">未分类</span>
+			<span ng-if="article.tags.length >0">
+				<span ng-repeat="t in article.tags">{{t}};</span>
+			</span>
+			
+		</div>
+		<div class="col-md-3">
+			<a ng-bind="article.user.nickname">
+				
+			</a>
+		</div>
+	</div>
+	<div class="article-content" >
+		<p ng-bind="article.content"></p>
+	</div>
+</div>

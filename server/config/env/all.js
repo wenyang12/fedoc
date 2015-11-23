@@ -19,5 +19,9 @@ module.exports = {
 			email: 'zhangc@fxiaoke.com',
 			pwd: '123456'
 		}]
+	},
+	LIST: {
+		perPage: 15,
+		limitPage: 10
 	}
 };

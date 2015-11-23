@@ -19,7 +19,10 @@ module.exports = function(app) {
 						var user = data.msg.user;
 						$rootScope.user = user;
 						toasty.success('登陆成功');
-						$state.go('site.articles');
+						$rootScope.$broadcast('userChange', {
+							user: user
+						});
+						$state.go('articles');
 					} else {
 						toasty.error(data.msg);
 					}
@@ -30,7 +33,7 @@ module.exports = function(app) {
 
 	app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
 		$stateProvider
-			.state('site.signin', {
+			.state('signin', {
 				url: '/signin',
 				templateUrl: '/site/tpls/signin/index.html',
 				controller: 'SigninController',

@@ -6,6 +6,10 @@
 .articles .tag-box {
   margin-bottom: 15px; }
 
+.article-box {
+  width: 700px;
+  margin: 0 auto; }
+
 .signin-box {
   width: 450px; }
 

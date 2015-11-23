@@ -10,7 +10,10 @@ module.exports = function(myModule) {
 						title: '文章管理',
 						subMenus: [{
 							title: '列表',
-							sref: 'site.articles'
+							sref: 'articles'
+						},{
+							title: '新增文档',
+							sref: 'addArticle'
 						}]
 					}];
 				},

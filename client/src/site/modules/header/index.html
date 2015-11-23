@@ -28,12 +28,12 @@
 					</a>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
 						<li role="menuitem" >
-							<a ng-click="signout()">退出</a>
+							<a ng-click="signout($event)">退出</a>
 						</li>
 					</ul>
 				</li>
 			</ul>
-			<ul ng-if="!user" ui-sref="site.signin" class="nav navbar-nav pull-right">
+			<ul ng-if="!user" ui-sref="signin" class="nav navbar-nav pull-right">
 				<li>
 					<a >
 						登陆
