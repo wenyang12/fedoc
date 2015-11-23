@@ -1,4 +1,25 @@
 .article-box{
 	width: 700px;
     margin: 0 auto;
+
+}
+.article-form{
+    .form-group-content{
+    	textarea{
+    		min-height: 600px;
+    	}
+    	>div{
+    		position: relative;
+    	}
+    	.btn-toggle-preview-status{
+		    position: absolute;
+		    top: 0;
+		    right: -10px;
+		    font-size: 20px;
+		    &:hover{
+		    	cursor: pointer;
+		    }
+    	}
+    }	
+
 }

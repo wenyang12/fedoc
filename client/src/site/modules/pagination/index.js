@@ -1,5 +1,5 @@
 module.exports = function(myModule) {
-    myModule.directive('sitePagination', ['$location',
+    myModule.directive('fedocPagination', ['$location',
         function factory($location) {
             var directive = {
                 restrict: 'E', //指令的使用方式，包括标签，属性，类，注释

@@ -21,7 +21,7 @@ module.exports = {
 		}]
 	},
 	LIST: {
-		perPage: 15,
+		perPage: 10,
 		limitPage: 10
 	}
 };

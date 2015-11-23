@@ -9,6 +9,8 @@
 		"bootstrap": "3.3.5",
 		"angular-ui-bootstrap": "0.13.3",
 		"angular-route": "latest",
-		"angular-toasty": "1.0.4"
+		"angular-toasty": "1.0.4",
+		"markdown-it":"latest",
+		"angular-sanitize":"latest"
 	}
 }

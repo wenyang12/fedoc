@@ -1,15 +1,33 @@
 <div class="container articles" ng-init="init()">
-	<div class="tag-box">
-		<button class="btn btn-primary">规范</button>
-		<button class="btn btn-default">工具</button>
-		<button class="btn btn-default">代码检测</button>
-		<button class="btn btn-default">h5</button>
-		<button class="btn btn-default">性能</button>
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="tag-box">
+				<button class="btn btn-default" ng-class="{'btn-primary':query.tag === t}" ng-click="chooseTag(t)" ng-repeat="t in tags">{{t}}</button>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="input-group">
+				<input type="text"  ng-model="query.keyword" class="form-control" placeholder="标题或内容搜索">
+				<span class="input-group-btn">
+					<button class="btn btn-default" ng-click="searchKeyword()" type="button">Go!</button>
+				</span>
+			</div>
+		</div>
 	</div>
-	<ul class="list-group">
+	<div class="text-center">
+			<p class="text-muted" ng-if="count===0">暂无数据</p>
+			<h3 class="text-success" ng-if="query.keyword">"{{query.keyword}}"搜索结果如下</h3>
+	</div>
+
+	<ul class="list-group" ng-if="count>
+		0">
 		<li class="list-group-item" ng-repeat="a in articles">
 			<a ui-sref="viewArticle({_id:a._id})">{{a.title}}</a>
-		</li>
+			<img  ng-src="{{a.user.avatar}}" alt="..." class="img-circle avatar"></li>
 	</ul>
-	<site-pagination ng-model="pagination"></site-pagination>
+	
+	
+	<div class="pull-right">
+		<fedoc-pagination ng-model="pagination" ></fedoc-pagination>
+	</div>
 </div>

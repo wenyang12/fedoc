@@ -23,7 +23,8 @@
 			</ul>
 			<ul ng-if="user" class="nav navbar-nav pull-right">
 				<li dropdown keyboard-nav >
-					<a dropdown-toggle ng-bind="user.nickname">
+					<a dropdown-toggle>
+						{{user.nickname}}
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">

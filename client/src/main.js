@@ -1,5 +1,7 @@
 require('assets/libs/angular/angular.min');
 require('assets/libs/lodash/lodash');
+
+require('assets/libs/angular-sanitize/angular-sanitize.min');
 require('assets/libs/angular-ui-router/release/angular-ui-router.min');
 require('assets/libs/restangular/dist/restangular');
 require('assets/vendor/angular-ui-bootstrap/angular-ui-bootstrap.min');
@@ -37,6 +39,12 @@ app.config(['toastyConfigProvider', function(toastyConfigProvider) {
 app.config(['RestangularProvider', function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('/api');
 }]);
+
+app.constant('constant', {
+	ARTICLES: {
+		tags: ['规范', '工具', '代码检测', 'h5', '性能']
+	}
+});
 
 require('site/index')(app);
 

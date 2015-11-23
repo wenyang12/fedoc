@@ -5,10 +5,26 @@
 
 .articles .tag-box {
   margin-bottom: 15px; }
+.articles .img-circle.avatar {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 20px;
+  top: 6px; }
 
 .article-box {
   width: 700px;
   margin: 0 auto; }
+
+.article-form .form-group-content textarea {
+  min-height: 600px; }
+.article-form .form-group-content > div {
+  position: relative; }
+.article-form .form-group-content .btn-toggle-preview-status {
+  position: absolute;
+  top: 0;
+  right: -10px;
+  font-size: 20px; }
 
 .signin-box {
   width: 450px; }

@@ -5,14 +5,18 @@ exports.getOne = function(query, callback) {
 	var fileds = '_id title content user tags createdTime';
 	ArticleModel.findOne(query, fileds, {}).populate([{
 		path: 'user',
-		select: '_id nickname'
+		select: '_id nickname head'
 	}]).exec(callback);
 };
 
 exports.list = function(options, callback) {
-	options.sql = options.sql || '_id title  createdTime tags';
+	options.sql = '_id title user createdTime tags';
 	ArticleModel.count(options.criteria, function(err, count) {
 		ArticleModel.find(options.criteria, options.sql)
+			.populate([{
+				path: 'user',
+				select: '_id nickname avatar'
+			}])
 			.sort(options.sort || {
 				createdTime: '-1'
 			})

@@ -56,36 +56,44 @@ exports.list = function(req, res) {
 	var page = (req.param('page') || 0) > 0 ? req.param('page') : 1;
 	var perPage = config.LIST.perPage,
 		limitPage = config.LIST.limitPage,
-		title = req.param('title');
+		keyword = req.param('keyword'),
+		tag = req.param('tag');
 	// var userId = req.user._id;
 	var options = {
 		page: page - 1,
 		perPage: perPage,
 		limitPage: limitPage,
 	};
-	if (title) {
-		title = title.toLowerCase();
+	if (keyword) {
+		keyword = keyword.toLowerCase();
 	}
 	options.criteria = {
 		// user: userId
 	};
 
-	if (title && (typeof title !== 'undefined')) {
+	if (keyword && (typeof keyword !== 'undefined')) {
 		options.criteria['$or'] = [];
 		var titleObj = {};
 		var contentObj = {};
-
+		keyword = keyword.toString('UTF-8');
 		titleObj.title = {
-			$regex: '(.)*' + title.toString('UTF-8') + '(.)*$',
+			$regex: '(.)*' + keyword + '(.)*$',
 			$options: 'i'
 		};
 		contentObj.content = {
-			$regex: '(.)*' + title.toString('UTF-8') + '(.)*$',
+			$regex: '(.)*' + keyword + '(.)*$',
 			$options: 'i'
 		};
 		options.criteria['$or'].push(titleObj);
 
 		options.criteria['$or'].push(contentObj);
+	}
+	if (tag) {
+		options.criteria.tags = {
+			$elemMatch: {
+				$in: [tag]
+			}
+		};
 	}
 
 	articleDao.list(options, function(err, data) {
