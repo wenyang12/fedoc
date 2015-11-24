@@ -129,4 +129,4 @@ gulp.task('watch', function() {
 gulp.task('default', ['watch', 'scss:site', 'restart']);
 gulp.task('compress', ['cssmin', 'uglify', 'htmlmin']);
 
-gulp.task('build-product', ['scss:site', 'copy', 'compress']); //,
+gulp.task('build-product', ['compress']); //,
