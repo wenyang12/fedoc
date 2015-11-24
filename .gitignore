@@ -1,6 +1,5 @@
 node_modules/*
 npm-debug.log
-client/src/assets/libs/*
 .sass-cache/*
 logs/err.log
 logs/out.log

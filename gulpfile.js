@@ -47,7 +47,7 @@ gulp.task("webpack:build-dev", function(callback) {
     });
 });
 
-gulp.task('scss:site', function() {
+gulp.task('scss:site', function(cb) {
     gulp.src(paths.scss.site)
         .pipe(scss({
             loadPath: 'client/src/site',
@@ -58,6 +58,7 @@ gulp.task('scss:site', function() {
             console.log(err.message);
         })
         .pipe(gulp.dest(paths.dist.build));
+    return cb(null);
 });
 
 // 监控服务端文件改动，并重启
@@ -76,47 +77,48 @@ gulp.task('restart', function() {
 });
 
 // 监控服务端文件改动，并重启
-gulp.task('copy', function() {
+gulp.task('copy', function(cb) {
     gulp.src(['client/src/**/*',
             '!client/src/site/**/*.js',
             '!client/src/site/**/*.scss'
         ])
         .pipe(gulp.dest(paths.dist.root));
-
+    return cb(null);
 });
 
 
 
-gulp.task('clean:dist', function() {
-    return del(paths.dist.root);
+gulp.task('clean:dist', function(cb) {
+    del(paths.dist.root);
+    return cb(null);
 });
 //压缩css
-gulp.task('cssmin', function() {
-    return gulp.src(paths.dist.build + '*.css')
-        .pipe(sourcemaps.init())
+gulp.task('cssmin', function(cb) {
+    gulp.src(paths.dist.build + '*.css')
         .pipe(minifyCSS())
-        .pipe(sourcemaps.write())
         .pipe(gulp.dest(paths.dist.build));
+    return cb(null);
 });
 
-gulp.task('uglify', function() {
-    return gulp.src(paths.dist.build + '/*.js')
+gulp.task('uglify', function(cb) {
+    gulp.src(paths.dist.build + '/*.js')
         .pipe(uglify({
-                compress:true
-            }))
+            compress: true
+        }))
         .pipe(gulp.dest(paths.dist.build));
-
+    return cb(null);
 });
 
-gulp.task('htmlmin', function() {
+gulp.task('htmlmin', function(cb) {
     var opts = {
         conditionals: true,
         spare: true
     };
 
-    return gulp.src(paths.dist.root + '/**/*.html')
+    gulp.src(paths.dist.root + '/**/*.html')
         .pipe(minifyHTML())
         .pipe(gulp.dest(paths.dist.root));
+    return cb(null);
 });
 
 gulp.task('watch', function() {
@@ -125,5 +127,6 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['watch', 'scss:site', 'restart']);
+gulp.task('compress', ['cssmin', 'uglify', 'htmlmin']);
 
-gulp.task('build-product', ['scss:site', 'copy', 'cssmin', 'uglify', 'htmlmin']); //'scss:site',
+gulp.task('build-product', ['scss:site', 'copy', 'compress']); //,
