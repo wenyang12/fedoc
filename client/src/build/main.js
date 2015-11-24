@@ -914,14 +914,18 @@
 					}
 					$scope.$watch('article.content', function(val) {
 						if (val) {
-							var contentPreviewElem = document.querySelector('#content-preview');
-	
-							var html = markdown.render(val);
-							if (!contentPreviewElem) return;
-							contentPreviewElem.innerHTML = html;
+							$scope.toPreviewContent(val);
 						}
 					});
 				};
+				$scope.toPreviewContent = function(val) {
+					var contentPreviewElem = document.querySelector('#content-preview');
+					var html = markdown.render(val);
+					if (!contentPreviewElem) return;
+					contentPreviewElem.innerHTML = html;
+				};
+	
+	
 				$scope.init();
 				$scope.update = function() {
 					ArticleService.update(articleId, {
