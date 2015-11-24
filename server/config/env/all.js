@@ -18,6 +18,9 @@ module.exports = {
 		superadmins: [{
 			email: 'zhangc@fxiaoke.com',
 			pwd: '123456'
+		},{
+			email: 'zhanglt@fxiaoke.com',
+			pwd: '123456'
 		}]
 	},
 	LIST: {

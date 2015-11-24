@@ -1,10 +1,6 @@
 module.exports = function(app) {
 	app.controller('SigninController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 		function($scope, $rootScope, $http, $state, toasty) {
-			$scope.form = {
-				email: 'zhangc@fxiaoke.com',
-				pwd: '123456'
-			};
 			$scope.login = function() {
 				$http({
 					method: 'post',

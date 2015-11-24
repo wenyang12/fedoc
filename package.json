@@ -31,7 +31,8 @@
 	},
 	"scripts": {
 		"start": "node server/server",
-		"build-development": "gulp"
+		"build-development": "gulp",
+		"build-product": "gulp build-product"
 	},
 	"devDependencies": {
 		"webpack": "1.4.4",
@@ -44,6 +45,8 @@
 		"gulp-sourcemaps": "1.2.2",
 		"gulp-uglify": "1.0.1",
 		"gulp-util": "3.0.1",
-		"gulp-load-plugins": "0.8.1"
+		"gulp-load-plugins": "0.8.1",
+		"del": "2.1.0",
+		"gulp-minify-html":"1.0.4"
 	}
 }

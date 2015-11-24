@@ -5,7 +5,6 @@ var path = require('path'),
 	CONFIG_ALL = require(path.join(__dirname, 'env', 'all')),
 	configName = process.env.NODE_ENV;
 
-
 CONFIG_ENV = require(path.join(__dirname, 'env', configName)) || {};
 
 

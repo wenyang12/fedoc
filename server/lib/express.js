@@ -77,8 +77,11 @@ module.exports = function(app, passport, mongoose) {
 	// 静态文件目录，可以设置多个
 	//!TODO 这边需要修改为 dirPath.build
 	// js css引用，css中image的引用
-	app.use(serveStatic(path.join(dirPath.client, 'src')));
-
+	if (app.get('env') === 'pro') {
+		app.use(serveStatic(path.join(dirPath.client, 'dist')));
+	} else {
+		app.use(serveStatic(path.join(dirPath.client, 'src')));
+	}
 
 	app.use(session({
 		resave: true,
