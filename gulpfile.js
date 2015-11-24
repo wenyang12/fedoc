@@ -57,7 +57,7 @@ gulp.task('scss:site', function(cb) {
         .on('error', function(err) {
             console.log(err.message);
         })
-        .pipe(gulp.dest(paths.dist.build));
+        .pipe(gulp.dest('client/src/build'));
     return cb(null);
 });
 

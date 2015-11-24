@@ -1,5 +1,5 @@
 module.exports = function(myModule) {
-  var markdown = require('assets/libs/markdown-it/dist/markdown-it')();
+  var markdown = require('assets/libs/markdown-it/markdown-it.min')();
   myModule.
   directive('fedocMarkdown', ['$sanitize', function($sanitize) {
     return {

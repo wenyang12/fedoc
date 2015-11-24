@@ -10,7 +10,7 @@ module.exports = function(app) {
 		function($scope, $state, $stateParams, ArticleService, toasty, isAdd, constant) {
 			var articleId = $stateParams._id;
 			$scope.tags = constant.ARTICLES.tags;
-			var markdown = require('assets/libs/markdown-it/dist/markdown-it')();
+			var markdown = require('assets/libs/markdown-it/markdown-it.min')();
 			$scope.article = {
 				tags: [],
 				isPreview: false
@@ -38,6 +38,15 @@ module.exports = function(app) {
 						}
 					});
 				}
+				$scope.$watch('article.content', function(val) {
+					if (val) {
+						var contentPreviewElem = document.querySelector('#content-preview');
+
+						var html = markdown.render(val);
+						if (!contentPreviewElem) return;
+						contentPreviewElem.innerHTML = html;
+					}
+				});
 			};
 			$scope.init();
 			$scope.update = function() {
@@ -54,13 +63,7 @@ module.exports = function(app) {
 					}
 				});
 			};
-			$scope.togglePreviewStatus = function() {
-				$scope.article.isPreview = !$scope.article.isPreview;
-				if ($scope.article.isPreview) {
-					var html = markdown.render($scope.article.content);
-					document.querySelector('#content-preview').innerHTML = html;
-				}
-			};
+
 			$scope.isCheckTag = function(tag) {
 				return $scope.article.tags.indexOf(tag) > -1;
 			};

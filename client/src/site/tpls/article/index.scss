@@ -1,24 +1,29 @@
 $article-content-height:600px;
-.article-box{
-	width: 700px;
-    margin: 0 auto;
-
-}
 .article-form{
     .form-group-content{
-    	textarea,#content-preview{
-    		min-height: $article-content-height;
+        width: 1187px;
+    	.ct-left,.ct-right{
+            float: left;
+            height: $article-content-height;
+            width: 586px;
     	}
-    	>div{
-    		position: relative;
-    	}
-    	.btn-toggle-preview-status{
-		    position: absolute;
-		    top: 0;
-		    right: -50px;
-		    &:hover{
-		    	cursor: pointer;
-		    }
-    	}
+        .ct-left{
+            textarea{
+                border-radius: 0;
+                height: 100%;
+                &:focus{
+                    outline: none;
+                    box-shadow:none;
+                    border-color:  #ccc;
+                }
+            }
+        }
+        .ct-right{
+
+                background-color: #fff;
+                background-image: none;
+                border: 1px solid #ccc;
+                border-left:none;
+        }
     }	
 }

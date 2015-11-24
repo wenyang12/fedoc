@@ -2,37 +2,30 @@
 	<!--编辑，新增,查看-->
 <form class="form-horizontal article-form" ng-if="article.isAuthor||article.isAdd">
 			<div class="form-group">
-				<label class="col-sm-2 control-label">标题</label>
-				<div class="col-sm-10">
-					<input  class="form-control" type="title" autocomplete="off" name="title" ng-model="article.title" placeholder="标题" required />
+			写文章
+				<div class="pull-right">
+						<button type="submit" class="btn btn-default"ng-click="update()" ng-if="article.isAuthor">保存</button>
+						<button type="submit" class="btn btn-default"ng-click="create()" ng-if="article.isAdd">新增</button>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">标签</label>
-				<div class="col-sm-10">
+					<input  class="form-control" type="title" autocomplete="off" name="title" ng-model="article.title" placeholder="标题" required />
+			</div>
+			<div class="form-group">
 					<label ng-repeat="t in tags">
                    
                     <input type="checkbox" ng-checked="isCheckTag(t)" ng-click="chooseTag($event,t)">
                      {{t}}
-                </label>
-				</div>
+                 </label>
 			</div>
 			<div class="form-group form-group-content">
-				<label class="col-sm-2 control-label">内容</label>
-				<div class="col-sm-10">
-					<textarea ng-show="!article.isPreview" class="form-control" type="content" autocomplete="off" name="content" ng-model="article.content" placeholder="内容" required>
+				<div class="ct-left">
+						<textarea ng-show="!article.isPreview" class="form-control" type="content" autocomplete="off" name="content" ng-model="article.content" placeholder="内容" required>
 					</textarea>
-					<div id="content-preview" ng-show="article.isPreview"></div>
-					<button class="btn btn-info btn-toggle-preview-status" ng-click="togglePreviewStatus()" ng-if="!article.isPreview">预览</button>
-					<button class="btn btn-default btn-toggle-preview-status" ng-if="article.isPreview" ng-click="togglePreviewStatus()">返回</button>
+					
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default"ng-click="update()" ng-if="article.isAuthor">保存</button>
-					<button type="submit" class="btn btn-default"ng-click="create()" ng-if="article.isAdd">新增</button>
-					
-					
+				<div class="ct-right">
+					<div id="content-preview" ></div>
 				</div>
 			</div>
 
