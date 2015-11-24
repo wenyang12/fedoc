@@ -1,6 +1,6 @@
 module.exports = {
 	APP: {
-		port: process.env.PORT || 19000,
+		port: process.env.PORT || 13000,
 		session: {
 			secret: '_fedoc',
 			key: '_fedoc_sid',
