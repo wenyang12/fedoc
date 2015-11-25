@@ -9,6 +9,7 @@ exports.update = function(req, res) {
 	var form = req.body;
 	var userId = req.user._id;
 	var articleId = req.params.articleId;
+	console.log(form);
 	articleDao.update({
 		_id: articleId,
 		user: userId

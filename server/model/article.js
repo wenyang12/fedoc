@@ -19,6 +19,9 @@ var schema = new Schema({
 		type: Array,
 		require: true
 	},
+	attachments: {
+		type: Array
+	},
 	user: {
 		type: Schema.ObjectId,
 		required: true,

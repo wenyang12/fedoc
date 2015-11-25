@@ -11,6 +11,7 @@
 		"angular-toasty": "1.0.4",
 		"markdown-it":"latest",
 		"angular-sanitize":"latest",
-		"Font-Awesome":"latest"
+		"Font-Awesome":"latest",
+		"ng-file-upload": "2.0.4",
 	}
 }

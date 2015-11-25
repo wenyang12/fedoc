@@ -14,7 +14,7 @@ module.exports = {
 				// 如果是套餐页面或帮助页面cookie超时， 重定向至首页
 				return res.redirect('/');
 			} else {
-				return res.requestError(201);
+				return res.errorMsg(201);
 			}
 		}else{
 			next();

@@ -8,7 +8,8 @@ module.exports = function(app) {
 		'isAdd',
 		'constant',
 		'TagService',
-		function($scope, $state, $stateParams, ArticleService, toasty, isAdd, constant, TagService) {
+		'$upload',
+		function($scope, $state, $stateParams, ArticleService, toasty, isAdd, constant, TagService, $upload) {
 			var articleId = $stateParams._id;
 			// $scope.tags = constant.ARTICLES.tags;
 			var markdown = require('assets/libs/markdown-it/markdown-it.min')();
@@ -67,6 +68,33 @@ module.exports = function(app) {
 					});
 				}
 			};
+			$scope.uploadAttachment = function(files) {
+				for (var i = 0, len = files.length; i < len; i++) {
+					_uploadAttachment(files[i]);
+				}
+			};
+
+			function _uploadAttachment(file) {
+				$upload.upload({
+						url: '/api/attachments/upload', 
+						file: file
+					})
+					.progress(function(evt) {
+
+					})
+					.success(function(data, status, headers, config) {
+						if (data.code === 200) {
+							$scope.article.attachments = $scope.article.attachments||[];
+							$scope.article.attachments.push({
+								fileUrl:data.msg.fileUrl,
+								fileName:data.msg.fileName
+							});
+						} else {
+
+						}
+					})
+					.error(function() {});
+			}
 			$scope.toPreviewContent = function(val) {
 				var contentPreviewElem = document.querySelector('#content-preview');
 				var html = markdown.render(val);
@@ -80,7 +108,8 @@ module.exports = function(app) {
 				ArticleService.update(articleId, {
 					title: $scope.article.title,
 					content: $scope.article.content,
-					tags: $scope.article.tags
+					tags: $scope.article.tags,
+					attachments:$scope.article.attachments
 				}).then(function(data) {
 					if (data.code === 200) {
 						toasty.success('更新文档成功');

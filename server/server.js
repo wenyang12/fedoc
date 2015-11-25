@@ -14,10 +14,11 @@ var config = context.config,
 	filePath = context.filePath;
 
 
-require(filePath.db).connect(function (mongoose) {
+require(filePath.db).connect(function(mongoose) {
 
 	var app = express();
 
+	
 	// passport配置
 	require(filePath.passport)(passport);
 
@@ -27,10 +28,10 @@ require(filePath.db).connect(function (mongoose) {
 	// Route配置
 	require(filePath.route)(app);
 
-		// Route配置
+	// Route配置
 	require(filePath.init)(app);
 
-	app.listen(app.get('port'), function () {
+	app.listen(app.get('port'), function() {
 		console.log('Listen on port ' + app.get('port'));
 	});
 });

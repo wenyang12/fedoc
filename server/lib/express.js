@@ -15,7 +15,6 @@ var path = require('path'),
 	hbsutils = require('hbs-utils')(hbs),
 	basicAuth = require('connect-basic-auth');
 
-
 var env = context.env,
 	config = context.config,
 	util = context.util,
@@ -24,14 +23,17 @@ var env = context.env,
 	APP_CONFIG = config.APP;
 
 module.exports = function(app, passport, mongoose) {
-	// 开发环境
-	if (app.get('env') === 'dev') {
-		app.use(errorHandler());
-		app.use(logger('dev')); // 纪录每一个请求
-	}
-	// 生产环境
-	// if (app.get('env') === 'pro') {
-	// 	return;
+
+	app.set('port', APP_CONFIG.port);
+	app.set('views', dirPath.view);
+
+	app.set('view engine', 'html');
+	app.engine('html', hbs.__express);
+
+	// // 开发环境
+	// if (app.get('env') === 'dev') {
+	// 	app.use(errorHandler());
+	// 	app.use(logger('dev')); // 纪录每一个请求
 	// }
 
 	// res的中间件
@@ -52,11 +54,7 @@ module.exports = function(app, passport, mongoose) {
 	});
 
 
-	app.set('port', APP_CONFIG.port);
-	app.set('views', dirPath.view);
 
-	app.set('view engine', 'html');
-	app.engine('html', hbs.__express);
 	hbs.registerPartials(path.join(dirPath.view, 'partial'));
 	hbs.registerPartials(path.join(dirPath.client, 'src', 'app'));
 	hbs.registerPartials(path.join(dirPath.client, 'src', 'module'));
@@ -69,19 +67,23 @@ module.exports = function(app, passport, mongoose) {
 	// compress requests and responses
 	app.use(compression()); // 需要进一步设置
 	app.use(cookieParser());
+
+	app.use(bodyParser.json({
+		limit: '50mb'
+	}));
 	app.use(bodyParser.urlencoded({
+		limit: '50mb',
 		extended: true
 	}));
 	app.use(bodyParser.json());
 	app.use(methodOverride());
-	// 静态文件目录，可以设置多个
-	//!TODO 这边需要修改为 dirPath.build
-	// js css引用，css中image的引用
+
 	if (app.get('env') === 'pro') {
 		app.use(serveStatic(path.join(dirPath.client, 'dist')));
 	} else {
 		app.use(serveStatic(path.join(dirPath.client, 'src')));
 	}
+
 
 	app.use(session({
 		resave: true,

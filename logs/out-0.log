@@ -21,3 +21,11 @@
 2015-11-24 11:41 +08:00: { [Error: Cannot find module '../build/Release/bson'] code: 'MODULE_NOT_FOUND' }
 2015-11-24 11:41 +08:00: { [Error: Cannot find module '../build/Release/bson'] code: 'MODULE_NOT_FOUND' }
 2015-11-24 11:41 +08:00: DB connected mongodb://127.0.0.1:27017/fedoc_production
+2015-11-25 16:54 +08:00: { [Error: Cannot find module '../build/Release/bson'] code: 'MODULE_NOT_FOUND' }
+2015-11-25 16:54 +08:00: DB connected mongodb://127.0.0.1:27017/fedoc_pro
+2015-11-25 16:54 +08:00: { [Error: Cannot find module '../build/Release/bson'] code: 'MODULE_NOT_FOUND' }
+2015-11-25 16:54 +08:00: Listen on port 13000
+2015-11-25 16:54 +08:00: zhangc@fxiaoke.com用户已创建
+2015-11-25 16:54 +08:00: zhanglt@fxiaoke.com用户已创建
+2015-11-25 16:54 +08:00: [用户创建成功]zhangc@fxiaoke.com
+2015-11-25 16:54 +08:00: [用户创建成功]zhanglt@fxiaoke.com

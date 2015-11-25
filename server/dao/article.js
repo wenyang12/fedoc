@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
 	ArticleModel = mongoose.model('Article');
 
 exports.getOne = function(query, callback) {
-	var fileds = '_id title content user tags createdTime';
+	var fileds = '_id title content user attachments tags createdTime';
 	ArticleModel.findOne(query, fileds, {}).populate([{
 		path: 'user',
 		select: '_id nickname head'
