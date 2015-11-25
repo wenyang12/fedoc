@@ -2,7 +2,6 @@
 	<!--编辑，新增,查看-->
 <form class="form-horizontal article-form" ng-if="article.isAuthor||article.isAdd">
 			<div class="form-group">
-			写文章
 				<div class="pull-right">
 						<button type="submit" class="btn btn-default"ng-click="update()" ng-if="article.isAuthor">保存</button>
 						<button type="submit" class="btn btn-default"ng-click="create()" ng-if="article.isAdd">新增</button>

@@ -6,14 +6,13 @@ module.exports = function(app) {
 		'ArticleService',
 		'constant',
 		function($scope, $state, $stateParams, ArticleService, constant) {
-			$scope.tags = constant.ARTICLES.tags;
 			$scope.query = {
 				keyword:$stateParams.keyword,
 				page: $stateParams.page,
 				tag: $stateParams.tag
 			};
-			$scope.list = function(query) {
-				var query = _.extend($scope.query, query);
+			$scope.list = function(_query) {
+				var query = _.extend($scope.query, _query);
 				ArticleService.list(query).then(function(data) {
 					$scope.articles = data.msg.articles;
 					$scope.pagination = data.msg.pagination;
@@ -25,17 +24,17 @@ module.exports = function(app) {
 				$scope.list();
 			};
 
-			$scope.searchKeyword = function() {
-				$state.go('articles', $scope.query);
-			};
-			$scope.chooseTag = function(tag) {
-				if ($scope.query.tag === tag) {
-					$scope.query.tag = '';
-				} else {
-					$scope.query.tag = tag;
-				}
-				$state.go('articles', $scope.query);
-			};
+			// $scope.searchKeyword = function() {
+			// 	$state.go('articles', $scope.query);
+			// };
+			// $scope.chooseTag = function(tag) {
+			// 	if ($scope.query.tag === tag) {
+			// 		$scope.query.tag = '';
+			// 	} else {
+			// 		$scope.query.tag = tag;
+			// 	}
+			// 	$state.go('articles', $scope.query);
+			// };
 		}
 	]);
 	app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {

@@ -15,6 +15,12 @@ module.exports = function(myModule) {
 							title: '新增文档',
 							sref: 'addArticle'
 						}]
+					},{
+						title: '分类管理',
+						subMenus: [{
+							title: '新增分类',
+							sref: 'addTag'
+						}]
 					}];
 				},
 				scope: false,
@@ -26,7 +32,9 @@ module.exports = function(myModule) {
 							$scope.user = data.user;
 						}
 					});
-
+					$scope.searchBox = {
+						keyword:''
+					};
 					$scope.signout = function($event) {
 						window.location.replace('\/api\/sign\/out');
 						$event.preventDefault();

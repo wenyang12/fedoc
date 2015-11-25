@@ -10,6 +10,7 @@
 		"angular-route": "latest",
 		"angular-toasty": "1.0.4",
 		"markdown-it":"latest",
-		"angular-sanitize":"latest"
+		"angular-sanitize":"latest",
+		"Font-Awesome":"latest"
 	}
 }

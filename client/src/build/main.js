@@ -55,7 +55,7 @@
 	//加载管理模块
 	__webpack_require__(9)(angular);
 	
-	__webpack_require__(15)(angular);
+	__webpack_require__(16)(angular);
 	var app = angular.module('app', [
 		'ui.router',
 		'restangular',
@@ -91,7 +91,7 @@
 		}
 	});
 	
-	__webpack_require__(17)(app);
+	__webpack_require__(19)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -595,6 +595,7 @@
 		__webpack_require__(11)(siteModules);
 		__webpack_require__(12)(siteModules);
 		__webpack_require__(14)(siteModules);
+		__webpack_require__(15)(siteModules);
 	
 	};
 
@@ -620,6 +621,12 @@
 								title: '新增文档',
 								sref: 'addArticle'
 							}]
+						},{
+							title: '分类管理',
+							subMenus: [{
+								title: '新增分类',
+								sref: 'addTag'
+							}]
 						}];
 					},
 					scope: false,
@@ -631,7 +638,9 @@
 								$scope.user = data.user;
 							}
 						});
-	
+						$scope.searchBox = {
+							keyword:''
+						};
 						$scope.signout = function($event) {
 							window.location.replace('\/api\/sign\/out');
 							$event.preventDefault();
@@ -755,14 +764,48 @@
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = function(myModule) {
+	    myModule.directive('articleTags', [
+	        function factory() {
+	            var directive = {
+	                restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	                replace: 'true',
+	                templateUrl: '/site/modules/article-tags/index.html',
+	                scope: false,
+	                controller: ['$scope', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, $rootScope, TagService, $stateParams, $state) {
+	                    TagService.listAll().then(function(data) {
+	                        if (data.code === 200) {
+	                            $scope.tags = data.msg.tags;
+	                        }
+	                    });
+	                    $scope.tag = $stateParams.tag || '';
+	
+	                    $scope.choose = function(tag) {
+	                        $scope.tag = tag;
+	                        $state.go('articles', {
+	                            tag: tag
+	                        });
+	                    };
+	                }]
+	            };
+	            return directive;
+	        }
+	    ]);
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function(angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(16)(siteServices);
+		__webpack_require__(17)(siteServices);
+		__webpack_require__(18)(siteServices);
 	};
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -793,7 +836,38 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.factory('TagService', ['Restangular', '$timeout',
+			function(Restangular, $timeout) {
+				var baseRoute = Restangular.all('tags');
+				return {
+					listAll: function(query) {
+						return baseRoute.customGET('', query);
+					},
+					getOne: function(tagId) {
+						return baseRoute.one(tagId)
+							.customGET();
+					},
+					remove: function(tagId) {
+						return baseRoute.one(tagId)
+							.remove();
+					},
+					create: function(tag) {
+						return baseRoute.customPOST(tag);
+					},
+					update: function(tagId, tag) {
+						return baseRoute.one(tagId).customPUT(tag);
+					}
+				};
+			}
+		]);
+	};
+
+/***/ },
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -833,14 +907,15 @@
 				});
 		}]);
 	
-		__webpack_require__(18)(app);
-		__webpack_require__(19)(app);
 		__webpack_require__(20)(app);
+		__webpack_require__(21)(app);
+		__webpack_require__(22)(app);
+		__webpack_require__(23)(app);
 	
 	};
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -851,14 +926,13 @@
 			'ArticleService',
 			'constant',
 			function($scope, $state, $stateParams, ArticleService, constant) {
-				$scope.tags = constant.ARTICLES.tags;
 				$scope.query = {
 					keyword:$stateParams.keyword,
 					page: $stateParams.page,
 					tag: $stateParams.tag
 				};
-				$scope.list = function(query) {
-					var query = _.extend($scope.query, query);
+				$scope.list = function(_query) {
+					var query = _.extend($scope.query, _query);
 					ArticleService.list(query).then(function(data) {
 						$scope.articles = data.msg.articles;
 						$scope.pagination = data.msg.pagination;
@@ -870,17 +944,17 @@
 					$scope.list();
 				};
 	
-				$scope.searchKeyword = function() {
-					$state.go('articles', $scope.query);
-				};
-				$scope.chooseTag = function(tag) {
-					if ($scope.query.tag === tag) {
-						$scope.query.tag = '';
-					} else {
-						$scope.query.tag = tag;
-					}
-					$state.go('articles', $scope.query);
-				};
+				// $scope.searchKeyword = function() {
+				// 	$state.go('articles', $scope.query);
+				// };
+				// $scope.chooseTag = function(tag) {
+				// 	if ($scope.query.tag === tag) {
+				// 		$scope.query.tag = '';
+				// 	} else {
+				// 		$scope.query.tag = tag;
+				// 	}
+				// 	$state.go('articles', $scope.query);
+				// };
 			}
 		]);
 		app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -894,7 +968,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -970,7 +1044,8 @@
 				$scope.isCheckTag = function(tag) {
 					return $scope.article.tags.indexOf(tag) > -1;
 				};
-				//选择字号
+				
+				//选择分类
 				$scope.chooseTag = function($event, tag) {
 					var curTarget = $event.currentTarget;
 					var index = $scope.article.tags.indexOf(tag);
@@ -1009,7 +1084,90 @@
 	};
 
 /***/ },
-/* 20 */
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+		app.controller('TagController', [
+			'$scope',
+			'$state',
+			'$stateParams',
+			'TagService',
+			'toasty',
+			'isAdd',
+			'constant',
+			function($scope, $state, $stateParams, TagService, toasty, isAdd, constant) {
+				var tagId = $stateParams._id;
+				$scope.tag = {
+					name:''
+				};
+				$scope.create = function() {
+					TagService.create($scope.tag).then(function(data) {
+						if (data.code === 200) {
+							toasty.success('创建分类成功');
+							$state.go('articles');
+						} else {
+							toasty.error(data.msg);
+						}
+					});
+				};
+				$scope.init = function() {
+					if (isAdd) {
+						$scope.tag.isAdd = true;
+					} else {
+						TagService.getOne(tagId).then(function(data) {
+							if (data.code === 200) {
+								$scope.tag = data.msg;
+							} else {
+								toasty.error(data.msg);
+							}
+						});
+					}
+				};
+	
+	
+				$scope.init();
+				$scope.update = function() {
+					TagService.update(tagId, {
+						name: $scope.tag.name,
+					}).then(function(data) {
+						if (data.code === 200) {
+							toasty.success('更新分类成功');
+							$state.go('articles');
+						} else {
+							toasty.error(data.msg);
+						}
+					});
+				};
+	
+			}
+		]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+			$stateProvider.state('addTag', {
+				url: '/tag/add',
+				templateUrl: '/site/tpls/tag/index.html',
+				controller: 'TagController',
+				pageTitle: '新增分类',
+				resolve: {
+					isAdd: [function() {
+						return true;
+					}]
+				}
+			}).state('viewTag', {
+				url: '/tags/:_id',
+				templateUrl: '/site/tpls/tag/index.html',
+				controller: 'TagController',
+				pageTitle: '查看分类',
+				resolve: {
+					isAdd: [function() {
+						return false;
+					}]
+				}
+			});
+		}]);
+	};
+
+/***/ },
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {

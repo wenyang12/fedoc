@@ -1,33 +1,23 @@
 <div class="container articles" ng-init="init()">
 	<div class="row">
-		<div class="col-sm-8">
-			<div class="tag-box">
-				<button class="btn btn-default" ng-class="{'btn-primary':query.tag === t}" ng-click="chooseTag(t)"  ng-repeat="t in tags">{{t}}</button>
+		<div class="col-md-3">
+			<article-tags></article-tags>
+		</div>
+		<div class="col-md-9">
+			<div class="text-center">
+				<p class="text-muted" ng-if="count===0">暂无数据</p>
+			</div>
+			<ul class="list-group" ng-if="count>
+				0">
+				<li class="list-group-item" ng-repeat="a in articles">
+					<a ui-sref="viewArticle({_id:a._id})">{{a.title}}</a>
+					<img  ng-src="{{a.user.avatar}}" alt="..." class="img-circle avatar"></li>
+			</ul>
+
+			<div class="pull-right">
+				<fedoc-pagination ng-model="pagination" ></fedoc-pagination>
 			</div>
 		</div>
-		<div class="col-sm-4">
-			<div class="input-group search-box">
-				<input type="text"  ng-model="query.keyword" class="form-control" fedoc-enter="searchKeyword()"  placeholder="标题或内容搜索">
-				<span class="icon-clear" ng-if="query.keyword" ng-click="query.keyword =''">x</span>
-				<span class="input-group-btn">
-					<button class="btn btn-default" ng-click="searchKeyword()" type="button">搜索</button>
-				</span>
-			</div>
-		</div>
-	</div>
-	<div class="text-center">
-		<p class="text-muted" ng-if="count===0">暂无数据</p>
 	</div>
 
-	<ul class="list-group" ng-if="count>
-		0">
-		<li class="list-group-item" ng-repeat="a in articles">
-			<a ui-sref="viewArticle({_id:a._id})">{{a.title}}</a>
-			<img  ng-src="{{a.user.avatar}}" alt="..." class="img-circle avatar"></li>
-	</ul>
-	
-	
-	<div class="pull-right">
-		<fedoc-pagination ng-model="pagination" ></fedoc-pagination>
-	</div>
 </div>

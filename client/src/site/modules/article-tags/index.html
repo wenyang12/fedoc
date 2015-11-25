@@ -1,0 +1,6 @@
+<div class="tags-box">
+	<ul class="list-group">
+		<li class="list-group-item" ng-class="{active:'' === tag}" ng-click="choose('')">全部</li>
+		<li class="list-group-item" ng-class="{active:t.name === tag}" ng-repeat="t in tags"  ng-click="choose(t.name)">{{t.name}}</li>
+	</ul>
+</div>

@@ -37,6 +37,7 @@ module.exports = function(app) {
 
 	require('site/tpls/articles/index')(app);
 	require('site/tpls/article/index')(app);
+	require('site/tpls/tag/index')(app);
 	require('site/tpls/signin/index')(app);
 
 };

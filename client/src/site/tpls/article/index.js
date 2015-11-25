@@ -71,7 +71,8 @@ module.exports = function(app) {
 			$scope.isCheckTag = function(tag) {
 				return $scope.article.tags.indexOf(tag) > -1;
 			};
-			//选择字号
+			
+			//选择分类
 			$scope.chooseTag = function($event, tag) {
 				var curTarget = $event.currentTarget;
 				var index = $scope.article.tags.indexOf(tag);

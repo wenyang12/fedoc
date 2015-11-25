@@ -1,6 +1,10 @@
 @import "compass";
+//base
+//
+@import "./base/index";
 // modules
 @import "./modules/header/index";
+@import "./modules/article-tags/index";
 // tpls
 @import "./tpls/articles/index";
 @import "./tpls/article/index";
