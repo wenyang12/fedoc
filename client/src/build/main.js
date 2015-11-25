@@ -55,7 +55,7 @@
 	//加载管理模块
 	__webpack_require__(9)(angular);
 	
-	__webpack_require__(14)(angular);
+	__webpack_require__(15)(angular);
 	var app = angular.module('app', [
 		'ui.router',
 		'restangular',
@@ -91,7 +91,7 @@
 		}
 	});
 	
-	__webpack_require__(16)(app);
+	__webpack_require__(17)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -594,6 +594,7 @@
 		__webpack_require__(10)(siteModules);
 		__webpack_require__(11)(siteModules);
 		__webpack_require__(12)(siteModules);
+		__webpack_require__(14)(siteModules);
 	
 	};
 
@@ -730,14 +731,38 @@
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = function(myModule) {
+		//回车按钮
+		myModule.directive('fedocEnter', function() {
+			return {
+				restrict: 'AC',
+				link: function($scope, $element, $attr) {
+					$element.bind("keydown", function($event) {
+						if (event.which === 13) {
+							$scope.$apply(function() {
+								$scope.$eval($attr.fedocEnter);
+							});
+							$event.stopPropagation();
+							return false;
+						}
+					});
+				}
+			};
+		});
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function(angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(15)(siteServices);
+		__webpack_require__(16)(siteServices);
 	};
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -768,7 +793,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -808,14 +833,14 @@
 				});
 		}]);
 	
-		__webpack_require__(17)(app);
 		__webpack_require__(18)(app);
 		__webpack_require__(19)(app);
+		__webpack_require__(20)(app);
 	
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -869,7 +894,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -984,7 +1009,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {

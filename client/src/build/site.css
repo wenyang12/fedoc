@@ -2,9 +2,23 @@
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0; }
+  .site-header .avatar {
+    width: 20px;
+    height: 20px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; }
 
 .articles .tag-box {
   margin-bottom: 15px; }
+.articles .search-box {
+  position: relative; }
+  .articles .search-box .icon-clear {
+    position: absolute;
+    right: 61px;
+    top: -2px;
+    z-index: 10;
+    font-size: 20px; }
 .articles .img-circle.avatar {
   width: 30px;
   height: 30px;
@@ -20,7 +34,8 @@
     width: 586px; }
   .article-form .form-group-content .ct-left textarea {
     border-radius: 0;
-    height: 100%; }
+    height: 100%;
+    font-size: inherit; }
     .article-form .form-group-content .ct-left textarea:focus {
       outline: none;
       box-shadow: none;

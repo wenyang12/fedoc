@@ -42,6 +42,7 @@ exports.login = function(req, res) {
 				_id: user._id,
 				email: user.email,
 				nickname: user.nickname,
+				avatar:user.avatar,
 				isAdmin: user.isAdmin
 			};
 			req.logIn(signUser, function() {

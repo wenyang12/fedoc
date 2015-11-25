@@ -11,6 +11,7 @@ $article-content-height:600px;
             textarea{
                 border-radius: 0;
                 height: 100%;
+                font-size: inherit;
                 &:focus{
                     outline: none;
                     box-shadow:none;

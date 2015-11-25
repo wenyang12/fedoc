@@ -11,6 +11,7 @@
 				<li ng-repeat="menu in menus" dropdown keyboard-nav >
 					<a dropdown-toggle>
 						{{menu.title}}
+
 						<span class="caret"></span>
 					</a>
 					<ul ng-if="menu.subMenus.length>
@@ -25,6 +26,7 @@
 				<li dropdown keyboard-nav >
 					<a dropdown-toggle>
 						{{user.nickname}}
+						<img ng-src="{{user.avatar}}" alt="..." class="avatar">
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">

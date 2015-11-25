@@ -1,3 +1,8 @@
 .site-header{
 	@include border-radius(0);
+	.avatar{
+		    width: 20px;
+		    height: 20px;
+		    @include border-radius(10px);
+	}
 }

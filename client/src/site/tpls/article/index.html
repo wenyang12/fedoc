@@ -38,11 +38,12 @@
 		<div class="col-md-3" >
 			<span ng-if="article.tags.length === 0">未分类</span>
 			<span ng-if="article.tags.length >0">
-				<span ng-repeat="t in article.tags">{{t}};</span>
+				分类:<span ng-repeat="t in article.tags">{{t}};</span>
 			</span>
 			
 		</div>
 		<div class="col-md-3">
+			作者:
 			<a ng-bind="article.user.nickname">
 				
 			</a>

@@ -3,5 +3,6 @@ module.exports = function(angular) {
 	require('site/modules/header/index')(siteModules);
 	require('site/modules/pagination/index')(siteModules);
 	require('site/modules/markdown/index')(siteModules);
+	require('site/modules/enter/index')(siteModules);
 
 };
