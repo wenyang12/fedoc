@@ -617,11 +617,11 @@
 							subMenus: [{
 								title: '列表',
 								sref: 'articles'
-							},{
+							}, {
 								title: '新增文档',
 								sref: 'addArticle'
 							}]
-						},{
+						}, {
 							title: '分类管理',
 							subMenus: [{
 								title: '新增分类',
@@ -630,7 +630,7 @@
 						}];
 					},
 					scope: false,
-					controller: ['$scope', '$rootScope', function($scope, $rootScope) {
+					controller: ['$scope', '$rootScope', '$stateParams', '$state', function($scope, $rootScope, $stateParams, $state) {
 						$scope.user = null;
 						//监听 - 缩略图被点击
 						$scope.$on('userChange', function(event, data) {
@@ -639,7 +639,14 @@
 							}
 						});
 						$scope.searchBox = {
-							keyword:''
+							keyword: ''
+						};
+						$scope.searchKeyword = function() {
+							$state.go('articles', {
+								tag: $stateParams.tag,
+								page: $stateParams.page,
+								keyword: $scope.searchBox.keyword
+							});
 						};
 						$scope.signout = function($event) {
 							window.location.replace('\/api\/sign\/out');
@@ -772,7 +779,7 @@
 	                replace: 'true',
 	                templateUrl: '/site/modules/article-tags/index.html',
 	                scope: false,
-	                controller: ['$scope', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, $rootScope, TagService, $stateParams, $state) {
+	                controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, toasty, $rootScope, TagService, $stateParams, $state) {
 	                    TagService.listAll().then(function(data) {
 	                        if (data.code === 200) {
 	                            $scope.tags = data.msg.tags;
@@ -780,11 +787,35 @@
 	                    });
 	                    $scope.tag = $stateParams.tag || '';
 	
-	                    $scope.choose = function(tag) {
+	                    $scope.choose = function($event, tag) {
 	                        $scope.tag = tag;
 	                        $state.go('articles', {
 	                            tag: tag
 	                        });
+	                        $event.stopPropagation();
+	                        return;
+	                    };
+	                    $scope.delTag = function($event, tag) {
+	                        if (confirm('确认删除该分类吗')) {
+	                            TagService.remove(tag._id).then(function(data) {
+	                                if (data.code === 200) {
+	                                    toasty.success('删除分类成功');
+	                                    for (var i = 0, len = $scope.tags.length; i < len; i++) {
+	                                        if ($scope.tags[i]._id === tag._id) {
+	                                            $scope.tags.splice(i, 1);
+	                                            if ($scope.tag === tag.name) {
+	                                                $state.go('articles', {
+	                                                    tag: ''
+	                                                });
+	                                            }
+	                                            return;
+	                                        }
+	                                    }
+	                                }
+	                            });
+	                        }
+	                        $event.stopPropagation();
+	                        return;
 	                    };
 	                }]
 	            };
@@ -980,9 +1011,10 @@
 			'toasty',
 			'isAdd',
 			'constant',
-			function($scope, $state, $stateParams, ArticleService, toasty, isAdd, constant) {
+			'TagService',
+			function($scope, $state, $stateParams, ArticleService, toasty, isAdd, constant, TagService) {
 				var articleId = $stateParams._id;
-				$scope.tags = constant.ARTICLES.tags;
+				// $scope.tags = constant.ARTICLES.tags;
 				var markdown = __webpack_require__(13)();
 				$scope.article = {
 					tags: [],
@@ -999,6 +1031,15 @@
 					});
 				};
 				$scope.init = function() {
+					TagService.listAll().then(function(data) {
+						if (data.code === 200) {
+							var tags = data.msg.tags;
+							$scope.tags = [];
+							for (var i = 0, len = tags.length; i < len; i++) {
+								$scope.tags.push(tags[i].name);
+							}
+						}
+					});
 					if (isAdd) {
 						$scope.article.isAdd = true;
 					} else {
@@ -1016,6 +1057,19 @@
 							$scope.toPreviewContent(val);
 						}
 					});
+				};
+	
+				$scope.del = function() {
+					if (confirm('确认删除文档吗')) {
+						ArticleService.remove($scope.article._id).then(function(data) {
+							if (data.code === 200) {
+								toasty.success('删除文档成功');
+								$state.go('articles', {
+									tag: ''
+								});
+							}
+						});
+					}
 				};
 				$scope.toPreviewContent = function(val) {
 					var contentPreviewElem = document.querySelector('#content-preview');
@@ -1044,7 +1098,7 @@
 				$scope.isCheckTag = function(tag) {
 					return $scope.article.tags.indexOf(tag) > -1;
 				};
-				
+	
 				//选择分类
 				$scope.chooseTag = function($event, tag) {
 					var curTarget = $event.currentTarget;

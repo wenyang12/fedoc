@@ -6,6 +6,10 @@ $article-content-height:600px;
             float: left;
             height: $article-content-height;
             width: 586px;
+            #content-preview{
+                height: $article-content-height;
+                overflow: scroll;
+            }
     	}
         .ct-left{
             textarea{
@@ -27,4 +31,25 @@ $article-content-height:600px;
                 border-left:none;
         }
     }	
+    .form-group-tags{
+        label{
+            margin-right: 5px;
+            input{margin-right: 5px;}
+        }
+    }
+}
+.article-box{
+    .article-header{
+        margin-bottom: 10px;
+        border-bottom: 1px #ccc dotted;
+         .article-header-title{
+            margin-bottom: 6px;
+        }
+        .article-header-tags{
+            position: absolute;
+            right: 15px;
+            top:10px;
+        }
+    }
+   
 }

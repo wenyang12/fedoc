@@ -7,9 +7,10 @@ module.exports = function(app) {
 		'toasty',
 		'isAdd',
 		'constant',
-		function($scope, $state, $stateParams, ArticleService, toasty, isAdd, constant) {
+		'TagService',
+		function($scope, $state, $stateParams, ArticleService, toasty, isAdd, constant, TagService) {
 			var articleId = $stateParams._id;
-			$scope.tags = constant.ARTICLES.tags;
+			// $scope.tags = constant.ARTICLES.tags;
 			var markdown = require('assets/libs/markdown-it/markdown-it.min')();
 			$scope.article = {
 				tags: [],
@@ -26,6 +27,15 @@ module.exports = function(app) {
 				});
 			};
 			$scope.init = function() {
+				TagService.listAll().then(function(data) {
+					if (data.code === 200) {
+						var tags = data.msg.tags;
+						$scope.tags = [];
+						for (var i = 0, len = tags.length; i < len; i++) {
+							$scope.tags.push(tags[i].name);
+						}
+					}
+				});
 				if (isAdd) {
 					$scope.article.isAdd = true;
 				} else {
@@ -43,6 +53,19 @@ module.exports = function(app) {
 						$scope.toPreviewContent(val);
 					}
 				});
+			};
+
+			$scope.del = function() {
+				if (confirm('确认删除文档吗')) {
+					ArticleService.remove($scope.article._id).then(function(data) {
+						if (data.code === 200) {
+							toasty.success('删除文档成功');
+							$state.go('articles', {
+								tag: ''
+							});
+						}
+					});
+				}
 			};
 			$scope.toPreviewContent = function(val) {
 				var contentPreviewElem = document.querySelector('#content-preview');
@@ -71,7 +94,7 @@ module.exports = function(app) {
 			$scope.isCheckTag = function(tag) {
 				return $scope.article.tags.indexOf(tag) > -1;
 			};
-			
+
 			//选择分类
 			$scope.chooseTag = function($event, tag) {
 				var curTarget = $event.currentTarget;

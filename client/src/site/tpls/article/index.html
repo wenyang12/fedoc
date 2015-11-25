@@ -1,54 +1,56 @@
-
-	<!--编辑，新增,查看-->
+<!--编辑，新增,查看-->
 <form class="form-horizontal article-form" ng-if="article.isAuthor||article.isAdd">
-			<div class="form-group">
-				<div class="pull-right">
-						<button type="submit" class="btn btn-default"ng-click="update()" ng-if="article.isAuthor">保存</button>
-						<button type="submit" class="btn btn-default"ng-click="create()" ng-if="article.isAdd">新增</button>
-				</div>
-			</div>
-			<div class="form-group">
-					<input  class="form-control" type="title" autocomplete="off" name="title" ng-model="article.title" placeholder="标题" required />
-			</div>
-			<div class="form-group">
-					<label ng-repeat="t in tags">
-                   
-                    <input type="checkbox" ng-checked="isCheckTag(t)" ng-click="chooseTag($event,t)">
-                     {{t}}
-                 </label>
-			</div>
-			<div class="form-group form-group-content">
-				<div class="ct-left">
-						<textarea ng-show="!article.isPreview" class="form-control" type="content" autocomplete="off" name="content" ng-model="article.content" placeholder="内容" required>
-					</textarea>
-					
-				</div>
-				<div class="ct-right">
-					<div id="content-preview" ng-init="toPreviewContent(article.content)" ></div>
-				</div>
-			</div>
+	<div class="form-group">
+		<div class="pull-left">
+			<button type="submit" class="btn btn-danger"ng-click="del()" ng-if="article.isAuthor">删除文档</button>
+		</div>
+		<div class="pull-right">
 
-</form>
-<div class="article-box"  ng-if="!article.isAdd &&!article.isAuthor">
-	<div class="row page-header">
-		<div class="article-title col-md-6"  ng-bind="article.title">
-		
-		</div>
-		<div class="col-md-3" >
-			<span ng-if="article.tags.length === 0">未分类</span>
-			<span ng-if="article.tags.length >0">
-				分类:<span ng-repeat="t in article.tags">{{t}};</span>
-			</span>
-			
-		</div>
-		<div class="col-md-3">
-			作者:
-			<a ng-bind="article.user.nickname">
-				
-			</a>
+			<button type="submit" class="btn btn-default"ng-click="update()" ng-if="article.isAuthor">保存</button>
+			<button type="submit" class="btn btn-default"ng-click="create()" ng-if="article.isAdd">新增</button>
 		</div>
 	</div>
-	<div class="article-content" fedoc-markdown="article.content">
-	
+	<div class="form-group">
+		<input  class="form-control" type="title" autocomplete="off" name="title" ng-model="article.title" placeholder="标题" required />
+	</div>
+	<div class="form-group form-group-tags">
+		<label ng-repeat="t in tags">
+
+			<input type="checkbox" ng-checked="isCheckTag(t)" ng-click="chooseTag($event,t)">{{t}}</label>
+	</div>
+	<div class="form-group form-group-content">
+		<div class="ct-left">
+			<textarea ng-show="!article.isPreview" class="form-control" type="content" autocomplete="off" name="content" ng-model="article.content" placeholder="内容" required></textarea>
+
+		</div>
+		<div class="ct-right">
+			<div id="content-preview" ng-init="toPreviewContent(article.content)" ></div>
+		</div>
+	</div>
+</form>
+
+<div class="article-box row"  ng-if="!article.isAdd &&!article.isAuthor">
+	<div class="col-md-3">
+		<article-tags></article-tags>
+	</div>
+	<div class="col-md-9">
+
+		<div class="article-header">
+			<h3 class="article-header-title"  ng-bind="article.title"></h3>
+			<div  class="text-info article-header-tags">
+				<span ng-if="article.tags.length === 0">未分类</span>
+
+				<span ng-if="article.tags.length >
+					0">
+				分类:
+					<span ng-repeat="t in article.tags">{{t}};</span>
+				</span>
+			</div>
+		</div>
+		<div class="article-content" fedoc-markdown="article.content"></div>
+
+		<div class="text-muted text-right">
+			<span>编辑:{{article.user.nickname}}</span>
+		</div>
 	</div>
 </div>

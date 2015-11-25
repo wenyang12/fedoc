@@ -2,4 +2,11 @@
 	width: 185px;
 	top:70px;
 	left: 100px;
+	.list-group-item{
+		position: relative;
+		.btn-operate{
+			position: absolute;
+			right: 5px;
+		}
+	}
 }

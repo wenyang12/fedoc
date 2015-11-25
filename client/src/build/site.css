@@ -313,6 +313,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 185px;
   top: 70px;
   left: 100px; }
+  .tags-box .list-group-item {
+    position: relative; }
+    .tags-box .list-group-item .btn-operate {
+      position: absolute;
+      right: 5px; }
 
 .articles .img-circle.avatar {
   width: 30px;
@@ -327,6 +332,9 @@ h1, h2, h3, h4, h5, h6 {
     float: left;
     height: 600px;
     width: 586px; }
+    .article-form .form-group-content .ct-left #content-preview, .article-form .form-group-content .ct-right #content-preview {
+      height: 600px;
+      overflow: scroll; }
   .article-form .form-group-content .ct-left textarea {
     border-radius: 0;
     height: 100%;
@@ -341,6 +349,20 @@ h1, h2, h3, h4, h5, h6 {
     background-image: none;
     border: 1px solid #ccc;
     border-left: none; }
+.article-form .form-group-tags label {
+  margin-right: 5px; }
+  .article-form .form-group-tags label input {
+    margin-right: 5px; }
+
+.article-box .article-header {
+  margin-bottom: 10px;
+  border-bottom: 1px #ccc dotted; }
+  .article-box .article-header .article-header-title {
+    margin-bottom: 6px; }
+  .article-box .article-header .article-header-tags {
+    position: absolute;
+    right: 15px;
+    top: 10px; }
 
 .signin-box {
   width: 450px; }

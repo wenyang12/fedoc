@@ -138,7 +138,7 @@ exports.get = function(req, res) {
 			return res.successMsg(article);
 		} else {
 			console.log(err);
-			return res.errorMsg(ERRORS_CODE.loadError);
+			return res.errorMsg(200, '获取文档失败');
 		}
 	});
 };
