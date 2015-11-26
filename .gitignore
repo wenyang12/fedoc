@@ -1,5 +1,5 @@
 node_modules/*
 npm-debug.log
 .sass-cache/*
-logs/err.log
-logs/out.log
+logs/err*.log
+logs/out*.log
