@@ -2,7 +2,6 @@
 /* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
 html {
   color: #333;
-  background: #fff;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility; }
@@ -28,7 +27,7 @@ audio, canvas, video {
 
 body {
   margin: 0;
-  background: #fff;
+  background-color: #e9eaec;
   font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif; }
 
 button::-moz-focus-inner,
@@ -351,13 +350,36 @@ h1, h2, h3, h4, h5, h6 {
   .article-box .article-header {
     margin: 0 0 30px; }
     .article-box .article-header h1 {
-      padding-bottom: 15px;
       border-bottom: 1px dotted #d4d4d4; }
+    .article-box .article-header .article-user {
+      margin: 15px 0 8px;
+      color: #aaaaaa; }
+      .article-box .article-header .article-user .article-user-avatar {
+        vertical-align: middle;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        background: no-repeat center center;
+        background-size: cover;
+        margin-right: 6px;
+        border-radius: 50%; }
+      .article-box .article-header .article-user .time {
+        color: #aaaaaa; }
   .article-box .article-content {
     min-height: 400px; }
 
 .signin-box {
   width: 450px; }
+
+.form-info .avatar {
+  width: 50px;
+  height: 50px;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px; }
+
+#site-box {
+  background-color: white; }
 
 #footer {
   width: 1000px;

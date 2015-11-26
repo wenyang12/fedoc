@@ -45,6 +45,17 @@
 <div class="article-box row"  ng-if="!article.isAdd &&!article.isAuthor">
 	<div class="article-header">
 		<h1 ng-bind="article.title"></h1>
+		<div class="article-user">
+		
+		<span class="article-user-avatar" style="background-image:url('{{article.user.avatar}}')"></span>
+		<a class="article-user-nickname" ng-bind="article.user.nickname"></a>
+		<span class="time">
+			&nbsp;•&nbsp;
+			<span class="timeago">
+				{{article.createdTime|dayDisplay}}
+			</span>
+		</span>
+		</div>
 	</div>
 	<div class="article-content" fedoc-markdown="article.content"></div>
 	<div>
@@ -58,7 +69,7 @@
 	</div>
 	<div class="text-muted">
 		<span>
-			[{{article.createdTime|dayDisplay}} |
+			[
 			<a ng-repeat="a in article.tags" ui-sref="articles({tag:a})">
 				{{a}}
 				<span class="text-muted">;</span>

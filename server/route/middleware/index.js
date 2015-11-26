@@ -16,8 +16,25 @@ module.exports = {
 			} else {
 				return res.errorMsg(201);
 			}
-		}else{
+		} else {
 			next();
+		}
+	},
+	requireAdminLogin: function(req, res, next) {
+		if (!req.isAuthenticated()) {
+			var path = req.path.toLowerCase();
+			if (path.lastIndexOf('api') < 0) {
+				// 如果是套餐页面或帮助页面cookie超时， 重定向至首页
+				return res.redirect('/');
+			} else {
+				return res.errorMsg(201);
+			}
+		} else {
+			if (req.user.isAdmin) {
+				next();
+			} else {
+				return res.errorMsg(201);
+			}
 		}
 	}
 };

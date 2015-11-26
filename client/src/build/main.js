@@ -83,11 +83,10 @@
 	
 	app.constant('constant', {
 		ARTICLES: {
-			tags: ['规范', '工具', '代码检测', 'h5', '性能']
 		}
 	});
 	
-	__webpack_require__(13)(app);
+	__webpack_require__(14)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -136,14 +135,28 @@
 						}];
 					},
 					scope: false,
-					controller: ['$scope', '$rootScope', '$stateParams', '$state', function($scope, $rootScope, $stateParams, $state) {
-						$scope.user = null;
+					controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', function($scope, $rootScope, $stateParams, $state, $http) {
+						
 						//监听 - 缩略图被点击
 						$scope.$on('userChange', function(event, data) {
 							if (data) {
 								$scope.user = data.user;
 							}
 						});
+						$scope.isLogin = function() {
+							$http({
+								method: 'post',
+								url: "/api/sign/isLogin"
+							}).
+							success(function(data, status, headers, config) {
+								if (data.code === 200) {
+									var user = data.msg.user;
+									$rootScope.user = user;
+									$scope.user = user;
+								}
+							});
+						};
+						$scope.isLogin();
 						$scope.searchBox = {
 							keyword: ''
 						};
@@ -369,6 +382,7 @@
 		var siteServices = angular.module('siteServices', ['restangular']);
 		__webpack_require__(11)(siteServices);
 		__webpack_require__(12)(siteServices);
+		__webpack_require__(13)(siteServices);
 	};
 
 
@@ -408,6 +422,40 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
+		myModule.factory('UserService', ['Restangular', '$timeout',
+			function(Restangular, $timeout) {
+				var baseRoute = Restangular.all('users');
+				return {
+					list: function(query) {
+						return baseRoute.customGET('', query);
+					},
+					getOne: function(userId) {
+						return baseRoute.one(userId)
+							.customGET();
+					},
+					remove: function(userId) {
+						return baseRoute.one(userId)
+							.remove();
+					},
+					create: function(user) {
+						return baseRoute.customPOST(user);
+					},
+					updateInfo: function(userId, user) {
+						return baseRoute.one(userId, 'info').customPUT(user);
+					},
+					updatePwd: function(userId, user) {
+						return baseRoute.one(userId, 'pwd').customPUT(user);
+					}
+				};
+			}
+		]);
+	};
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
 		myModule.factory('TagService', ['Restangular', '$timeout',
 			function(Restangular, $timeout) {
 				var baseRoute = Restangular.all('tags');
@@ -435,7 +483,7 @@
 	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -447,22 +495,7 @@
 					pwd: '123456'
 				};
 	
-				$scope.isLogin = function() {
-					$http({
-						method: 'post',
-						url: "/api/sign/isLogin"
-					}).
-					success(function(data, status, headers, config) {
-						if (data.code === 200) {
-							var user = data.msg.user;
-							$rootScope.user = user;
-							$rootScope.$broadcast('userChange', {
-								user: user
-							});
-						}
-					});
-				};
-				$scope.isLogin();
+			
 				$state.go('articles');
 			}
 		]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -475,15 +508,16 @@
 				});
 		}]);
 	
-		__webpack_require__(14)(app);
 		__webpack_require__(15)(app);
 		__webpack_require__(16)(app);
 		__webpack_require__(17)(app);
+		__webpack_require__(18)(app);
+		__webpack_require__(21)(app);
 	
 	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -536,7 +570,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -635,7 +669,7 @@
 							file: file
 						})
 						.progress(function(evt) {
-							console.log(evt);
+							
 						})
 						.success(function(data, status, headers, config) {
 							if (data.code === 200) {
@@ -721,7 +755,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -804,7 +838,120 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+		__webpack_require__(19)(app);
+		__webpack_require__(20)(app);
+		
+		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
+			function($scope, $rootScope, $http, $state, toasty) {
+				if ($state.is('profile')) $state.go('profile.info');
+			}
+		]);
+	
+		app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+			$stateProvider.state('profile', {
+					url: '/profile',
+					templateUrl: '/site/tpls/profile/index.html',
+					controller: 'ProfileController',
+					pageTitle: '基本信息'
+				})
+				.state('profile.info', {
+					url: '/info',
+					templateUrl: '/site/tpls/profile/info/index.html',
+					controller: 'ProfileInfoController',
+					pageTitle: '基本信息'
+				}).state('profile.pwd', {
+					url: '/pwd',
+					templateUrl: '/site/tpls/profile/pwd/index.html',
+					controller: 'ProfilePwdController',
+					pageTitle: '密码修改'
+				});
+		}]);
+	};
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+		app.controller('ProfilePwdController', ['$scope', '$rootScope', '$http', '$state', 'toasty','UserService',
+			function($scope, $rootScope, $http, $state, toasty,UserService) {
+				$scope.updatePwd = function() {
+					UserService.updatePwd($rootScope.user._id,{
+						pwd: $scope.form.pwd,
+						npwd: $scope.form.npwd,
+						cpwd:$scope.form.cpwd
+					}).then(function(data) {
+						if (data.code === 200) {
+							toasty.success('修改密码成功');
+							window.location.reload();
+						} else {
+							toasty.error(data.msg);
+						}
+					});
+				};
+			}
+		]);
+	};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+		app.controller('ProfileInfoController', ['$scope', '$rootScope', '$http', '$state', 'toasty', 'UserService', '$upload',
+			function($scope, $rootScope, $http, $state, toasty, UserService, $upload) {
+				var user = $rootScope.user;
+				$scope.form = {
+					avatar: user.avatar,
+					email: user.email,
+					nickname: user.nickname
+				};
+				$scope.updateInfo = function() {
+					UserService.updateInfo(user._id,{
+						nickname: $scope.form.nickname,
+						avatar: $scope.form.avatar
+					}).then(function(data) {
+						if (data.code === 200) {
+							toasty.success('修改信息成功');
+							window.location.reload();
+						} else {
+							toasty.error(data.msg);
+						}
+					});
+				};
+				$scope.uploadAvatar = function(files) {
+					var file = files[0];
+					$scope.uploading = true;
+					$upload.upload({
+							url: '/api/attachments/upload',
+							file: file
+						})
+						.progress(function(evt) {
+	
+						})
+						.success(function(data, status, headers, config) {
+							if (data.code === 200) {
+								$scope.form.avatar = data.msg.fileUrl;
+							} else {
+	
+							}
+							$scope.uploading = false;
+						})
+						.error(function() {
+	
+						});
+				};
+			}
+		]);
+	
+	};
+
+/***/ },
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {

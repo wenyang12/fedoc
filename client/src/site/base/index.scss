@@ -3,7 +3,7 @@
 /* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
 html {
   color: #333;
-  background: #fff;
+  
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
@@ -34,7 +34,7 @@ audio, canvas, video {
 
 body{
     margin: 0;
-    background: #fff;
+    background-color: rgb(233, 234, 236);
     font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
 }
 

@@ -7,22 +7,7 @@ module.exports = function(app) {
 				pwd: '123456'
 			};
 
-			$scope.isLogin = function() {
-				$http({
-					method: 'post',
-					url: "/api/sign/isLogin"
-				}).
-				success(function(data, status, headers, config) {
-					if (data.code === 200) {
-						var user = data.msg.user;
-						$rootScope.user = user;
-						$rootScope.$broadcast('userChange', {
-							user: user
-						});
-					}
-				});
-			};
-			$scope.isLogin();
+		
 			$state.go('articles');
 		}
 	]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -38,6 +23,7 @@ module.exports = function(app) {
 	require('site/tpls/articles/index')(app);
 	require('site/tpls/article/index')(app);
 	require('site/tpls/tag/index')(app);
+	require('site/tpls/profile/index')(app);
 	require('site/tpls/signin/index')(app);
 
 };

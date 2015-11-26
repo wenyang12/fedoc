@@ -36,10 +36,25 @@ $article-content-height: 600px;
         margin: 0 0 30px;
 
         h1 {
-            padding-bottom: 15px;
             border-bottom: 1px dotted #d4d4d4;
         }
-
+        .article-user{
+            margin: 15px 0 8px;
+            color:#aaaaaa;
+            .article-user-avatar{
+                    vertical-align: middle;
+                    display: inline-block;
+                    width: 25px;
+                    height: 25px;
+                    background: no-repeat center center;
+                    background-size: cover;
+                    margin-right: 6px;
+                    border-radius: 50%;
+            }
+            .time{
+                color: rgb(170, 170, 170);
+            }
+        }
     }
 
     .article-content {

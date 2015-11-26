@@ -94,7 +94,7 @@ module.exports = function(app) {
 						file: file
 					})
 					.progress(function(evt) {
-						console.log(evt);
+						
 					})
 					.success(function(data, status, headers, config) {
 						if (data.code === 200) {

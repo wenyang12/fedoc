@@ -9,7 +9,10 @@
 @import "./tpls/articles/index";
 @import "./tpls/article/index";
 @import "./tpls/signin/index";
-
+@import "./tpls/profile/info/index";
+#site-box{
+	background-color: white;
+}
 #footer{
 	width: 1000px;
     margin: 40px auto 0;

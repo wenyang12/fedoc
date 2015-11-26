@@ -5,7 +5,7 @@ exports.getOne = function(query, callback) {
 	var fileds = '_id title content user attachments tags createdTime';
 	ArticleModel.findOne(query, fileds, {}).populate([{
 		path: 'user',
-		select: '_id nickname head'
+		select: '_id nickname avatar'
 	}]).exec(callback);
 };
 

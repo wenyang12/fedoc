@@ -24,14 +24,28 @@ module.exports = function(myModule) {
 					}];
 				},
 				scope: false,
-				controller: ['$scope', '$rootScope', '$stateParams', '$state', function($scope, $rootScope, $stateParams, $state) {
-					$scope.user = null;
+				controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', function($scope, $rootScope, $stateParams, $state, $http) {
+					
 					//监听 - 缩略图被点击
 					$scope.$on('userChange', function(event, data) {
 						if (data) {
 							$scope.user = data.user;
 						}
 					});
+					$scope.isLogin = function() {
+						$http({
+							method: 'post',
+							url: "/api/sign/isLogin"
+						}).
+						success(function(data, status, headers, config) {
+							if (data.code === 200) {
+								var user = data.msg.user;
+								$rootScope.user = user;
+								$scope.user = user;
+							}
+						});
+					};
+					$scope.isLogin();
 					$scope.searchBox = {
 						keyword: ''
 					};

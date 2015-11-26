@@ -37,7 +37,6 @@ app.config(['RestangularProvider', function(RestangularProvider) {
 
 app.constant('constant', {
 	ARTICLES: {
-		tags: ['规范', '工具', '代码检测', 'h5', '性能']
 	}
 });
 
