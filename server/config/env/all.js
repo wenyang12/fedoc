@@ -21,6 +21,9 @@ module.exports = {
 		},{
 			email: 'zhanglt@fxiaoke.com',
 			pwd: '123456'
+		},{
+			email: 'maxiyue@fxiaoke.com',
+			pwd: '123456'
 		}]
 	},
 	LIST: {
