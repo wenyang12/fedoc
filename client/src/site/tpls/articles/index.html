@@ -4,14 +4,10 @@
 			<article-tags></article-tags>
 		</div>
 		<div class="col-md-9">
-			<div class="text-center">
-				<p class="text-muted" ng-if="count===0">暂无数据</p>
-			</div>
-			<ul class="list-group" ng-if="count>
-				0">
+			<ul class="list-group" ng-if="count">
 				<li class="list-group-item" ng-repeat="a in articles">
 					<a ui-sref="viewArticle({_id:a._id})">{{a.title}}</a>
-					<img  ng-src="{{a.user.avatar}}" alt="..." class="img-circle avatar"></li>
+					<span class="pull-right text-muted" ng-bind="a.createdTime|dayDisplay"></span>
 			</ul>
 
 			<div class="pull-right">

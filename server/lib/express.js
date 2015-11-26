@@ -20,7 +20,10 @@ var env = context.env,
 	util = context.util,
 	dirPath = context.dirPath,
 	filePath = context.filePath,
-	APP_CONFIG = config.APP;
+	APP_CONFIG = config.APP,
+	clientSrcPath = path.join(dirPath.client, 'src'),
+	clientDistPath = path.join(dirPath.client, 'dist'),
+	staticPath = clientSrcPath;
 
 module.exports = function(app, passport, mongoose) {
 
@@ -79,11 +82,11 @@ module.exports = function(app, passport, mongoose) {
 	app.use(methodOverride());
 
 	if (app.get('env') === 'pro') {
-		app.use(serveStatic(path.join(dirPath.client, 'dist')));
-	} else {
-		app.use(serveStatic(path.join(dirPath.client, 'src')));
+		staticPath = clientDistPath;
 	}
 
+	app.use(serveStatic(staticPath));
+	app.use(favicon(path.join(staticPath, 'assets', 'images', 'favicon.ico')));
 
 	app.use(session({
 		resave: true,

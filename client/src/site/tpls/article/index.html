@@ -14,57 +14,44 @@
 	</div>
 	<div class="form-group form-group-tags">
 		<label ng-repeat="t in tags">
-
 			<input type="checkbox" ng-checked="isCheckTag(t)" ng-click="chooseTag($event,t)">{{t}}</label>
 	</div>
 	<div class="form-group form-group-attachment">
-		<div class="btn btn-success"
+		<div class="attachment-upload-box">
+			<button class="btn btn-primary btn-attachment-upload"
 				ng-file-select="uploadAttachment($files)"
 				multiple="true"
-				resetonclick="true">
-				附件上传
+				resetonclick="true">附件上传</button>
 		</div>
-		<a ng-repeat="a in article.attachments">
-			<span class="fa fa-file-o"></span>
-			{{a.fileName}}
-		</a>
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="a in article.attachments">
+				<span class="fa fa-file"></span>
+				<a  ng-href="{{a.fileUrl}}" target="_blank">{{a.fileName}}</a>
+			</li>
+		</ul>
 	</div>
 	<div class="form-group form-group-content">
-		<div class="ct-left">
-			<textarea ng-show="!article.isPreview" class="form-control" type="content" autocomplete="off" name="content" ng-model="article.content" placeholder="内容" required></textarea>
-
-		</div>
-		<div class="ct-right">
-			<div id="content-preview" ng-init="toPreviewContent(article.content)" ></div>
-		</div>
+			<textarea ng-show="!article.isPreview" class="form-control" type="content" autocomplete="off" name="content" ng-model="article.content" placeholder="内容" ng-init="initEditor()" id="editor"></textarea>
 	</div>
 </form>
 
 <div class="article-box row"  ng-if="!article.isAdd &&!article.isAuthor">
-	<div class="col-md-3">
-		<article-tags></article-tags>
-	</div>
-	<div class="col-md-9">
-
 		<div class="article-header">
-			<h3 class="article-header-title"  ng-bind="article.title"></h3>
-			<div  class="text-info article-header-tags">
-				<span ng-if="article.tags.length === 0">未分类</span>
-
-				<span ng-if="article.tags.length >
-					0">
-				分类:
-					<span ng-repeat="t in article.tags">{{t}};</span>
-				</span>
-			</div>
+			<h1 ng-bind="article.title"></h1>
 		</div>
 		<div class="article-content" fedoc-markdown="article.content"></div>
 		<div>
-			附件下载:
-			<a ng-repeat="a in article.attachments" ng-href="{{a.fileUrl}}" target="_blank">{{a.fileName}}</a>
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="a in article.attachments">
+					<span class="fa fa-file"></span>
+					{{a.fileName}}
+					<a class="pull-right fa fa-cloud-download"  ng-href="{{a.fileUrl}}" target="_blank">
+						下载
+					</a>
+				</li>
+			</ul>
 		</div>
-		<div class="text-muted text-right">
-			<span>编辑:{{article.user.nickname}}</span>
+		<div class="text-muted">
+			<span>[{{article.createdTime|dayDisplay}} | <a ng-repeat="a in article.tags" ui-sref="articles({tag:a.name})">{{a.name}}</a>;]</span>
 		</div>
-	</div>
 </div>

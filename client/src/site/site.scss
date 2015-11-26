@@ -9,3 +9,14 @@
 @import "./tpls/articles/index";
 @import "./tpls/article/index";
 @import "./tpls/signin/index";
+
+#footer{
+	width: 1000px;
+    margin: 40px auto 0;
+    padding: 10px 0 30px;
+    border-top: 1px solid #d4d4d4;
+    color: #999;
+    #copyright {
+	    margin: 0 10px;
+	}
+}

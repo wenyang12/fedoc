@@ -11,13 +11,14 @@ module.exports = function(app) {
 		'$upload',
 		function($scope, $state, $stateParams, ArticleService, toasty, isAdd, constant, TagService, $upload) {
 			var articleId = $stateParams._id;
-			// $scope.tags = constant.ARTICLES.tags;
 			var markdown = require('assets/libs/markdown-it/markdown-it.min')();
+			var articleEditor;
 			$scope.article = {
 				tags: [],
 				isPreview: false
 			};
 			$scope.create = function() {
+				$scope.article.content = articleEditor.value();
 				ArticleService.create($scope.article).then(function(data) {
 					if (data.code === 200) {
 						toasty.success('创建文档成功');
@@ -43,7 +44,6 @@ module.exports = function(app) {
 					ArticleService.getOne(articleId).then(function(data) {
 						if (data.code === 200) {
 							$scope.article = data.msg;
-
 						} else {
 							toasty.error(data.msg);
 						}
@@ -54,6 +54,14 @@ module.exports = function(app) {
 						$scope.toPreviewContent(val);
 					}
 				});
+			};
+
+			$scope.initEditor = function() {
+				articleEditor = new SimpleMDE({
+					element: document.getElementById('editor')
+				});
+
+				articleEditor.value($scope.article.content);
 			};
 
 			$scope.del = function() {
@@ -76,7 +84,7 @@ module.exports = function(app) {
 
 			function _uploadAttachment(file) {
 				$upload.upload({
-						url: '/api/attachments/upload', 
+						url: '/api/attachments/upload',
 						file: file
 					})
 					.progress(function(evt) {
@@ -84,10 +92,10 @@ module.exports = function(app) {
 					})
 					.success(function(data, status, headers, config) {
 						if (data.code === 200) {
-							$scope.article.attachments = $scope.article.attachments||[];
+							$scope.article.attachments = $scope.article.attachments || [];
 							$scope.article.attachments.push({
-								fileUrl:data.msg.fileUrl,
-								fileName:data.msg.fileName
+								fileUrl: data.msg.fileUrl,
+								fileName: data.msg.fileName
 							});
 						} else {
 
@@ -107,9 +115,9 @@ module.exports = function(app) {
 			$scope.update = function() {
 				ArticleService.update(articleId, {
 					title: $scope.article.title,
-					content: $scope.article.content,
+					content: articleEditor.value(),
 					tags: $scope.article.tags,
-					attachments:$scope.article.attachments
+					attachments: $scope.article.attachments
 				}).then(function(data) {
 					if (data.code === 200) {
 						toasty.success('更新文档成功');

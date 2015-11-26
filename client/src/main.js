@@ -1,16 +1,8 @@
-require('assets/libs/angular/angular.min');
-require('assets/libs/lodash/lodash.min');
-require('assets/libs/angular-sanitize/angular-sanitize.min');
-require('assets/libs/angular-ui-router/angular-ui-router.min');
-require('assets/libs/restangular/restangular.min');
-require('assets/libs/angular-ui-bootstrap/angular-ui-bootstrap.min');
-require('assets/libs/angular-toasty/angular-toasty.min');
-require('assets/libs/angular-file-upload/angular-file-upload.min');
 
 
 //加载管理模块
 require('site/modules/index')(angular);
-
+require('site/filters/index')(angular);
 require('site/services/index')(angular);
 var app = angular.module('app', [
 	'ui.router',
@@ -18,6 +10,7 @@ var app = angular.module('app', [
 	'ui.bootstrap',
 	'siteModules',
 	'siteServices',
+	'siteFilters',
 	'angular-toasty',
 	'angularFileUpload'
 ]);

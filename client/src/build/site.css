@@ -327,45 +327,43 @@ h1, h2, h3, h4, h5, h6 {
   right: 20px;
   top: 6px; }
 
-.article-form .form-group-content {
-  width: 1187px; }
-  .article-form .form-group-content .ct-left, .article-form .form-group-content .ct-right {
-    float: left;
-    height: 600px;
-    width: 586px; }
-    .article-form .form-group-content .ct-left #content-preview, .article-form .form-group-content .ct-right #content-preview {
-      height: 600px;
-      overflow: scroll; }
-  .article-form .form-group-content .ct-left textarea {
-    border-radius: 0;
-    height: 100%;
-    font-size: inherit; }
-    .article-form .form-group-content .ct-left textarea:focus {
-      outline: none;
-      box-shadow: none;
-      border-color: #ccc; }
-  .article-form .form-group-content .ct-right {
-    padding: 6px 12px;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-left: none; }
-.article-form .form-group-tags label {
-  margin-right: 5px; }
-  .article-form .form-group-tags label input {
+.article-form {
+  width: 1000px;
+  margin: 0 auto; }
+  .article-form .form-group-content {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ddd; }
+  .article-form .form-group-tags label {
     margin-right: 5px; }
+    .article-form .form-group-tags label input {
+      margin-right: 5px; }
+  .article-form .attachment-upload-box {
+    margin-bottom: 10px; }
 
-.article-box .article-header {
-  margin-bottom: 10px;
-  border-bottom: 1px #ccc dotted; }
-  .article-box .article-header .article-header-title {
-    margin-bottom: 6px; }
-  .article-box .article-header .article-header-tags {
-    position: absolute;
-    right: 15px;
-    top: 10px; }
+.article-box {
+  width: 980px;
+  padding: 10px;
+  margin: 0 auto; }
+  .article-box .article-header {
+    margin: 0 0 30px; }
+    .article-box .article-header h1 {
+      padding-bottom: 15px;
+      border-bottom: 1px dotted #d4d4d4; }
+  .article-box .article-content {
+    min-height: 400px; }
 
 .signin-box {
   width: 450px; }
+
+#footer {
+  width: 1000px;
+  margin: 40px auto 0;
+  padding: 10px 0 30px;
+  border-top: 1px solid #d4d4d4;
+  color: #999; }
+  #footer #copyright {
+    margin: 0 10px; }
 
 /*# sourceMappingURL=site.css.map */
