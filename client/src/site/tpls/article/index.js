@@ -76,19 +76,25 @@ module.exports = function(app) {
 					});
 				}
 			};
+			//上传附件
 			$scope.uploadAttachment = function(files) {
 				for (var i = 0, len = files.length; i < len; i++) {
 					_uploadAttachment(files[i]);
 				}
 			};
 
+			$scope.delAttachment = function(index) {
+				$scope.article.attachments.splice(index, 1);
+			};
+
 			function _uploadAttachment(file) {
+				$scope.uploading = true;
 				$upload.upload({
 						url: '/api/attachments/upload',
 						file: file
 					})
 					.progress(function(evt) {
-
+						console.log(evt);
 					})
 					.success(function(data, status, headers, config) {
 						if (data.code === 200) {
@@ -100,8 +106,11 @@ module.exports = function(app) {
 						} else {
 
 						}
+						$scope.uploading = false;
 					})
-					.error(function() {});
+					.error(function() {
+						$scope.uploading = false;
+					});
 			}
 			$scope.toPreviewContent = function(val) {
 				var contentPreviewElem = document.querySelector('#content-preview');

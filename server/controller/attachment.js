@@ -22,11 +22,10 @@ exports.upload = function(req, res) {
 		var originFileName = file.originalname;
 		async.auto({
 				'upload': function(cb) {
-					var uploadKey = path.join('attachments', originFileName),
+					var uploadKey = path.join('attachments', new Date().getTime().toString(), originFileName),
 						cloudUrl = url.resolve(defaultDomain, uploadKey),
 						localFilePath = file.path;
-
-					qnClient.upload(localFilePath, {
+					qnClient.upload(fs.createReadStream(localFilePath), {
 						key: uploadKey
 					}, function() {
 						cb(null, {
