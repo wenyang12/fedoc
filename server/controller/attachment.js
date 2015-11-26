@@ -1,6 +1,5 @@
 var path = require('path');
 var url = require('url');
-var Qiniu = require('./qiniu');
 var fs = require('fs-extra');
 var qn = require('qn');
 qnClient = qn.create({
