@@ -15,6 +15,11 @@ module.exports = function(myModule) {
                     $scope.tag = $stateParams.tag || '';
 
                     $scope.choose = function($event, tag) {
+
+                        if (tag === '代码规范') {
+                            window.open('/docs/standard/index.html', '_blank');
+                            return;
+                        }
                         $scope.tag = tag;
                         $state.go('articles', {
                             tag: tag

@@ -318,6 +318,9 @@ h1, h2, h3, h4, h5, h6 {
     .tags-box .list-group-item .btn-operate {
       position: absolute;
       right: 5px; }
+    .tags-box .list-group-item .tag-hot {
+      font-size: 18px;
+      color: #E04B4B; }
 
 .articles-box .list-group {
   position: relative; }
