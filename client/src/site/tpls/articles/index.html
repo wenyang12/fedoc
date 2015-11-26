@@ -1,9 +1,9 @@
 <div class="container articles" ng-init="init()">
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<article-tags></article-tags>
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-10">
 			<ul class="list-group" ng-if="count">
 				<li class="list-group-item" ng-repeat="a in articles">
 					<a ui-sref="viewArticle({_id:a._id})">{{a.title}}</a>
