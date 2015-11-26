@@ -319,12 +319,19 @@ h1, h2, h3, h4, h5, h6 {
       position: absolute;
       right: 5px; }
 
-.articles .img-circle.avatar {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  right: 20px;
-  top: 6px; }
+.articles-box .list-group {
+  position: relative; }
+  .articles-box .list-group .title {
+    font-size: 18px;
+    margin-left: 10px; }
+  .articles-box .list-group .time {
+    position: absolute;
+    right: 7px;
+    bottom: 4px;
+    font-size: 12px; }
+  .articles-box .list-group .img-circle.avatar {
+    width: 40px;
+    height: 40px; }
 
 .article-form {
   width: 1000px;
@@ -380,7 +387,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #site-box {
   background-color: white;
-  padding: 15px 0px; }
+  padding: 15px; }
 
 #footer {
   width: 1000px;
