@@ -23,18 +23,6 @@ module.exports = function(app) {
 			$scope.init = function() {
 				$scope.list();
 			};
-
-			// $scope.searchKeyword = function() {
-			// 	$state.go('articles', $scope.query);
-			// };
-			// $scope.chooseTag = function(tag) {
-			// 	if ($scope.query.tag === tag) {
-			// 		$scope.query.tag = '';
-			// 	} else {
-			// 		$scope.query.tag = tag;
-			// 	}
-			// 	$state.go('articles', $scope.query);
-			// };
 		}
 	]);
 	app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {

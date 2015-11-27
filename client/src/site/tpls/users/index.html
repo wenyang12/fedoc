@@ -4,6 +4,7 @@
 			<tr>
 				<td>姓名</td>
 				<td>邮箱</td>
+				<td>操作</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -14,6 +15,7 @@
 				</td>
 
 				<td>{{u.email}}</td>
+				<td><button class="btn btn-danger" ng-click="del(u)">删除</button></td>
 			</tr>
 		</tbody>
 	</table>

@@ -283,7 +283,7 @@ h1, h2, h3, h4, h5, h6 {
   .site-header .site-header-nav {
     position: relative; }
   .site-header .search-box {
-    width: 180px;
+    width: 220px;
     position: absolute;
     right: 243px;
     top: 8px;
@@ -342,7 +342,7 @@ h1, h2, h3, h4, h5, h6 {
 .articles-box .list-group {
   position: relative; }
   .articles-box .list-group .title {
-    font-size: 18px;
+    font-size: 16px;
     margin-left: 10px; }
   .articles-box .list-group .time {
     position: absolute;

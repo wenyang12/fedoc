@@ -593,18 +593,6 @@
 				$scope.init = function() {
 					$scope.list();
 				};
-	
-				// $scope.searchKeyword = function() {
-				// 	$state.go('articles', $scope.query);
-				// };
-				// $scope.chooseTag = function(tag) {
-				// 	if ($scope.query.tag === tag) {
-				// 		$scope.query.tag = '';
-				// 	} else {
-				// 		$scope.query.tag = tag;
-				// 	}
-				// 	$state.go('articles', $scope.query);
-				// };
 			}
 		]);
 		app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -813,7 +801,8 @@
 			'$stateParams',
 			'UserService',
 			'constant',
-			function($scope, $state, $stateParams, UserService, constant) {
+			'toasty',
+			function($scope, $state, $stateParams, UserService, constant,toasty) {
 				$scope.query = {
 					page: $stateParams.page,
 				};
@@ -826,6 +815,21 @@
 					});
 				};
 	
+				$scope.del = function(user) {
+					if (confirm('确认删除用户吗')) {
+						UserService.remove(user._id).then(function(data) {
+							if (data.code === 200) {
+								toasty.success('删除用户');
+								for (var i = 0, len = $scope.users.length; i < len; i++) {
+									if ($scope.users[i]._id === user._id) {
+										$scope.users.splice(i, 1);
+										return;
+									}
+								}
+							}
+						});
+					}
+				};
 				$scope.init = function() {
 					$scope.list();
 				};
