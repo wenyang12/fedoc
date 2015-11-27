@@ -310,7 +310,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px; }
 
 .tags-box {
-  width: 185px;
+  width: 140px;
   top: 70px;
   left: 100px; }
   .tags-box .tag-item {
@@ -340,19 +340,40 @@ h1, h2, h3, h4, h5, h6 {
   .btn-to-top.active {
     display: block; }
 
-.articles-box .list-group {
-  position: relative; }
-  .articles-box .list-group .title {
-    font-size: 16px;
-    margin-left: 10px; }
-  .articles-box .list-group .time {
-    position: absolute;
-    right: 16px;
-    bottom: 16px;
-    font-size: 12px; }
-  .articles-box .list-group .img-circle.avatar {
-    width: 26px;
-    height: 26px; }
+.articles-box .article-list {
+  position: relative;
+  width: 900px;
+  margin-left: 40px; }
+  .articles-box .article-list .article-list-item {
+    padding: 10px;
+    font-size: 12px;
+    border-bottom: 1px dotted #ddd; }
+    .articles-box .article-list .article-list-item .title {
+      color: #444; }
+      .articles-box .article-list .article-list-item .title:hover {
+        cursor: pointer; }
+    .articles-box .article-list .article-list-item .author {
+      color: #999;
+      position: absolute;
+      width: 150px;
+      right: 0;
+      padding-left: 30px; }
+      .articles-box .article-list .article-list-item .author .author-avatar {
+        position: absolute;
+        left: 0;
+        width: 20px;
+        height: 20px; }
+      .articles-box .article-list .article-list-item .author .author-nickname {
+        width: 60px;
+        height: 26px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        display: block; }
+      .articles-box .article-list .article-list-item .author .time {
+        position: absolute;
+        right: 0;
+        top: 0px; }
 
 .article-form .form-group-content {
   -moz-border-radius: 4px;

@@ -4,11 +4,19 @@
 			<article-tags></article-tags>
 		</div>
 		<div class="col-md-10">
-			<ul class="list-group" ng-if="count">
-				<li class="list-group-item" ng-repeat="a in articles">
-					<img class="avatar img-circle" ng-src="{{a.user.avatar}}"/>
+			<ul class="article-list" ng-if="count">
+				<li class="article-list-item" ng-repeat="a in articles">
 					<a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}}</a>
-					<span class="time text-muted" ng-bind="a.createdTime|dayDisplay"></span>
+					<span class="author">
+						<img class="author-avatar img-circle" ng-src="{{a.user.avatar}}"/>
+						<a class="author-nickname">
+							{{a.user.nickname}}
+						</a>
+						<span class="time" ng-bind="a.createdTime|dateAgo">
+							
+						</span>
+					</span>
+
 				
 				</li>
 			</ul>

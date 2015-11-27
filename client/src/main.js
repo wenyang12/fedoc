@@ -1,5 +1,3 @@
-
-
 //加载管理模块
 require('site/modules/index')(angular);
 require('site/filters/index')(angular);
