@@ -14,7 +14,6 @@
     "markdown-it": "latest",
     "angular-sanitize": "latest",
     "Font-Awesome": "latest",
-    "ng-file-upload": "2.0.4",
     "github-markdown-css": "~2.1.0"
   }
 }
