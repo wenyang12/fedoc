@@ -3,3 +3,4 @@ npm-debug.log
 .sass-cache/*
 logs/err*.log
 logs/out*.log
+server/db_backup/

@@ -28,6 +28,8 @@ require(filePath.db).connect(function(mongoose) {
 	// Route配置
 	require(filePath.route)(app);
 
+	require(filePath.cron)();
+
 	// Route配置
 	require(filePath.init)(app);
 

@@ -29,5 +29,9 @@ module.exports = {
 	LIST: {
 		perPage: 10,
 		limitPage: 10
-	}
+	},
+    TIME: {
+        // midnight: '0 3 15 * * *'
+        midnight: '0 10 1 * * *'
+    }
 };

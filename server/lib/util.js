@@ -30,7 +30,8 @@ exports.setContext = function(serverPath) {
 			model: path.join(serverPath, 'model'),
 			route: path.join(serverPath, 'route'),
 			test: path.join(serverPath, 'test'),
-			upload: path.join(clientPath, 'upload')
+			upload: path.join(clientPath, 'upload'),
+			dbBackup:path.join(serverPath, 'db_backup')
 		},
 		// 文件路径
 		filePath: {}
