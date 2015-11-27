@@ -28,7 +28,7 @@ module.exports = function(myModule) {
 						return parseInt(timeDistance / 60) + '分钟前';
 					} else if (timeDistance < 3600 * 24) {
 						return parseInt(timeDistance / (60 * 24)) + '小时前';
-					} else if (timeDistance < 360 * 24 * 30) {
+					} else if (timeDistance < 3600 * 24 * 30) {
 						return parseInt(timeDistance / (60 * 24 * 30)) + '天前';
 					} else {
 						return parseInt(timeDistance / (60 * 24 * 30 * 365)) + '年前';
