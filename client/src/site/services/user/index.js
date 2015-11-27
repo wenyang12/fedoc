@@ -6,6 +6,9 @@ module.exports = function(myModule) {
 				list: function(query) {
 					return baseRoute.customGET('', query);
 				},
+				listAll: function(query) {
+					return baseRoute.customGET('all', query);
+				},
 				getOne: function(userId) {
 					return baseRoute.one(userId)
 						.customGET();

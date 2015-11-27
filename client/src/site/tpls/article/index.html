@@ -12,6 +12,12 @@
 	<div class="form-group">
 		<input  class="form-control" type="title" autocomplete="off" name="title" ng-model="article.title" placeholder="标题" required />
 	</div>
+	<div class="form-group" ng-init="user.isAdmin">
+		<select class="form-control input-sm"
+				ng-model="article.user._id"
+				ng-options="u._id as u.nickname for u in users">
+			</select>
+	</div>
 	<div class="form-group form-group-tags">
 		<label ng-repeat="t in tags">
 			<input type="checkbox" ng-checked="isCheckTag(t)" ng-click="chooseTag($event,t)">{{t}}</label>

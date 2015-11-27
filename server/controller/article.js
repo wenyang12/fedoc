@@ -7,12 +7,16 @@ var mongoose = require('mongoose'),
 
 exports.update = function(req, res) {
 	var form = req.body;
+	var user = req.user;
 	var userId = req.user._id;
 	var articleId = req.params.articleId;
-	articleDao.update({
-		_id: articleId,
-		user: userId
-	}, form, '', function(err) {
+	var query = {
+		_id: articleId
+	};
+	if (!user.isAdmin) {
+		query.user = userId;
+	}
+	articleDao.update(query, form, '', function(err) {
 		if (!err) {
 			return res.successMsg();
 		} else {
@@ -133,7 +137,7 @@ exports.get = function(req, res) {
 		if (!err) {
 			var article = results.getArticle;
 			if (user) {
-				article.isAuthor = user.isAdmin||user._id === article.user._id.toString();
+				article.isAuthor = user.isAdmin || user._id === article.user._id.toString();
 			}
 			return res.successMsg(article);
 		} else {

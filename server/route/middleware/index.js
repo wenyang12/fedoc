@@ -27,13 +27,13 @@ module.exports = {
 				// 如果是套餐页面或帮助页面cookie超时， 重定向至首页
 				return res.redirect('/');
 			} else {
-				return res.errorMsg(201);
+				return res.errorMsg(201, '权限不足');
 			}
 		} else {
 			if (req.user.isAdmin) {
 				next();
 			} else {
-				return res.errorMsg(201);
+				return res.errorMsg(201, '权限不足');
 			}
 		}
 	}

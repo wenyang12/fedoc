@@ -477,6 +477,9 @@
 					list: function(query) {
 						return baseRoute.customGET('', query);
 					},
+					listAll: function(query) {
+						return baseRoute.customGET('all', query);
+					},
 					getOne: function(userId) {
 						return baseRoute.one(userId)
 							.customGET();
@@ -615,12 +618,14 @@
 			'$state',
 			'$stateParams',
 			'ArticleService',
+			'UserService',
 			'toasty',
 			'isAdd',
 			'constant',
 			'TagService',
 			'$upload',
-			function($scope, $state, $stateParams, ArticleService, toasty, isAdd, constant, TagService, $upload) {
+			'$rootScope',
+			function($scope, $state, $stateParams, ArticleService, UserService, toasty, isAdd, constant, TagService, $upload, $rootScope) {
 				var articleId = $stateParams._id;
 				var markdown = __webpack_require__(5)();
 				var articleEditor;
@@ -649,20 +654,28 @@
 							}
 						}
 					});
+	
 					if (isAdd) {
 						$scope.article.isAdd = true;
 					} else {
+	
 						ArticleService.getOne(articleId).then(function(data) {
 							if (data.code === 200) {
 								$scope.article = data.msg;
+								if ($rootScope.user && $rootScope.user.isAdmin) {
+									$scope.initAllUsers();
+								}
 							} else {
 								toasty.error(data.msg);
 							}
 						});
 					}
-					$scope.$watch('article.content', function(val) {
-						if (val) {
-							$scope.toPreviewContent(val);
+				};
+	
+				$scope.initAllUsers = function() {
+					UserService.listAll().then(function(data) {
+						if (data.code === 200) {
+							$scope.users = data.msg.users;
 						}
 					});
 				};
@@ -705,7 +718,7 @@
 							file: file
 						})
 						.progress(function(evt) {
-							
+	
 						})
 						.success(function(data, status, headers, config) {
 							if (data.code === 200) {
@@ -723,12 +736,6 @@
 							$scope.uploading = false;
 						});
 				}
-				$scope.toPreviewContent = function(val) {
-					var contentPreviewElem = document.querySelector('#content-preview');
-					var html = markdown.render(val);
-					if (!contentPreviewElem) return;
-					contentPreviewElem.innerHTML = html;
-				};
 	
 	
 				$scope.init();
@@ -737,6 +744,7 @@
 						title: $scope.article.title,
 						content: articleEditor.value(),
 						tags: $scope.article.tags,
+						user: $scope.article.user._id,
 						attachments: $scope.article.attachments
 					}).then(function(data) {
 						if (data.code === 200) {

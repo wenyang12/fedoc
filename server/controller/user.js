@@ -162,3 +162,19 @@ exports.get = function(req, res) {
 		}
 	});
 };
+exports.listAll = function(req, res) {
+	userDao.listAll({
+		criteria: {}
+	}, {
+		createdTime: -1
+	}, function(err, data) {
+		if (!err) {
+			return res.successMsg({
+				users: data
+			} || null);
+		} else {
+			console.log(err);
+			return res.errorMsg(10000, '获取列表失败');
+		}
+	});
+};
