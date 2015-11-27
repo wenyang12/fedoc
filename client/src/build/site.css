@@ -317,7 +317,8 @@ h1, h2, h3, h4, h5, h6 {
     position: relative; }
     .tags-box .tag-item .btn-operate {
       position: absolute;
-      right: 5px; }
+      right: 5px;
+      top: 11px; }
     .tags-box .tag-item .tag-hot {
       font-size: 18px;
       color: #E04B4B; }
