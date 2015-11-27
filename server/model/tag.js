@@ -10,7 +10,11 @@ var schema = new Schema({
 		type: String,
 		required: true
 	},
-
+	sort: {
+		type: Number,
+		required: true,
+		default: 0
+	},
 	user: {
 		type: Schema.ObjectId,
 		required: true,

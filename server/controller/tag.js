@@ -7,11 +7,9 @@ var mongoose = require('mongoose'),
 
 exports.update = function(req, res) {
 	var form = req.body;
-	var userId = req.user._id;
 	var tagId = req.params.tagId;
 	tagDao.update({
-		_id: tagId,
-		user: userId
+		_id: tagId
 	}, form, '', function(err) {
 		if (!err) {
 			return res.successMsg();
@@ -24,7 +22,6 @@ exports.update = function(req, res) {
 
 exports.create = function(req, res) {
 	var form = req.body;
-	var userId = req.user._id;
 	form.user = userId;
 	tagDao.createBySave(form, function(err) {
 		if (!err) {
@@ -38,10 +35,8 @@ exports.create = function(req, res) {
 
 exports.delete = function(req, res) {
 	var tagId = req.params.tagId;
-	var userId = req.user._id;
 	tagDao.delete({
-		_id: tagId,
-		user: userId
+		_id: tagId
 	}, function(err) {
 		if (!err) {
 			return res.successMsg();
@@ -90,10 +85,13 @@ exports.listAll = function(req, res) {
 	tagDao.listAll({
 		criteria: {}
 	}, {
+		sort: 1,
 		createdTime: -1
 	}, function(err, data) {
 		if (!err) {
-			return res.successMsg({tags:data} || null);
+			return res.successMsg({
+				tags: data
+			} || null);
 		} else {
 			console.log(err);
 			return res.errorMsg(10000, '获取列表失败');

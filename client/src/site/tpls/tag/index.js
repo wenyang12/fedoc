@@ -10,7 +10,7 @@ module.exports = function(app) {
 		function($scope, $state, $stateParams, TagService, toasty, isAdd, constant) {
 			var tagId = $stateParams._id;
 			$scope.tag = {
-				name:''
+				name: ''
 			};
 			$scope.create = function() {
 				TagService.create($scope.tag).then(function(data) {
@@ -41,6 +41,7 @@ module.exports = function(app) {
 			$scope.update = function() {
 				TagService.update(tagId, {
 					name: $scope.tag.name,
+					sort: $scope.tag.sort
 				}).then(function(data) {
 					if (data.code === 200) {
 						toasty.success('更新分类成功');
