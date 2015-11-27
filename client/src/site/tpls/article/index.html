@@ -12,7 +12,7 @@
 	<div class="form-group">
 		<input  class="form-control" type="title" autocomplete="off" name="title" ng-model="article.title" placeholder="标题" required />
 	</div>
-	<div class="form-group" ng-init="user.isAdmin">
+	<div class="form-group" ng-if="user.isAdmin">
 		<select class="form-control input-sm"
 				ng-model="article.user._id"
 				ng-options="u._id as u.nickname for u in users">
