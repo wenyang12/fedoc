@@ -22,6 +22,7 @@ exports.update = function(req, res) {
 
 exports.create = function(req, res) {
 	var form = req.body;
+	var userId = req.user._id;
 	form.user = userId;
 	tagDao.createBySave(form, function(err) {
 		if (!err) {
