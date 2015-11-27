@@ -5,5 +5,6 @@ module.exports = function(angular) {
 	require('site/modules/markdown/index')(siteModules);
 	require('site/modules/enter/index')(siteModules);
 	require('site/modules/article-tags/index')(siteModules);
+	require('site/modules/btn-to-top/index')(siteModules);
 
 };

@@ -6,17 +6,6 @@ module.exports = function(app) {
 				email: 'zhangc@fxiaoke.com',
 				pwd: '123456'
 			};
-			// var $btnToTop = angular.element(document).find('.btn-to-top');
-
-			// angular.element($window).bind("scroll", function(e) {
-			// 	var scrollTop = window.document.body.scrollTop;
-			// 	if (scrollTop > 40) {
-			// 		$btnToTop.addClass('active');
-			// 		debugger;
-			// 	} else {
-			// 		$btnToTop.removeClass('active');
-			// 	}
-			// });
 			$state.go('articles');
 		}
 	]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {

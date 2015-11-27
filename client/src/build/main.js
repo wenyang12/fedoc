@@ -48,8 +48,8 @@
 	
 	//加载管理模块
 	__webpack_require__(1)(angular);
-	__webpack_require__(8)(angular);
-	__webpack_require__(10)(angular);
+	__webpack_require__(9)(angular);
+	__webpack_require__(11)(angular);
 	var app = angular.module('app', [
 		'ui.router',
 		'restangular',
@@ -86,7 +86,7 @@
 		}
 	});
 	
-	__webpack_require__(14)(app);
+	__webpack_require__(15)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -101,6 +101,7 @@
 		__webpack_require__(4)(siteModules);
 		__webpack_require__(6)(siteModules);
 		__webpack_require__(7)(siteModules);
+		__webpack_require__(8)(siteModules);
 	
 	};
 
@@ -363,14 +364,45 @@
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = function(myModule) {
+		myModule.directive('btnToTop', ['$window',
+			function factory($window) {
+				var directive = {
+					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+					replace: 'true',
+					template: ' <div class="btn-to-top"></div>',
+					scope: false,
+					link: function($scope, $element, $attrs) {
+						angular.element($window).bind("scroll", function(e) {
+							var scrollTop = window.document.body.scrollTop;
+							if (scrollTop > 40) {
+								$element.addClass('active');
+							} else {
+								$element.removeClass('active');
+							}
+						});
+						$element.on('click',function(){
+							window.document.body.scrollTop = 0;
+						});
+					}
+				};
+				return directive;
+			}
+		]);
+	};
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function(angular) {
 		var siteFilters = angular.module('siteFilters', []);
-		__webpack_require__(9)(siteFilters);
+		__webpack_require__(10)(siteFilters);
 	};
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -391,19 +423,19 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(11)(siteServices);
 		__webpack_require__(12)(siteServices);
 		__webpack_require__(13)(siteServices);
+		__webpack_require__(14)(siteServices);
 	};
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -434,7 +466,7 @@
 	};
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -468,7 +500,7 @@
 	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -499,7 +531,7 @@
 	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -510,17 +542,6 @@
 					email: 'zhangc@fxiaoke.com',
 					pwd: '123456'
 				};
-				// var $btnToTop = angular.element(document).find('.btn-to-top');
-	
-				// angular.element($window).bind("scroll", function(e) {
-				// 	var scrollTop = window.document.body.scrollTop;
-				// 	if (scrollTop > 40) {
-				// 		$btnToTop.addClass('active');
-				// 		debugger;
-				// 	} else {
-				// 		$btnToTop.removeClass('active');
-				// 	}
-				// });
 				$state.go('articles');
 			}
 		]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -533,18 +554,18 @@
 				});
 		}]);
 	
-		__webpack_require__(15)(app);
 		__webpack_require__(16)(app);
 		__webpack_require__(17)(app);
 		__webpack_require__(18)(app);
 		__webpack_require__(19)(app);
 		__webpack_require__(20)(app);
-		__webpack_require__(23)(app);
+		__webpack_require__(21)(app);
+		__webpack_require__(24)(app);
 	
 	};
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -597,7 +618,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -782,7 +803,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -821,7 +842,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -866,7 +887,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -949,12 +970,12 @@
 	};
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(21)(app);
 		__webpack_require__(22)(app);
+		__webpack_require__(23)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -984,7 +1005,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1009,7 +1030,7 @@
 	};
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1062,7 +1083,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {

@@ -313,14 +313,31 @@ h1, h2, h3, h4, h5, h6 {
   width: 185px;
   top: 70px;
   left: 100px; }
-  .tags-box .list-group-item {
+  .tags-box .tag-item {
     position: relative; }
-    .tags-box .list-group-item .btn-operate {
+    .tags-box .tag-item .btn-operate {
       position: absolute;
       right: 5px; }
-    .tags-box .list-group-item .tag-hot {
+    .tags-box .tag-item .tag-hot {
       font-size: 18px;
       color: #E04B4B; }
+
+.btn-to-top {
+  display: none;
+  top: 400px;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  border: 1px solid #D5D6DB;
+  border-right: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  z-index: 12;
+  background: #FFF url(../assets/images/top.png) no-repeat center center; }
+  .btn-to-top.active {
+    display: block; }
 
 .articles-box .list-group {
   position: relative; }
@@ -329,12 +346,12 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: 10px; }
   .articles-box .list-group .time {
     position: absolute;
-    right: 7px;
-    bottom: 4px;
+    right: 16px;
+    bottom: 16px;
     font-size: 12px; }
   .articles-box .list-group .img-circle.avatar {
-    width: 40px;
-    height: 40px; }
+    width: 26px;
+    height: 26px; }
 
 .article-form .form-group-content {
   -moz-border-radius: 4px;
@@ -397,23 +414,6 @@ h1, h2, h3, h4, h5, h6 {
 .common-form {
   width: 450px;
   margin: 0 auto; }
-
-.btn-to-top {
-  display: none;
-  bottom: 115px;
-  width: 44px;
-  height: 44px;
-  overflow: hidden;
-  position: fixed;
-  right: 0;
-  border: 1px solid #D5D6DB;
-  border-right: 0;
-  border-radius: 2px;
-  cursor: pointer;
-  z-index: 12;
-  background: #FFF url(../assets/images/top.png) no-repeat center center; }
-  .btn-to-top.active {
-    display: block; }
 
 #footer {
   width: 1000px;

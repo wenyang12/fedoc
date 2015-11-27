@@ -5,6 +5,8 @@
 // modules
 @import "./modules/header/index";
 @import "./modules/article-tags/index";
+@import "./modules/btn-to-top/index";
+
 // tpls
 @import "./tpls/articles/index";
 @import "./tpls/article/index";
@@ -24,24 +26,6 @@
 .common-form{
 	width: 450px;
 	margin: 0 auto;
-}
-.btn-to-top{
-	&.active{
-		display: block;
-	}
-	display: none;
-	bottom: 115px;
-    width: 44px;
-    height: 44px;
-    overflow: hidden;
-    position: fixed;
-    right: 0;
-    border: 1px solid #D5D6DB;
-    border-right: 0;
-    border-radius: 2px;
-    cursor: pointer;
-    z-index: 12;
-    background: #FFF url(../assets/images/top.png) no-repeat center center;
 }
 #footer {
 	width: 1000px;

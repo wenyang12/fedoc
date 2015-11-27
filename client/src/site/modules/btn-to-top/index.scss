@@ -1,0 +1,18 @@
+.btn-to-top{
+	&.active{
+		display: block;
+	}
+	display: none;
+	top: 400px;
+    width: 44px;
+    height: 44px;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    border: 1px solid #D5D6DB;
+    border-right: 0;
+    border-radius: 2px;
+    cursor: pointer;
+    z-index: 12;
+    background: #FFF url(../assets/images/top.png) no-repeat center center;
+}
