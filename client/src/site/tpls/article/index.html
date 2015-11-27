@@ -42,7 +42,7 @@
 	</div>
 </form>
 
-<div class="article-box common-box row"  ng-if="!article.isAdd &&!article.isAuthor">
+<div class="article-box common-box row "  ng-if="!article.isAdd &&!article.isAuthor">
 	<div class="article-header">
 		<h1 ng-bind="article.title"></h1>
 		<div class="article-user">
@@ -57,7 +57,7 @@
 		</span>
 		</div>
 	</div>
-	<div class="article-content" fedoc-markdown="article.content"></div>
+	<div class="article-content markdown-body" fedoc-markdown="article.content"></div>
 	<div>
 		<ul class="list-group">
 			<li class="list-group-item" ng-repeat="a in article.attachments">
