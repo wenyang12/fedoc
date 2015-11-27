@@ -6,10 +6,10 @@ module.exports = function(myModule) {
 				replace: 'true',
 				templateUrl: '/site/modules/header/index.html',
 				link: function($scope) {
-					$scope.menus = [{
-						title: '文章管理',
+					$scope.adminMenus = [{
+						title: '文档管理',
 						subMenus: [{
-							title: '列表',
+							title: '文档列表',
 							sref: 'articles'
 						}, {
 							title: '新增文档',
@@ -21,11 +21,27 @@ module.exports = function(myModule) {
 							title: '新增分类',
 							sref: 'addTag'
 						}]
+					}, {
+						title: '成员管理',
+						subMenus: [{
+							title: '新增成员',
+							sref: 'addUser'
+						}, {
+							title: '成员列表',
+							sref: 'users'
+						}]
+					}];
+					$scope.userMenus = [{
+						title: '文档管理',
+						subMenus: [{
+							title: '新增文档',
+							sref: 'addArticle'
+						}]
 					}];
 				},
 				scope: false,
 				controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', function($scope, $rootScope, $stateParams, $state, $http) {
-					
+
 					//监听 - 缩略图被点击
 					$scope.$on('userChange', function(event, data) {
 						if (data) {

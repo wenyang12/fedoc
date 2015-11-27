@@ -133,7 +133,7 @@ exports.get = function(req, res) {
 		if (!err) {
 			var article = results.getArticle;
 			if (user) {
-				article.isAuthor = user._id === article.user._id.toString();
+				article.isAuthor = user.isAdmin||user._id === article.user._id.toString();
 			}
 			return res.successMsg(article);
 		} else {

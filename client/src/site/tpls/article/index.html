@@ -1,5 +1,5 @@
 <!--编辑，新增,查看-->
-<form class="form-horizontal article-form" ng-if="article.isAuthor||article.isAdd">
+<form class="form-horizontal article-form common-box" ng-if="article.isAuthor||article.isAdd">
 	<div class="form-group">
 		<div class="pull-left">
 			<button type="submit" class="btn btn-danger"ng-click="del()" ng-if="article.isAuthor">删除文档</button>
@@ -42,7 +42,7 @@
 	</div>
 </form>
 
-<div class="article-box row"  ng-if="!article.isAdd &&!article.isAuthor">
+<div class="article-box common-box row"  ng-if="!article.isAdd &&!article.isAuthor">
 	<div class="article-header">
 		<h1 ng-bind="article.title"></h1>
 		<div class="article-user">

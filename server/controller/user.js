@@ -78,7 +78,11 @@ exports.updatePwd = function(req, res) {
 
 exports.create = function(req, res) {
 	var form = req.body;
-	userDao.createBySave(form, function(err) {
+	userDao.createBySave({
+		email: form.email,
+		nickname: form.email,
+		pwd: '000000'
+	}, function(err) {
 		if (!err) {
 			return res.successMsg();
 		} else {

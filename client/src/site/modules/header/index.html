@@ -8,10 +8,23 @@
 			</div>
 
 			<ul ng-if="user && user.isAdmin"  class="nav navbar-nav">
-				<li ng-repeat="menu in menus" dropdown keyboard-nav >
+				<li ng-repeat="menu in adminMenus" dropdown keyboard-nav >
 					<a dropdown-toggle>
 						{{menu.title}}
-
+						<span class="caret"></span>
+					</a>
+					<ul ng-if="menu.subMenus.length>
+						0" class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+						<li role="menuitem" ng-repeat="subMenu in menu.subMenus">
+							<a ui-sref="{{subMenu.sref}}">{{subMenu.title}}</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<ul ng-if="user && !user.isAdmin"  class="nav navbar-nav">
+				<li ng-repeat="menu in userMenus" dropdown keyboard-nav >
+					<a dropdown-toggle>
+						{{menu.title}}
 						<span class="caret"></span>
 					</a>
 					<ul ng-if="menu.subMenus.length>

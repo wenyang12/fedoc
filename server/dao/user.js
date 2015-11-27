@@ -24,10 +24,10 @@ exports.list = function(options, callback) {
 			})
 			.limit(options.perPage)
 			.skip(options.perPage * options.page)
-			.exec(function(err, articles) {
+			.exec(function(err, users) {
 				if (!err) {
 					var data = {
-						articles: articles,
+						users: users,
 						count: count
 					};
 					callback(null, data);

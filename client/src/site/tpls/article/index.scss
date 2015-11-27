@@ -1,8 +1,6 @@
 $article-content-height: 600px;
 
 .article-form {
-    width: 1000px;
-    margin: 0 auto;
     .form-group-content {
         @include border-radius(4px);
         border: 1px solid #ddd;
