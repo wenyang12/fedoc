@@ -135,7 +135,7 @@ module.exports = function(app) {
 				}).then(function(data) {
 					if (data.code === 200) {
 						toasty.success('更新文档成功');
-						$state.go('articles');
+						window.location.reload();
 					} else {
 						toasty.error(data.msg);
 					}
