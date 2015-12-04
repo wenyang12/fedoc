@@ -4,5 +4,5 @@ module.exports = function(app, mw, sign) {
 	app.post('/api/sign/login', sign.login);
 	app.post('/api/sign/isLogin', sign.isLogin);
 	app.get('/api/sign/out', sign.signout);
-
+	
 };
