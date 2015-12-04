@@ -33,6 +33,7 @@ require(filePath.db).connect(function(mongoose) {
 	// Route配置
 	require(filePath.init)(app);
 
+	//监听端口
 	app.listen(app.get('port'), function() {
 		console.log('Listen on port ' + app.get('port'));
 	});
