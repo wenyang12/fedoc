@@ -6,11 +6,12 @@ var config = context.config,
 
 
 exports.init = function(req, res) {
-	var key = req.param('key');
+		var key = req.param('key');
 	if (key !== 'fedoc') {
 		return res.send('无权限请求');
 	}
-	exec('./deploy.sh', {
+	console.log('构建开始'+dirPath.root);
+	exec(dirPath.root+'/deploy.sh', {
 		cwd: dirPath.root
 	}, function(err) {
 		if (!err) {

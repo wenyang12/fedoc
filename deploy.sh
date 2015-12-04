@@ -1,4 +1,4 @@
 #!/bin/bash
 git pull origin master
-gulp copy 
-gulp compress
+node_modules/gulp/bin/gulp.js copy 
+node_modules/gulp/bin/gulp.js compress
