@@ -4,3 +4,4 @@ npm-debug.log
 logs/err*.log
 logs/out*.log
 server/db_backup/
+client/dist/*
