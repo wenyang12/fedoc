@@ -1,7 +1,8 @@
 {
   "name": "fedoc",
   "author": [
-    "TerryZhang"
+    "TerryZhang",
+    "yinj"
   ],
   "license": "MIT",
   "dependencies": {
