@@ -13,7 +13,6 @@ module.exports = function(app) {
 		'$rootScope',
 		function($scope, $state, $stateParams, ArticleService, UserService, toasty, isAdd, constant, TagService, $upload, $rootScope) {
 			var articleId = $stateParams._id;
-			var markdown = require('assets/libs/markdown-it/markdown-it.min')();
 			var articleEditor;
 			$scope.article = {
 				tags: [],
