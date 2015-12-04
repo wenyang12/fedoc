@@ -6,8 +6,11 @@ express+angular + webpack + gulp
 
 
 ### 安装与运行
+
 ```
 ~ npm install
 ~ gulp
 ```
+
+### 启用gitlab webhook
 
