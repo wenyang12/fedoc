@@ -7,9 +7,9 @@ var config = context.config,
 
 exports.init = function(req, res) {
 		var key = req.param('key');
-	if (key !== 'fedoc') {
-		return res.send('无权限请求');
-	}
+	// if (key !== 'fedoc') {
+	// 	return res.send('无权限请求');
+	// }
 	console.log('构建开始'+dirPath.root);
 	exec(dirPath.root+'/deploy.sh', {
 		cwd: dirPath.root
