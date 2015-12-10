@@ -116,6 +116,9 @@ a:hover {
 ins, a {
   text-decoration: none; }
 
+a {
+  cursor: pointer; }
+
 /* 专名号：虽然 u 已经重回 html5 Draft，但在所有浏览器中都是可以使用的，
  * 要做到更好，向后兼容的话，添加 class="typo-u" 来显示专名号
  * 关于 <u> 标签：http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-u-element

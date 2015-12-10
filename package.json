@@ -45,7 +45,7 @@
   "devDependencies": {
     "webpack": "1.4.4",
     "webpack-dev-server": "1.6.5",
-    "gulp": "3.8.11",
+    "gulp": "3.9.0",
     "gulp-minify-css": "0.3.10",
     "gulp-nodemon": "1.0.4",
     "gulp-rename": "1.2.0",
