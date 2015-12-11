@@ -53,6 +53,9 @@
     font-weight: normal;
     color: #666;
     line-height: 22px;
+    background-color: #5A4311;
+    color: #fff;
+    cursor: pointer;
 }
 
 .markdown-body input {
@@ -189,6 +192,12 @@
     margin-top    : 0;
     margin-bottom : 0;
     font          : 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    -webkit-box-shadow : inset 0 0 10px #ccc;
+    -moz-box-shadow    : inset 0 0 10px #ccc;
+    -ms-box-shadow     : inset 0 0 10px #ccc;
+    -o-box-shadow      : inset 0 0 10px #ccc;
+    box-shadow         : inset 0 0 10px #ccc;
+    text-shadow : 0 1px 2px #666;
 }
 
 .markdown-body .select::-ms-expand {
@@ -450,6 +459,12 @@
     border      : 0;
 }
 
+
+.markdown-body p code {
+    margin: 0px 5px;
+    padding: 3px 0;
+}
+
 .markdown-body .highlight {
     margin-bottom : 16px;
 }
@@ -460,23 +475,30 @@
     overflow         : auto;
     font-size        : 85%;
     line-height      : 1.6;
-    background-color : #f7f7f7;
     border-radius    : 3px;
 
 }
 .markdown-body pre, .markdown-body blockquote {
-    -webkit-transition : box-shadow .5s;
-    -moz-transition    : box-shadow .5s;
-    -ms-transition     : box-shadow .5s;
-    -o-transition      : box-shadow .5s;
-    transition         : box-shadow .5s;
+    -webkit-transition : all 0.5s ease-in;
+    -moz-transition    : all 0.5s ease-in;
+    -ms-transition     : all 0.5s ease-in;
+    -o-transition      : all 0.5s ease-in;
+    transition         : all 0.5s ease-in;
 }
-.markdown-body pre:hover, .markdown-body blockquote:hover {
-    -webkit-box-shadow : 0 0 10px #999;
-    -moz-box-shadow    : 0 0 10px #999;
-    -ms-box-shadow     : 0 0 10px #999;
-    -o-box-shadow      : 0 0 10px #999;
-    box-shadow         : 0 0 10px #999;
+.markdown-body blockquote:hover {
+    -webkit-box-shadow : 0 0 10px #c06a00;
+    -moz-box-shadow    : 0 0 10px #c06a00;
+    -ms-box-shadow     : 0 0 10px #c06a00;
+    -o-box-shadow      : 0 0 10px #c06a00;
+    box-shadow         : 0 0 10px #c06a00;
+    border-left-color: #c06a00;
+}
+.markdown-body pre:hover {
+    background: #c06a00;
+    -ms-text-shadow : 0 1px 3px #333;
+    -webkit-text-shadow : 0 1px 3px #333;
+    -moz-text-shadow : 0 1px 3px #333;
+    text-shadow : 0 1px 3px #333;
 }
 
 .markdown-body .highlight pre {
