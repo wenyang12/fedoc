@@ -8,7 +8,7 @@
     text-size-adjust         : 100%;
     color                    : #333;
     font-family              : 'Microsoft Yahei', tahoma, arial, 'Hiragino Sans GB', 'Hiragino Sans GB W3', \5b8b\4f53;
-    font-size                : 16px;
+    font-size                : 14px;
     line-height              : 1.6;
     word-wrap                : break-word;
     font-weight              : 300;
@@ -48,9 +48,11 @@
 .markdown-body code,
 .markdown-body kbd,
 .markdown-body pre {
-    font-family : 'Microsoft Yahei', tahoma, arial, 'Hiragino Sans GB', 'Hiragino Sans GB W3', \5b8b\4f53;
-    font-size   : 1em;
-    font-weight : 300;
+    font-family : Bitstream Vera Sans Mono, Consolas, Courier New, 'Microsoft Yahei', tahoma, arial, 'Hiragino Sans GB', 'Hiragino Sans GB W3', \5b8b\4f53;
+    font-size: 13px;
+    font-weight: normal;
+    color: #666;
+    line-height: 22px;
 }
 
 .markdown-body input {
@@ -129,6 +131,7 @@
     margin-top    : 15px;
     margin-bottom : 15px;
     line-height   : 1.1;
+    color: #FF8300;
 }
 
 .markdown-body h1 {
@@ -180,12 +183,6 @@
 
 .markdown-body dd {
     margin-left : 0;
-}
-
-.markdown-body code {
-    font-family : 'Microsoft Yahei', tahoma, arial, 'Hiragino Sans GB', 'Hiragino Sans GB W3', \5b8b\4f53;
-    font-size   : 12px;
-    font-weight : 300;
 }
 
 .markdown-body pre {
@@ -389,10 +386,14 @@
 }
 
 .markdown-body blockquote {
-    padding     : 0 15px;
+    padding     : 10px 10px;
     color       : #777;
-    border-left : 4px solid #ddd;
-    font-weight : 300;
+    border-left : 2px solid #ddd;
+    font-size: 12px;
+    background: #fafafa;
+    -webkit-border-radius : 3px;
+    -moz-border-radius    : 3px;
+    border-radius         : 3px;
 }
 
 .markdown-body blockquote > :first-child {
@@ -436,16 +437,6 @@
     background-color : #fff;
 }
 
-.markdown-body code {
-    padding          : 0;
-    padding-top      : 0.2em;
-    padding-bottom   : 0.2em;
-    margin           : 0;
-    font-size        : 85%;
-    background-color : rgba(0, 0, 0, 0.04);
-    border-radius    : 3px;
-}
-
 .markdown-body code:before,
 .markdown-body code:after {
     letter-spacing : -0.2em;
@@ -455,9 +446,6 @@
 .markdown-body pre > code {
     padding     : 0;
     margin      : 0;
-    font-size   : 100%;
-    word-break  : normal;
-    white-space : pre;
     background  : transparent;
     border      : 0;
 }
@@ -471,30 +459,29 @@
     padding          : 16px;
     overflow         : auto;
     font-size        : 85%;
-    line-height      : 1.45;
+    line-height      : 1.6;
     background-color : #f7f7f7;
     border-radius    : 3px;
+
+}
+.markdown-body pre, .markdown-body blockquote {
+    -webkit-transition : box-shadow .5s;
+    -moz-transition    : box-shadow .5s;
+    -ms-transition     : box-shadow .5s;
+    -o-transition      : box-shadow .5s;
+    transition         : box-shadow .5s;
+}
+.markdown-body pre:hover, .markdown-body blockquote:hover {
+    -webkit-box-shadow : 0 0 10px #999;
+    -moz-box-shadow    : 0 0 10px #999;
+    -ms-box-shadow     : 0 0 10px #999;
+    -o-box-shadow      : 0 0 10px #999;
+    box-shadow         : 0 0 10px #999;
 }
 
 .markdown-body .highlight pre {
     margin-bottom : 0;
     word-break    : normal;
-}
-
-.markdown-body pre {
-    word-wrap : normal;
-}
-
-.markdown-body pre code {
-    display          : inline;
-    max-width        : initial;
-    padding          : 0;
-    margin           : 0;
-    overflow         : initial;
-    line-height      : inherit;
-    word-wrap        : normal;
-    background-color : transparent;
-    border           : 0;
 }
 
 .markdown-body pre code:before,
