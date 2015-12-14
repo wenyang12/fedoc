@@ -393,7 +393,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 150px; }
 
 .article-box {
-  width: 980px;
+  /*width: 980px;*/
   padding: 10px;
   margin: 0 auto; }
   .article-box .article-header {
@@ -433,7 +433,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 15px; }
 
 .common-box {
-  width: 1000px;
+  /*width: 1000px;*/
   margin: 0 auto; }
 
 .common-form {
@@ -441,7 +441,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto; }
 
 #footer {
-  width: 1000px;
+  /*width: 1000px;*/
   margin: 40px auto 0;
   padding: 10px 0 30px;
   border-top: 1px solid #d4d4d4;
