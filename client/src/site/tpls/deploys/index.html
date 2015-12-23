@@ -1,0 +1,25 @@
+<div class="deploys-box common-box" ng-init="init()">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<td>模块</td>
+				<td>版本</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="d in deploys">
+				<td>
+					<img class="img-circle avatar" ng-src="{{d.avatar}}" />
+					{{d.name}}
+				</td>
+
+				<td>{{d.version}}</td>
+				<td><button class="btn btn-danger" ng-click="del(d)">删除</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="pull-right">
+		<fedoc-pagination ng-model="pagination" ></fedoc-pagination>
+	</div>
+</div>

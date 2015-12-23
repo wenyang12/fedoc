@@ -84,7 +84,7 @@
 		}
 	});
 	
-	__webpack_require__(14)(app);
+	__webpack_require__(15)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -469,6 +469,8 @@
 		__webpack_require__(11)(siteServices);
 		__webpack_require__(12)(siteServices);
 		__webpack_require__(13)(siteServices);
+		__webpack_require__(14)(siteServices);
+	
 	};
 
 
@@ -575,6 +577,37 @@
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = function(myModule) {
+		myModule.factory('DeployService', ['Restangular', '$timeout',
+			function(Restangular, $timeout) {
+				var baseRoute = Restangular.all('deploys');
+				return {
+					list: function(query) {
+						return baseRoute.customGET('', query);
+					},
+					getOne: function(articleId) {
+						return baseRoute.one(articleId)
+							.customGET();
+					},
+					remove: function(articleId) {
+						return baseRoute.one(articleId)
+							.remove();
+					},
+					create: function(article) {
+						return baseRoute.customPOST(article);
+					},
+					update: function(articleId, article) {
+						return baseRoute.one(articleId).customPUT(article);
+					}
+				};
+			}
+		]);
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function(app) {
 	
 		app.controller('SiteController', ['$scope', '$rootScope', '$http', '$state', '$window',
@@ -595,18 +628,20 @@
 				});
 		}]);
 	
-		__webpack_require__(15)(app);
 		__webpack_require__(16)(app);
 		__webpack_require__(17)(app);
 		__webpack_require__(18)(app);
 		__webpack_require__(19)(app);
 		__webpack_require__(20)(app);
-		__webpack_require__(23)(app);
+		__webpack_require__(21)(app);
+		__webpack_require__(24)(app);
+		__webpack_require__(25)(app);
+		__webpack_require__(26)(app);
 	
 	};
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -647,7 +682,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -836,7 +871,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -891,7 +926,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -936,7 +971,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1020,12 +1055,12 @@
 	};
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(21)(app);
 		__webpack_require__(22)(app);
+		__webpack_require__(23)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1055,7 +1090,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1080,7 +1115,7 @@
 	};
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1133,7 +1168,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1173,6 +1208,112 @@
 					controller: 'SigninController',
 					pageTitle: '登录'
 				});
+		}]);
+	};
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+		app.controller('DeployController', [
+			'$scope',
+			'$state',
+			'$stateParams',
+			'DeployService',
+			'toasty',
+			'isAdd',
+			'constant',
+			function($scope, $state, $stateParams, DeployService, toasty, isAdd, constant) {
+				var tagId = $stateParams._id;
+	
+				$scope.deploy = {
+					name:'fs',
+					version:'4.7',
+					developer:'zhangc',
+					deployDate: new Date()
+				};
+	
+				$scope.create = function() {
+					DeployService.create($scope.deploy).then(function(data) {
+						if (data.code === 200) {
+							toasty.success('创建分类成功');
+							$state.go('deploys');
+						} else {
+							toasty.error(data.msg);
+						}
+					});
+				};
+	
+	
+			}
+		]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+			$stateProvider.state('deployApply', {
+				url: '/deploy/add',
+				templateUrl: '/site/tpls/deploy/index.html',
+				controller: 'DeployController',
+				pageTitle: '申请部署代码',
+				resolve: {
+					isAdd: [function() {
+						return true;
+					}]
+				}
+			});
+		}]);
+	};
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+		app.controller('DeployListController', [
+			'$scope',
+			'$state',
+			'$stateParams',
+			'DeployService',
+			'constant',
+			'toasty',
+			function($scope, $state, $stateParams, DeployService, constant,toasty) {
+				$scope.query = {
+					page: $stateParams.page,
+				};
+				$scope.list = function(_query) {
+					var query = _.extend($scope.query, _query);
+					DeployService.list(query).then(function(data) {
+						$scope.deploys = data.msg.deploys;
+						$scope.pagination = data.msg.pagination;
+						$scope.count = data.msg.count;
+					});
+				};
+	
+				$scope.del = function(deploy) {
+					if (confirm('确认删除用户吗')) {
+						DeployService.remove(deploy._id).then(function(data) {
+							if (data.code === 200) {
+								toasty.success('删除用户');
+								for (var i = 0, len = $scope.deploys.length; i < len; i++) {
+									if ($scope.deploys[i]._id === deploy._id) {
+										$scope.deploys.splice(i, 1);
+										return;
+									}
+								}
+							}
+						});
+					}
+				};
+				$scope.init = function() {
+					$scope.list();
+				};
+			}
+		]);
+		app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+			$stateProvider.state('deploys', {
+				url: '/deploys?page',
+				templateUrl: '/site/tpls/deploys/index.html',
+				pageTitle: '文档列表',
+				controller: 'DeployListController'
+			});
 		}]);
 	};
 

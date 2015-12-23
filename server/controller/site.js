@@ -9,6 +9,8 @@ var isPro = util.isPro(),
 	isDev = util.isDev();
 
 
-exports.index = function (req, res) {
+exports.siteIndex = function (req, res) {
 	return res.render('site');
 };
+
+
