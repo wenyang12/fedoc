@@ -11,8 +11,14 @@ var schema = new Schema({
 		type: String,
 		required: true
 	},
+	reason:{
+		type: String
+	},
 	version: {
 		type: String
+	},
+	range:{
+		type:String
 	},
 	developer: {
 		type: String

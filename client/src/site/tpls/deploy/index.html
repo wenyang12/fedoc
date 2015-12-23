@@ -1,18 +1,61 @@
 <!--编辑，新增,查看-->
-<form class="form-horizontal tag-form common-form" >
+<form class="form-horizontal tag-form common-form" ng-init="init()">
 	<h3 class="text-center">部署代码</h3>
 	<div class="form-group">
-		<input  class="form-control" type="text" autocomplete="off" name="name" ng-model="deploy.name" placeholder="分支名称" required />
+		<label for="">发布原因</label>
+		<input  class="form-control" type="text" name="name" ng-model="deploy.reason" placeholder="例:zhangc" required />
 	</div>
 	<div class="form-group">
-		<input  class="form-control" type="text" autocomplete="off" name="name" ng-model="deploy.version" placeholder="版本号" required />
+		<label for="">分支名称</label>
+		<input  class="form-control" type="text" name="name" ng-model="deploy.name" placeholder="例:base" required />
+		<div>
+			<label ng-repeat="m in modules">
+			<input type="radio" ng-model="deploy.name" ng-value="m">	&nbsp;{{m}}&nbsp;
+			</label>
+		</div>
 	</div>
 	<div class="form-group">
-		<input  class="form-control" type="text" autocomplete="off" name="name" ng-model="deploy.developer" placeholder="开发者" required />
+		<label for="">发布范围</label>
+		<div>
+			<label>
+			<input type="radio" ng-model="deploy.range" ng-value="'内测'">&nbsp;内测&nbsp;
+		</label>
+			<label>
+			<input type="radio" ng-model="deploy.range" ng-value="'全网'">&nbsp;全网&nbsp;
+		</label>
+	
+		</div>
 	</div>
 	<div class="form-group">
-		<input class="form-control" type="date" autocomplete="off" name="name" ng-model="deploy.runDate" placeholder="预计上线时间" required />
+		<label for="">版本号</label>
+		<input  class="form-control" type="text" name="name" ng-model="deploy.version" placeholder="例:4.7" required />
+		<div>
+			<label ng-repeat="v in versions">
+			<input type="radio" ng-model="deploy.version" ng-value="v">	&nbsp;{{v}}&nbsp;
+			</label>
+		</div>
+	</div>
+	<!-- <div class="form-group">
+		<label for="">开发者</label>
+		<input  class="form-control" type="text" name="name" ng-model="deploy.developer" placeholder="例:zhangc" required />
+	</div> -->
+	<div class="form-group">
+		<label for="">预计上线时间</label>
+		<input class="form-control" type="date" name="name" ng-model="deploy.runDate" placeholder="" required />
 	</div>
 	<div class="form-group">
 		<button type="submit" class="btn btn-success"ng-click="create()">创建</button>
+	<div>
+		<hr>
+		<code>
+				<div>发布内容：</div>
+				<div>[日常发布]#发布记录#</div>
+				<div>1. 发布原因：{{deploy.reason}}</div>
+				<div>2. 修改模块：{{deploy.name}}</div>
+				<div>3. 变更时间：{{deploy.runDate||dateDisplay}}</div>
+				<div>4. 范围--{{deploy.range}}</div>
+				<div>5. 是否验证：是</div>
+				<div>6. 是否可回滚：是</div>
+		</code>
+	</div>
 </form>

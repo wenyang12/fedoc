@@ -1,8 +1,12 @@
 var mongoose = require('mongoose'),
 	async = require('async'),
+	fs = require('fs-extra'),
+	_ = require('lodash'),
+	path = require('path'),
 	util = context.util,
 	config = context.config,
-	deployDao = util.getDao('Deploy');
+	deployDao = util.getDao('Deploy'),
+	deployPkgPath = path.join(context.dirPath.config, 'deploy.json');
 
 
 exports.update = function(req, res) {
@@ -20,11 +24,22 @@ exports.update = function(req, res) {
 	});
 };
 
+exports.getConfig = function(req,res){
+	return res.successMsg(fs.readJsonSync(deployPkgPath));
+};
+
 exports.create = function(req, res) {
 	var form = req.body;
+	var deployPkg = fs.readJsonSync(deployPkgPath);
 	deployDao.createBySave(form, function(err) {
 		if (!err) {
-			return res.successMsg();
+			deployPkg[form.name] = deployPkg[form.name] || [];
+			deployPkg[form.name].push(form.version);
+			deployPkg[form.name] = _.unique(deployPkg[form.name]);
+			fs.outputJson(deployPkgPath, deployPkg, function(err) {
+				return res.successMsg();
+
+			});
 		} else {
 			console.log(err);
 			return res.errorMsg(10000, '创建失败');

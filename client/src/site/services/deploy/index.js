@@ -10,6 +10,9 @@ module.exports = function(myModule) {
 					return baseRoute.one(articleId)
 						.customGET();
 				},
+				getConfig: function() {
+					return baseRoute.customGET('config');
+				},
 				remove: function(articleId) {
 					return baseRoute.one(articleId)
 						.remove();

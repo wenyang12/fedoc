@@ -589,6 +589,9 @@
 						return baseRoute.one(articleId)
 							.customGET();
 					},
+					getConfig: function() {
+						return baseRoute.customGET('config');
+					},
 					remove: function(articleId) {
 						return baseRoute.one(articleId)
 							.remove();
@@ -1228,10 +1231,27 @@
 				var tagId = $stateParams._id;
 	
 				$scope.deploy = {
+					range:'内测',
 					name:'fs',
 					version:'4.7',
 					developer:'zhangc',
-					deployDate: new Date()
+					runDate: new Date()
+				};
+				$scope.init = function(){
+					DeployService.getConfig().then(function(data){
+						var config = data.msg;
+						var modules = [];
+						for (var key in config) {
+							modules.push(key);
+						}
+						$scope.modules = modules;
+	
+						$scope.$watch('deploy.name',function(newVal){
+							if(newVal){
+								$scope.versions = config[newVal];
+							}
+						});
+					});
 				};
 	
 				$scope.create = function() {
