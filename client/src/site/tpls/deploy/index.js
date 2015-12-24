@@ -16,7 +16,7 @@ module.exports = function(app) {
 				name:'fs',
 				version:'4.7',
 				developer:'zhangc',
-				runDate: new Date()
+				runTime: new Date()
 			};
 			$scope.init = function(){
 				DeployService.getConfig().then(function(data){
