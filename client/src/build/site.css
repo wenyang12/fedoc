@@ -343,6 +343,17 @@ h1, h2, h3, h4, h5, h6 {
   .btn-to-top.active {
     display: block; }
 
+.deploy-record {
+  background: black;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  padding: 10px 20px; }
+  .deploy-record > div {
+    padding: 2px 4px; }
+
 .articles-box .article-list {
   position: relative;
   width: 900px;
@@ -419,6 +430,10 @@ h1, h2, h3, h4, h5, h6 {
 .users-box .avatar {
   width: 20px;
   height: 20px; }
+
+.deploy-box .deploy-record {
+  margin-top: 40px;
+  width: 400px; }
 
 .form-info .avatar {
   width: 50px;

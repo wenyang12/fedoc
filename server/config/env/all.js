@@ -33,5 +33,11 @@ module.exports = {
     TIME: {
         // midnight: '0 3 15 * * *'
         midnight: '0 10 1 * * *'
+    },
+    DEPLOYS:{
+    	status:{
+    		initial:10,
+    		success:20
+    	}
     }
 };

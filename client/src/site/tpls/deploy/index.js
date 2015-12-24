@@ -11,6 +11,7 @@ module.exports = function(app) {
 			var tagId = $stateParams._id;
 
 			$scope.deploy = {
+				reason:'修复了',
 				range:'内测',
 				name:'fs',
 				version:'4.7',
@@ -44,6 +45,8 @@ module.exports = function(app) {
 					}
 				});
 			};
+
+		
 
 
 		}

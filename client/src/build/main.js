@@ -46,8 +46,8 @@
 
 	//加载管理模块
 	__webpack_require__(1)(angular);
-	__webpack_require__(8)(angular);
-	__webpack_require__(10)(angular);
+	__webpack_require__(9)(angular);
+	__webpack_require__(11)(angular);
 	var app = angular.module('app', [
 		'ui.router',
 		'restangular',
@@ -84,7 +84,7 @@
 		}
 	});
 	
-	__webpack_require__(15)(app);
+	__webpack_require__(18)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -100,6 +100,7 @@
 		__webpack_require__(5)(siteModules);
 		__webpack_require__(6)(siteModules);
 		__webpack_require__(7)(siteModules);
+		__webpack_require__(8)(siteModules);
 	
 	};
 
@@ -406,14 +407,38 @@
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = function(myModule) {
+		myModule.directive('deployRecord', [
+			function factory() {
+				var directive = {
+					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+					replace: 'true',
+					templateUrl: '/site/modules/deploy-record/index.html',
+					require: "ngModel",
+	                scope: {
+	                    ngModel: '='
+	                },
+					link: function($scope) {
+						console.log($scope.ngModel)
+					}
+				};
+				return directive;
+			}
+		]);
+	};
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function(angular) {
 		var siteFilters = angular.module('siteFilters', []);
-		__webpack_require__(9)(siteFilters);
+		__webpack_require__(10)(siteFilters);
 	};
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -425,6 +450,18 @@
 						return '';
 					} else {
 						return standardDateFilterFn(data, 'yyyy-MM-dd');
+					}
+				};
+			}
+		]);
+		myModule.filter('dateDisplay', ['$filter',
+			function($filter) {
+				var standardDateFilterFn = $filter('date');
+				return function(data) {
+					if (data == null || data == '') {
+						return '';
+					} else {
+						return standardDateFilterFn(data, 'yyyy-MM-dd hh:mm');
 					}
 				};
 			}
@@ -461,21 +498,23 @@
 	};
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(11)(siteServices);
 		__webpack_require__(12)(siteServices);
 		__webpack_require__(13)(siteServices);
 		__webpack_require__(14)(siteServices);
+		__webpack_require__(15)(siteServices);
+		__webpack_require__(16)(siteServices);
+		__webpack_require__(17)(siteServices);
 	
 	};
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -506,7 +545,7 @@
 	};
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -543,7 +582,7 @@
 	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -574,7 +613,7 @@
 	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -585,22 +624,25 @@
 					list: function(query) {
 						return baseRoute.customGET('', query);
 					},
-					getOne: function(articleId) {
-						return baseRoute.one(articleId)
+					getOne: function(deployId) {
+						return baseRoute.one(deployId)
 							.customGET();
 					},
 					getConfig: function() {
 						return baseRoute.customGET('config');
 					},
-					remove: function(articleId) {
-						return baseRoute.one(articleId)
+					run: function(deployId) {
+						return baseRoute.one(deployId,'run').customPUT();
+					},
+					remove: function(deployId) {
+						return baseRoute.one(deployId)
 							.remove();
 					},
 					create: function(article) {
 						return baseRoute.customPOST(article);
 					},
-					update: function(articleId, article) {
-						return baseRoute.one(articleId).customPUT(article);
+					update: function(deployId, article) {
+						return baseRoute.one(deployId).customPUT(article);
 					}
 				};
 			}
@@ -608,7 +650,61 @@
 	};
 
 /***/ },
-/* 15 */
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.factory('$modalService', ['$modal', '$modalStack', function($modal, $modalStack) {
+			var defaultOptions = {
+				backdrop: true,
+				keyboard: true,
+				windowClass: ''
+			};
+			return {
+				show: function(options) {
+					var realOpt = _.cloneDeep(defaultOptions);
+					angular.extend(realOpt, options || {});
+					return $modal.open(realOpt).result;
+				},
+				dismissAll: function() {
+					$modalStack.dismissAll();
+				}
+			};
+		}]);
+	};
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	 module.exports = function(myModule) {
+	  myModule.service('deployRead', ['$modalService', '$q',
+	        function factory($modalService, $q) {
+	            this.init = function(options) {
+	               var deploy = options.deploy;
+	                var delay = $q.defer();
+	                $modalService.show({
+	                    templateUrl: '/site/services/deploy-read/index.html',
+	                    width: 600,
+	                    height: 345,
+	                    controller: ['$scope', '$modalInstance', 
+	                        function($scope, $modalInstance) {
+	                            $scope.deploy = deploy;
+	                            $scope.close = function() {
+	                                $modalInstance.close();
+	                            };
+	                          
+	                        }
+	                    ]
+	                });
+	                return delay.promise;
+	            };
+	        }
+	    ]);
+	};
+
+/***/ },
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -631,20 +727,20 @@
 				});
 		}]);
 	
-		__webpack_require__(16)(app);
-		__webpack_require__(17)(app);
-		__webpack_require__(18)(app);
 		__webpack_require__(19)(app);
 		__webpack_require__(20)(app);
 		__webpack_require__(21)(app);
+		__webpack_require__(22)(app);
+		__webpack_require__(23)(app);
 		__webpack_require__(24)(app);
-		__webpack_require__(25)(app);
-		__webpack_require__(26)(app);
+		__webpack_require__(27)(app);
+		__webpack_require__(28)(app);
+		__webpack_require__(29)(app);
 	
 	};
 
 /***/ },
-/* 16 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -685,7 +781,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -874,7 +970,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -929,7 +1025,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -974,7 +1070,7 @@
 	};
 
 /***/ },
-/* 20 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1058,12 +1154,12 @@
 	};
 
 /***/ },
-/* 21 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(22)(app);
-		__webpack_require__(23)(app);
+		__webpack_require__(25)(app);
+		__webpack_require__(26)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1093,7 +1189,7 @@
 	};
 
 /***/ },
-/* 22 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1118,7 +1214,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1171,7 +1267,7 @@
 	};
 
 /***/ },
-/* 24 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1215,7 +1311,7 @@
 	};
 
 /***/ },
-/* 25 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1231,6 +1327,7 @@
 				var tagId = $stateParams._id;
 	
 				$scope.deploy = {
+					reason:'修复了',
 					range:'内测',
 					name:'fs',
 					version:'4.7',
@@ -1265,6 +1362,8 @@
 					});
 				};
 	
+			
+	
 	
 			}
 		]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -1283,7 +1382,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1294,7 +1393,8 @@
 			'DeployService',
 			'constant',
 			'toasty',
-			function($scope, $state, $stateParams, DeployService, constant,toasty) {
+			'deployRead',
+			function($scope, $state, $stateParams, DeployService, constant,toasty,deployRead) {
 				$scope.query = {
 					page: $stateParams.page,
 				};
@@ -1308,10 +1408,10 @@
 				};
 	
 				$scope.del = function(deploy) {
-					if (confirm('确认删除用户吗')) {
+					if (confirm('确认删除发布吗')) {
 						DeployService.remove(deploy._id).then(function(data) {
 							if (data.code === 200) {
-								toasty.success('删除用户');
+								toasty.success('删除发布');
 								for (var i = 0, len = $scope.deploys.length; i < len; i++) {
 									if ($scope.deploys[i]._id === deploy._id) {
 										$scope.deploys.splice(i, 1);
@@ -1321,6 +1421,22 @@
 							}
 						});
 					}
+				};
+	
+				$scope.run = function(d){
+					DeployService.run(d._id).then(function(data) {
+						if (data.code === 200) {
+							d.status = 20;
+							toasty.success('执行发布成功');
+						} else {
+							toasty.error(data.msg);
+						}
+					});
+				};
+				$scope.read = function(d){
+					deployRead.init({
+						deploy:d
+					});
 				};
 				$scope.init = function() {
 					$scope.list();

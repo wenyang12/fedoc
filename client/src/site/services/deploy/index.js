@@ -6,22 +6,25 @@ module.exports = function(myModule) {
 				list: function(query) {
 					return baseRoute.customGET('', query);
 				},
-				getOne: function(articleId) {
-					return baseRoute.one(articleId)
+				getOne: function(deployId) {
+					return baseRoute.one(deployId)
 						.customGET();
 				},
 				getConfig: function() {
 					return baseRoute.customGET('config');
 				},
-				remove: function(articleId) {
-					return baseRoute.one(articleId)
+				run: function(deployId) {
+					return baseRoute.one(deployId,'run').customPUT();
+				},
+				remove: function(deployId) {
+					return baseRoute.one(deployId)
 						.remove();
 				},
 				create: function(article) {
 					return baseRoute.customPOST(article);
 				},
-				update: function(articleId, article) {
-					return baseRoute.one(articleId).customPUT(article);
+				update: function(deployId, article) {
+					return baseRoute.one(deployId).customPUT(article);
 				}
 			};
 		}

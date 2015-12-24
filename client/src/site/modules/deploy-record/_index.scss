@@ -1,0 +1,11 @@
+.deploy-record {
+	background: black;
+	@include border-radius(8px);
+	color: white;
+	font-size: 14px;
+	padding: 10px 20px;
+
+	>div {
+		padding: 2px 4px;
+	}
+}

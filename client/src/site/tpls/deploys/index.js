@@ -6,7 +6,8 @@ module.exports = function(app) {
 		'DeployService',
 		'constant',
 		'toasty',
-		function($scope, $state, $stateParams, DeployService, constant,toasty) {
+		'deployRead',
+		function($scope, $state, $stateParams, DeployService, constant,toasty,deployRead) {
 			$scope.query = {
 				page: $stateParams.page,
 			};
@@ -20,10 +21,10 @@ module.exports = function(app) {
 			};
 
 			$scope.del = function(deploy) {
-				if (confirm('确认删除用户吗')) {
+				if (confirm('确认删除发布吗')) {
 					DeployService.remove(deploy._id).then(function(data) {
 						if (data.code === 200) {
-							toasty.success('删除用户');
+							toasty.success('删除发布');
 							for (var i = 0, len = $scope.deploys.length; i < len; i++) {
 								if ($scope.deploys[i]._id === deploy._id) {
 									$scope.deploys.splice(i, 1);
@@ -33,6 +34,22 @@ module.exports = function(app) {
 						}
 					});
 				}
+			};
+
+			$scope.run = function(d){
+				DeployService.run(d._id).then(function(data) {
+					if (data.code === 200) {
+						d.status = 20;
+						toasty.success('执行发布成功');
+					} else {
+						toasty.error(data.msg);
+					}
+				});
+			};
+			$scope.read = function(d){
+				deployRead.init({
+					deploy:d
+				});
 			};
 			$scope.init = function() {
 				$scope.list();

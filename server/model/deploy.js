@@ -23,6 +23,10 @@ var schema = new Schema({
 	developer: {
 		type: String
 	},
+	status:{
+		type:Number,
+		default:config.DEPLOYS.status.initial
+	},
 	runTime:{
 		type: Date,
 		get: util.dateTimeFormat,

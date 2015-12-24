@@ -11,6 +11,18 @@ module.exports = function(myModule) {
 			};
 		}
 	]);
+	myModule.filter('dateDisplay', ['$filter',
+		function($filter) {
+			var standardDateFilterFn = $filter('date');
+			return function(data) {
+				if (data == null || data == '') {
+					return '';
+				} else {
+					return standardDateFilterFn(data, 'yyyy-MM-dd hh:mm');
+				}
+			};
+		}
+	]);
 
 	myModule.filter('dateAgo', ['$filter',
 		function($filter) {

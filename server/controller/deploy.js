@@ -24,6 +24,20 @@ exports.update = function(req, res) {
 	});
 };
 
+exports.run = function(req, res) {
+	var deployId = req.params.deployId;
+	deployDao.update({
+		_id: deployId
+	}, {status:config.DEPLOYS.status.success}, '', function(err) {
+		if (!err) {
+			return res.successMsg();
+		} else {
+			console.log(err);
+			return res.errorMsg(10000, '执行失败');
+		}
+	});
+};
+
 exports.getConfig = function(req,res){
 	return res.successMsg(fs.readJsonSync(deployPkgPath));
 };
