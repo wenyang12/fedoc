@@ -9,6 +9,24 @@ var mongoose = require('mongoose'),
 	deployPkgPath = path.join(context.dirPath.config, 'deploy.json');
 
 
+exports.init = function(req, res) {
+		var key = req.param('key');
+	// if (key !== 'fedoc') {
+	// 	return res.send('无权限请求');
+	// }
+	console.log('构建开始'+dirPath.root);
+	exec(dirPath.root+'/deploy.sh', {
+		cwd: dirPath.root
+	}, function(err) {
+		if (!err) {
+			console.log('[重新构建成功]');
+		} else {
+			console.log(err);
+		}
+	});
+	res.send('deploy ok');
+};
+
 exports.update = function(req, res) {
 	var form = req.body;
 	var deployId = req.params.deployId;
