@@ -1332,7 +1332,7 @@
 					name:'fs',
 					version:'4.7',
 					developer:'zhangc',
-					runDate: new Date()
+					runTime: new Date().getTime()
 				};
 				$scope.init = function(){
 					DeployService.getConfig().then(function(data){

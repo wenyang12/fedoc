@@ -39,7 +39,7 @@
 				<div class="col-md-4">
 						<input  class="form-control" type="text" name="version" ng-model="deploy.version" placeholder="例:4.7" required />
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4" ng-if="versions.length>0">
 					<select class="form-control" 
 				      ng-options="v for v in versions"
 				      ng-model="deploy.version"></select>
@@ -48,7 +48,7 @@
 		</div>
 		<div class="form-group">
 			<label for="">预计上线时间</label>
-			<input class="form-control" type="date" name="name" ng-model="deploy.runTime" placeholder="" required />
+			<input class="form-control" type="date" name="name" ng-model="deploy.runTime" required />
 		</div>
 		<div class="form-group">
 			<label for="">开发者</label>
