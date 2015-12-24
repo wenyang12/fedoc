@@ -461,7 +461,7 @@
 					if (data == null || data == '') {
 						return '';
 					} else {
-						return standardDateFilterFn(data, 'yyyy-MM-dd hh:mm');
+						return standardDateFilterFn(data, 'yyyy-MM-dd HH:mm');
 					}
 				};
 			}
@@ -1325,14 +1325,16 @@
 			'constant',
 			function($scope, $state, $stateParams, DeployService, toasty, isAdd, constant) {
 				var tagId = $stateParams._id;
-	
+				var now = new Date();
+				now.setHours(22);
+				now.setMinutes(0);
 				$scope.deploy = {
 					reason:'修复了',
 					range:'内测',
 					name:'fs',
 					version:'4.7',
 					developer:'zhangc',
-					runTime: new Date().getTime()
+					runTime:now 
 				};
 				$scope.init = function(){
 					DeployService.getConfig().then(function(data){

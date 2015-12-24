@@ -18,7 +18,7 @@ module.exports = function(myModule) {
 				if (data == null || data == '') {
 					return '';
 				} else {
-					return standardDateFilterFn(data, 'yyyy-MM-dd hh:mm');
+					return standardDateFilterFn(data, 'yyyy-MM-dd HH:mm');
 				}
 			};
 		}
