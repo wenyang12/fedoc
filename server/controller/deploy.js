@@ -6,6 +6,8 @@ var mongoose = require('mongoose'),
 	util = context.util,
 	config = context.config,
 	deployDao = util.getDao('Deploy'),
+	dirPath = context.dirPath,
+	exec = require('child_process').exec,
 	deployPkgPath = path.join(context.dirPath.config, 'deploy.json');
 
 
