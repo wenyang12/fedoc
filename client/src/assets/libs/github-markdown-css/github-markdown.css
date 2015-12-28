@@ -495,12 +495,6 @@
     border-left-color  : #c06a00;
 }
 
-.markdown-body pre:hover code, .markdown-body pre:hover pre {
-    -webkit-text-shadow : 0px 1px 1px #F7BA90;
-    text-shadow         : 0px 1px 1px #F7BA90;
-    color               : #fff;
-}
-
 .markdown-body .highlight pre {
     margin-bottom : 0;
     word-break    : normal;
