@@ -496,8 +496,8 @@
 }
 
 .markdown-body pre:hover code, .markdown-body pre:hover pre {
-    -webkit-text-shadow : 1px 1px 1px #9A5E00;
-    text-shadow         : 1px 1px 1px #9A5E00;
+    -webkit-text-shadow : 0px 1px 1px #F7BA90;
+    text-shadow         : 0px 1px 1px #F7BA90;
     color               : #fff;
 }
 
