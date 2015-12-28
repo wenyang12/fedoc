@@ -495,10 +495,6 @@
     border-left-color  : #c06a00;
 }
 
-.markdown-body pre:hover {
-    background : #9A5E00;
-}
-
 .markdown-body pre:hover code, .markdown-body pre:hover pre {
     -webkit-text-shadow : 1px 1px 1px #9A5E00;
     text-shadow         : 1px 1px 1px #9A5E00;
