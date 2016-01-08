@@ -2,6 +2,7 @@
 <form class="form-horizontal article-form common-box" ng-if="article.isEdit||article.isAdd">
 
 	<button class="btn-simplemde-upload" 
+				ng-accept="'image/*'"
 				ng-file-select="uploadSimplemdeAttachment($files)">附件上传</button>
 	<div class="form-group">
 		<div class="pull-left">
