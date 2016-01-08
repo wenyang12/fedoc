@@ -55,6 +55,7 @@
 		'siteModules',
 		'siteServices',
 		'siteFilters',
+		'cgBusy',
 		'angular-toasty',
 		'angularFileUpload'
 	]);
@@ -337,9 +338,13 @@
 	
 	                    $scope.choose = function($event, tag) {
 	                        $scope.tag = tag;
-	                        $state.go('articles', {
+	                        var opts = {
 	                            tag: tag
-	                        });
+	                        };
+	                        if (tag !== $stateParams.tag) {
+	                            opts.page = 1;
+	                        }
+	                        $state.go('articles', opts);
 	                        $event.stopPropagation();
 	                        return;
 	                    };
@@ -800,6 +805,7 @@
 			function($scope, $state, $stateParams, ArticleService, UserService, toasty, isAdd, constant, TagService, $upload, $rootScope) {
 				var articleId = $stateParams._id;
 				var articleEditor;
+				var editorUploadCallback;
 				$scope.article = {
 					tags: [],
 					isPreview: false
@@ -853,7 +859,18 @@
 	
 				$scope.initEditor = function() {
 					articleEditor = new SimpleMDE({
-						element: document.getElementById('editor')
+						element: document.getElementById('editor'),
+						toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", {
+							name: "image",
+							action: function(editor) {
+								$('.btn-simplemde-upload').click();
+	
+								editorUploadCallback = function(data) {
+									editor.value(editor.value() + '![图片](' + data.src + ')');
+								};
+							},
+							className: "fa fa-image"
+						}, "|", "preview", "side-by-side", "fullscreen", "guide"]
 					});
 	
 					articleEditor.value($scope.article.content);
@@ -877,6 +894,30 @@
 						_uploadAttachment(files[i]);
 					}
 				};
+				$scope.uploadSimplemdeAttachment = function(files) {
+					if(!files||files.length===0){
+						return;
+					}
+					var file = files[0];
+					$rootScope.waitPromise = $upload.upload({
+							url: '/api/attachments/upload',
+							file: file
+						})
+						.progress(function(evt) {
+	
+						})
+						.success(function(data, status, headers, config) {
+							if (data.code === 200) {
+								editorUploadCallback({
+									src: data.msg.fileUrl
+								});
+								editorUploadCallback = null;
+							} else {
+	
+							}
+						})
+						.error(function() {});
+				};
 	
 				$scope.delAttachment = function(index) {
 					$scope.article.attachments.splice(index, 1);
@@ -884,7 +925,7 @@
 	
 				function _uploadAttachment(file) {
 					$scope.uploading = true;
-					$upload.upload({
+					$rootScope.waitPromise = $upload.upload({
 							url: '/api/attachments/upload',
 							file: file
 						})

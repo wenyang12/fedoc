@@ -389,6 +389,9 @@ h1, h2, h3, h4, h5, h6 {
         right: 0;
         top: 0px; }
 
+.btn-simplemde-upload {
+  display: none; }
+
 .article-form .form-group-content {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -457,5 +460,8 @@ h1, h2, h3, h4, h5, h6 {
   color: #999; }
   #footer #copyright {
     margin: 0 10px; }
+
+.cg-busy {
+  position: fixed; }
 
 /*# sourceMappingURL=site.css.map */

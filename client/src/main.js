@@ -9,6 +9,7 @@ var app = angular.module('app', [
 	'siteModules',
 	'siteServices',
 	'siteFilters',
+	'cgBusy',
 	'angular-toasty',
 	'angularFileUpload'
 ]);

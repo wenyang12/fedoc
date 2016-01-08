@@ -16,9 +16,13 @@ module.exports = function(myModule) {
 
                     $scope.choose = function($event, tag) {
                         $scope.tag = tag;
-                        $state.go('articles', {
+                        var opts = {
                             tag: tag
-                        });
+                        };
+                        if (tag !== $stateParams.tag) {
+                            opts.page = 1;
+                        }
+                        $state.go('articles', opts);
                         $event.stopPropagation();
                         return;
                     };

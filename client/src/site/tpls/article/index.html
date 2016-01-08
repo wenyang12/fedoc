@@ -1,5 +1,8 @@
 <!--编辑，新增,查看-->
 <form class="form-horizontal article-form common-box" ng-if="article.isEdit||article.isAdd">
+
+	<button class="btn-simplemde-upload" 
+				ng-file-select="uploadSimplemdeAttachment($files)">附件上传</button>
 	<div class="form-group">
 		<div class="pull-left">
 			<button type="submit" class="btn btn-danger"ng-click="del()" ng-if="article.isEdit">删除文档</button>

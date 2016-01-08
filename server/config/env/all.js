@@ -27,7 +27,7 @@ module.exports = {
 		}]
 	},
 	LIST: {
-		perPage: 10,
+		perPage: 5,
 		limitPage: 10
 	},
     TIME: {

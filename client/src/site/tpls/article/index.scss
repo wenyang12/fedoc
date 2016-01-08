@@ -1,5 +1,7 @@
 $article-content-height: 600px;
-
+.btn-simplemde-upload{
+    display: none;
+}
 .article-form {
     .form-group-content {
         @include border-radius(4px);
@@ -16,7 +18,7 @@ $article-content-height: 600px;
         }
 
     }
-
+    
     .attachment-upload-box {
         margin-bottom: 10px;
     }

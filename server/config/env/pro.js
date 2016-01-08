@@ -8,5 +8,9 @@ module.exports = {
 		cookie: {
 			domain: null
 		}
+	},
+	LIST: {
+		perPage: 20,
+		limitPage: 10
 	}
 };
