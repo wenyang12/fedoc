@@ -394,7 +394,8 @@ h1, h2, h3, h4, h5, h6 {
       .articles-box .article-list .article-list-item .author .time {
         position: absolute;
         right: 0;
-        top: 0px; }
+        top: 0px;
+        font-size: 10px; }
 
 .btn-simplemde-upload {
   display: none; }
