@@ -123,6 +123,10 @@ exports.get = function(req, res) {
 			}, function(err, article) {
 				if (!err) {
 					if (article) {
+						article.views++;
+						article.save(function(){
+							
+						});
 						cb(null, article._doc);
 					} else {
 						return cb('找不到文档');

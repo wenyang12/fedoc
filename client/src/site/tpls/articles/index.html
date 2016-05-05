@@ -6,12 +6,15 @@
 		<div class="col-md-10">
 			<ul class="article-list" ng-if="count">
 				<li class="article-list-item" ng-repeat="a in articles">
-					<a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}}</a>
+					<a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}} </a>
 					<span class="author">
 						<img class="author-avatar img-circle" ng-src="{{a.user.avatar}}"/>
 						<a class="author-nickname">
-							{{a.user.nickname}}
+							<span class="author-nickname-inner">{{a.user.nickname}}</span>
+							
 						</a>
+						<span class="views-num">阅读：{{a.views}}</span>
+
 						<span class="time" ng-bind="a.createdTime|dateAgo">
 							
 						</span>

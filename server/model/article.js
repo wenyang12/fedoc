@@ -15,6 +15,10 @@ var schema = new Schema({
 		type: String,
 		required: true
 	},
+	views: {
+		type: Number,
+		default:0
+	},
 	tags: {
 		type: Array,
 		require: true

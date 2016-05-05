@@ -66,6 +66,10 @@
 				{{article.createdTime|dateAgo}}
 			</span>
 		</span>
+		<div class="views">
+			<div class="num">{{article.views}}</div>
+			<div class="word">阅读量</div>
+		</div>
 		<a class="pull-right" ng-if="article.isAuthor" ng-click="article.isEdit = true">编辑</a>
 		</div>
 	</div>

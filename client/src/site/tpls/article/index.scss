@@ -34,13 +34,36 @@ $article-content-height: 600px;
 
     .article-header {
         margin: 0 0 30px;
-
+        position: relative;
         h1 {
             border-bottom: 1px dotted #d4d4d4;
+        }
+         .views{
+            position: absolute;
+            right: 0;
+            width: 100px;
+            top: 0;
+            text-align: center;
+            border-radius: 0.2rem;
+            border: 1px solid #f3f3f3;
+            background: #fff;
+            padding: 15px 5px;
+            color: #999999;
+            margin: 0 4px;
+            font-size: 0.6rem;
+            .num{
+                    font-size: 1.3rem;
+                    color: #333333;
+            }
+            .word{
+                color: #999999;
+                font-size: 0.6rem;
+            }
         }
         .article-user{
             margin: 15px 0 8px;
             color:#aaaaaa;
+            
             .article-user-avatar{
                     vertical-align: middle;
                     display: inline-block;
@@ -54,6 +77,7 @@ $article-content-height: 600px;
             .time{
                 color: rgb(170, 170, 170);
             }
+           
         }
     }
 

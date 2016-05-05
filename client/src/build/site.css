@@ -369,21 +369,28 @@ h1, h2, h3, h4, h5, h6 {
     .articles-box .article-list .article-list-item .author {
       color: #999;
       position: absolute;
-      width: 150px;
+      width: 200px;
       right: 0;
-      padding-left: 30px; }
+      padding-left: 30px;
+      /*@include transition(all .2s ease-in);*/ }
+      .articles-box .article-list .article-list-item .author .views-num {
+        font-size: 10px;
+        color: #b4b4b4;
+        position: absolute;
+        right: 50px;
+        top: 0px; }
       .articles-box .article-list .article-list-item .author .author-avatar {
         position: absolute;
         left: 0;
         width: 20px;
         height: 20px; }
       .articles-box .article-list .article-list-item .author .author-nickname {
+        display: block;
         width: 60px;
         height: 26px;
         text-overflow: ellipsis;
         overflow: hidden;
-        white-space: nowrap;
-        display: block; }
+        white-space: nowrap; }
       .articles-box .article-list .article-list-item .author .time {
         position: absolute;
         right: 0;
@@ -410,9 +417,29 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px;
   margin: 0 auto; }
   .article-box .article-header {
-    margin: 0 0 30px; }
+    margin: 0 0 30px;
+    position: relative; }
     .article-box .article-header h1 {
       border-bottom: 1px dotted #d4d4d4; }
+    .article-box .article-header .views {
+      position: absolute;
+      right: 0;
+      width: 100px;
+      top: 0;
+      text-align: center;
+      border-radius: 0.2rem;
+      border: 1px solid #f3f3f3;
+      background: #fff;
+      padding: 15px 5px;
+      color: #999999;
+      margin: 0 4px;
+      font-size: 0.6rem; }
+      .article-box .article-header .views .num {
+        font-size: 1.3rem;
+        color: #333333; }
+      .article-box .article-header .views .word {
+        color: #999999;
+        font-size: 0.6rem; }
     .article-box .article-header .article-user {
       margin: 15px 0 8px;
       color: #aaaaaa; }

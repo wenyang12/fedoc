@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
 	ArticleModel = mongoose.model('Article');
 
 exports.getOne = function(query, callback) {
-	var fileds = '_id title content user attachments tags createdTime';
+	var fileds = '_id title content views user attachments tags createdTime';
 	ArticleModel.findOne(query, fileds, {}).populate([{
 		path: 'user',
 		select: '_id nickname avatar'
@@ -10,7 +10,7 @@ exports.getOne = function(query, callback) {
 };
 
 exports.list = function(options, callback) {
-	options.sql = '_id title user createdTime tags';
+	options.sql = '_id title user createdTime views tags';
 	ArticleModel.count(options.criteria, function(err, count) {
 		ArticleModel.find(options.criteria, options.sql)
 			.populate([{
