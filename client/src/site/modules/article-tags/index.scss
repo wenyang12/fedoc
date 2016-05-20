@@ -8,7 +8,19 @@
 			position: absolute;
 			right: 5px;
 			top:11px;
-			
+			.fa{
+				display: none;
+			}
+			>span{
+				&:hover{
+					pointer:cursor;	
+				}
+			}
+		}
+		&:hover{
+			.fa{
+				display: initial;
+			}	
 		}
 		.tag-hot{
 			    font-size: 18px;

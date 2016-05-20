@@ -13,9 +13,9 @@ exports.update = function(req, res) {
 	var query = {
 		_id: articleId
 	};
-	if (!user.isAdmin) {
-		query.user = userId;
-	}
+	// if (!user.isAdmin) {
+	// 	query.user = userId;
+	// }
 	articleDao.update(query, form, '', function(err) {
 		if (!err) {
 			return res.successMsg();
@@ -141,7 +141,8 @@ exports.get = function(req, res) {
 		if (!err) {
 			var article = results.getArticle;
 			if (user) {
-				article.isAuthor = user.isAdmin || user._id === article.user._id.toString();
+				// article.isAuthor = user.isAdmin || user._id === article.user._id.toString();
+				article.isAuthor = true;//默认所有文章都开启编辑模式
 			}
 			return res.successMsg(article);
 		} else {

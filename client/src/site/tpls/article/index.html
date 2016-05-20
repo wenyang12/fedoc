@@ -70,7 +70,7 @@
 			<div class="num">{{article.views}}</div>
 			<div class="word">阅读量</div>
 		</div>
-		<a class="pull-right" ng-if="article.isAuthor" ng-click="article.isEdit = true">编辑</a>
+		<a class="pull-right btn-to-edit" ng-if="article.isAuthor" ng-click="article.isEdit = true">编辑</a>
 		</div>
 	</div>
 	<div class="article-content markdown-body" fedoc-markdown="article.content"></div>

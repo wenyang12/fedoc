@@ -6,8 +6,8 @@
 				{{t.name}}
 			</a>
 			<span class="btn-operate"ng-if="user.isAdmin">
-					<span class="fa fa-close" ng-click="delTag($event,t)"></span>
-					<span class="fa fa-cog" ui-sref="viewTag({_id:t._id})"></span>
+					<span title="删除" class="fa fa-close" ng-click="delTag($event,t)"></span>
+					<span title="编辑" class="fa fa-cog" ui-sref="viewTag({_id:t._id})"></span>
 				</span>
 		</li>
 	</ul>

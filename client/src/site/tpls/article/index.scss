@@ -2,7 +2,15 @@ $article-content-height: 600px;
 .btn-simplemde-upload{
     display: none;
 }
+.btn-to-edit{
+    position: absolute;
+    left: -70px;
+    top: -25px;
+    background: white;
+    padding: 10px 15px 10px 10px;
+}
 .article-form {
+    padding: 0 15px;
     .form-group-content {
         @include border-radius(4px);
         border: 1px solid #ddd;
