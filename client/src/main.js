@@ -38,7 +38,7 @@ app.constant('constant', {
 	ARTICLES: {
 	}
 });
-
+window.duoshuoQuery = {short_name:"fedoc"};
 require('site/index')(app);
 
 angular.bootstrap(document, ['app']);

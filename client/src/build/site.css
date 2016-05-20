@@ -493,4 +493,7 @@ h1, h2, h3, h4, h5, h6 {
 .cg-busy {
   position: fixed; }
 
+#ds-thread #ds-reset .ds-powered-by {
+  display: none; }
+
 /*# sourceMappingURL=site.css.map */

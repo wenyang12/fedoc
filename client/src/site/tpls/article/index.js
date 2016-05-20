@@ -51,12 +51,23 @@ module.exports = function(app) {
 							if ($rootScope.user && $rootScope.user.isAdmin) {
 								$scope.initAllUsers();
 							}
+							$scope.initReplys();
 						} else {
 							toasty.error(data.msg);
 						}
 					});
 				}
 			};
+			$scope.initReplys = function(){
+	            var el = document.createElement('div'),
+	                $ds = $('#duoshuo-box'),
+	                article =  $scope.article;
+	            el.setAttribute('data-thread-key',article._id);
+	            el.setAttribute('data-url', 'http://fe.firstshare.cn/#/articles/'+article._id);
+	            el.setAttribute('data-title', article.title);
+	            DUOSHUO.EmbedThread(el);
+	            $ds.append(el);
+	        };
 
 			$scope.initAllUsers = function() {
 				UserService.listAll().then(function(data) {
