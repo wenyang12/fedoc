@@ -376,8 +376,10 @@ h1, h2, h3, h4, h5, h6 {
       font-size: 12px;
       display: none;
       margin-left: 10px; }
-    .articles-box .article-list .article-list-item:hover .btn-operate {
-      display: initial; }
+    .articles-box .article-list .article-list-item:hover {
+      background-color: #f4f6fc; }
+      .articles-box .article-list .article-list-item:hover .btn-operate {
+        display: initial; }
     .articles-box .article-list .article-list-item .put-top {
       background: #80bd01;
       padding: 2px 4px;
