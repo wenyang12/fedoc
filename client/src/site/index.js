@@ -25,6 +25,7 @@ module.exports = function(app) {
 	require('site/tpls/tag/index')(app);
 	require('site/tpls/profile/index')(app);
 	require('site/tpls/signin/index')(app);
+	require('site/tpls/signup/index')(app);
 	require('site/tpls/deploy/index')(app);
 	require('site/tpls/deploys/index')(app);
 

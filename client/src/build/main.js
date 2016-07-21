@@ -46,8 +46,8 @@
 
 	//加载管理模块
 	__webpack_require__(1)(angular);
-	__webpack_require__(9)(angular);
-	__webpack_require__(11)(angular);
+	__webpack_require__(10)(angular);
+	__webpack_require__(12)(angular);
 	var app = angular.module('app', [
 		'ui.router',
 		'restangular',
@@ -85,7 +85,7 @@
 		}
 	});
 	window.duoshuoQuery = {short_name:"fedoc"};
-	__webpack_require__(18)(app);
+	__webpack_require__(19)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -98,10 +98,10 @@
 		__webpack_require__(2)(siteModules);
 		__webpack_require__(3)(siteModules);
 		__webpack_require__(4)(siteModules);
-		__webpack_require__(5)(siteModules);
 		__webpack_require__(6)(siteModules);
 		__webpack_require__(7)(siteModules);
 		__webpack_require__(8)(siteModules);
+		__webpack_require__(9)(siteModules);
 	
 	};
 
@@ -248,14 +248,14 @@
 
 	module.exports = function(myModule) {
 	
-	    var md = __webpack_require__(30)({
+	    var md = __webpack_require__(5)({
 	        html: true,
 	        linkify: true,
 	        typographer: true
 	    });
-	    var addLinkTarget = function (code) {
-	      var pattern = /a href=/g;
-	      return code.replace(pattern,"a target='_blank' href=");
+	    var addLinkTarget = function(code) {
+	        var pattern = /a href=/g;
+	        return code.replace(pattern, "a target='_blank' href=");
 	    };
 	    myModule.
 	    directive('fedocMarkdown', ['$sanitize', function($sanitize) {
@@ -270,7 +270,7 @@
 	                    });
 	                } else {
 	                    var html = $sanitize(md.render(element.text()));
-	                      html = addLinkTarget(html);
+	                    html = addLinkTarget(html);
 	                    element.html(html);
 	                }
 	            }
@@ -282,6 +282,12 @@
 
 /***/ },
 /* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = markdownit;
+
+/***/ },
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -305,7 +311,7 @@
 	};
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -366,7 +372,7 @@
 	};
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -397,7 +403,7 @@
 	};
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -421,17 +427,17 @@
 	};
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(angular) {
 		var siteFilters = angular.module('siteFilters', []);
-		__webpack_require__(10)(siteFilters);
+		__webpack_require__(11)(siteFilters);
 	};
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -491,23 +497,23 @@
 	};
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(12)(siteServices);
 		__webpack_require__(13)(siteServices);
 		__webpack_require__(14)(siteServices);
 		__webpack_require__(15)(siteServices);
 		__webpack_require__(16)(siteServices);
 		__webpack_require__(17)(siteServices);
+		__webpack_require__(18)(siteServices);
 	
 	};
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -538,7 +544,7 @@
 	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -575,7 +581,7 @@
 	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -606,7 +612,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -643,7 +649,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -667,7 +673,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	 module.exports = function(myModule) {
@@ -697,7 +703,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -720,20 +726,22 @@
 				});
 		}]);
 	
-		__webpack_require__(19)(app);
 		__webpack_require__(20)(app);
 		__webpack_require__(21)(app);
 		__webpack_require__(22)(app);
 		__webpack_require__(23)(app);
 		__webpack_require__(24)(app);
-		__webpack_require__(27)(app);
+		__webpack_require__(25)(app);
 		__webpack_require__(28)(app);
+		__webpack_require__(31)(app);
 		__webpack_require__(29)(app);
+		__webpack_require__(30)(app);
 	
 	};
 
+
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -774,7 +782,7 @@
 	};
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1010,7 +1018,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1065,7 +1073,7 @@
 	};
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1110,7 +1118,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1194,12 +1202,12 @@
 	};
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(25)(app);
 		__webpack_require__(26)(app);
+		__webpack_require__(27)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1229,7 +1237,7 @@
 	};
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1254,7 +1262,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1307,7 +1315,7 @@
 	};
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1351,7 +1359,7 @@
 	};
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1424,7 +1432,7 @@
 	};
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1496,10 +1504,49 @@
 	};
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = markdownit;
+	module.exports = function(app) {
+		app.controller('SignupController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
+			function($scope, $rootScope, $http, $state, toasty) {
+				$scope.create = function() {
+					$http({
+						method: 'post',
+						url: "/api/sign/reg",
+						data: {
+							email: $scope.form.email || '',
+							pwd: $scope.form.pwd || ''
+						}
+					}).
+					success(function(data, status, headers, config) {
+						if (data.code === 200) {
+							var user = data.msg.user;
+							$rootScope.user = user;
+							toasty.success('注册成功');
+							$rootScope.$broadcast('userChange', {
+								user: user
+							});
+							$state.go('articles');
+						} else {
+							toasty.error(data.msg);
+						}
+					});
+				};
+			}
+		]);
+	
+		app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+			$stateProvider
+				.state('signup', {
+					url: '/signup',
+					templateUrl: '/site/tpls/signup/index.html',
+					controller: 'SignupController',
+					pageTitle: '登录'
+				});
+		}]);
+	};
+
 
 /***/ }
 /******/ ])

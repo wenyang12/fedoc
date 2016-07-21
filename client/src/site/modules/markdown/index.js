@@ -5,9 +5,9 @@ module.exports = function(myModule) {
         linkify: true,
         typographer: true
     });
-    var addLinkTarget = function (code) {
-      var pattern = /a href=/g;
-      return code.replace(pattern,"a target='_blank' href=");
+    var addLinkTarget = function(code) {
+        var pattern = /a href=/g;
+        return code.replace(pattern, "a target='_blank' href=");
     };
     myModule.
     directive('fedocMarkdown', ['$sanitize', function($sanitize) {
@@ -22,7 +22,7 @@ module.exports = function(myModule) {
                     });
                 } else {
                     var html = $sanitize(md.render(element.text()));
-                      html = addLinkTarget(html);
+                    html = addLinkTarget(html);
                     element.html(html);
                 }
             }
