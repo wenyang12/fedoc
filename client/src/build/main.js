@@ -248,49 +248,37 @@
 
 	module.exports = function(myModule) {
 	
-	 var markdown = window.markdownit();
-	  myModule.
-	  directive('fedocMarkdown', ['$sanitize', function($sanitize) {
-	    return {
-	      restrict: 'AE',
-	      link: function(scope, element, attrs) {
-	        if (attrs.fedocMarkdown) {
-	          scope.$watch(attrs.fedocMarkdown, function(newVal) {
-	            var html = newVal ? $sanitize(markdown.render(newVal)) : '';
-	            element.html(html);
-	          });
-	        } else {
-	          var html = $sanitize(markdown.render(element.text()));
-	          element.html(html);
-	        }
-	      }
+	    var md = __webpack_require__(30)({
+	        html: true,
+	        linkify: true,
+	        typographer: true
+	    });
+	    var addLinkTarget = function (code) {
+	      var pattern = /a href=/g;
+	      return code.replace(pattern,"a target='_blank' href=");
 	    };
-	  }]);
-	 
-	
-	  // myModule.
-	  // directive('fedocMarkdown', ['$sanitize', function($sanitize) {
-	  //   return {
-	  //     restrict: 'AE',
-	  //     link: function(scope, element, attrs) {
-	  //       if (attrs.fedocMarkdown) {
-	  //         scope.$watch(attrs.fedocMarkdown, function(newVal) {
-	
-	  //           var  simplemde = new SimpleMDE({
-	  //             element:ele
-	  //           });
-	  //           var html = newVal ? $sanitize(simplemde.options.previewRender(newVal)) : '';
-	  //           element.html(html);
-	  //         });
-	  //       } else {
-	  //         var html = $sanitize(markdown.render(element.text()));
-	  //         element.html(html);
-	  //       }
-	  //     }
-	  //   };
-	  // }]);
+	    myModule.
+	    directive('fedocMarkdown', ['$sanitize', function($sanitize) {
+	        return {
+	            restrict: 'AE',
+	            link: function(scope, element, attrs) {
+	                if (attrs.fedocMarkdown) {
+	                    scope.$watch(attrs.fedocMarkdown, function(newVal) {
+	                        var html = newVal ? $sanitize(md.render(newVal)) : '';
+	                        html = addLinkTarget(html);
+	                        element.html(html);
+	                    });
+	                } else {
+	                    var html = $sanitize(md.render(element.text()));
+	                      html = addLinkTarget(html);
+	                    element.html(html);
+	                }
+	            }
+	        };
+	    }]);
 	
 	};
+
 
 /***/ },
 /* 5 */
@@ -1506,6 +1494,12 @@
 			});
 		}]);
 	};
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = markdownit;
 
 /***/ }
 /******/ ])

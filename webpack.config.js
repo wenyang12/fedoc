@@ -27,6 +27,9 @@ module.exports = {
         },
         extensions: ['', '.js', '.coffee', '.html', '.css', '.scss']
     },
+    externals: {
+        'md': 'markdownit'
+    },
     plugins: [],
     module: {
         loaders: [{
