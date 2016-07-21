@@ -26,7 +26,7 @@ $article-content-height: 600px;
         }
 
     }
-    
+
     .attachment-upload-box {
         margin-bottom: 10px;
     }
@@ -71,7 +71,7 @@ $article-content-height: 600px;
         .article-user{
             margin: 15px 0 8px;
             color:#aaaaaa;
-            
+
             .article-user-avatar{
                     vertical-align: middle;
                     display: inline-block;
@@ -85,12 +85,22 @@ $article-content-height: 600px;
             .time{
                 color: rgb(170, 170, 170);
             }
-           
+
         }
     }
 
     .article-content {
         min-height: 400px;
+    }
+    .imgs-list{
+      .thumbnail{
+        width: 140px;
+        height: 140px;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
 
 }

@@ -472,6 +472,12 @@ h1, h2, h3, h4, h5, h6 {
         color: #aaaaaa; }
   .article-box .article-content {
     min-height: 400px; }
+  .article-box .imgs-list .thumbnail {
+    width: 140px;
+    height: 140px; }
+    .article-box .imgs-list .thumbnail img {
+      width: 100%;
+      height: 100%; }
 
 .users-box .avatar {
   width: 20px;
