@@ -5,4 +5,6 @@ module.exports = function(app, mw, article) {
 	app.get('/api/articles/:articleId', article.get);
 	app.put('/api/articles/:articleId', mw.requireLogin, article.update);
 	app.delete('/api/articles/:articleId', mw.requireLogin, article.delete);
+	app.put('/api/articles/:articleId/top', mw.requireLogin, article.top);
+
 };

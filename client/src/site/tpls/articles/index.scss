@@ -14,7 +14,23 @@
 				}
 
 			}
-
+			.btn-operate{
+				font-size: 12px;
+				display: none;
+				margin-left: 10px;
+			}
+			&:hover{
+				.btn-operate{
+					display: initial;
+				}
+			}
+			.put-top{
+				background: #80bd01;
+				padding: 2px 4px;
+				border-radius: 3px;
+				color: #fff;
+				font-size: 12px;
+			}
 			.author {
 				color: #999;
 				position: absolute;
