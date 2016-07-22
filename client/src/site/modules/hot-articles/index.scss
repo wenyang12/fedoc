@@ -4,6 +4,13 @@
   .views-num{
     float: right;;
   }
+  a.title{
+    display: inline-block;
+  width: 140px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  }
   .fa-fire{
     color:#CC3300;
   }

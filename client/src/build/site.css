@@ -367,6 +367,12 @@ h1, h2, h3, h4, h5, h6 {
   background: #fff; }
   .hot-articles-box .views-num {
     float: right; }
+  .hot-articles-box a.title {
+    display: inline-block;
+    width: 140px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; }
   .hot-articles-box .fa-fire {
     color: #CC3300; }
 
@@ -541,11 +547,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .main-left {
   padding: 15px;
-  min-height: 600px; }
+  min-height: 950px; }
 
 .main-right {
   background: #e9eaec;
   padding-right: 0;
-  min-height: 600px; }
+  min-height: 950px; }
 
 /*# sourceMappingURL=site.css.map */
