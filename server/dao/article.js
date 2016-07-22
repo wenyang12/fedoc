@@ -39,7 +39,7 @@ exports.list = function(options, callback) {
 
 exports.listHot = function(callback) {
     var sql = '_id title views';
-    ArticleModel.find(sql).limit(10)
+    ArticleModel.find(sql).limit(20)
         .sort({
             views: -1,
             createdTime: '-1'
