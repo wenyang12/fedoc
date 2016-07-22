@@ -18,15 +18,21 @@
 @import "./tpls/deploy/index";
 @import "./tpls/profile/info/index";
 @import "./tpls/profile/pwd/index";
+@import "./tpls/tag/index";
 
 #site-box{
 	background: white;
 }
 
-.common-form{
-	width: 450px;
-	margin: 0 auto;
+.common-box{
+	margin: 15px auto;
+	&.sm{
+	  width: 450px;
+	}
 }
+
+
+
 #footer {
 	//width: 1000px;
 	text-align: center;

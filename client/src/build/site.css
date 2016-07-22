@@ -365,11 +365,16 @@ h1, h2, h3, h4, h5, h6 {
 .hot-articles-box {
   padding: 15px;
   background: #fff; }
+  .hot-articles-box li {
+    position: relative; }
   .hot-articles-box .views-num {
-    float: right; }
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 10px; }
   .hot-articles-box a.title {
     display: inline-block;
-    width: 140px;
+    width: 190px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden; }
@@ -460,7 +465,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .article-box {
   padding: 10px;
-  margin: 0 auto; }
+  margin: 15px auto; }
   .article-box .article-header {
     margin: 0 0 30px;
     position: relative; }
@@ -526,9 +531,10 @@ h1, h2, h3, h4, h5, h6 {
 #site-box {
   background: white; }
 
-.common-form {
-  width: 450px;
-  margin: 0 auto; }
+.common-box {
+  margin: 15px auto; }
+  .common-box.sm {
+    width: 450px; }
 
 #footer {
   text-align: center;
