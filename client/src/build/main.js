@@ -46,8 +46,8 @@
 
 	//加载管理模块
 	__webpack_require__(1)(angular);
-	__webpack_require__(10)(angular);
-	__webpack_require__(12)(angular);
+	__webpack_require__(2)(angular);
+	__webpack_require__(4)(angular);
 	var app = angular.module('app', [
 		'ui.router',
 		'restangular',
@@ -85,7 +85,7 @@
 		}
 	});
 	window.duoshuoQuery = {short_name:"fedoc"};
-	__webpack_require__(19)(app);
+	__webpack_require__(11)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -95,13 +95,13 @@
 
 	module.exports = function(angular) {
 		var siteModules = angular.module('siteModules', ['ngSanitize']);
-		__webpack_require__(2)(siteModules);
-		__webpack_require__(3)(siteModules);
-		__webpack_require__(4)(siteModules);
-		__webpack_require__(6)(siteModules);
-		__webpack_require__(7)(siteModules);
-		__webpack_require__(8)(siteModules);
-		__webpack_require__(9)(siteModules);
+		__webpack_require__(24)(siteModules);
+		__webpack_require__(25)(siteModules);
+		__webpack_require__(26)(siteModules);
+		__webpack_require__(28)(siteModules);
+		__webpack_require__(29)(siteModules);
+		__webpack_require__(30)(siteModules);
+		__webpack_require__(31)(siteModules);
 	
 	};
 
@@ -110,334 +110,14 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(myModule) {
-		myModule.directive('siteHeader', [
-			function factory() {
-				var directive = {
-					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-					replace: 'true',
-					templateUrl: '/site/modules/header/index.html',
-					link: function($scope) {
-						$scope.adminMenus = [{
-							title: '文档管理',
-							subMenus: [{
-								title: '文档列表',
-								sref: 'articles'
-							}, {
-								title: '新增文档',
-								sref: 'addArticle'
-							}]
-						}, {
-							title: '分类管理',
-							subMenus: [{
-								title: '新增分类',
-								sref: 'addTag'
-							}]
-						}, {
-							title: '成员管理',
-							subMenus: [{
-								title: '新增成员',
-								sref: 'addUser'
-							}, {
-								title: '成员列表',
-								sref: 'users'
-							}]
-						}];
-						$scope.userMenus = [{
-							title: '文档管理',
-							subMenus: [{
-								title: '新增文档',
-								sref: 'addArticle'
-							}]
-						}];
-					},
-					scope: false,
-					controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', function($scope, $rootScope, $stateParams, $state, $http) {
-	
-						//监听 - 缩略图被点击
-						$scope.$on('userChange', function(event, data) {
-							if (data) {
-								$scope.user = data.user;
-							}
-						});
-						$scope.isLogin = function() {
-							$http({
-								method: 'post',
-								url: "/api/sign/isLogin"
-							}).
-							success(function(data, status, headers, config) {
-								if (data.code === 200) {
-									var user = data.msg.user;
-									$rootScope.user = user;
-									$scope.user = user;
-								}
-							});
-						};
-						$scope.isLogin();
-						$scope.searchBox = {
-							keyword: ''
-						};
-						$scope.searchKeyword = function() {
-							$state.go('articles', {
-								tag: $stateParams.tag,
-								page: $stateParams.page,
-								keyword: $scope.searchBox.keyword
-							});
-						};
-						$scope.signout = function($event) {
-							window.location.replace('\/api\/sign\/out');
-							$event.preventDefault();
-							$event.stopPropagation();
-							return false;
-						};
-					}]
-				};
-				return directive;
-			}
-		]);
+	module.exports = function(angular) {
+		var siteFilters = angular.module('siteFilters', []);
+		__webpack_require__(3)(siteFilters);
 	};
+
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-	    myModule.directive('fedocPagination', ['$location',
-	        function factory($location) {
-	            var directive = {
-	                restrict: 'E', //指令的使用方式，包括标签，属性，类，注释
-	                templateUrl: '/site/modules/pagination/index.html', //从指定的url地址加载模板
-	                replace: true, // //是否用模板替换当前元素，若为false，则append在当前元素上
-	                transclude: true, //是否将当前元素的内容转移到模板中
-	                require: "ngModel",
-	                scope: {
-	                    ngModel: '=',
-	                    turn: '&'
-	                },
-	                link: function($scope, $element, $attrs, $transclude, ngModel) {
-	                    $scope.$watch('ngModel', function(value) {
-	                        if (value) {
-	                            $scope.pagination = value;
-	                        }
-	                    });
-	
-	                    if (!$attrs.turn) {
-	                        //刷新页面
-	                        $scope.search = function(page) {
-	                            var query = $location.search();
-	                            query.page = page;
-	                            $location.path($location.path()).search(query);
-	                        };
-	                    } else {
-	                        $scope.search = function(page) {
-	                            $scope.turn({
-	                                data: page
-	                            });
-	                        };
-	                    }
-	                }
-	            };
-	            return directive;
-	        }
-	    ]);
-	};
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-	
-	    var md = __webpack_require__(5)({
-	        html: true,
-	        linkify: true,
-	        typographer: true
-	    });
-	    var addLinkTarget = function(code) {
-	        var pattern = /a href=/g;
-	        return code.replace(pattern, "a target='_blank' href=");
-	    };
-	    myModule.
-	    directive('fedocMarkdown', ['$sanitize', function($sanitize) {
-	        return {
-	            restrict: 'AE',
-	            link: function(scope, element, attrs) {
-	                if (attrs.fedocMarkdown) {
-	                    scope.$watch(attrs.fedocMarkdown, function(newVal) {
-	                        var html = newVal ? $sanitize(md.render(newVal)) : '';
-	                        html = addLinkTarget(html);
-	                        element.html(html);
-	                    });
-	                } else {
-	                    var html = $sanitize(md.render(element.text()));
-	                    html = addLinkTarget(html);
-	                    element.html(html);
-	                }
-	            }
-	        };
-	    }]);
-	
-	};
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = markdownit;
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		//回车按钮
-		myModule.directive('fedocEnter', function() {
-			return {
-				restrict: 'AC',
-				link: function($scope, $element, $attr) {
-					$element.bind("keydown", function($event) {
-						if (event.which === 13) {
-							$scope.$apply(function() {
-								$scope.$eval($attr.fedocEnter);
-							});
-							$event.stopPropagation();
-							return false;
-						}
-					});
-				}
-			};
-		});
-	};
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-	    myModule.directive('articleTags', [
-	        function factory() {
-	            var directive = {
-	                restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-	                replace: 'true',
-	                templateUrl: '/site/modules/article-tags/index.html',
-	                scope: false,
-	                controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, toasty, $rootScope, TagService, $stateParams, $state) {
-	                    TagService.listAll().then(function(data) {
-	                        if (data.code === 200) {
-	                            $scope.tags = data.msg.tags;
-	                        }
-	                    });
-	                    $scope.tag = $stateParams.tag || '';
-	
-	                    $scope.choose = function($event, tag) {
-	                        $scope.tag = tag;
-	                        var opts = {
-	                            tag: tag
-	                        };
-	                        if (tag !== $stateParams.tag) {
-	                            opts.page = 1;
-	                        }
-	                        $state.go('articles', opts);
-	                        $event.stopPropagation();
-	                        return;
-	                    };
-	                    $scope.delTag = function($event, tag) {
-	                        if (confirm('确认删除该分类吗')) {
-	                            TagService.remove(tag._id).then(function(data) {
-	                                if (data.code === 200) {
-	                                    toasty.success('删除分类成功');
-	                                    for (var i = 0, len = $scope.tags.length; i < len; i++) {
-	                                        if ($scope.tags[i]._id === tag._id) {
-	                                            $scope.tags.splice(i, 1);
-	                                            if ($scope.tag === tag.name) {
-	                                                $state.go('articles', {
-	                                                    tag: ''
-	                                                });
-	                                            }
-	                                            return;
-	                                        }
-	                                    }
-	                                }
-	                            });
-	                        }
-	                        $event.stopPropagation();
-	                        return;
-	                    };
-	                }]
-	            };
-	            return directive;
-	        }
-	    ]);
-	};
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.directive('btnToTop', ['$window',
-			function factory($window) {
-				var directive = {
-					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-					replace: 'true',
-					template: ' <div class="btn-to-top"></div>',
-					scope: false,
-					link: function($scope, $element, $attrs) {
-						angular.element($window).bind("scroll", function(e) {
-							var scrollTop = window.document.body.scrollTop;
-							if (scrollTop > 40) {
-								$element.addClass('active');
-							} else {
-								$element.removeClass('active');
-							}
-						});
-						$element.on('click',function(){
-							window.document.body.scrollTop = 0;
-						});
-					}
-				};
-				return directive;
-			}
-		]);
-	};
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.directive('deployRecord', [
-			function factory() {
-				var directive = {
-					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-					replace: 'true',
-					templateUrl: '/site/modules/deploy-record/index.html',
-					require: "ngModel",
-	                scope: {
-	                    ngModel: '='
-	                },
-					link: function($scope) {
-						console.log($scope.ngModel)
-					}
-				};
-				return directive;
-			}
-		]);
-	};
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(angular) {
-		var siteFilters = angular.module('siteFilters', []);
-		__webpack_require__(11)(siteFilters);
-	};
-
-
-/***/ },
-/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -497,23 +177,23 @@
 	};
 
 /***/ },
-/* 12 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(13)(siteServices);
-		__webpack_require__(14)(siteServices);
-		__webpack_require__(15)(siteServices);
-		__webpack_require__(16)(siteServices);
-		__webpack_require__(17)(siteServices);
-		__webpack_require__(18)(siteServices);
+		__webpack_require__(5)(siteServices);
+		__webpack_require__(6)(siteServices);
+		__webpack_require__(7)(siteServices);
+		__webpack_require__(8)(siteServices);
+		__webpack_require__(9)(siteServices);
+		__webpack_require__(10)(siteServices);
 	
 	};
 
 
 /***/ },
-/* 13 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -550,7 +230,7 @@
 
 
 /***/ },
-/* 14 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -587,7 +267,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -619,7 +299,7 @@
 
 
 /***/ },
-/* 16 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -656,7 +336,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -680,7 +360,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	 module.exports = function(myModule) {
@@ -710,7 +390,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -733,22 +413,22 @@
 				});
 		}]);
 	
+		__webpack_require__(12)(app);
+		__webpack_require__(13)(app);
+		__webpack_require__(14)(app);
+		__webpack_require__(15)(app);
+		__webpack_require__(16)(app);
+		__webpack_require__(17)(app);
 		__webpack_require__(20)(app);
 		__webpack_require__(21)(app);
 		__webpack_require__(22)(app);
 		__webpack_require__(23)(app);
-		__webpack_require__(24)(app);
-		__webpack_require__(25)(app);
-		__webpack_require__(28)(app);
-		__webpack_require__(29)(app);
-		__webpack_require__(30)(app);
-		__webpack_require__(31)(app);
 	
 	};
 
 
 /***/ },
-/* 20 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -802,7 +482,7 @@
 
 
 /***/ },
-/* 21 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1050,7 +730,7 @@
 
 
 /***/ },
-/* 22 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1105,7 +785,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1150,7 +830,7 @@
 	};
 
 /***/ },
-/* 24 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1234,12 +914,12 @@
 	};
 
 /***/ },
-/* 25 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(26)(app);
-		__webpack_require__(27)(app);
+		__webpack_require__(18)(app);
+		__webpack_require__(19)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1269,7 +949,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1294,7 +974,7 @@
 	};
 
 /***/ },
-/* 27 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1347,7 +1027,7 @@
 	};
 
 /***/ },
-/* 28 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1391,7 +1071,7 @@
 	};
 
 /***/ },
-/* 29 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1436,7 +1116,7 @@
 
 
 /***/ },
-/* 30 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1509,7 +1189,7 @@
 	};
 
 /***/ },
-/* 31 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1578,6 +1258,326 @@
 				controller: 'DeployListController'
 			});
 		}]);
+	};
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.directive('siteHeader', [
+			function factory() {
+				var directive = {
+					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+					replace: 'true',
+					templateUrl: '/site/modules/header/index.html',
+					link: function($scope) {
+						$scope.adminMenus = [{
+							title: '文档管理',
+							subMenus: [{
+								title: '文档列表',
+								sref: 'articles'
+							}, {
+								title: '新增文档',
+								sref: 'addArticle'
+							}]
+						}, {
+							title: '分类管理',
+							subMenus: [{
+								title: '新增分类',
+								sref: 'addTag'
+							}]
+						}, {
+							title: '成员管理',
+							subMenus: [{
+								title: '新增成员',
+								sref: 'addUser'
+							}, {
+								title: '成员列表',
+								sref: 'users'
+							}]
+						}];
+						$scope.userMenus = [{
+							title: '文档管理',
+							subMenus: [{
+								title: '新增文档',
+								sref: 'addArticle'
+							}]
+						}];
+					},
+					scope: false,
+					controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', function($scope, $rootScope, $stateParams, $state, $http) {
+	
+						//监听 - 缩略图被点击
+						$scope.$on('userChange', function(event, data) {
+							if (data) {
+								$scope.user = data.user;
+							}
+						});
+						$scope.isLogin = function() {
+							$http({
+								method: 'post',
+								url: "/api/sign/isLogin"
+							}).
+							success(function(data, status, headers, config) {
+								if (data.code === 200) {
+									var user = data.msg.user;
+									$rootScope.user = user;
+									$scope.user = user;
+								}
+							});
+						};
+						$scope.isLogin();
+						$scope.searchBox = {
+							keyword: ''
+						};
+						$scope.searchKeyword = function() {
+							$state.go('articles', {
+								tag: $stateParams.tag,
+								page: $stateParams.page,
+								keyword: $scope.searchBox.keyword
+							});
+						};
+						$scope.signout = function($event) {
+							window.location.replace('\/api\/sign\/out');
+							$event.preventDefault();
+							$event.stopPropagation();
+							return false;
+						};
+					}]
+				};
+				return directive;
+			}
+		]);
+	};
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.directive('fedocPagination', ['$location',
+	        function factory($location) {
+	            var directive = {
+	                restrict: 'E', //指令的使用方式，包括标签，属性，类，注释
+	                templateUrl: '/site/modules/pagination/index.html', //从指定的url地址加载模板
+	                replace: true, // //是否用模板替换当前元素，若为false，则append在当前元素上
+	                transclude: true, //是否将当前元素的内容转移到模板中
+	                require: "ngModel",
+	                scope: {
+	                    ngModel: '=',
+	                    turn: '&'
+	                },
+	                link: function($scope, $element, $attrs, $transclude, ngModel) {
+	                    $scope.$watch('ngModel', function(value) {
+	                        if (value) {
+	                            $scope.pagination = value;
+	                        }
+	                    });
+	
+	                    if (!$attrs.turn) {
+	                        //刷新页面
+	                        $scope.search = function(page) {
+	                            var query = $location.search();
+	                            query.page = page;
+	                            $location.path($location.path()).search(query);
+	                        };
+	                    } else {
+	                        $scope.search = function(page) {
+	                            $scope.turn({
+	                                data: page
+	                            });
+	                        };
+	                    }
+	                }
+	            };
+	            return directive;
+	        }
+	    ]);
+	};
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	
+	    var md = __webpack_require__(27)({
+	        html: true,
+	        linkify: true,
+	        typographer: true
+	    });
+	    var addLinkTarget = function(code) {
+	        var pattern = /a href=/g;
+	        return code.replace(pattern, "a target='_blank' href=");
+	    };
+	    myModule.
+	    directive('fedocMarkdown', ['$sanitize', function($sanitize) {
+	        return {
+	            restrict: 'AE',
+	            link: function(scope, element, attrs) {
+	                if (attrs.fedocMarkdown) {
+	                    scope.$watch(attrs.fedocMarkdown, function(newVal) {
+	                        var html = newVal ? $sanitize(md.render(newVal)) : '';
+	                        html = addLinkTarget(html);
+	                        element.html(html);
+	                    });
+	                } else {
+	                    var html = $sanitize(md.render(element.text()));
+	                    html = addLinkTarget(html);
+	                    element.html(html);
+	                }
+	            }
+	        };
+	    }]);
+	
+	};
+
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = markdownit;
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		//回车按钮
+		myModule.directive('fedocEnter', function() {
+			return {
+				restrict: 'AC',
+				link: function($scope, $element, $attr) {
+					$element.bind("keydown", function($event) {
+						if (event.which === 13) {
+							$scope.$apply(function() {
+								$scope.$eval($attr.fedocEnter);
+							});
+							$event.stopPropagation();
+							return false;
+						}
+					});
+				}
+			};
+		});
+	};
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.directive('articleTags', [
+	        function factory() {
+	            var directive = {
+	                restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	                replace: 'true',
+	                templateUrl: '/site/modules/article-tags/index.html',
+	                scope: false,
+	                controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, toasty, $rootScope, TagService, $stateParams, $state) {
+	                    TagService.listAll().then(function(data) {
+	                        if (data.code === 200) {
+	                            $scope.tags = data.msg.tags;
+	                        }
+	                    });
+	                    $scope.tag = $stateParams.tag || '';
+	
+	                    $scope.choose = function($event, tag) {
+	                        $scope.tag = tag;
+	                        var opts = {
+	                            tag: tag
+	                        };
+	                        if (tag !== $stateParams.tag) {
+	                            opts.page = 1;
+	                        }
+	                        $state.go('articles', opts);
+	                        $event.stopPropagation();
+	                        return;
+	                    };
+	                    $scope.delTag = function($event, tag) {
+	                        if (confirm('确认删除该分类吗')) {
+	                            TagService.remove(tag._id).then(function(data) {
+	                                if (data.code === 200) {
+	                                    toasty.success('删除分类成功');
+	                                    for (var i = 0, len = $scope.tags.length; i < len; i++) {
+	                                        if ($scope.tags[i]._id === tag._id) {
+	                                            $scope.tags.splice(i, 1);
+	                                            if ($scope.tag === tag.name) {
+	                                                $state.go('articles', {
+	                                                    tag: ''
+	                                                });
+	                                            }
+	                                            return;
+	                                        }
+	                                    }
+	                                }
+	                            });
+	                        }
+	                        $event.stopPropagation();
+	                        return;
+	                    };
+	                }]
+	            };
+	            return directive;
+	        }
+	    ]);
+	};
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.directive('btnToTop', ['$window',
+			function factory($window) {
+				var directive = {
+					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+					replace: 'true',
+					template: ' <div class="btn-to-top"></div>',
+					scope: false,
+					link: function($scope, $element, $attrs) {
+						angular.element($window).bind("scroll", function(e) {
+							var scrollTop = window.document.body.scrollTop;
+							if (scrollTop > 40) {
+								$element.addClass('active');
+							} else {
+								$element.removeClass('active');
+							}
+						});
+						$element.on('click',function(){
+							window.document.body.scrollTop = 0;
+						});
+					}
+				};
+				return directive;
+			}
+		]);
+	};
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.directive('deployRecord', [
+			function factory() {
+				var directive = {
+					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+					replace: 'true',
+					templateUrl: '/site/modules/deploy-record/index.html',
+					require: "ngModel",
+	                scope: {
+	                    ngModel: '='
+	                },
+					link: function($scope) {
+						console.log($scope.ngModel)
+					}
+				};
+				return directive;
+			}
+		]);
 	};
 
 /***/ }
