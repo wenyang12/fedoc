@@ -1,5 +1,5 @@
-<div class="tags-box">
-	<ul class="nav nav-pills nav-stacked">
+<div class="tags-box" ng-class={'tags-box-admin':user.isAdmin}>
+	<ul class="nav nav-pills">
 		<li class="tag-item" ng-class="{active:'' === tag}"><a ng-click="choose($event,'')">全部</a></li>
 		<li class="tag-item" ng-class="{active:t.name === tag}"ng-repeat="t in tags">
 			<a ng-click="choose($event,t.name)">

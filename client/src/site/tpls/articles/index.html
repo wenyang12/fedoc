@@ -1,9 +1,7 @@
 <div class="articles-box" ng-init="init()">
 	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-9 main-left">
 			<article-tags></article-tags>
-		</div>
-		<div class="col-md-10">
 			<ul class="article-list" ng-if="count">
 				<li class="article-list-item" ng-repeat="a in articles">
 					<a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}} <span ng-if="a.isTop === 1" class="put-top">置顶</span></a>
@@ -31,6 +29,8 @@
 				<fedoc-pagination ng-model="pagination" ></fedoc-pagination>
 			</div>
 		</div>
+		<div class="col-md-3 main-right">
+					<hot-articles></hot-articles>
+		</div>
 	</div>
-
 </div>

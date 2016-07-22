@@ -7,11 +7,14 @@ module.exports = function(myModule) {
                 templateUrl: '/site/modules/article-tags/index.html',
                 scope: false,
                 controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, toasty, $rootScope, TagService, $stateParams, $state) {
+
                     TagService.listAll().then(function(data) {
                         if (data.code === 200) {
+                            window.tags = data.msg.tags;
                             $scope.tags = data.msg.tags;
                         }
                     });
+
                     $scope.tag = $stateParams.tag || '';
 
                     $scope.choose = function($event, tag) {

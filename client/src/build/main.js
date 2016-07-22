@@ -102,6 +102,7 @@
 		__webpack_require__(29)(siteModules);
 		__webpack_require__(30)(siteModules);
 		__webpack_require__(31)(siteModules);
+		__webpack_require__(32)(siteModules);
 	
 	};
 
@@ -203,6 +204,9 @@
 	            return {
 	                list: function(query) {
 	                    return baseRoute.customGET('', query);
+	                },
+	                listHot: function(query) {
+	                    return baseRoute.customGET('hot', query);
 	                },
 	                getOne: function(articleId) {
 	                    return baseRoute.one(articleId)
@@ -1477,11 +1481,14 @@
 	                templateUrl: '/site/modules/article-tags/index.html',
 	                scope: false,
 	                controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, toasty, $rootScope, TagService, $stateParams, $state) {
+	
 	                    TagService.listAll().then(function(data) {
 	                        if (data.code === 200) {
+	                            window.tags = data.msg.tags;
 	                            $scope.tags = data.msg.tags;
 	                        }
 	                    });
+	
 	                    $scope.tag = $stateParams.tag || '';
 	
 	                    $scope.choose = function($event, tag) {
@@ -1524,6 +1531,7 @@
 	        }
 	    ]);
 	};
+
 
 /***/ },
 /* 30 */
@@ -1579,6 +1587,37 @@
 			}
 		]);
 	};
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.directive('hotArticles', [
+	        function factory() {
+	            var directive = {
+	                restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	                replace: 'true',
+	                templateUrl: '/site/modules/hot-articles/index.html',
+	                scope: true,
+	                controller: ['$scope', 'toasty', '$rootScope', 'ArticleService', '$stateParams', '$state', function($scope, toasty, $rootScope, ArticleService, $stateParams, $state) {
+	                    if (window.hotArticles) {
+	                        $scope.articles = window.hotArticles;
+	                    } else {
+	                        ArticleService.listHot().then(function(data) {
+	                            if (data.code === 200) {
+	                                window.hotArticles = data.msg.articles;
+	                                $scope.articles = data.msg.articles;
+	                            }
+	                        });
+	                    }
+	                }]
+	            };
+	            return directive;
+	        }
+	    ]);
+	};
+
 
 /***/ }
 /******/ ])

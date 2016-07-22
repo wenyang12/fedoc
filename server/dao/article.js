@@ -36,3 +36,22 @@ exports.list = function(options, callback) {
             });
     });
 };
+
+exports.listHot = function(callback) {
+    var sql = '_id title views';
+    ArticleModel.find(sql).limit(10)
+        .sort({
+            views: -1,
+            createdTime: '-1'
+        })
+        .exec(function(err, articles) {
+            if (!err) {
+                var data = {
+                    articles: articles
+                };
+                callback(null, data);
+            } else {
+                callback(err);
+            }
+        });
+};
