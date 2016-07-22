@@ -1,16 +1,11 @@
-@import "compass";
-//base
+@import "compass"; //base
 //
-@import "./base/index";
-// modules
+@import "./base/index"; // modules
 @import "./modules/header/index";
 @import "./modules/article-tags/index";
 @import "./modules/btn-to-top/index";
 @import "./modules/deploy-record/index";
-@import "./modules/hot-articles/index";
-
-
-// tpls
+@import "./modules/hot-articles/index"; // tpls
 @import "./tpls/articles/index";
 @import "./tpls/article/index";
 @import "./tpls/signin/index";
@@ -19,20 +14,15 @@
 @import "./tpls/profile/info/index";
 @import "./tpls/profile/pwd/index";
 @import "./tpls/tag/index";
-
-#site-box{
+#site-box {
 	background: white;
 }
-
-.common-box{
+.common-box {
 	margin: 15px auto;
-	&.sm{
-	  width: 450px;
+	&.sm {
+		width: 450px;
 	}
 }
-
-
-
 #footer {
 	//width: 1000px;
 	text-align: center;
@@ -40,23 +30,24 @@
 	padding: 10px 0 30px;
 	border-top: 1px solid #d4d4d4;
 	color: #999;
-
 	#copyright {
 		margin: 0 10px;
 	}
 }
-.cg-busy{
+.cg-busy {
 	position: fixed;
 }
 #ds-thread #ds-reset .ds-powered-by {
-   display: none;
+	display: none;
 }
-.main-left{
-	padding: 15px;
+.main-left {
+	padding-left: 0;
 	min-height: 1010px;
 }
-.main-right{
+.main-right {
+	padding-left: 15px;
 	background: #e9eaec;
-	padding-right: 0;
-	min-height: 1010px;
+	.articles-box {
+		min-height: 1010px;
+	}
 }

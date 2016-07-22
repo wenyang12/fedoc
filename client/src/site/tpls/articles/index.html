@@ -1,11 +1,14 @@
-<div class="articles-box" ng-init="init()">
-	<div class="row">
-		<div class="col-md-9 main-left">
+<div class="row">
+	<div class="col-md-3 main-left">
+		<hot-articles></hot-articles>
+	</div>
+	<div class="col-md-9 main-right">
+		<div class="articles-box" ng-init="init()">
 			<article-tags></article-tags>
 			<ul class="article-list" ng-if="count">
 				<li class="article-list-item" ng-repeat="a in articles">
 					<a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}} <span ng-if="a.isTop === 1" class="put-top">置顶</span></a>
-					<a class="btn-operate" ng-if="a.isTop && user.isAdmin"ng-click="toTop(a,0)">取消置顶</a>
+					<a class="btn-operate" ng-if="a.isTop && user.isAdmin" ng-click="toTop(a,0)">取消置顶</a>
 					<a class="btn-operate" ng-if="!a.isTop && user.isAdmin" ng-click="toTop(a,1)">置顶</a>
 
 					<span class="author">
@@ -13,10 +16,10 @@
 						<a class="author-nickname">
 							<span class="author-nickname-inner">{{a.user.nickname}}</span>
 
-						</a>
-						<span class="views-num">阅读：{{a.views}}</span>
+					</a>
+					<span class="views-num">阅读：{{a.views}}</span>
 
-						<span class="time" ng-bind="a.createdTime|dateAgo">
+					<span class="time" ng-bind="a.createdTime|dateAgo">
 
 						</span>
 					</span>
@@ -26,11 +29,9 @@
 			</ul>
 
 			<div class="pull-right">
-				<fedoc-pagination ng-model="pagination" ></fedoc-pagination>
+				<fedoc-pagination ng-model="pagination"></fedoc-pagination>
 			</div>
 		</div>
-		<div class="col-md-3 main-right">
-					<hot-articles></hot-articles>
-		</div>
+
 	</div>
 </div>

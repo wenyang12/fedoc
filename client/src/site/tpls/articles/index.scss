@@ -1,4 +1,6 @@
 .articles-box {
+	background-color: #fff;
+	padding: 15px;
 	.article-list {
 		margin-top: 15px;
 		position: relative;
@@ -8,23 +10,22 @@
 			border-bottom: 1px dotted #ddd;
 			.title {
 				color: #444;
-				&:hover{
+				&:hover {
 					cursor: pointer;
 				}
-
 			}
-			.btn-operate{
+			.btn-operate {
 				font-size: 12px;
 				display: none;
 				margin-left: 10px;
 			}
-			&:hover{
-				.btn-operate{
+			&:hover {
+				.btn-operate {
 					display: initial;
 				}
 				background-color: #f4f6fc;
 			}
-			.put-top{
+			.put-top {
 				background: #80bd01;
 				padding: 2px 4px;
 				border-radius: 3px;
@@ -38,12 +39,12 @@
 				right: 0;
 				padding-left: 30px;
 				/*@include transition(all .2s ease-in);*/
-				.views-num{
+				.views-num {
 					font-size: 10px;
-    				color: #b4b4b4;
-    				position: absolute;
-				    right: 55px;
-				    top: 1px;
+					color: #b4b4b4;
+					position: absolute;
+					right: 55px;
+					top: 1px;
 				}
 				.author-avatar {
 					position: absolute;
@@ -51,7 +52,6 @@
 					width: 20px;
 					height: 20px;
 				}
-
 				.author-nickname {
 					display: block;
 					width: 60px;
@@ -60,17 +60,13 @@
 					overflow: hidden;
 					white-space: nowrap;
 				}
-				.time{
+				.time {
 					position: absolute;
-				    right: 0;
-				    top: 0px;
-				    font-size: 10px;
+					right: 0;
+					top: 0;
+					font-size: 10px;
 				}
-
 			}
-
 		}
-
 	}
-
 }
