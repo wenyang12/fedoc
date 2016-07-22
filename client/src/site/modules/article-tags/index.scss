@@ -1,30 +1,40 @@
 .tags-box{
-	width: 140px;
-	top:70px;
-	left: 100px;
 	.tag-item{
 		position: relative;
+
 		.btn-operate{
 			position: absolute;
 			right: 5px;
-			top:11px;
+			top:6px;
 			.fa{
 				display: none;
+				color:#FC923F;
 			}
 			>span{
 				&:hover{
-					pointer:cursor;	
+					pointer:cursor;
 				}
 			}
+		}
+		a{
+			font-size: 14px;
+    	padding: 7px;
 		}
 		&:hover{
 			.fa{
 				display: initial;
-			}	
+			}
 		}
 		.tag-hot{
 			    font-size: 18px;
     		    color: #E04B4B;
 		}
+	}
+	&.tags-box-admin{
+			li{
+				a{
+					padding-right: 40px;
+				}
+			}
 	}
 }

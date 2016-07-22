@@ -130,6 +130,16 @@ exports.list = function(req, res) {
     });
 };
 
+exports.listHot = function(req, res) {
+    articleDao.listHot(function(err, data) {
+        if (!err) {
+            return res.successMsg(data || null);
+        } else {
+            console.log(err);
+            return res.errorMsg(10000, '获取热门文档失败');
+        }
+    });
+};
 
 exports.get = function(req, res) {
     var articleId = req.params.articleId;

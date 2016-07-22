@@ -312,25 +312,27 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-border-radius: 10px;
     border-radius: 10px; }
 
-.tags-box {
-  width: 140px;
-  top: 70px;
-  left: 100px; }
-  .tags-box .tag-item {
-    position: relative; }
-    .tags-box .tag-item .btn-operate {
-      position: absolute;
-      right: 5px;
-      top: 11px; }
-      .tags-box .tag-item .btn-operate .fa {
-        display: none; }
-      .tags-box .tag-item .btn-operate > span:hover {
-        pointer: cursor; }
-    .tags-box .tag-item:hover .fa {
-      display: initial; }
-    .tags-box .tag-item .tag-hot {
-      font-size: 18px;
-      color: #E04B4B; }
+.tags-box .tag-item {
+  position: relative; }
+  .tags-box .tag-item .btn-operate {
+    position: absolute;
+    right: 5px;
+    top: 6px; }
+    .tags-box .tag-item .btn-operate .fa {
+      display: none;
+      color: #FC923F; }
+    .tags-box .tag-item .btn-operate > span:hover {
+      pointer: cursor; }
+  .tags-box .tag-item a {
+    font-size: 14px;
+    padding: 7px; }
+  .tags-box .tag-item:hover .fa {
+    display: initial; }
+  .tags-box .tag-item .tag-hot {
+    font-size: 18px;
+    color: #E04B4B; }
+.tags-box.tags-box-admin li a {
+  padding-right: 40px; }
 
 .btn-to-top {
   display: none;
@@ -360,10 +362,17 @@ h1, h2, h3, h4, h5, h6 {
   .deploy-record > div {
     padding: 2px 4px; }
 
+.hot-articles-box {
+  padding: 15px;
+  background: #fff; }
+  .hot-articles-box .views-num {
+    float: right; }
+  .hot-articles-box .fa-fire {
+    color: #CC3300; }
+
 .articles-box .article-list {
-  position: relative;
-  width: 900px;
-  margin-left: 40px; }
+  margin-top: 15px;
+  position: relative; }
   .articles-box .article-list .article-list-item {
     padding: 10px;
     font-size: 14px;
@@ -509,8 +518,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 25px; }
 
 #site-box {
-  background-color: white;
-  padding: 15px; }
+  background: white; }
 
 .common-form {
   width: 450px;
@@ -530,5 +538,14 @@ h1, h2, h3, h4, h5, h6 {
 
 #ds-thread #ds-reset .ds-powered-by {
   display: none; }
+
+.main-left {
+  padding: 15px;
+  min-height: 600px; }
+
+.main-right {
+  background: #e9eaec;
+  padding-right: 0;
+  min-height: 600px; }
 
 /*# sourceMappingURL=site.css.map */

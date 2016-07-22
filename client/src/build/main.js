@@ -46,8 +46,8 @@
 
 	//加载管理模块
 	__webpack_require__(1)(angular);
-	__webpack_require__(10)(angular);
-	__webpack_require__(12)(angular);
+	__webpack_require__(11)(angular);
+	__webpack_require__(13)(angular);
 	var app = angular.module('app', [
 		'ui.router',
 		'restangular',
@@ -85,7 +85,7 @@
 		}
 	});
 	window.duoshuoQuery = {short_name:"fedoc"};
-	__webpack_require__(19)(app);
+	__webpack_require__(20)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -102,6 +102,7 @@
 		__webpack_require__(7)(siteModules);
 		__webpack_require__(8)(siteModules);
 		__webpack_require__(9)(siteModules);
+		__webpack_require__(10)(siteModules);
 	
 	};
 
@@ -323,11 +324,14 @@
 	                templateUrl: '/site/modules/article-tags/index.html',
 	                scope: false,
 	                controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, toasty, $rootScope, TagService, $stateParams, $state) {
+	
 	                    TagService.listAll().then(function(data) {
 	                        if (data.code === 200) {
+	                            window.tags = data.msg.tags;
 	                            $scope.tags = data.msg.tags;
 	                        }
 	                    });
+	
 	                    $scope.tag = $stateParams.tag || '';
 	
 	                    $scope.choose = function($event, tag) {
@@ -370,6 +374,7 @@
 	        }
 	    ]);
 	};
+
 
 /***/ },
 /* 8 */
@@ -430,14 +435,45 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(angular) {
-		var siteFilters = angular.module('siteFilters', []);
-		__webpack_require__(11)(siteFilters);
+	module.exports = function(myModule) {
+	    myModule.directive('hotArticles', [
+	        function factory() {
+	            var directive = {
+	                restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	                replace: 'true',
+	                templateUrl: '/site/modules/hot-articles/index.html',
+	                scope: true,
+	                controller: ['$scope', 'toasty', '$rootScope', 'ArticleService', '$stateParams', '$state', function($scope, toasty, $rootScope, ArticleService, $stateParams, $state) {
+	                    if (window.hotArticles) {
+	                        $scope.articles = window.hotArticles;
+	                    } else {
+	                        ArticleService.listHot().then(function(data) {
+	                            if (data.code === 200) {
+	                                window.hotArticles = data.msg.articles;
+	                                $scope.articles = data.msg.articles;
+	                            }
+	                        });
+	                    }
+	                }]
+	            };
+	            return directive;
+	        }
+	    ]);
 	};
 
 
 /***/ },
 /* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(angular) {
+		var siteFilters = angular.module('siteFilters', []);
+		__webpack_require__(12)(siteFilters);
+	};
+
+
+/***/ },
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -497,23 +533,23 @@
 	};
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(13)(siteServices);
 		__webpack_require__(14)(siteServices);
 		__webpack_require__(15)(siteServices);
 		__webpack_require__(16)(siteServices);
 		__webpack_require__(17)(siteServices);
 		__webpack_require__(18)(siteServices);
+		__webpack_require__(19)(siteServices);
 	
 	};
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -523,6 +559,9 @@
 	            return {
 	                list: function(query) {
 	                    return baseRoute.customGET('', query);
+	                },
+	                listHot: function(query) {
+	                    return baseRoute.customGET('hot', query);
 	                },
 	                getOne: function(articleId) {
 	                    return baseRoute.one(articleId)
@@ -550,7 +589,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -587,7 +626,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -619,7 +658,7 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -656,7 +695,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -680,7 +719,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	 module.exports = function(myModule) {
@@ -710,7 +749,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -733,22 +772,22 @@
 				});
 		}]);
 	
-		__webpack_require__(20)(app);
 		__webpack_require__(21)(app);
 		__webpack_require__(22)(app);
 		__webpack_require__(23)(app);
 		__webpack_require__(24)(app);
 		__webpack_require__(25)(app);
-		__webpack_require__(28)(app);
+		__webpack_require__(26)(app);
 		__webpack_require__(29)(app);
 		__webpack_require__(30)(app);
 		__webpack_require__(31)(app);
+		__webpack_require__(32)(app);
 	
 	};
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -802,7 +841,7 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1050,7 +1089,7 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1105,7 +1144,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1150,7 +1189,7 @@
 	};
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1234,12 +1273,12 @@
 	};
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(26)(app);
 		__webpack_require__(27)(app);
+		__webpack_require__(28)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1269,7 +1308,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1294,7 +1333,7 @@
 	};
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1347,7 +1386,7 @@
 	};
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1391,7 +1430,7 @@
 	};
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1436,7 +1475,7 @@
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1509,7 +1548,7 @@
 	};
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {

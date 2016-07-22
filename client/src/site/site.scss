@@ -7,6 +7,8 @@
 @import "./modules/article-tags/index";
 @import "./modules/btn-to-top/index";
 @import "./modules/deploy-record/index";
+@import "./modules/hot-articles/index";
+
 
 // tpls
 @import "./tpls/articles/index";
@@ -17,14 +19,10 @@
 @import "./tpls/profile/info/index";
 @import "./tpls/profile/pwd/index";
 
-#site-box {
-	background-color: white;
-	padding: 15px;
+#site-box{
+	background: white;
 }
-//.common-box{
-//	width: 1000px;
-//    margin: 0 auto;
-//}
+
 .common-form{
 	width: 450px;
 	margin: 0 auto;
@@ -46,4 +44,13 @@
 }
 #ds-thread #ds-reset .ds-powered-by {
    display: none;
+}
+.main-left{
+	padding: 15px;
+	min-height: 600px;
+}
+.main-right{
+	background: #e9eaec;
+	padding-right: 0;
+	min-height: 600px;
 }

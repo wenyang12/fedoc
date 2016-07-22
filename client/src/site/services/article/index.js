@@ -6,6 +6,9 @@ module.exports = function(myModule) {
                 list: function(query) {
                     return baseRoute.customGET('', query);
                 },
+                listHot: function(query) {
+                    return baseRoute.customGET('hot', query);
+                },
                 getOne: function(articleId) {
                     return baseRoute.one(articleId)
                         .customGET();

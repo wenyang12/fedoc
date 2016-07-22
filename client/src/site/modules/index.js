@@ -7,5 +7,6 @@ module.exports = function(angular) {
 	require('site/modules/article-tags/index')(siteModules);
 	require('site/modules/btn-to-top/index')(siteModules);
 	require('site/modules/deploy-record/index')(siteModules);
+	require('site/modules/hot-articles/index')(siteModules);
 
 };
