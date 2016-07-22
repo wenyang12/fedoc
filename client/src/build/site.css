@@ -554,14 +554,14 @@ h1, h2, h3, h4, h5, h6 {
 #ds-thread #ds-reset .ds-powered-by {
   display: none; }
 
-.main-left {
+.main-right {
   padding-left: 0;
   min-height: 1010px; }
 
-.main-right {
+.main-left {
   padding-left: 15px;
   background: #e9eaec; }
-  .main-right .articles-box {
+  .main-left .articles-box {
     min-height: 1010px; }
 
 /*# sourceMappingURL=site.css.map */
