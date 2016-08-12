@@ -2,6 +2,9 @@
 	.site-header-nav{
 		position: relative;
 	}
+	.fa-rocket{
+			color:#fe7446;
+	}
 	@include border-radius(0);
 	.search-box{
 		width: 220px;

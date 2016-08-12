@@ -6,9 +6,22 @@
 					fe.firstshare.cn
 				</a>
 			</div>
+			<ul class="nav navbar-nav pull-left">
+				<li >
+					<a ui-sref="articles">
+						文档列表
+					</a>
+				</li>
+				<li >
+					<a ui-sref="sites">
+						<i class="fa fa-rocket"></i>
+						前端站点
+					</a>
+				</li>
+			</ul>
 
-			<ul ng-if="user && user.isAdmin"  class="nav navbar-nav">
-				<li ng-repeat="menu in adminMenus" dropdown keyboard-nav >
+			<ul ng-if="user && user.isAdmin" class="nav navbar-nav">
+				<li ng-repeat="menu in adminMenus" dropdown keyboard-nav>
 					<a dropdown-toggle>
 						{{menu.title}}
 						<span class="caret"></span>
@@ -21,8 +34,8 @@
 					</ul>
 				</li>
 			</ul>
-			<ul ng-if="user && !user.isAdmin"  class="nav navbar-nav">
-				<li ng-repeat="menu in userMenus" dropdown keyboard-nav >
+			<ul ng-if="user && !user.isAdmin" class="nav navbar-nav">
+				<li ng-repeat="menu in userMenus" dropdown keyboard-nav>
 					<a dropdown-toggle>
 						{{menu.title}}
 						<span class="caret"></span>
@@ -37,36 +50,36 @@
 			</ul>
 
 			<ul ng-if="user" class="nav navbar-nav pull-right">
-				<li dropdown keyboard-nav >
+				<li dropdown keyboard-nav>
 					<a dropdown-toggle>
 						{{user.nickname}}
 						<img ng-src="{{user.avatar}}" alt="..." class="avatar">
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
-						<li role="menuitem" >
+						<li role="menuitem">
 							<a ui-sref="profile">个人设置</a>
 						</li>
-						<li role="menuitem" >
+						<li role="menuitem">
 							<a ng-click="signout($event)">退出</a>
 						</li>
 					</ul>
 				</li>
 			</ul>
 			<ul ng-if="!user" class="nav navbar-nav pull-right">
-				<li  ui-sref="signin">
-					<a >
+				<li ui-sref="signin">
+					<a>
 						登陆
 					</a>
 				</li>
-				<li  ui-sref="signup">
-					<a >
+				<li ui-sref="signup">
+					<a>
 						注册
 					</a>
 				</li>
 			</ul>
 			<div class="input-group search-box">
-				<input type="text"  ng-model="searchBox.keyword" class="search-box-ipt" fedoc-enter="searchKeyword()"  placeholder="按标题或内容搜索文档">
+				<input type="text" ng-model="searchBox.keyword" class="search-box-ipt" fedoc-enter="searchKeyword()" placeholder="按标题或内容搜索文档">
 				<span class="fa fa-search search-box-btn" ng-click="searchKeyword()">
 
 				</span>

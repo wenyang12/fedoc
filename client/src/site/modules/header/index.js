@@ -9,15 +9,12 @@ module.exports = function(myModule) {
 					$scope.adminMenus = [{
 						title: '文档管理',
 						subMenus: [{
-							title: '文档列表',
+							title: '查看列表',
 							sref: 'articles'
 						}, {
 							title: '新增文档',
 							sref: 'addArticle'
-						}]
-					}, {
-						title: '分类管理',
-						subMenus: [{
+						},{
 							title: '新增分类',
 							sref: 'addTag'
 						}]
