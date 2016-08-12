@@ -1643,6 +1643,9 @@
 	                href: 'http://fe.firstshare.cn',
 	                name: '文档平台'
 	            }, {
+	                href: 'http://www.fspte.com/crmdoc/index.html#',
+	                name: 'CRM前端文档'
+	            }, {
 	                href: 'http://git.firstshare.cn/',
 	                name: '基于gitlab代码仓库'
 	            }, {
