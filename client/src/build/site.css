@@ -314,6 +314,22 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-border-radius: 10px;
     border-radius: 10px; }
 
+.yy-freshman {
+  position: fixed;
+  top: 200px;
+  left: -205px;
+  background: url(./../site/modules/header/gf.png) 79px center no-repeat;
+  display: block;
+  background-size: cover;
+  width: 238px;
+  height: 104px;
+  -moz-transition: left 0.2s ease-in;
+  -o-transition: left 0.2s ease-in;
+  -webkit-transition: left 0.2s ease-in;
+  transition: left 0.2s ease-in; }
+  .yy-freshman:hover {
+    left: -160px; }
+
 .tags-box .tag-item {
   position: relative; }
   .tags-box .tag-item .btn-operate {

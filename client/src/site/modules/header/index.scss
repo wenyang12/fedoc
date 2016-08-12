@@ -33,3 +33,17 @@
 		    @include border-radius(10px);
 	}
 }
+.yy-freshman{
+	position: fixed;
+	top: 200px;
+	left: -205px;
+	background: url(./../site/modules/header/gf.png) 79px center no-repeat;
+	display: block;
+	background-size: cover;
+	width: 238px;
+	height: 104px;
+	@include transition(left .2s ease-in);
+	&:hover{
+			left:-160px;
+	}
+}
