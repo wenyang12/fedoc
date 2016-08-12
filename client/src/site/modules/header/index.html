@@ -8,16 +8,17 @@
 			</div>
 			<ul class="nav navbar-nav pull-left">
 				<li >
-					<a ui-sref="articles">
-						文档列表
-					</a>
-				</li>
-				<li >
 					<a ui-sref="sites">
 						<i class="fa fa-rocket"></i>
 						前端站点
 					</a>
 				</li>
+				<li >
+					<a ui-sref="articles">
+						文档列表
+					</a>
+				</li>
+
 			</ul>
 
 			<ul ng-if="user && user.isAdmin" class="nav navbar-nav">
