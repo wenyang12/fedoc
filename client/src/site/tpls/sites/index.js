@@ -11,6 +11,10 @@ module.exports = function(app) {
                 name: '私有npm',
                 hot: true
             }, {
+                href: 'http://rap.firstshare.cn/org/index.do',
+                name: '接口mock工具 - RAP',
+                hot: true
+            }, {
                 href: 'http://fe.firstshare.cn',
                 name: '文档平台'
             }, {
@@ -22,6 +26,9 @@ module.exports = function(app) {
             }, {
                 href: 'http://open.fsfte2.com/open/jsapi/doc/',
                 name: 'jsapi文档'
+            }, {
+                href: 'http://oss.firstshare.cn/fisheye/',
+                name: 'codereview - fisheye'
             }, {
                 href: 'http://vwsr100014:8080/',
                 name: '安卓打包地址'
