@@ -292,16 +292,12 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 30px;
     float: right;
     margin-right: 30px;
-    margin-top: 8px; }
+    margin-top: 9px; }
     .site-header .search-box input {
-      -moz-transition: width 0.3s ease-in;
-      -o-transition: width 0.3s ease-in;
-      -webkit-transition: width 0.3s ease-in;
-      transition: width 0.3s ease-in;
-      -moz-transition: width 0.3s ease-in;
-      -o-transition: width 0.3s ease-in;
-      -webkit-transition: width 0.3s ease-in;
-      transition: width 0.3s ease-in;
+      -moz-transition: all 0.2s ease-in;
+      -o-transition: all 0.2s ease-in;
+      -webkit-transition: all 0.2s ease-in;
+      transition: all 0.2s ease-in;
       border-color: transparent;
       width: 0;
       color: white;
@@ -310,8 +306,9 @@ h1, h2, h3, h4, h5, h6 {
       font-size: 12px; }
     .site-header .search-box .btn-search {
       cursor: pointer;
-      font-size: 14px;
-      color: white; }
+      color: #9d9d9d; }
+      .site-header .search-box .btn-search:hover {
+        color: white; }
       .site-header .search-box .btn-search .fa-search {
         font-size: 16px;
         margin-right: 4px; }
@@ -319,6 +316,8 @@ h1, h2, h3, h4, h5, h6 {
       border-bottom: 1px solid white; }
       .site-header .search-box.active input {
         width: 150px; }
+      .site-header .search-box.active .fa-search {
+        color: white; }
       .site-header .search-box.active .tip {
         display: none; }
   .site-header .avatar {
