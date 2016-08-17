@@ -2,6 +2,7 @@
 	<div class="col-md-9 main-left">
 		<div class="articles-box" ng-init="init()">
 			<article-tags></article-tags>
+			<div class="fx-loading pv150" ng-if="_loading"></div>
 			<ul class="article-list" ng-if="count">
 				<li class="article-list-item" ng-repeat="a in articles">
 					<a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}} <span ng-if="a.isTop === 1" class="put-top">置顶</span></a>
@@ -24,6 +25,7 @@
 
 				</li>
 			</ul>
+			<p class="text-muted text-center pv150" ng-if="count === 0"><small>内容为空</small></p>
 
 			<div class="pull-right">
 				<fedoc-pagination ng-model="pagination"></fedoc-pagination>

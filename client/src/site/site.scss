@@ -51,3 +51,31 @@
 		min-height: 1010px;
 	}
 }
+.pv150{
+	padding: 150px 0;
+}
+
+@include keyframes(fx-loading-rotate) {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.fx-loading {
+    height: 30px;
+    &:after {
+        margin: 5px auto;
+        display: block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #fc923f;
+        background: white;
+        border-radius: 50%;
+        border-right-color: transparent;
+        @include animation(fx-loading-rotate 600ms linear infinite);
+        content: " ";
+        text-align: center;
+    }
+}

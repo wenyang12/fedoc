@@ -1,49 +1,64 @@
-.site-header{
-	.site-header-nav{
+.site-header {
+	.site-header-nav {
 		position: relative;
 	}
-	.fa-rocket{
-			color:#fe7446;
+	.fa-rocket {
+		color: #fe7446;
 	}
 	@include border-radius(0);
-	.search-box{
-		width: 220px;
-	    position: absolute;
-	    right: 243px;
-	    top: 8px;
-	    height: 37px;
-	    .search-box-ipt{
-			@include border-radius(2px);
-			padding-left: 24px;
-		    border-color:transparent;
-		    height: 100%;
-		    width: 100%;
-		    padding-left: 8px;
-	    }
-	    .search-box-btn{
-	    	position: absolute;
-		    top: 9px;
-		    right: 9px;
-		    font-size: 16px;
-	    }
+	.search-box {
+		height: 30px;
+		line-height: 30px;
+		float: right;;
+		margin-right: 30px;
+		margin-top: 8px;
+
+		input {
+			@include transition(width .3s ease-in);
+			@include transition(width .3s ease-in);
+			border-color: transparent;
+			width: 0;
+			color: white;
+			background-color: #222;
+			outline: none;
+			font-size: 12px;
+		}
+		.btn-search {
+			cursor: pointer;
+			font-size: 14px;
+			color: white;
+			.fa-search {
+				font-size: 16px;
+				margin-right: 4px;
+			}
+		}
+		&.active {
+			border-bottom: 1px solid white;
+			input{
+				width: 150px;
+			}
+			.tip {
+				display: none;
+			}
+		}
 	}
-	.avatar{
-		    width: 20px;
-		    height: 20px;
-		    @include border-radius(10px);
+	.avatar {
+		width: 20px;
+		height: 20px;
+		@include border-radius(10px);
 	}
 }
-.yy-freshman{
+.yy-freshman {
 	position: fixed;
 	top: 200px;
 	left: -205px;
-	background: url(./../site/modules/header/gf.png) 79px center no-repeat;
+	background: url("./../site/modules/header/gf.png") 79px center no-repeat;
 	display: block;
 	background-size: cover;
 	width: 238px;
 	height: 104px;
 	@include transition(left .2s ease-in);
-	&:hover{
-			left:-104px;
+	&:hover {
+		left: -104px;
 	}
 }

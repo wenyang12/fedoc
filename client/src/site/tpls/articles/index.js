@@ -14,7 +14,9 @@ module.exports = function(app) {
             };
             $scope.list = function(_query) {
                 var query = _.extend($scope.query, _query);
+                $scope._loading = true;
                 ArticleService.list(query).then(function(data) {
+                  $scope._loading = false;
                     $scope.articles = data.msg.articles;
                     $scope.pagination = data.msg.pagination;
                     $scope.count = data.msg.count;
@@ -26,6 +28,7 @@ module.exports = function(app) {
             };
 
             $scope.toTop = function(article, flag) {
+
                 ArticleService.toTop(article._id, flag).then(function(data) {
                     if (data.code === 200) {
                         toasty.success('操作成');

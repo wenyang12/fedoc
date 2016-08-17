@@ -1,6 +1,5 @@
-
 <header class="site-header navbar navbar-inverse">
-	<a target="_blank" href="http://fe.firstshare.cn/#/articles/565d0d2b66f363224b786612" class="yy-freshman" tooltip-placement="right" tooltip-trigger="mouseenter" tooltip-append-to-body="true"  tooltip-html-unsafe="新人大礼包" ></a>
+	<a target="_blank" href="http://fe.firstshare.cn/#/articles/565d0d2b66f363224b786612" class="yy-freshman" tooltip-placement="right" tooltip-trigger="mouseenter" tooltip-append-to-body="true" title="新人大礼包"></a>
 
 	<div class="container">
 		<nav class="site-header-nav navbar-collapse collapse">
@@ -10,13 +9,12 @@
 				</a>
 			</div>
 			<ul class="nav navbar-nav pull-left">
-				<li >
+				<li>
 					<a ui-sref="sites">
-						<i class="fa fa-rocket"></i>
-						前端站点
+						<i class="fa fa-rocket"></i> 前端站点
 					</a>
 				</li>
-				<li >
+				<li>
 					<a ui-sref="articles">
 						文档列表
 					</a>
@@ -82,11 +80,11 @@
 					</a>
 				</li>
 			</ul>
-			<div class="input-group search-box">
-				<input type="text" ng-model="searchBox.keyword" class="search-box-ipt" fedoc-enter="searchKeyword()" placeholder="按标题或内容搜索文档">
-				<span class="fa fa-search search-box-btn" ng-click="searchKeyword()">
-
+			<div class="input-group search-box" ng-class="{'active':searchBox.active}" ng-click="enableSearchBox()">
+				<span class="btn-search" >
+						<i class="fa fa-search"></i><span class="tip">搜索</span>
 				</span>
+				<input type="text" ng-model="searchBox.keyword" class="j-ipt-search" ng-blur="disableSearchBox()" fedoc-enter="searchKeyword()" >
 			</div>
 		</nav>
 	</div>
