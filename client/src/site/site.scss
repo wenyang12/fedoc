@@ -44,11 +44,11 @@
 }
 .main-right {
 	min-height: 1010px;
-	border-left:1px solid #E9E9E9;
 }
 .main-left {
+	border-right: 1px solid #E9E9E9;
 	.articles-box {
-		min-height: 1010px;
+		 min-height: 1010px;
 	}
 }
 .pv150{

@@ -658,11 +658,12 @@ h1, h2, h3, h4, h5, h6 {
   display: none; }
 
 .main-right {
-  min-height: 1010px;
-  border-left: 1px solid #E9E9E9; }
-
-.main-left .articles-box {
   min-height: 1010px; }
+
+.main-left {
+  border-right: 1px solid #E9E9E9; }
+  .main-left .articles-box {
+    min-height: 1010px; }
 
 .pv150 {
   padding: 150px 0; }
