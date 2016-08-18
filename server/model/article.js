@@ -43,4 +43,6 @@ var schema = new Schema({
 
 });
 
+
+
 mongoose.model('Article', schema);

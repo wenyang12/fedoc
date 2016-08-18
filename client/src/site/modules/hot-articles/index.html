@@ -1,7 +1,7 @@
-  <div class="articles-box hot-articles-box">
+  <div class="hot-articles-box">
       <h4><i class="fa fa-fire"></i> 热门阅读 </h4>
       <ul class="article-list">
-          <li class="article-list-item" ng-repeat="a in articles">
+          <li ng-repeat="a in articles">
               <a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}}
           </a>
               <span class="views-num text-muted">{{a.views}}</span>

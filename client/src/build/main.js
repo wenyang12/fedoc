@@ -766,35 +766,49 @@
 
 	module.exports = function(app) {
 	
-		app.controller('SiteController', ['$scope', '$rootScope', '$http', '$state', '$window',
-			function($scope, $rootScope, $http, $state, $window) {
-				$scope.user = {
-					email: 'zhangc@fxiaoke.com',
-					pwd: '123456'
-				};
-				$state.go('articles');
-			}
-		]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-			$stateProvider
-				.state('site', {
-					url: '/site',
-					templateUrl: '/site/index.html',
-					pageTitle: '主页',
-					controller: 'SiteController'
-				});
-		}]);
+	    app.controller('SiteController', ['$scope', '$rootScope', '$http', '$state', '$window',
+	        function($scope, $rootScope, $http, $state, $window) {
+	            $scope.user = {
+	                email: 'zhangc@fxiaoke.com',
+	                pwd: '123456'
+	            };
+	            $state.go('articles');
 	
-		__webpack_require__(21)(app);
-		__webpack_require__(22)(app);
-		__webpack_require__(23)(app);
-		__webpack_require__(24)(app);
-		__webpack_require__(25)(app);
-		__webpack_require__(26)(app);
-		__webpack_require__(29)(app);
-		__webpack_require__(30)(app);
-		__webpack_require__(31)(app);
-		__webpack_require__(32)(app);
-		__webpack_require__(33)(app);
+	
+	            $rootScope.filterAttachmentImgs = function(attachments) {
+	                return _.filter(attachments, function(item) {
+	                    return /\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
+	                });
+	            };
+	            $rootScope.filterAttachment = function(attachments) {
+	                return _.filter(attachments, function(item) {
+	                    return !/\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
+	                });
+	            };
+	        }
+	    ]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+	        $stateProvider
+	            .state('site', {
+	                url: '/site',
+	                templateUrl: '/site/index.html',
+	                pageTitle: '主页',
+	                controller: 'SiteController'
+	            });
+	    }]);
+	
+	
+	
+	    __webpack_require__(21)(app);
+	    __webpack_require__(22)(app);
+	    __webpack_require__(23)(app);
+	    __webpack_require__(24)(app);
+	    __webpack_require__(25)(app);
+	    __webpack_require__(26)(app);
+	    __webpack_require__(29)(app);
+	    __webpack_require__(30)(app);
+	    __webpack_require__(31)(app);
+	    __webpack_require__(32)(app);
+	    __webpack_require__(33)(app);
 	
 	
 	};
@@ -893,16 +907,7 @@
 	                    }
 	                });
 	            };
-	            $scope.filterAttachmentImgs = function(attachments) {
-	                return _.filter(attachments, function(item) {
-	                    return /\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
-	                });
-	            };
-							$scope.filterAttachment = function(attachments) {
-									return _.filter(attachments, function(item) {
-											return !/\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
-									});
-							};
+	        
 	            $scope.init = function() {
 	                TagService.listAll().then(function(data) {
 	                    if (data.code === 200) {

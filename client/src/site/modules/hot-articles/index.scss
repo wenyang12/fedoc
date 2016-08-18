@@ -1,8 +1,14 @@
 .hot-articles-box {
     padding: 15px;
     background: #fff;
-    li{
+    li {
         position: relative;
+        padding: 10px;
+        font-size: 14px;
+        border-bottom: 1px dotted #ddd;
+        &:hover{
+          background-color: #f4f6fc
+        }
     }
     .views-num {
         float: right;

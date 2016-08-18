@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    ArticleModel = mongoose.model('Article');
+    ArticleModel = mongoose.model('Article'),
+    _ = require('lodash');
 
 exports.getOne = function(query, callback) {
     var fileds = '_id title content views user attachments tags createdTime';
@@ -10,7 +11,7 @@ exports.getOne = function(query, callback) {
 };
 
 exports.list = function(options, callback) {
-    options.sql = '_id title user createdTime views tags isTop';
+    options.sql = '_id title user attachments createdTime views tags isTop';
     ArticleModel.count(options.criteria, function(err, count) {
         ArticleModel.find(options.criteria, options.sql)
             .populate([{
@@ -25,6 +26,7 @@ exports.list = function(options, callback) {
             .skip(options.perPage * options.page)
             .exec(function(err, articles) {
                 if (!err) {
+
                     var data = {
                         articles: articles,
                         count: count

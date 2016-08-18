@@ -405,7 +405,12 @@ h1, h2, h3, h4, h5, h6 {
   padding: 15px;
   background: #fff; }
   .hot-articles-box li {
-    position: relative; }
+    position: relative;
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 1px dotted #ddd; }
+    .hot-articles-box li:hover {
+      background-color: #f4f6fc; }
   .hot-articles-box .views-num {
     float: right;
     position: absolute;
@@ -425,58 +430,83 @@ h1, h2, h3, h4, h5, h6 {
   .articles-box .article-list {
     margin-top: 15px;
     position: relative; }
-    .articles-box .article-list .article-list-item {
-      padding: 10px;
-      font-size: 14px;
-      border-bottom: 1px dotted #ddd; }
-      .articles-box .article-list .article-list-item .title {
+    .articles-box .article-list li {
+      height: 90px;
+      position: relative;
+      border-bottom: #EEE solid 1px; }
+      .articles-box .article-list li a {
+        text-decoration: none; }
+      .articles-box .article-list li .title {
         color: #444; }
-        .articles-box .article-list .article-list-item .title:hover {
+        .articles-box .article-list li .title:hover {
           cursor: pointer; }
-      .articles-box .article-list .article-list-item .btn-operate {
+        .articles-box .article-list li .title .fa-file {
+          font-size: 12px; }
+      .articles-box .article-list li .article-user {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 20px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        background: #EEE;
+        display: block; }
+        .articles-box .article-list li .article-user img {
+          width: 100%; }
+      .articles-box .article-list li .article-summary {
+        position: absolute;
+        top: 17px;
+        left: 68px;
+        max-width: 658px;
+        overflow: hidden; }
+        .articles-box .article-list li .article-summary .title {
+          font-size: 16px !important;
+          line-height: 34px;
+          font-weight: 400;
+          max-width: 477px;
+          height: 34px;
+          vertical-align: top;
+          display: inline-block;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          word-break: keep-all; }
+          .articles-box .article-list li .article-summary .title .title strong {
+            color: #424242; }
+        .articles-box .article-list li .article-summary .desc {
+          font-size: 12px; }
+          .articles-box .article-list li .article-summary .desc .nickname {
+            margin-right: 6px;
+            padding-right: 11px;
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAMCAYAAACji9dXAAAABGdBTUEAALGPC/xhBQAAABNJREFUCB1jePDgwX8mBiAgnQAA0tgDtpOZD7QAAAAASUVORK5CYII=");
+            background-repeat: no-repeat;
+            background-position: right;
+            color: #8c8c8c;
+            cursor: default; }
+          .articles-box .article-list li .article-summary .desc .time {
+            color: #b5b5b5; }
+      .articles-box .article-list li .article-info {
+        position: absolute;
+        top: 52px;
+        right: 0;
+        color: #b5b5b5;
+        font-size: 12px; }
+      .articles-box .article-list li .btn-operate {
         font-size: 12px;
         display: none;
-        margin-left: 10px; }
-      .articles-box .article-list .article-list-item:hover {
-        background-color: #f4f6fc; }
-        .articles-box .article-list .article-list-item:hover .btn-operate {
-          display: initial; }
-      .articles-box .article-list .article-list-item .put-top {
+        margin-left: 10px;
+        position: absolute;
+        right: 0;
+        top: 8px; }
+      .articles-box .article-list li .put-top {
         background: #80bd01;
         padding: 2px 4px;
         border-radius: 3px;
         color: #fff;
         font-size: 12px; }
-      .articles-box .article-list .article-list-item .author {
-        color: #999;
-        position: absolute;
-        width: 210px;
-        right: 0;
-        padding-left: 30px;
-        /*@include transition(all .2s ease-in);*/ }
-        .articles-box .article-list .article-list-item .author .views-num {
-          font-size: 10px;
-          color: #b4b4b4;
-          position: absolute;
-          right: 55px;
-          top: 1px; }
-        .articles-box .article-list .article-list-item .author .author-avatar {
-          position: absolute;
-          left: 0;
-          width: 20px;
-          height: 20px; }
-        .articles-box .article-list .article-list-item .author .author-nickname {
-          display: block;
-          width: 60px;
-          height: 26px;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap; }
-        .articles-box .article-list .article-list-item .author .time {
-          position: absolute;
-          right: 0;
-          top: 0;
-          font-size: 10px; }
+      .articles-box .article-list li:hover .btn-operate {
+        display: block; }
 
 .btn-simplemde-upload {
   display: none; }

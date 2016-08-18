@@ -30,16 +30,7 @@ module.exports = function(app) {
                     }
                 });
             };
-            $scope.filterAttachmentImgs = function(attachments) {
-                return _.filter(attachments, function(item) {
-                    return /\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
-                });
-            };
-						$scope.filterAttachment = function(attachments) {
-								return _.filter(attachments, function(item) {
-										return !/\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
-								});
-						};
+        
             $scope.init = function() {
                 TagService.listAll().then(function(data) {
                     if (data.code === 200) {

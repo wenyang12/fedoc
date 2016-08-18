@@ -4,25 +4,31 @@
 			<article-tags></article-tags>
 			<div class="fx-loading pv150" ng-if="_loading"></div>
 			<ul class="article-list" ng-if="count">
-				<li class="article-list-item" ng-repeat="a in articles">
-					<a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}} <span ng-if="a.isTop === 1" class="put-top">置顶</span></a>
+				<li ng-repeat="a in articles">
+					<a class="article-user">
+							<img class="author-avatar img-circle" ng-src="{{a.user.avatar}}"/>
+					</a>
+					<div class="article-summary">
+							<h3 class="title">
+									<a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}}
+										<i class="fa fa-image" ng-if="filterAttachmentImgs(a.attachments).length"></i>
+										<i class="fa fa-file-o" ng-if="filterAttachment(a.attachments).length"></i>
+										<span ng-if="a.isTop === 1" class="put-top">置顶</span></a>
+							</h3>
+							<div class="desc">
+								<a class="nickname">{{a.user.nickname}}</a>
+
+								<span class="time">
+										发表于 {{a.createdTime|dateDisplay}}
+								</span>
+
+							</div>
+					</div>
+				<span class="article-info"><i class="fa fa-eye"></i> {{a.views}}</span>
+
+
 					<a class="btn-operate" ng-if="a.isTop && user.isAdmin" ng-click="toTop(a,0)">取消置顶</a>
 					<a class="btn-operate" ng-if="!a.isTop && user.isAdmin" ng-click="toTop(a,1)">置顶</a>
-
-					<span class="author">
-						<img class="author-avatar img-circle" ng-src="{{a.user.avatar}}"/>
-						<a class="author-nickname">
-							<span class="author-nickname-inner">{{a.user.nickname}}</span>
-
-					</a>
-					<span class="views-num">阅读：{{a.views}}</span>
-
-					<span class="time" ng-bind="a.createdTime|dateAgo">
-
-						</span>
-					</span>
-
-
 				</li>
 			</ul>
 			<p class="text-muted text-center pv150" ng-if="count === 0"><small>内容为空</small></p>
