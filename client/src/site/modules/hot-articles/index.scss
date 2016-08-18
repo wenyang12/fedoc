@@ -1,13 +1,16 @@
 .hot-articles-box {
     padding: 15px;
     background: #fff;
+    ul {
+        margin-top: 10px;
+    }
     li {
         position: relative;
         padding: 10px;
         font-size: 14px;
         border-bottom: 1px dotted #ddd;
-        &:hover{
-          background-color: #f4f6fc
+        &:hover {
+            background-color: #f4f6fc;
         }
     }
     .views-num {
@@ -15,6 +18,8 @@
         position: absolute;
         right: 0;
         top: 10px;
+        color: #b5b5b5;
+        font-size: 12px;
     }
     a.title {
         display: inline-block;
@@ -22,6 +27,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        color: #444;
     }
     .fa-fire {
         color: #CC3300;
