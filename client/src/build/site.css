@@ -344,7 +344,7 @@ h1, h2, h3, h4, h5, h6 {
 .tags-box li {
   float: left;
   position: relative;
-  padding: 0 20px;
+  padding: 5px 20px;
   font-size: 14px;
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAANCAYAAABo1wTyAAAABGdBTUEAALGPC/xhBQAAABNJREFUCB1jePDgwX8mBiAgkwAA5XADuJ6JlS4AAAAASUVORK5CYII=");
   background-repeat: no-repeat;
