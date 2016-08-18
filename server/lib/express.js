@@ -38,7 +38,7 @@ module.exports = function(app, passport, mongoose) {
     // 	app.use(errorHandler());
     // 	app.use(logger('dev')); // 纪录每一个请求
     // }
-    app.use(require('express-status-monitor')());
+    // app.use(require('express-status-monitor')());
     // res的中间件
     app.use(function(req, res, next) {
         res.errorMsg = function(code, msg) {
