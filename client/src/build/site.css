@@ -285,8 +285,6 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 0; }
   .site-header .site-header-nav {
     position: relative; }
-  .site-header .fa-rocket {
-    color: #fe7446; }
   .site-header .search-box {
     height: 30px;
     line-height: 30px;
@@ -343,27 +341,36 @@ h1, h2, h3, h4, h5, h6 {
   .yy-freshman:hover {
     left: -104px; }
 
-.tags-box .tag-item {
-  position: relative; }
-  .tags-box .tag-item .btn-operate {
+.tags-box li {
+  float: left;
+  position: relative;
+  padding: 0 20px;
+  font-size: 14px;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAANCAYAAABo1wTyAAAABGdBTUEAALGPC/xhBQAAABNJREFUCB1jePDgwX8mBiAgkwAA5XADuJ6JlS4AAAAASUVORK5CYII=");
+  background-repeat: no-repeat;
+  background-position: 0 3px;
+  vertical-align: top; }
+  .tags-box li .btn-operate {
     position: absolute;
-    right: 5px;
-    top: 6px; }
-    .tags-box .tag-item .btn-operate .fa {
+    top: -20px;
+    right: 0; }
+    .tags-box li .btn-operate .fa {
       display: none;
       color: #FC923F; }
-    .tags-box .tag-item .btn-operate > span:hover {
+    .tags-box li .btn-operate > span:hover {
       pointer: cursor; }
-  .tags-box .tag-item a {
-    font-size: 14px;
-    padding: 7px; }
-  .tags-box .tag-item:hover .fa {
+  .tags-box li a {
+    color: #999; }
+  .tags-box li:hover .fa {
     display: initial; }
-  .tags-box .tag-item .tag-hot {
+  .tags-box li .tag-hot {
     font-size: 18px;
     color: #E04B4B; }
-.tags-box.tags-box-admin li a {
-  padding-right: 40px; }
+  .tags-box li.active a {
+    color: #fc923f; }
+.tags-box li:first-child {
+  background-image: none;
+  padding-left: 0; }
 
 .btn-to-top {
   display: none;

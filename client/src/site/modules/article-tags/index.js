@@ -29,6 +29,14 @@ module.exports = function(myModule) {
                         $event.stopPropagation();
                         return;
                     };
+
+                    $scope.goWrite = function() {
+                        if ($rootScope.user) {
+                            $state.go('addArticle');
+                        } else {
+                            $state.go('signin');
+                        }
+                    };
                     $scope.delTag = function($event, tag) {
                         if (confirm('确认删除该分类吗')) {
                             TagService.remove(tag._id).then(function(data) {

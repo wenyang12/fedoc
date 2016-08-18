@@ -125,9 +125,6 @@
 	                            title: '查看列表',
 	                            sref: 'articles'
 	                        }, {
-	                            title: '新增文档',
-	                            sref: 'addArticle'
-	                        }, {
 	                            title: '新增分类',
 	                            sref: 'addTag'
 	                        }]
@@ -352,6 +349,14 @@
 	                        $state.go('articles', opts);
 	                        $event.stopPropagation();
 	                        return;
+	                    };
+	
+	                    $scope.goWrite = function() {
+	                        if ($rootScope.user) {
+	                            $state.go('addArticle');
+	                        } else {
+	                            $state.go('signin');
+	                        }
 	                    };
 	                    $scope.delTag = function($event, tag) {
 	                        if (confirm('确认删除该分类吗')) {

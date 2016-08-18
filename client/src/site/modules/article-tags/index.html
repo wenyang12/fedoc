@@ -1,14 +1,23 @@
-<div class="tags-box" ng-class={'tags-box-admin':user.isAdmin}>
-	<ul class="nav nav-pills">
-		<li class="tag-item" ng-class="{active:'' === tag}"><a ng-click="choose($event,'')">全部</a></li>
-		<li class="tag-item" ng-class="{active:t.name === tag}"ng-repeat="t in tags">
-			<a ng-click="choose($event,t.name)">
-				{{t.name}}
-			</a>
-			<span class="btn-operate" ng-if="user.isAdmin">
-					<span title="删除" class="fa fa-close" ng-click="delTag($event,t)"></span>
-					<span title="编辑" class="fa fa-cog" ui-sref="viewTag({_id:t._id})"></span>
-				</span>
-		</li>
-	</ul>
+<div class="tags-box clearfix" ng-class="{'tags-box-admin':user.isAdmin}">
+	<div class="row">
+		<div class="col-md-10">
+			<ul>
+				<li ng-click="choose($event,'')" ng-class="{active:'' == tag}"><a>全部</a>
+				</li>
+				<li ng-click="choose($event,t.name)" ng-class="{active:t.name == tag}" ng-repeat="t in tags">
+					<a>
+								{{t.name}}
+								<span class="btn-operate" ng-if="user.isAdmin">
+										<span title="删除" class="fa fa-close" ng-click="delTag($event,t)"></span>
+										<span title="编辑" class="fa fa-cog" ui-sref="viewTag({_id:t._id})"></span>
+									</span>
+						</a>
+				</li>
+
+			</ul>
+		</div>
+		<div class="col-md-2">
+			<a class="btn btn-success btn-sm pull-right btn-write" ng-click="goWrite()">写文档</a>
+		</div>
+	</div>
 </div>

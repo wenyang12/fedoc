@@ -1,40 +1,49 @@
-.tags-box{
-	.tag-item{
-		position: relative;
+.tags-box {
 
-		.btn-operate{
+	li {
+		float: left;
+		position: relative;
+		padding: 0 20px;
+		font-size: 14px;
+		background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAANCAYAAABo1wTyAAAABGdBTUEAALGPC/xhBQAAABNJREFUCB1jePDgwX8mBiAgkwAA5XADuJ6JlS4AAAAASUVORK5CYII=");
+		background-repeat: no-repeat;
+		background-position: 0 3px;
+		vertical-align: top;
+		.btn-operate {
 			position: absolute;
-			right: 5px;
-			top:6px;
-			.fa{
+			top: -20px;
+			right: 0;
+			.fa {
 				display: none;
-				color:#FC923F;
+				color: #FC923F;
 			}
-			>span{
-				&:hover{
-					pointer:cursor;
+			> span {
+				&:hover {
+					pointer: cursor;
 				}
 			}
 		}
 		a{
-			font-size: 14px;
-    	padding: 7px;
+			color: #999;
 		}
-		&:hover{
-			.fa{
+		&:hover {
+			.fa {
 				display: initial;
 			}
 		}
-		.tag-hot{
-			    font-size: 18px;
-    		    color: #E04B4B;
+		.tag-hot {
+			font-size: 18px;
+			color: #E04B4B;
+		}
+
+		&.active{
+			a{
+				color:#fc923f;
+			}
 		}
 	}
-	&.tags-box-admin{
-			li{
-				a{
-					padding-right: 40px;
-				}
-			}
+	li:first-child{
+		background-image: none;
+		padding-left: 0;
 	}
 }

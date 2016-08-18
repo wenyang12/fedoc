@@ -12,9 +12,6 @@ module.exports = function(myModule) {
                             title: '查看列表',
                             sref: 'articles'
                         }, {
-                            title: '新增文档',
-                            sref: 'addArticle'
-                        }, {
                             title: '新增分类',
                             sref: 'addTag'
                         }]
