@@ -28,10 +28,9 @@ audio, canvas, video {
 body {
   margin: 0;
   background-color: #e9eaec;
-  font-size: 13px;
-  line-height: 1.7;
-  word-wrap: break-word;
-  color: #222; }
+  font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
+  font-weight: 400;
+  color: #333; }
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {
