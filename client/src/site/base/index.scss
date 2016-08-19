@@ -2,8 +2,8 @@
 
 /* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
 html {
-  color: #333; 
-  
+  color: #333;
+
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
@@ -35,7 +35,7 @@ audio, canvas, video {
 body{
     margin: 0;
     background-color: rgb(233, 234, 236);
-    font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
+    font-family: "Lantinghei SC", "Helvetica Neue","Microsoft YaHei","WenQuanYi Micro Hei", "Heiti SC", "Segoe UI", Arial, sans-serif
 }
 
 button::-moz-focus-inner,
@@ -147,10 +147,10 @@ a:hover {
 /* 默认不显示下划线，保持页面简洁 */
 ins, a {
   text-decoration: none;
-} 
+}
 
 a {
-	cursor: pointer; 
+	cursor: pointer;
 }
 /* 专名号：虽然 u 已经重回 html5 Draft，但在所有浏览器中都是可以使用的，
  * 要做到更好，向后兼容的话，添加 class="typo-u" 来显示专名号

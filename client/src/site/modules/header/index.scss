@@ -1,6 +1,15 @@
 .site-header {
+	background-color: white;
 	.site-header-nav {
 		position: relative;
+	}
+
+	ul li a,.navbar-brand{
+				color:#666;
+				&:hover,&:focus{
+					 background: none!important;
+					 color: #fc923f;
+				}
 	}
 	@include border-radius(0);
 	.search-box {
@@ -14,16 +23,15 @@
 			@include transition(all .2s ease-in);
 			border-color: transparent;
 			width: 0;
-			color: white;
-			background-color: #222;
+			color: #666;
 			outline: none;
 			font-size: 12px;
 		}
 		.btn-search {
 			cursor: pointer;
-			color: #9d9d9d;
+			color: #666;
 			&:hover{
-				color: white;
+				color: #fc923f;
 			}
 			.fa-search {
 				font-size: 16px;
@@ -35,8 +43,8 @@
 			input{
 				width: 150px;
 			}
-			.fa-search{
-				color: white;
+			.btn-search{
+					color: #fc923f;
 			}
 			.tip {
 				display: none;

@@ -28,7 +28,7 @@ audio, canvas, video {
 body {
   margin: 0;
   background-color: #e9eaec;
-  font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif; }
+  font-family: "Lantinghei SC", "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", "Heiti SC", "Segoe UI", Arial, sans-serif; }
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {
@@ -280,11 +280,17 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 100%; }
 
 .site-header {
+  background-color: white;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0; }
   .site-header .site-header-nav {
     position: relative; }
+  .site-header ul li a, .site-header .navbar-brand {
+    color: #666; }
+    .site-header ul li a:hover, .site-header ul li a:focus, .site-header .navbar-brand:hover, .site-header .navbar-brand:focus {
+      background: none !important;
+      color: #fc923f; }
   .site-header .search-box {
     height: 30px;
     line-height: 30px;
@@ -298,15 +304,14 @@ h1, h2, h3, h4, h5, h6 {
       transition: all 0.2s ease-in;
       border-color: transparent;
       width: 0;
-      color: white;
-      background-color: #222;
+      color: #666;
       outline: none;
       font-size: 12px; }
     .site-header .search-box .btn-search {
       cursor: pointer;
-      color: #9d9d9d; }
+      color: #666; }
       .site-header .search-box .btn-search:hover {
-        color: white; }
+        color: #fc923f; }
       .site-header .search-box .btn-search .fa-search {
         font-size: 16px;
         margin-right: 4px; }
@@ -314,8 +319,8 @@ h1, h2, h3, h4, h5, h6 {
       border-bottom: 1px solid white; }
       .site-header .search-box.active input {
         width: 150px; }
-      .site-header .search-box.active .fa-search {
-        color: white; }
+      .site-header .search-box.active .btn-search {
+        color: #fc923f; }
       .site-header .search-box.active .tip {
         display: none; }
   .site-header .avatar {
