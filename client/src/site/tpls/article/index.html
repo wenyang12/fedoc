@@ -20,8 +20,8 @@
 		</select>
 	</div>
 	<div class="form-group form-group-tags">
-		<label ng-repeat="t in tags">
-			<input type="checkbox" ng-checked="isCheckTag(t)" ng-click="chooseTag($event,t)">{{t}}</label>
+		<label ng-repeat="tagName in tagNames">
+			<input type="checkbox" ng-checked="isCheckTag(tagName)" ng-click="chooseTag($event,tagName)">{{tagName}}</label>
 	</div>
 	<div class="form-group form-group-attachment">
 		<div class="attachment-upload-box">

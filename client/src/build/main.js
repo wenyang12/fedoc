@@ -907,22 +907,22 @@
 	                    }
 	                });
 	            };
-	        
+	
 	            $scope.init = function() {
 	                TagService.listAll().then(function(data) {
 	                    if (data.code === 200) {
 	                        var tags = data.msg.tags;
-	                        $scope.tags = [];
+	                        var tagNames = [];
 	                        for (var i = 0, len = tags.length; i < len; i++) {
-	                            $scope.tags.push(tags[i].name);
+	                            tagNames.push(tags[i].name.toString());
 	                        }
+	                        $scope.tagNames = tagNames;
 	                    }
 	                });
 	
 	                if (isAdd) {
 	                    $scope.article.isAdd = true;
 	                } else {
-	
 	                    ArticleService.getOne(articleId).then(function(data) {
 	                        if (data.code === 200) {
 	                            var article = data.msg;
