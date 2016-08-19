@@ -6,7 +6,7 @@ module.exports = function(myModule) {
                 replace: 'true',
                 templateUrl: '/site/modules/article-tags/index.html',
                 scope: false,
-                controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, toasty, $rootScope, TagService, $stateParams, $state) {
+                controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', '$loginModal', function($scope, toasty, $rootScope, TagService, $stateParams, $state, $loginModal) {
 
                     TagService.listAll().then(function(data) {
                         if (data.code === 200) {
@@ -34,7 +34,11 @@ module.exports = function(myModule) {
                         if ($rootScope.user) {
                             $state.go('addArticle');
                         } else {
-                            $state.go('signin');
+                            $loginModal.init({
+                                onLogined: function() {
+                                    $state.go('addArticle');
+                                }
+                            });
                         }
                     };
                     $scope.delTag = function($event, tag) {

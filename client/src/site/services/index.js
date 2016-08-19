@@ -6,5 +6,8 @@ module.exports = function(angular) {
 	require('site/services/deploy/index')(siteServices);
 	require('site/services/modal/index')(siteServices);
 	require('site/services/deploy-read/index')(siteServices);
+	require('site/services/login-modal/index')(siteServices);
+	require('site/services/reg-modal/index')(siteServices);
+
 
 };

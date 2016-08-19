@@ -28,7 +28,10 @@ audio, canvas, video {
 body {
   margin: 0;
   background-color: #e9eaec;
-  font-family: "Lantinghei SC", "Helvetica Neue", "Microsoft YaHei", "WenQuanYi Micro Hei", "Heiti SC", "Segoe UI", Arial, sans-serif; }
+  font-size: 13px;
+  line-height: 1.7;
+  word-wrap: break-word;
+  color: #222; }
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {

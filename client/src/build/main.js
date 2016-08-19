@@ -85,7 +85,7 @@
 		}
 	});
 	window.duoshuoQuery = {short_name:"fedoc"};
-	__webpack_require__(20)(app);
+	__webpack_require__(22)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -119,18 +119,12 @@
 	                replace: 'true',
 	                templateUrl: '/site/modules/header/index.html',
 	                link: function($scope) {
-	                    $scope.adminMenus = [{
-	                        title: '文档管理',
+	                    $scope.userMenus = [{
+	                        title: '管理',
 	                        subMenus: [{
-	                            title: '查看列表',
-	                            sref: 'articles'
-	                        }, {
 	                            title: '新增分类',
 	                            sref: 'addTag'
-	                        }]
-	                    }, {
-	                        title: '成员管理',
-	                        subMenus: [{
+	                        },{
 	                            title: '新增成员',
 	                            sref: 'addUser'
 	                        }, {
@@ -138,16 +132,9 @@
 	                            sref: 'users'
 	                        }]
 	                    }];
-	                    $scope.userMenus = [{
-	                        title: '文档管理',
-	                        subMenus: [{
-	                            title: '新增文档',
-	                            sref: 'addArticle'
-	                        }]
-	                    }];
 	                },
 	                scope: false,
-	                controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', function($scope, $rootScope, $stateParams, $state, $http) {
+	                controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', '$loginModal', '$regModal', function($scope, $rootScope, $stateParams, $state, $http, $loginModal, $regModal) {
 	
 	                    //监听 - 缩略图被点击
 	                    $scope.$on('userChange', function(event, data) {
@@ -180,14 +167,20 @@
 	                            keyword: $scope.searchBox.keyword
 	                        });
 	                    };
+	                    $scope.signin = function() {
+	                        $loginModal.init();
+	                    };
+	                    $scope.reg = function() {
+	                        $regModal.init();
+	                    };
 	                    $scope.enableSearchBox = function() {
 	                        $scope.searchBox.active = true;
-													$('.j-ipt-search').focus();
+	                        $('.j-ipt-search').focus();
 	                    };
-											$scope.disableSearchBox = function() {
-													$scope.searchBox.active = false;
-													$scope.searchBox.keyword = '';
-											};
+	                    $scope.disableSearchBox = function() {
+	                        $scope.searchBox.active = false;
+	                        $scope.searchBox.keyword = '';
+	                    };
 	                    $scope.signout = function($event) {
 	                        window.location.replace('\/api\/sign\/out');
 	                        $event.preventDefault();
@@ -327,7 +320,7 @@
 	                replace: 'true',
 	                templateUrl: '/site/modules/article-tags/index.html',
 	                scope: false,
-	                controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', function($scope, toasty, $rootScope, TagService, $stateParams, $state) {
+	                controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', '$loginModal', function($scope, toasty, $rootScope, TagService, $stateParams, $state, $loginModal) {
 	
 	                    TagService.listAll().then(function(data) {
 	                        if (data.code === 200) {
@@ -355,7 +348,11 @@
 	                        if ($rootScope.user) {
 	                            $state.go('addArticle');
 	                        } else {
-	                            $state.go('signin');
+	                            $loginModal.init({
+	                                onLogined: function() {
+	                                    $state.go('addArticle');
+	                                }
+	                            });
 	                        }
 	                    };
 	                    $scope.delTag = function($event, tag) {
@@ -556,6 +553,9 @@
 		__webpack_require__(17)(siteServices);
 		__webpack_require__(18)(siteServices);
 		__webpack_require__(19)(siteServices);
+		__webpack_require__(20)(siteServices);
+		__webpack_require__(21)(siteServices);
+	
 	
 	};
 
@@ -764,6 +764,111 @@
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = function(myModule) {
+	    myModule.service('$loginModal', ['$modalService', '$q',
+	        function factory($modalService, $q) {
+	            this.init = function(options) {
+	                options = options || {};
+	                var onLoginedCallback = options.onLogined;
+	                $modalService.show({
+	                    templateUrl: '/site/services/login-modal/index.html',
+	                    width: 600,
+	                    height: 600,
+	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
+	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
+	                            $scope.close = function() {
+	                                $modalInstance.close();
+	                                if (onLoginedCallback) {
+	                                    onLoginedCallback();
+	                                }
+	                            };
+	                            $scope.login = function() {
+	                                $http({
+	                                    method: 'post',
+	                                    url: "/api/sign/login",
+	                                    data: {
+	                                        email: $scope.form.email || '',
+	                                        pwd: $scope.form.pwd || ''
+	                                    }
+	                                }).
+	                                success(function(data, status, headers, config) {
+	                                    if (data.code === 200) {
+	                                        var user = data.msg.user;
+	                                        $rootScope.user = user;
+	                                        toasty.success('登陆成功');
+	                                        $rootScope.$broadcast('userChange', {
+	                                            user: user
+	                                        });
+	                                        $scope.close();
+	                                    } else {
+	                                        toasty.error(data.msg);
+	                                    }
+	                                });
+	                            };
+	                        }
+	                    ]
+	                });
+	            };
+	        }
+	    ]);
+	};
+
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.service('$regModal', ['$modalService', '$q',
+	        function factory($modalService, $q) {
+	            this.init = function(options) {
+	                var delay = $q.defer();
+	                $modalService.show({
+	                    templateUrl: '/site/services/reg-modal/index.html',
+	                    width: 600,
+	                    height: 600,
+	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
+	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
+	                            $scope.close = function() {
+	                                $modalInstance.close();
+	                            };
+	                            $scope.create = function() {
+	                                $http({
+	                                    method: 'post',
+	                                    url: "/api/sign/reg",
+	                                    data: {
+	                                        email: $scope.form.email || '',
+	                                        pwd: $scope.form.pwd || ''
+	                                    }
+	                                }).
+	                                success(function(data, status, headers, config) {
+	                                    if (data.code === 200) {
+	                                        var user = data.msg.user;
+	                                        $rootScope.user = user;
+	                                        toasty.success('注册成功');
+	                                        $rootScope.$broadcast('userChange', {
+	                                            user: user
+	                                        });
+	                                        $scope.close();
+	                                    } else {
+	                                        toasty.error(data.msg);
+	                                    }
+	                                });
+	                            };
+	                        }
+	                    ]
+	                });
+	                return delay.promise;
+	            };
+	        }
+	    ]);
+	};
+
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function(app) {
 	
 	    app.controller('SiteController', ['$scope', '$rootScope', '$http', '$state', '$window',
@@ -798,24 +903,24 @@
 	
 	
 	
-	    __webpack_require__(21)(app);
-	    __webpack_require__(22)(app);
 	    __webpack_require__(23)(app);
 	    __webpack_require__(24)(app);
 	    __webpack_require__(25)(app);
 	    __webpack_require__(26)(app);
-	    __webpack_require__(29)(app);
-	    __webpack_require__(30)(app);
+	    __webpack_require__(27)(app);
+	    __webpack_require__(28)(app);
 	    __webpack_require__(31)(app);
 	    __webpack_require__(32)(app);
 	    __webpack_require__(33)(app);
+	    __webpack_require__(34)(app);
+	    __webpack_require__(35)(app);
 	
 	
 	};
 
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -872,7 +977,7 @@
 
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1111,7 +1216,7 @@
 
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1166,7 +1271,7 @@
 	};
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1211,7 +1316,7 @@
 	};
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1295,12 +1400,12 @@
 	};
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(27)(app);
-		__webpack_require__(28)(app);
+		__webpack_require__(29)(app);
+		__webpack_require__(30)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1330,7 +1435,7 @@
 	};
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1355,7 +1460,7 @@
 	};
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1408,7 +1513,7 @@
 	};
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1452,7 +1557,7 @@
 	};
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1497,7 +1602,7 @@
 
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1570,7 +1675,7 @@
 	};
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1642,7 +1747,7 @@
 	};
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {

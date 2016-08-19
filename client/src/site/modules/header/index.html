@@ -10,33 +10,19 @@
 			</div>
 			<ul class="nav navbar-nav pull-left">
 				<li>
-					<a ui-sref="sites">
-						前端站点
-					</a>
-				</li>
-				<li>
 					<a ui-sref="articles">
 						文档列表
 					</a>
 				</li>
-
-			</ul>
-
-			<ul ng-if="user && user.isAdmin" class="nav navbar-nav">
-				<li ng-repeat="menu in adminMenus" dropdown keyboard-nav>
-					<a dropdown-toggle>
-						{{menu.title}}
-						<span class="caret"></span>
+				<li>
+					<a ui-sref="sites">
+						前端站点
 					</a>
-					<ul ng-if="menu.subMenus.length>
-						0" class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
-						<li role="menuitem" ng-repeat="subMenu in menu.subMenus">
-							<a ui-sref="{{subMenu.sref}}">{{subMenu.title}}</a>
-						</li>
-					</ul>
 				</li>
 			</ul>
-			<ul ng-if="user && !user.isAdmin" class="nav navbar-nav">
+
+
+			<ul ng-if="user && user.isAdmin" class="nav navbar-nav">
 				<li ng-repeat="menu in userMenus" dropdown keyboard-nav>
 					<a dropdown-toggle>
 						{{menu.title}}
@@ -69,12 +55,12 @@
 				</li>
 			</ul>
 			<ul ng-if="!user" class="nav navbar-nav pull-right">
-				<li ui-sref="signin">
+				<li ng-click="signin()">
 					<a>
 						登陆
 					</a>
 				</li>
-				<li ui-sref="signup">
+				<li ng-click="reg()">
 					<a>
 						注册
 					</a>

@@ -7,7 +7,7 @@
 			<button type="submit" class="btn btn-danger" ng-click="del()" ng-if="article.isEdit">删除文档</button>
 		</div>
 		<div class="pull-right">
-			<button class="btn btn-default" ng-click="article.isEdit = false">取消编辑</button>
+			<button class="btn btn-default" ng-if="article._id" ng-click="article.isEdit = false">取消编辑</button>
 			<button type="submit" class="btn btn-success" ng-click="update()" ng-if="article.isEdit">保存</button>
 			<button type="submit" class="btn btn-success" ng-click="create()" ng-if="article.isAdd">新增</button>
 		</div>

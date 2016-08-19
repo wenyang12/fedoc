@@ -6,18 +6,12 @@ module.exports = function(myModule) {
                 replace: 'true',
                 templateUrl: '/site/modules/header/index.html',
                 link: function($scope) {
-                    $scope.adminMenus = [{
-                        title: '文档管理',
+                    $scope.userMenus = [{
+                        title: '管理',
                         subMenus: [{
-                            title: '查看列表',
-                            sref: 'articles'
-                        }, {
                             title: '新增分类',
                             sref: 'addTag'
-                        }]
-                    }, {
-                        title: '成员管理',
-                        subMenus: [{
+                        },{
                             title: '新增成员',
                             sref: 'addUser'
                         }, {
@@ -25,16 +19,9 @@ module.exports = function(myModule) {
                             sref: 'users'
                         }]
                     }];
-                    $scope.userMenus = [{
-                        title: '文档管理',
-                        subMenus: [{
-                            title: '新增文档',
-                            sref: 'addArticle'
-                        }]
-                    }];
                 },
                 scope: false,
-                controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', function($scope, $rootScope, $stateParams, $state, $http) {
+                controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', '$loginModal', '$regModal', function($scope, $rootScope, $stateParams, $state, $http, $loginModal, $regModal) {
 
                     //监听 - 缩略图被点击
                     $scope.$on('userChange', function(event, data) {
@@ -67,14 +54,20 @@ module.exports = function(myModule) {
                             keyword: $scope.searchBox.keyword
                         });
                     };
+                    $scope.signin = function() {
+                        $loginModal.init();
+                    };
+                    $scope.reg = function() {
+                        $regModal.init();
+                    };
                     $scope.enableSearchBox = function() {
                         $scope.searchBox.active = true;
-												$('.j-ipt-search').focus();
+                        $('.j-ipt-search').focus();
                     };
-										$scope.disableSearchBox = function() {
-												$scope.searchBox.active = false;
-												$scope.searchBox.keyword = '';
-										};
+                    $scope.disableSearchBox = function() {
+                        $scope.searchBox.active = false;
+                        $scope.searchBox.keyword = '';
+                    };
                     $scope.signout = function($event) {
                         window.location.replace('\/api\/sign\/out');
                         $event.preventDefault();
