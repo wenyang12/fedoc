@@ -774,13 +774,23 @@
 	                    templateUrl: '/site/services/login-modal/index.html',
 	                    width: 600,
 	                    height: 600,
-	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
-	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
+	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance', '$regModal',
+	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance, $regModal) {
 	                            $scope.close = function() {
 	                                $modalInstance.close();
+	
+	                            };
+	                            $scope.logined = function() {
+	                                $scope.close();
 	                                if (onLoginedCallback) {
 	                                    onLoginedCallback();
 	                                }
+	                            };
+	                            $scope.goReg = function() {
+	                                $modalInstance.close();
+	                                $regModal.init({
+	                                    onReged: onLoginedCallback ? onLoginedCallback : null
+	                                });
 	                            };
 	                            $scope.login = function() {
 	                                $http({
@@ -799,7 +809,7 @@
 	                                        $rootScope.$broadcast('userChange', {
 	                                            user: user
 	                                        });
-	                                        $scope.close();
+	                                        $scope.logined();
 	                                    } else {
 	                                        toasty.error(data.msg);
 	                                    }
@@ -822,7 +832,8 @@
 	    myModule.service('$regModal', ['$modalService', '$q',
 	        function factory($modalService, $q) {
 	            this.init = function(options) {
-	                var delay = $q.defer();
+	                options = options || {};
+	                var onRegedCallback = options.onReged;
 	                $modalService.show({
 	                    templateUrl: '/site/services/reg-modal/index.html',
 	                    width: 600,
@@ -830,7 +841,14 @@
 	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
 	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
 	                            $scope.close = function() {
+	
 	                                $modalInstance.close();
+	                            };
+	                            $scope.reged = function() {
+	                                $scope.close();
+	                                if (onRegedCallback) {
+	                                    onRegedCallback();
+	                                }
 	                            };
 	                            $scope.create = function() {
 	                                $http({
@@ -849,7 +867,7 @@
 	                                        $rootScope.$broadcast('userChange', {
 	                                            user: user
 	                                        });
-	                                        $scope.close();
+	                                        $scope.reged();
 	                                    } else {
 	                                        toasty.error(data.msg);
 	                                    }
@@ -1005,7 +1023,7 @@
 	                $scope.article.content = articleEditor.value();
 	                ArticleService.create($scope.article).then(function(data) {
 	                    if (data.code === 200) {
-	                        toasty.success('创建文档成功');
+	                        toasty.success('感谢你贡献新的文档:)');
 	                        $state.go('articles');
 	                    } else {
 	                        toasty.error(data.msg);

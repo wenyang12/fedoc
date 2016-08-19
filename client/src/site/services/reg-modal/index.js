@@ -2,7 +2,8 @@ module.exports = function(myModule) {
     myModule.service('$regModal', ['$modalService', '$q',
         function factory($modalService, $q) {
             this.init = function(options) {
-                var delay = $q.defer();
+                options = options || {};
+                var onRegedCallback = options.onReged;
                 $modalService.show({
                     templateUrl: '/site/services/reg-modal/index.html',
                     width: 600,
@@ -10,7 +11,14 @@ module.exports = function(myModule) {
                     controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
                         function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
                             $scope.close = function() {
+
                                 $modalInstance.close();
+                            };
+                            $scope.reged = function() {
+                                $scope.close();
+                                if (onRegedCallback) {
+                                    onRegedCallback();
+                                }
                             };
                             $scope.create = function() {
                                 $http({
@@ -29,7 +37,7 @@ module.exports = function(myModule) {
                                         $rootScope.$broadcast('userChange', {
                                             user: user
                                         });
-                                        $scope.close();
+                                        $scope.reged();
                                     } else {
                                         toasty.error(data.msg);
                                     }

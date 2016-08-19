@@ -8,13 +8,23 @@ module.exports = function(myModule) {
                     templateUrl: '/site/services/login-modal/index.html',
                     width: 600,
                     height: 600,
-                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
-                        function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
+                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance', '$regModal',
+                        function($scope, $rootScope, $http, $state, toasty, $modalInstance, $regModal) {
                             $scope.close = function() {
                                 $modalInstance.close();
+
+                            };
+                            $scope.logined = function() {
+                                $scope.close();
                                 if (onLoginedCallback) {
                                     onLoginedCallback();
                                 }
+                            };
+                            $scope.goReg = function() {
+                                $modalInstance.close();
+                                $regModal.init({
+                                    onReged: onLoginedCallback ? onLoginedCallback : null
+                                });
                             };
                             $scope.login = function() {
                                 $http({
@@ -33,7 +43,7 @@ module.exports = function(myModule) {
                                         $rootScope.$broadcast('userChange', {
                                             user: user
                                         });
-                                        $scope.close();
+                                        $scope.logined();
                                     } else {
                                         toasty.error(data.msg);
                                     }

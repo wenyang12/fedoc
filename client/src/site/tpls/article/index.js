@@ -23,7 +23,7 @@ module.exports = function(app) {
                 $scope.article.content = articleEditor.value();
                 ArticleService.create($scope.article).then(function(data) {
                     if (data.code === 200) {
-                        toasty.success('创建文档成功');
+                        toasty.success('感谢你贡献新的文档:)');
                         $state.go('articles');
                     } else {
                         toasty.error(data.msg);
