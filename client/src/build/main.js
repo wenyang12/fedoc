@@ -85,7 +85,7 @@
 		}
 	});
 	window.duoshuoQuery = {short_name:"fedoc"};
-	__webpack_require__(14)(app);
+	__webpack_require__(22)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -547,14 +547,14 @@
 
 	module.exports = function(angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(28)(siteServices);
-		__webpack_require__(29)(siteServices);
-		__webpack_require__(30)(siteServices);
-		__webpack_require__(31)(siteServices);
-		__webpack_require__(32)(siteServices);
-		__webpack_require__(33)(siteServices);
-		__webpack_require__(34)(siteServices);
-		__webpack_require__(35)(siteServices);
+		__webpack_require__(14)(siteServices);
+		__webpack_require__(15)(siteServices);
+		__webpack_require__(16)(siteServices);
+		__webpack_require__(17)(siteServices);
+		__webpack_require__(18)(siteServices);
+		__webpack_require__(19)(siteServices);
+		__webpack_require__(20)(siteServices);
+		__webpack_require__(21)(siteServices);
 	
 	
 	};
@@ -562,6 +562,329 @@
 
 /***/ },
 /* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.factory('ArticleService', ['Restangular', '$timeout',
+	        function(Restangular, $timeout) {
+	            var baseRoute = Restangular.all('articles');
+	            return {
+	                list: function(query) {
+	                    return baseRoute.customGET('', query);
+	                },
+	                listHot: function(query) {
+	                    return baseRoute.customGET('hot', query);
+	                },
+	                getOne: function(articleId) {
+	                    return baseRoute.one(articleId)
+	                        .customGET();
+	                },
+	                remove: function(articleId) {
+	                    return baseRoute.one(articleId)
+	                        .remove();
+	                },
+	                create: function(article) {
+	                    return baseRoute.customPOST(article);
+	                },
+	                update: function(articleId, article) {
+	                    return baseRoute.one(articleId).customPUT(article);
+	                },
+	                toTop: function(articleId, flag) {
+	                    return baseRoute.one(articleId, 'top').customPUT({
+	                        flag: flag
+	                    });
+	                }
+	            };
+	        }
+	    ]);
+	};
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.factory('UserService', ['Restangular', '$timeout',
+			function(Restangular, $timeout) {
+				var baseRoute = Restangular.all('users');
+				return {
+					list: function(query) {
+						return baseRoute.customGET('', query);
+					},
+					listAll: function(query) {
+						return baseRoute.customGET('all', query);
+					},
+					getOne: function(userId) {
+						return baseRoute.one(userId)
+							.customGET();
+					},
+					remove: function(userId) {
+						return baseRoute.one(userId)
+							.remove();
+					},
+					create: function(user) {
+						return baseRoute.customPOST(user);
+					},
+					updateInfo: function(userId, user) {
+						return baseRoute.one(userId, 'info').customPUT(user);
+					},
+					updatePwd: function(userId, user) {
+						return baseRoute.one(userId, 'pwd').customPUT(user);
+					}
+				};
+			}
+		]);
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.factory('TagService', ['Restangular', '$timeout',
+			function(Restangular, $timeout) {
+				var baseRoute = Restangular.all('tags');
+				return {
+					listAll: function(query) {
+						return baseRoute.customGET('', query);
+					},
+					getOne: function(tagId) {
+						return baseRoute.one(tagId)
+							.customGET();
+					},
+					remove: function(tagId) {
+						return baseRoute.one(tagId)
+							.remove();
+					},
+					create: function(tag) {
+						return baseRoute.customPOST(tag);
+					},
+					update: function(tagId, tag) {
+						return baseRoute.one(tagId).customPUT(tag);
+					}
+				};
+			}
+		]);
+	};
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.factory('DeployService', ['Restangular', '$timeout',
+			function(Restangular, $timeout) {
+				var baseRoute = Restangular.all('deploys');
+				return {
+					list: function(query) {
+						return baseRoute.customGET('', query);
+					},
+					getOne: function(deployId) {
+						return baseRoute.one(deployId)
+							.customGET();
+					},
+					getConfig: function() {
+						return baseRoute.customGET('config');
+					},
+					run: function(deployId) {
+						return baseRoute.one(deployId,'run').customPUT();
+					},
+					remove: function(deployId) {
+						return baseRoute.one(deployId)
+							.remove();
+					},
+					create: function(article) {
+						return baseRoute.customPOST(article);
+					},
+					update: function(deployId, article) {
+						return baseRoute.one(deployId).customPUT(article);
+					}
+				};
+			}
+		]);
+	};
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.factory('$modalService', ['$modal', '$modalStack', function($modal, $modalStack) {
+			var defaultOptions = {
+				backdrop: true,
+				keyboard: true,
+				windowClass: ''
+			};
+			return {
+				show: function(options) {
+					var realOpt = _.cloneDeep(defaultOptions);
+					angular.extend(realOpt, options || {});
+					return $modal.open(realOpt).result;
+				},
+				dismissAll: function() {
+					$modalStack.dismissAll();
+				}
+			};
+		}]);
+	};
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	 module.exports = function(myModule) {
+	  myModule.service('deployRead', ['$modalService', '$q',
+	        function factory($modalService, $q) {
+	            this.init = function(options) {
+	               var deploy = options.deploy;
+	                var delay = $q.defer();
+	                $modalService.show({
+	                    templateUrl: '/site/services/deploy-read/index.html',
+	                    width: 600,
+	                    height: 345,
+	                    controller: ['$scope', '$modalInstance', 
+	                        function($scope, $modalInstance) {
+	                            $scope.deploy = deploy;
+	                            $scope.close = function() {
+	                                $modalInstance.close();
+	                            };
+	                          
+	                        }
+	                    ]
+	                });
+	                return delay.promise;
+	            };
+	        }
+	    ]);
+	};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.service('$loginModal', ['$modalService', '$q',
+	        function factory($modalService, $q) {
+	            this.init = function(options) {
+	                options = options || {};
+	                var onLoginedCallback = options.onLogined;
+	                $modalService.show({
+	                    templateUrl: '/site/services/login-modal/index.html',
+	                    width: 600,
+	                    height: 600,
+	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance', '$regModal',
+	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance, $regModal) {
+	                            $scope.close = function() {
+	                                $modalInstance.close();
+	
+	                            };
+	                            $scope.logined = function() {
+	                                $scope.close();
+	                                if (onLoginedCallback) {
+	                                    onLoginedCallback();
+	                                }
+	                            };
+	                            $scope.goReg = function() {
+	                                $modalInstance.close();
+	                                $regModal.init({
+	                                    onReged: onLoginedCallback ? onLoginedCallback : null
+	                                });
+	                            };
+	                            $scope.login = function() {
+	                                $http({
+	                                    method: 'post',
+	                                    url: "/api/sign/login",
+	                                    data: {
+	                                        email: $scope.form.email || '',
+	                                        pwd: $scope.form.pwd || ''
+	                                    }
+	                                }).
+	                                success(function(data, status, headers, config) {
+	                                    if (data.code === 200) {
+	                                        var user = data.msg.user;
+	                                        $rootScope.user = user;
+	                                        toasty.success('登陆成功');
+	                                        $rootScope.$broadcast('userChange', {
+	                                            user: user
+	                                        });
+	                                        $scope.logined();
+	                                    } else {
+	                                        toasty.error(data.msg);
+	                                    }
+	                                });
+	                            };
+	                        }
+	                    ]
+	                });
+	            };
+	        }
+	    ]);
+	};
+
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.service('$regModal', ['$modalService', '$q',
+	        function factory($modalService, $q) {
+	            this.init = function(options) {
+	                options = options || {};
+	                var onRegedCallback = options.onReged;
+	                $modalService.show({
+	                    templateUrl: '/site/services/reg-modal/index.html',
+	                    width: 600,
+	                    height: 600,
+	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
+	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
+	                            $scope.close = function() {
+	
+	                                $modalInstance.close();
+	                            };
+	                            $scope.reged = function() {
+	                                $scope.close();
+	                                if (onRegedCallback) {
+	                                    onRegedCallback();
+	                                }
+	                            };
+	                            $scope.create = function() {
+	                                $http({
+	                                    method: 'post',
+	                                    url: "/api/sign/reg",
+	                                    data: {
+	                                        email: $scope.form.email || '',
+	                                        pwd: $scope.form.pwd || ''
+	                                    }
+	                                }).
+	                                success(function(data, status, headers, config) {
+	                                    if (data.code === 200) {
+	                                        var user = data.msg.user;
+	                                        $rootScope.user = user;
+	                                        toasty.success('注册成功');
+	                                        $rootScope.$broadcast('userChange', {
+	                                            user: user
+	                                        });
+	                                        $scope.reged();
+	                                    } else {
+	                                        toasty.error(data.msg);
+	                                    }
+	                                });
+	                            };
+	                        }
+	                    ]
+	                });
+	                return delay.promise;
+	            };
+	        }
+	    ]);
+	};
+
+
+/***/ },
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -598,24 +921,24 @@
 	
 	
 	
-	    __webpack_require__(15)(app);
-	    __webpack_require__(16)(app);
-	    __webpack_require__(17)(app);
-	    __webpack_require__(18)(app);
-	    __webpack_require__(19)(app);
-	    __webpack_require__(20)(app);
 	    __webpack_require__(23)(app);
 	    __webpack_require__(24)(app);
 	    __webpack_require__(25)(app);
 	    __webpack_require__(26)(app);
 	    __webpack_require__(27)(app);
+	    __webpack_require__(28)(app);
+	    __webpack_require__(31)(app);
+	    __webpack_require__(32)(app);
+	    __webpack_require__(33)(app);
+	    __webpack_require__(34)(app);
+	    __webpack_require__(35)(app);
 	
 	
 	};
 
 
 /***/ },
-/* 15 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -636,7 +959,7 @@
 	                var query = _.extend($scope.query, _query);
 	                $scope._loading = true;
 	                ArticleService.list(query).then(function(data) {
-	                  $scope._loading = false;
+	                    $scope._loading = false;
 	                    $scope.articles = data.msg.articles;
 	                    $scope.pagination = data.msg.pagination;
 	                    $scope.count = data.msg.count;
@@ -647,11 +970,26 @@
 	                $scope.list();
 	            };
 	
-	            $scope.toTop = function(article, flag) {
+	            $scope.del = function(article) {
+	                if (confirm('确认删除文档吗')) {
+	                    ArticleService.remove(article._id).then(function(data) {
+	                        if (data.code === 200) {
+	                            toasty.success('删除文档成功');
+	                            for (var i = 0, len = $scope.tags.length; i < len; i++) {
+	                                if ($scope.articles[i]._id === article._id) {
+	                                    $scope.articles.splice(i, 1);
+	                                    return;
+	                                }
+	                            }
+	                        } 
+	                    });
+	                }
+	            };
 	
+	            $scope.toTop = function(article, flag) {
 	                ArticleService.toTop(article._id, flag).then(function(data) {
 	                    if (data.code === 200) {
-	                        toasty.success('操作成');
+	                        toasty.success('操作成功');
 	                        article.isTop = flag;
 	                    } else {
 	                        toasty.error(data.msg);
@@ -672,7 +1010,7 @@
 
 
 /***/ },
-/* 16 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -775,18 +1113,7 @@
 	                articleEditor.value($scope.article.content);
 	            };
 	
-	            $scope.del = function() {
-	                if (confirm('确认删除文档吗')) {
-	                    ArticleService.remove($scope.article._id).then(function(data) {
-	                        if (data.code === 200) {
-	                            toasty.success('删除文档成功');
-	                            $state.go('articles', {
-	                                tag: ''
-	                            });
-	                        }
-	                    });
-	                }
-	            };
+	          
 	            //上传附件
 	            $scope.uploadAttachment = function(files) {
 	                for (var i = 0, len = files.length; i < len; i++) {
@@ -911,7 +1238,7 @@
 
 
 /***/ },
-/* 17 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -966,7 +1293,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1011,7 +1338,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1095,12 +1422,12 @@
 	};
 
 /***/ },
-/* 20 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(21)(app);
-		__webpack_require__(22)(app);
+		__webpack_require__(29)(app);
+		__webpack_require__(30)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1130,7 +1457,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1155,7 +1482,7 @@
 	};
 
 /***/ },
-/* 22 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1208,7 +1535,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1252,7 +1579,7 @@
 	};
 
 /***/ },
-/* 24 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1297,7 +1624,7 @@
 
 
 /***/ },
-/* 25 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1370,7 +1697,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1442,7 +1769,7 @@
 	};
 
 /***/ },
-/* 27 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1498,329 +1825,6 @@
 	            controller: 'SitesController'
 	        });
 	    }]);
-	};
-
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-	    myModule.factory('ArticleService', ['Restangular', '$timeout',
-	        function(Restangular, $timeout) {
-	            var baseRoute = Restangular.all('articles');
-	            return {
-	                list: function(query) {
-	                    return baseRoute.customGET('', query);
-	                },
-	                listHot: function(query) {
-	                    return baseRoute.customGET('hot', query);
-	                },
-	                getOne: function(articleId) {
-	                    return baseRoute.one(articleId)
-	                        .customGET();
-	                },
-	                remove: function(articleId) {
-	                    return baseRoute.one(articleId)
-	                        .remove();
-	                },
-	                create: function(article) {
-	                    return baseRoute.customPOST(article);
-	                },
-	                update: function(articleId, article) {
-	                    return baseRoute.one(articleId).customPUT(article);
-	                },
-	                toTop: function(articleId, flag) {
-	                    return baseRoute.one(articleId, 'top').customPUT({
-	                        flag: flag
-	                    });
-	                }
-	            };
-	        }
-	    ]);
-	};
-
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.factory('UserService', ['Restangular', '$timeout',
-			function(Restangular, $timeout) {
-				var baseRoute = Restangular.all('users');
-				return {
-					list: function(query) {
-						return baseRoute.customGET('', query);
-					},
-					listAll: function(query) {
-						return baseRoute.customGET('all', query);
-					},
-					getOne: function(userId) {
-						return baseRoute.one(userId)
-							.customGET();
-					},
-					remove: function(userId) {
-						return baseRoute.one(userId)
-							.remove();
-					},
-					create: function(user) {
-						return baseRoute.customPOST(user);
-					},
-					updateInfo: function(userId, user) {
-						return baseRoute.one(userId, 'info').customPUT(user);
-					},
-					updatePwd: function(userId, user) {
-						return baseRoute.one(userId, 'pwd').customPUT(user);
-					}
-				};
-			}
-		]);
-	};
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.factory('TagService', ['Restangular', '$timeout',
-			function(Restangular, $timeout) {
-				var baseRoute = Restangular.all('tags');
-				return {
-					listAll: function(query) {
-						return baseRoute.customGET('', query);
-					},
-					getOne: function(tagId) {
-						return baseRoute.one(tagId)
-							.customGET();
-					},
-					remove: function(tagId) {
-						return baseRoute.one(tagId)
-							.remove();
-					},
-					create: function(tag) {
-						return baseRoute.customPOST(tag);
-					},
-					update: function(tagId, tag) {
-						return baseRoute.one(tagId).customPUT(tag);
-					}
-				};
-			}
-		]);
-	};
-
-
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.factory('DeployService', ['Restangular', '$timeout',
-			function(Restangular, $timeout) {
-				var baseRoute = Restangular.all('deploys');
-				return {
-					list: function(query) {
-						return baseRoute.customGET('', query);
-					},
-					getOne: function(deployId) {
-						return baseRoute.one(deployId)
-							.customGET();
-					},
-					getConfig: function() {
-						return baseRoute.customGET('config');
-					},
-					run: function(deployId) {
-						return baseRoute.one(deployId,'run').customPUT();
-					},
-					remove: function(deployId) {
-						return baseRoute.one(deployId)
-							.remove();
-					},
-					create: function(article) {
-						return baseRoute.customPOST(article);
-					},
-					update: function(deployId, article) {
-						return baseRoute.one(deployId).customPUT(article);
-					}
-				};
-			}
-		]);
-	};
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.factory('$modalService', ['$modal', '$modalStack', function($modal, $modalStack) {
-			var defaultOptions = {
-				backdrop: true,
-				keyboard: true,
-				windowClass: ''
-			};
-			return {
-				show: function(options) {
-					var realOpt = _.cloneDeep(defaultOptions);
-					angular.extend(realOpt, options || {});
-					return $modal.open(realOpt).result;
-				},
-				dismissAll: function() {
-					$modalStack.dismissAll();
-				}
-			};
-		}]);
-	};
-
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	 module.exports = function(myModule) {
-	  myModule.service('deployRead', ['$modalService', '$q',
-	        function factory($modalService, $q) {
-	            this.init = function(options) {
-	               var deploy = options.deploy;
-	                var delay = $q.defer();
-	                $modalService.show({
-	                    templateUrl: '/site/services/deploy-read/index.html',
-	                    width: 600,
-	                    height: 345,
-	                    controller: ['$scope', '$modalInstance', 
-	                        function($scope, $modalInstance) {
-	                            $scope.deploy = deploy;
-	                            $scope.close = function() {
-	                                $modalInstance.close();
-	                            };
-	                          
-	                        }
-	                    ]
-	                });
-	                return delay.promise;
-	            };
-	        }
-	    ]);
-	};
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-	    myModule.service('$loginModal', ['$modalService', '$q',
-	        function factory($modalService, $q) {
-	            this.init = function(options) {
-	                options = options || {};
-	                var onLoginedCallback = options.onLogined;
-	                $modalService.show({
-	                    templateUrl: '/site/services/login-modal/index.html',
-	                    width: 600,
-	                    height: 600,
-	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance', '$regModal',
-	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance, $regModal) {
-	                            $scope.close = function() {
-	                                $modalInstance.close();
-	
-	                            };
-	                            $scope.logined = function() {
-	                                $scope.close();
-	                                if (onLoginedCallback) {
-	                                    onLoginedCallback();
-	                                }
-	                            };
-	                            $scope.goReg = function() {
-	                                $modalInstance.close();
-	                                $regModal.init({
-	                                    onReged: onLoginedCallback ? onLoginedCallback : null
-	                                });
-	                            };
-	                            $scope.login = function() {
-	                                $http({
-	                                    method: 'post',
-	                                    url: "/api/sign/login",
-	                                    data: {
-	                                        email: $scope.form.email || '',
-	                                        pwd: $scope.form.pwd || ''
-	                                    }
-	                                }).
-	                                success(function(data, status, headers, config) {
-	                                    if (data.code === 200) {
-	                                        var user = data.msg.user;
-	                                        $rootScope.user = user;
-	                                        toasty.success('登陆成功');
-	                                        $rootScope.$broadcast('userChange', {
-	                                            user: user
-	                                        });
-	                                        $scope.logined();
-	                                    } else {
-	                                        toasty.error(data.msg);
-	                                    }
-	                                });
-	                            };
-	                        }
-	                    ]
-	                });
-	            };
-	        }
-	    ]);
-	};
-
-
-/***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-	    myModule.service('$regModal', ['$modalService', '$q',
-	        function factory($modalService, $q) {
-	            this.init = function(options) {
-	                options = options || {};
-	                var onRegedCallback = options.onReged;
-	                $modalService.show({
-	                    templateUrl: '/site/services/reg-modal/index.html',
-	                    width: 600,
-	                    height: 600,
-	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
-	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
-	                            $scope.close = function() {
-	
-	                                $modalInstance.close();
-	                            };
-	                            $scope.reged = function() {
-	                                $scope.close();
-	                                if (onRegedCallback) {
-	                                    onRegedCallback();
-	                                }
-	                            };
-	                            $scope.create = function() {
-	                                $http({
-	                                    method: 'post',
-	                                    url: "/api/sign/reg",
-	                                    data: {
-	                                        email: $scope.form.email || '',
-	                                        pwd: $scope.form.pwd || ''
-	                                    }
-	                                }).
-	                                success(function(data, status, headers, config) {
-	                                    if (data.code === 200) {
-	                                        var user = data.msg.user;
-	                                        $rootScope.user = user;
-	                                        toasty.success('注册成功');
-	                                        $rootScope.$broadcast('userChange', {
-	                                            user: user
-	                                        });
-	                                        $scope.reged();
-	                                    } else {
-	                                        toasty.error(data.msg);
-	                                    }
-	                                });
-	                            };
-	                        }
-	                    ]
-	                });
-	                return delay.promise;
-	            };
-	        }
-	    ]);
 	};
 
 

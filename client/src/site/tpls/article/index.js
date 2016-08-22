@@ -98,18 +98,7 @@ module.exports = function(app) {
                 articleEditor.value($scope.article.content);
             };
 
-            $scope.del = function() {
-                if (confirm('确认删除文档吗')) {
-                    ArticleService.remove($scope.article._id).then(function(data) {
-                        if (data.code === 200) {
-                            toasty.success('删除文档成功');
-                            $state.go('articles', {
-                                tag: ''
-                            });
-                        }
-                    });
-                }
-            };
+          
             //上传附件
             $scope.uploadAttachment = function(files) {
                 for (var i = 0, len = files.length; i < len; i++) {

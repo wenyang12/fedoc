@@ -60,11 +60,17 @@ exports.create = function(req, res) {
 
 exports.delete = function(req, res) {
     var articleId = req.params.articleId;
-    var userId = req.user._id;
-    articleDao.delete({
+    var query = {
         _id: articleId,
         user: userId
-    }, function(err) {
+    };
+
+    if (req.user.isAdmin) {
+        query = {
+            _id: articleId
+        };
+    }
+    articleDao.delete(query, function(err) {
         if (!err) {
             return res.successMsg();
         } else {
