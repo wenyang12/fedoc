@@ -1113,7 +1113,7 @@
 	                articleEditor.value($scope.article.content);
 	            };
 	
-	          
+	
 	            //上传附件
 	            $scope.uploadAttachment = function(files) {
 	                for (var i = 0, len = files.length; i < len; i++) {
