@@ -25,7 +25,7 @@ module.exports = {
             'libs$': '/client/src/assets/libs',
             'vendor$': '/client/src/assets/vendor'
         },
-        extensions: ['', '.js', '.coffee', '.html', '.css', '.scss']
+        extensions: ['', '.js', '.html', '.css', '.scss']
     },
     externals: {
         'md': 'markdownit'
@@ -33,9 +33,6 @@ module.exports = {
     plugins: [],
     module: {
         loaders: [{
-            test: /\.coffee$/,
-            loader: 'coffee'
-        }, {
             test: /\.html$/,
             loader: 'html'
         }, {
@@ -59,6 +56,9 @@ module.exports = {
         }, {
             test: /\.svg$/,
             loader: "file"
+        }, {
+          test: /\.js$/,
+          loader: 'babel?presets[]=es2015' //可以使用es6
         }]
     }
 };
