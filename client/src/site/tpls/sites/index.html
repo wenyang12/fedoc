@@ -1,6 +1,5 @@
-<div class="fe-sites clearfix">
-    
-    <a ng-href="{{site.href}}" target="_blank" ng-repeat="site in sites">
+<div class="hot-sites clearfix">
+    <a class="hot-sites__item" ng-href="{{site.href}}" target="_blank" ng-repeat="site in sites">
         <i class="fa fa-star" ng-show="site.hot"></i>
         <h3>
         {{site.name}}

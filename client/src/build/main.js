@@ -85,7 +85,7 @@
 		}
 	});
 	window.duoshuoQuery = {short_name:"fedoc"};
-	__webpack_require__(21)(app);
+	__webpack_require__(19)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -529,9 +529,6 @@
 		__webpack_require__(16)(siteServices);
 		__webpack_require__(17)(siteServices);
 		__webpack_require__(18)(siteServices);
-		__webpack_require__(19)(siteServices);
-		__webpack_require__(20)(siteServices);
-	
 	
 	};
 
@@ -650,43 +647,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
-		myModule.factory('DeployService', ['Restangular', '$timeout',
-			function(Restangular, $timeout) {
-				var baseRoute = Restangular.all('deploys');
-				return {
-					list: function(query) {
-						return baseRoute.customGET('', query);
-					},
-					getOne: function(deployId) {
-						return baseRoute.one(deployId)
-							.customGET();
-					},
-					getConfig: function() {
-						return baseRoute.customGET('config');
-					},
-					run: function(deployId) {
-						return baseRoute.one(deployId,'run').customPUT();
-					},
-					remove: function(deployId) {
-						return baseRoute.one(deployId)
-							.remove();
-					},
-					create: function(article) {
-						return baseRoute.customPOST(article);
-					},
-					update: function(deployId, article) {
-						return baseRoute.one(deployId).customPUT(article);
-					}
-				};
-			}
-		]);
-	};
-
-/***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
 		myModule.factory('$modalService', ['$modal', '$modalStack', function($modal, $modalStack) {
 			var defaultOptions = {
 				backdrop: true,
@@ -707,37 +667,7 @@
 	};
 
 /***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	 module.exports = function(myModule) {
-	  myModule.service('deployRead', ['$modalService', '$q',
-	        function factory($modalService, $q) {
-	            this.init = function(options) {
-	               var deploy = options.deploy;
-	                var delay = $q.defer();
-	                $modalService.show({
-	                    templateUrl: '/site/services/deploy-read/index.html',
-	                    width: 600,
-	                    height: 345,
-	                    controller: ['$scope', '$modalInstance', 
-	                        function($scope, $modalInstance) {
-	                            $scope.deploy = deploy;
-	                            $scope.close = function() {
-	                                $modalInstance.close();
-	                            };
-	                          
-	                        }
-	                    ]
-	                });
-	                return delay.promise;
-	            };
-	        }
-	    ]);
-	};
-
-/***/ },
-/* 19 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -801,7 +731,7 @@
 
 
 /***/ },
-/* 20 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -860,7 +790,7 @@
 
 
 /***/ },
-/* 21 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -897,22 +827,19 @@
 	
 	
 	
+	    __webpack_require__(20)(app);
+	    __webpack_require__(21)(app);
 	    __webpack_require__(22)(app);
 	    __webpack_require__(23)(app);
 	    __webpack_require__(24)(app);
 	    __webpack_require__(25)(app);
-	    __webpack_require__(26)(app);
-	    __webpack_require__(27)(app);
-	    __webpack_require__(30)(app);
-	    __webpack_require__(31)(app);
-	    __webpack_require__(32)(app);
-	
+	    __webpack_require__(28)(app);
 	
 	};
 
 
 /***/ },
-/* 22 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -984,7 +911,7 @@
 
 
 /***/ },
-/* 23 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1209,7 +1136,7 @@
 
 
 /***/ },
-/* 24 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1264,7 +1191,7 @@
 	};
 
 /***/ },
-/* 25 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1309,7 +1236,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1393,12 +1320,12 @@
 	};
 
 /***/ },
-/* 27 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(28)(app);
-		__webpack_require__(29)(app);
+		__webpack_require__(26)(app);
+		__webpack_require__(27)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1428,7 +1355,7 @@
 	};
 
 /***/ },
-/* 28 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1453,7 +1380,7 @@
 	};
 
 /***/ },
-/* 29 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1506,96 +1433,7 @@
 	};
 
 /***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(app) {
-		app.controller('SigninController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
-			function($scope, $rootScope, $http, $state, toasty) {
-				$scope.login = function() {
-					$http({
-						method: 'post',
-						url: "/api/sign/login",
-						data: {
-							email: $scope.form.email || '',
-							pwd: $scope.form.pwd || ''
-						}
-					}).
-					success(function(data, status, headers, config) {
-						if (data.code === 200) {
-							var user = data.msg.user;
-							$rootScope.user = user;
-							toasty.success('登陆成功');
-							$rootScope.$broadcast('userChange', {
-								user: user
-							});
-							$state.go('articles');
-						} else {
-							toasty.error(data.msg);
-						}
-					});
-				};
-			}
-		]);
-	
-		app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-			$stateProvider
-				.state('signin', {
-					url: '/signin',
-					templateUrl: '/site/tpls/signin/index.html',
-					controller: 'SigninController',
-					pageTitle: '登录'
-				});
-		}]);
-	};
-
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(app) {
-		app.controller('SignupController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
-			function($scope, $rootScope, $http, $state, toasty) {
-				$scope.create = function() {
-					$http({
-						method: 'post',
-						url: "/api/sign/reg",
-						data: {
-							email: $scope.form.email || '',
-							pwd: $scope.form.pwd || ''
-						}
-					}).
-					success(function(data, status, headers, config) {
-						if (data.code === 200) {
-							var user = data.msg.user;
-							$rootScope.user = user;
-							toasty.success('注册成功');
-							$rootScope.$broadcast('userChange', {
-								user: user
-							});
-							$state.go('articles');
-						} else {
-							toasty.error(data.msg);
-						}
-					});
-				};
-			}
-		]);
-	
-		app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-			$stateProvider
-				.state('signup', {
-					url: '/signup',
-					templateUrl: '/site/tpls/signup/index.html',
-					controller: 'SignupController',
-					pageTitle: '登录'
-				});
-		}]);
-	};
-
-
-/***/ },
-/* 32 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
