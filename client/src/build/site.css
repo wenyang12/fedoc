@@ -309,22 +309,22 @@ h1, h2, h3, h4, h5, h6 {
       color: #666;
       outline: none;
       font-size: 12px; }
-    .site-header .search-box .btn-search {
+    .site-header .search-box .search-box__submit {
       cursor: pointer;
       color: #666; }
-      .site-header .search-box .btn-search:hover {
+      .site-header .search-box .search-box__submit:hover {
         color: #fc923f; }
-      .site-header .search-box .btn-search .fa-search {
+      .site-header .search-box .search-box__submit .fa-search {
         font-size: 16px;
         margin-right: 4px; }
-    .site-header .search-box.active {
-      border-bottom: 1px solid white; }
-      .site-header .search-box.active input {
-        width: 150px; }
-      .site-header .search-box.active .btn-search {
-        color: #fc923f; }
-      .site-header .search-box.active .tip {
-        display: none; }
+  .site-header .search-box--active {
+    border-bottom: 1px solid white; }
+    .site-header .search-box--active input {
+      width: 150px; }
+    .site-header .search-box--active .search-box__submit {
+      color: #fc923f; }
+    .site-header .search-box--active .search-box__tip {
+      display: none; }
   .site-header .avatar {
     width: 20px;
     height: 20px;
@@ -377,7 +377,7 @@ h1, h2, h3, h4, h5, h6 {
 .tag-tabs .tag-tabs__item--active a {
   color: #fc923f; }
 
-.btn-to-top {
+.btn-gotop {
   display: none;
   top: 400px;
   width: 44px;
@@ -391,19 +391,9 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   z-index: 12;
   background: #FFF url(../assets/images/top.png) no-repeat center center; }
-  .btn-to-top.active {
-    display: block; }
 
-.deploy-record {
-  background: black;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
-  color: white;
-  font-size: 14px;
-  padding: 10px 20px; }
-  .deploy-record > div {
-    padding: 2px 4px; }
+.btn-gotop--active {
+  display: block; }
 
 .hot-articles-box {
   padding: 15px;
@@ -599,10 +589,6 @@ h1, h2, h3, h4, h5, h6 {
 .users-box .avatar {
   width: 20px;
   height: 20px; }
-
-.deploy-box .deploy-record {
-  margin-top: 40px;
-  width: 400px; }
 
 .form-info .avatar {
   width: 50px;

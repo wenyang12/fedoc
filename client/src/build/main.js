@@ -46,8 +46,8 @@
 
 	//加载管理模块
 	__webpack_require__(1)(angular);
-	__webpack_require__(11)(angular);
-	__webpack_require__(13)(angular);
+	__webpack_require__(10)(angular);
+	__webpack_require__(12)(angular);
 	var app = angular.module('app', [
 		'ui.router',
 		'restangular',
@@ -85,7 +85,7 @@
 		}
 	});
 	window.duoshuoQuery = {short_name:"fedoc"};
-	__webpack_require__(22)(app);
+	__webpack_require__(21)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -102,7 +102,6 @@
 		__webpack_require__(7)(siteModules);
 		__webpack_require__(8)(siteModules);
 		__webpack_require__(9)(siteModules);
-		__webpack_require__(10)(siteModules);
 	
 	};
 
@@ -175,7 +174,7 @@
 	                    };
 	                    $scope.enableSearchBox = function() {
 	                        $scope.searchBox.active = true;
-	                        $('.j-ipt-search').focus();
+	                        $('.j-search-box__input').focus();
 	                    };
 	                    $scope.disableSearchBox = function() {
 	                        $scope.searchBox.active = false;
@@ -395,15 +394,15 @@
 				var directive = {
 					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
 					replace: 'true',
-					template: ' <div class="btn-to-top"></div>',
+					template: ' <div class="btn-gotop"></div>',
 					scope: false,
 					link: function($scope, $element, $attrs) {
 						angular.element($window).bind("scroll", function(e) {
 							var scrollTop = window.document.body.scrollTop;
 							if (scrollTop > 40) {
-								$element.addClass('active');
+								$element.addClass('btn-gotop--active');
 							} else {
-								$element.removeClass('active');
+								$element.removeClass('btn-gotop--active');
 							}
 						});
 						$element.on('click',function(){
@@ -416,32 +415,9 @@
 		]);
 	};
 
+
 /***/ },
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.directive('deployRecord', [
-			function factory() {
-				var directive = {
-					restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-					replace: 'true',
-					templateUrl: '/site/modules/deploy-record/index.html',
-					require: "ngModel",
-	                scope: {
-	                    ngModel: '='
-	                },
-					link: function($scope) {
-						console.log($scope.ngModel)
-					}
-				};
-				return directive;
-			}
-		]);
-	};
-
-/***/ },
-/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -472,17 +448,17 @@
 
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(angular) {
 		var siteFilters = angular.module('siteFilters', []);
-		__webpack_require__(12)(siteFilters);
+		__webpack_require__(11)(siteFilters);
 	};
 
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -542,11 +518,12 @@
 	};
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
+		__webpack_require__(13)(siteServices);
 		__webpack_require__(14)(siteServices);
 		__webpack_require__(15)(siteServices);
 		__webpack_require__(16)(siteServices);
@@ -554,14 +531,13 @@
 		__webpack_require__(18)(siteServices);
 		__webpack_require__(19)(siteServices);
 		__webpack_require__(20)(siteServices);
-		__webpack_require__(21)(siteServices);
 	
 	
 	};
 
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -601,7 +577,7 @@
 
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -638,7 +614,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -670,7 +646,7 @@
 
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -707,7 +683,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -731,7 +707,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	 module.exports = function(myModule) {
@@ -761,7 +737,7 @@
 	};
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -825,7 +801,7 @@
 
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -884,7 +860,7 @@
 
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -921,24 +897,22 @@
 	
 	
 	
+	    __webpack_require__(22)(app);
 	    __webpack_require__(23)(app);
 	    __webpack_require__(24)(app);
 	    __webpack_require__(25)(app);
 	    __webpack_require__(26)(app);
 	    __webpack_require__(27)(app);
-	    __webpack_require__(28)(app);
+	    __webpack_require__(30)(app);
 	    __webpack_require__(31)(app);
 	    __webpack_require__(32)(app);
-	    __webpack_require__(33)(app);
-	    __webpack_require__(34)(app);
-	    __webpack_require__(35)(app);
 	
 	
 	};
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1010,235 +984,232 @@
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-	    app.controller('ArticleController', [
-	        '$scope',
-	        '$state',
-	        '$stateParams',
-	        'ArticleService',
-	        'UserService',
-	        'toasty',
-	        'isAdd',
-	        'constant',
-	        'TagService',
-	        '$upload',
-	        '$rootScope',
-	        function($scope, $state, $stateParams, ArticleService, UserService, toasty, isAdd, constant, TagService, $upload, $rootScope) {
-	            var articleId = $stateParams._id;
-	            var articleEditor;
-	            var editorUploadCallback;
-	            $scope.article = {
-	                tags: [],
-	                isPreview: false
-	            };
-	            $scope.create = function() {
-	                $scope.article.content = articleEditor.value();
-	                ArticleService.create($scope.article).then(function(data) {
-	                    if (data.code === 200) {
-	                        toasty.success('感谢你贡献新的文档:)');
-	                        $state.go('articles');
-	                    } else {
-	                        toasty.error(data.msg);
-	                    }
-	                });
-	            };
+	  app.controller('ArticleController', [
+	    '$scope',
+	    '$state',
+	    '$stateParams',
+	    'ArticleService',
+	    'UserService',
+	    'toasty',
+	    'isAdd',
+	    'constant',
+	    'TagService',
+	    '$upload',
+	    '$rootScope',
+	    function($scope, $state, $stateParams, ArticleService, UserService, toasty, isAdd, constant, TagService, $upload, $rootScope) {
+	      var articleId = $stateParams._id;
+	      var articleEditor;
+	      var editorUploadCallback;
+	      $scope.article = {
+	        tags: [],
+	        isPreview: false
+	      };
+	      $scope.create = function() {
+	        $scope.article.content = articleEditor.value();
+	        ArticleService.create($scope.article).then(function(data) {
+	          if (data.code === 200) {
+	            toasty.success('感谢你贡献新的文档:)');
+	            $state.go('articles');
+	          } else {
+	            toasty.error(data.msg);
+	          }
+	        });
+	      };
 	
-	            $scope.init = function() {
-	                TagService.listAll().then(function(data) {
-	                    if (data.code === 200) {
-	                        var tags = data.msg.tags;
-	                        var tagNames = [];
-	                        for (var i = 0, len = tags.length; i < len; i++) {
-	                            tagNames.push(tags[i].name.toString());
-	                        }
-	                        $scope.tagNames = tagNames;
-	                    }
-	                });
+	      $scope.init = function() {
+	        TagService.listAll().then(function(data) {
+	          if (data.code === 200) {
+	            var tags = data.msg.tags;
+	            var tagNames = [];
+	            for (var i = 0, len = tags.length; i < len; i++) {
+	              tagNames.push(tags[i].name.toString());
+	            }
+	            $scope.tagNames = tagNames;
+	          }
+	        });
 	
-	                if (isAdd) {
-	                    $scope.article.isAdd = true;
-	                } else {
-	                    ArticleService.getOne(articleId).then(function(data) {
-	                        if (data.code === 200) {
-	                            var article = data.msg;
-	                            $scope.article = article;
-	                            if ($rootScope.user && $rootScope.user.isAdmin) {
-	                                $scope.initAllUsers();
-	                            }
-	                            $scope.initReplys();
-	                        } else {
-	                            toasty.error(data.msg);
-	                        }
-	                    });
-	                }
-	            };
-	            $scope.initReplys = function() {
-	                var el = document.createElement('div'),
-	                    $ds = $('#duoshuo-box'),
-	                    article = $scope.article;
-	                el.setAttribute('data-thread-key', article._id);
-	                el.setAttribute('data-url', 'http://fe.firstshare.cn/#/articles/' + article._id);
-	                el.setAttribute('data-title', article.title);
-	                DUOSHUO.EmbedThread(el);
-	                $ds.append(el);
-	            };
+	        if (isAdd) {
+	          $scope.article.isAdd = true;
+	        } else {
+	          ArticleService.getOne(articleId).then(function(data) {
+	            if (data.code === 200) {
+	              var article = data.msg;
+	              $scope.article = article;
+	              if ($rootScope.user && $rootScope.user.isAdmin) {
+	                $scope.initAllUsers();
+	              }
+	              $scope.initReplys();
+	            } else {
+	              toasty.error(data.msg);
+	            }
+	          });
+	        }
+	      };
+	      $scope.initReplys = function() {
+	        var el = document.createElement('div'),
+	          $ds = $('#duoshuo-box'),
+	          article = $scope.article;
+	        el.setAttribute('data-thread-key', article._id);
+	        el.setAttribute('data-url', 'http://fe.firstshare.cn/#/articles/' + article._id);
+	        el.setAttribute('data-title', article.title);
+	        DUOSHUO.EmbedThread(el);
+	        $ds.append(el);
+	      };
 	
-	            $scope.initAllUsers = function() {
-	                UserService.listAll().then(function(data) {
-	                    if (data.code === 200) {
-	                        $scope.users = data.msg.users;
-	                    }
-	                });
-	            };
+	      $scope.initAllUsers = function() {
+	        UserService.listAll().then(function(data) {
+	          if (data.code === 200) {
+	            $scope.users = data.msg.users;
+	          }
+	        });
+	      };
 	
-	            $scope.initEditor = function() {
-	                articleEditor = new SimpleMDE({
-	                    element: document.getElementById('editor'),
-	                    toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", {
-	                        name: "image",
-	                        action: function(editor) {
-	                            $('.btn-simplemde-upload').click();
+	      $scope.initEditor = function() {
+	        articleEditor = new SimpleMDE({
+	          element: document.getElementById('editor'),
+	          toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", {
+	            name: "image",
+	            action: function(editor) {
+	              $('.btn-simplemde-upload').click();
 	
-	                            editorUploadCallback = function(data) {
-	                                editor.value(editor.value() + '![图片](' + data.src + ')');
-	                            };
-	                        },
-	                        className: "fa fa-image"
-	                    }, "|", "preview", "side-by-side", "fullscreen", "guide"]
-	                });
+	              editorUploadCallback = function(data) {
+	                editor.value(editor.value() + '![图片](' + data.src + ')');
+	              };
+	            },
+	            className: "fa fa-image"
+	          }, "|", "preview", "side-by-side", "fullscreen", "guide"]
+	        });
 	
-	                articleEditor.value($scope.article.content);
-	            };
+	        articleEditor.value($scope.article.content);
+	      };
 	
-	
-	            //上传附件
-	            $scope.uploadAttachment = function(files) {
-	                for (var i = 0, len = files.length; i < len; i++) {
-	                    _uploadAttachment(files[i]);
-	                }
-	            };
-	            $scope.uploadSimplemdeAttachment = function(files) {
-	                if (!files || files.length === 0) {
-	                    return;
-	                }
-	                var file = files[0];
-	                $rootScope.waitPromise = $upload.upload({
-	                        url: '/api/attachments/upload',
-	                        file: file
-	                    })
+	            // 上传附件
+	      $scope.uploadAttachment = function(files) {
+	        for (var i = 0, len = files.length; i < len; i++) {
+	          _uploadAttachment(files[i]);
+	        }
+	      };
+	      $scope.uploadSimplemdeAttachment = function(files) {
+	        if (!files || files.length === 0) {
+	          return;
+	        }
+	        var file = files[0];
+	        $rootScope.waitPromise = $upload.upload({
+	          url: '/api/attachments/upload',
+	          file: file
+	        })
 	                    .progress(function(evt) {
 	
 	                    })
 	                    .success(function(data, status, headers, config) {
-	                        if (data.code === 200) {
-	                            editorUploadCallback({
-	                                src: data.msg.fileUrl
-	                            });
-	                            editorUploadCallback = null;
-	                        } else {
+	                      if (data.code === 200) {
+	                        editorUploadCallback({
+	                          src: data.msg.fileUrl
+	                        });
+	                        editorUploadCallback = null;
+	                      } else {
 	
-	                        }
+	                      }
 	                    })
 	                    .error(function() {});
-	            };
+	      };
 	
-	            $scope.delAttachment = function(index) {
-	                $scope.article.attachments.splice(index, 1);
-	            };
+	      $scope.delAttachment = function(index) {
+	        $scope.article.attachments.splice(index, 1);
+	      };
 	
-	            function _uploadAttachment(file) {
-	                $scope.uploading = true;
-	                $rootScope.waitPromise = $upload.upload({
-	                        url: '/api/attachments/upload',
-	                        file: file
-	                    })
+	      function _uploadAttachment(file) {
+	        $scope.uploading = true;
+	        $rootScope.waitPromise = $upload.upload({
+	          url: '/api/attachments/upload',
+	          file: file
+	        })
 	                    .progress(function(evt) {
 	
 	                    })
 	                    .success(function(data, status, headers, config) {
-	                        if (data.code === 200) {
-	                            $scope.article.attachments = $scope.article.attachments || [];
-	                            $scope.article.attachments.push({
-	                                fileUrl: data.msg.fileUrl,
-	                                fileName: data.msg.fileName
-	                            });
-	                        } else {
+	                      if (data.code === 200) {
+	                        $scope.article.attachments = $scope.article.attachments || [];
+	                        $scope.article.attachments.push({
+	                          fileUrl: data.msg.fileUrl,
+	                          fileName: data.msg.fileName
+	                        });
+	                      } else {
 	
-	                        }
-	                        $scope.uploading = false;
+	                      }
+	                      $scope.uploading = false;
 	                    })
 	                    .error(function() {
-	                        $scope.uploading = false;
+	                      $scope.uploading = false;
 	                    });
-	            }
+	      }
 	
-	
-	            $scope.init();
-	            $scope.update = function() {
-	                ArticleService.update(articleId, {
-	                    title: $scope.article.title,
-	                    content: articleEditor.value(),
-	                    tags: $scope.article.tags,
-	                    user: $scope.article.user._id,
-	                    attachments: $scope.article.attachments
-	                }).then(function(data) {
-	                    if (data.code === 200) {
-	                        toasty.success('更新文档成功');
-	                        window.location.reload();
-	                    } else {
-	                        toasty.error(data.msg);
-	                    }
-	                });
-	            };
-	
-	            $scope.isCheckTag = function(tag) {
-	                return $scope.article.tags.indexOf(tag) > -1;
-	            };
-	
-	            //选择分类
-	            $scope.chooseTag = function($event, tag) {
-	                var curTarget = $event.currentTarget;
-	                var index = $scope.article.tags.indexOf(tag);
-	                //如果被选中
-	                if (curTarget.checked) {
-	                    if (index === -1) $scope.article.tags.push(tag);
-	                } else {
-	                    if (index !== -1) $scope.article.tags.splice(index, 1);
-	                }
-	            };
-	
-	        }
-	    ]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-	        $stateProvider.state('addArticle', {
-	            url: '/article/add',
-	            templateUrl: '/site/tpls/article/index.html',
-	            controller: 'ArticleController',
-	            pageTitle: '新增文章',
-	            resolve: {
-	                isAdd: [function() {
-	                    return true;
-	                }]
-	            }
-	        }).state('viewArticle', {
-	            url: '/articles/:_id',
-	            templateUrl: '/site/tpls/article/index.html',
-	            controller: 'ArticleController',
-	            pageTitle: '查看文章',
-	            resolve: {
-	                isAdd: [function() {
-	                    return false;
-	                }]
-	            }
+	      $scope.init();
+	      $scope.update = function() {
+	        ArticleService.update(articleId, {
+	          title: $scope.article.title,
+	          content: articleEditor.value(),
+	          tags: $scope.article.tags,
+	          user: $scope.article.user._id,
+	          attachments: $scope.article.attachments
+	        }).then(function(data) {
+	          if (data.code === 200) {
+	            toasty.success('更新文档成功');
+	            window.location.reload();
+	          } else {
+	            toasty.error(data.msg);
+	          }
 	        });
-	    }]);
+	      };
+	
+	      $scope.isCheckTag = function(tag) {
+	        return $scope.article.tags.indexOf(tag) > -1;
+	      };
+	
+	            // 选择分类
+	      $scope.chooseTag = function($event, tag) {
+	        var curTarget = $event.currentTarget;
+	        var index = $scope.article.tags.indexOf(tag);
+	                // 如果被选中
+	        if (curTarget.checked) {
+	          if (index === -1) $scope.article.tags.push(tag);
+	        } else {
+	          if (index !== -1) $scope.article.tags.splice(index, 1);
+	        }
+	      };
+	    }
+	  ]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+	    $stateProvider.state('addArticle', {
+	      url: '/article/add',
+	      templateUrl: '/site/tpls/article/index.html',
+	      controller: 'ArticleController',
+	      pageTitle: '新增文章',
+	      resolve: {
+	        isAdd: [function() {
+	          return true;
+	        }]
+	      }
+	    }).state('viewArticle', {
+	      url: '/articles/:_id',
+	      templateUrl: '/site/tpls/article/index.html',
+	      controller: 'ArticleController',
+	      pageTitle: '查看文章',
+	      resolve: {
+	        isAdd: [function() {
+	          return false;
+	        }]
+	      }
+	    });
+	  }]);
 	};
 
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1293,7 +1264,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1338,7 +1309,7 @@
 	};
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1422,12 +1393,12 @@
 	};
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
+		__webpack_require__(28)(app);
 		__webpack_require__(29)(app);
-		__webpack_require__(30)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1457,7 +1428,7 @@
 	};
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1482,7 +1453,7 @@
 	};
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1535,7 +1506,7 @@
 	};
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1579,7 +1550,7 @@
 	};
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1624,152 +1595,7 @@
 
 
 /***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(app) {
-		app.controller('DeployController', [
-			'$scope',
-			'$state',
-			'$stateParams',
-			'DeployService',
-			'toasty',
-			'isAdd',
-			'constant',
-			function($scope, $state, $stateParams, DeployService, toasty, isAdd, constant) {
-				var tagId = $stateParams._id;
-				var now = new Date();
-				now.setHours(22);
-				now.setMinutes(0);
-				$scope.deploy = {
-					reason:'修复了',
-					range:'内测',
-					name:'fs',
-					version:'4.7',
-					developer:'zhangc',
-					runTime:now 
-				};
-				$scope.init = function(){
-					DeployService.getConfig().then(function(data){
-						var config = data.msg;
-						var modules = [];
-						for (var key in config) {
-							modules.push(key);
-						}
-						$scope.modules = modules;
-	
-						$scope.$watch('deploy.name',function(newVal){
-							if(newVal){
-								$scope.versions = config[newVal];
-							}
-						});
-					});
-				};
-	
-				$scope.create = function() {
-					DeployService.create($scope.deploy).then(function(data) {
-						if (data.code === 200) {
-							toasty.success('创建分类成功');
-							$state.go('deploys');
-						} else {
-							toasty.error(data.msg);
-						}
-					});
-				};
-	
-			
-	
-	
-			}
-		]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-			$stateProvider.state('deployApply', {
-				url: '/deploy/add',
-				templateUrl: '/site/tpls/deploy/index.html',
-				controller: 'DeployController',
-				pageTitle: '申请部署代码',
-				resolve: {
-					isAdd: [function() {
-						return true;
-					}]
-				}
-			});
-		}]);
-	};
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(app) {
-		app.controller('DeployListController', [
-			'$scope',
-			'$state',
-			'$stateParams',
-			'DeployService',
-			'constant',
-			'toasty',
-			'deployRead',
-			function($scope, $state, $stateParams, DeployService, constant,toasty,deployRead) {
-				$scope.query = {
-					page: $stateParams.page,
-				};
-				$scope.list = function(_query) {
-					var query = _.extend($scope.query, _query);
-					DeployService.list(query).then(function(data) {
-						$scope.deploys = data.msg.deploys;
-						$scope.pagination = data.msg.pagination;
-						$scope.count = data.msg.count;
-					});
-				};
-	
-				$scope.del = function(deploy) {
-					if (confirm('确认删除发布吗')) {
-						DeployService.remove(deploy._id).then(function(data) {
-							if (data.code === 200) {
-								toasty.success('删除发布');
-								for (var i = 0, len = $scope.deploys.length; i < len; i++) {
-									if ($scope.deploys[i]._id === deploy._id) {
-										$scope.deploys.splice(i, 1);
-										return;
-									}
-								}
-							}
-						});
-					}
-				};
-	
-				$scope.run = function(d){
-					DeployService.run(d._id).then(function(data) {
-						if (data.code === 200) {
-							d.status = 20;
-							toasty.success('执行发布成功');
-						} else {
-							toasty.error(data.msg);
-						}
-					});
-				};
-				$scope.read = function(d){
-					deployRead.init({
-						deploy:d
-					});
-				};
-				$scope.init = function() {
-					$scope.list();
-				};
-			}
-		]);
-		app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-			$stateProvider.state('deploys', {
-				url: '/deploys?page',
-				templateUrl: '/site/tpls/deploys/index.html',
-				pageTitle: '文档列表',
-				controller: 'DeployListController'
-			});
-		}]);
-	};
-
-/***/ },
-/* 35 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
