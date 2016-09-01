@@ -1,12 +1,12 @@
 <!--编辑，新增,查看-->
-<form class="form-horizontal article-form common-box " ng-if="article.isEdit||article.isAdd">
+<form class="form-horizontal fedoc-article--edit common-box " ng-if="article.isEdit||article.isAdd">
 
-	<button class="btn-simplemde-upload" ng-accept="'image/*'" ng-file-select="uploadSimplemdeAttachment($files)">附件上传</button>
+	<button class="fedoc-article--edit__btn--uploadattachment" ng-accept="'image/*'" ng-file-select="uploadSimplemdeAttachment($files)">附件上传</button>
 	<div class="form-group">
 		<div class="pull-right">
 			<button class="btn btn-default" ng-if="article._id" ng-click="article.isEdit = false">取消编辑</button>
 			<button type="submit" class="btn btn-success" ng-click="update()" ng-if="article.isEdit">保存</button>
-			<button type="submit" class="btn btn-success" ng-click="create()" ng-if="article.isAdd">新增</button>
+			<button type="submit" class="btn btn-success" ng-click="create()" ng-if="article.isAdd">创建</button>
 		</div>
 	</div>
 	<div class="form-group">
@@ -16,11 +16,11 @@
 		<select class="form-control input-sm" ng-model="article.user._id" ng-options="u._id as u.nickname for u in users">
 		</select>
 	</div>
-	<div class="form-group form-group-tags">
+	<div class="form-group fedoc-article__tags__box ">
 		<label ng-repeat="tagName in tagNames">
 			<input type="checkbox" ng-checked="isCheckTag(tagName)" ng-click="chooseTag($event,tagName)">{{tagName}}</label>
 	</div>
-	<div class="form-group form-group-attachment">
+	<div class="form-group fedoc-article__attachment__box--upload">
 		<div class="attachment-upload-box">
 			<button ng-if="!uploading" class="btn btn-primary btn-attachment-upload" ng-file-select="uploadAttachment($files)" resetonclick="true">附件上传</button>
 		</div>
@@ -39,37 +39,36 @@
 			</li>
 		</ul>
 	</div>
-	<div class="form-group form-group-content">
+	<div class="form-group fedoc-article__content__box">
 		<textarea ng-show="!article.isPreview" class="form-control" type="content" autocomplete="off" name="content" ng-model="article.content" placeholder="内容" ng-init="initEditor()" id="editor"></textarea>
 	</div>
 </form>
 
-<div class="article-box common-box row " ng-if="!article.isAdd &&!article.isEdit">
-	<div class="article-header">
+<div class="fedoc-article--read common-box row " ng-if="!article.isAdd &&!article.isEdit">
+	<div class="fedoc-article--read__header">
 		<h2 ng-bind="article.title"></h2>
-		<div class="article-user">
-
-			<span class="article-user-avatar" style="background-image:url('{{article.user.avatar}}')"></span>
-			<a class="article-user-nickname" ng-bind="article.user.nickname"></a>
-			<span class="time">
+		<div class="fedoc-article--read__header__summary">
+			<span class="fedoc-article--read__header__summary__avatar" style="background-image:url('{{article.user.avatar}}')"></span>
+			<a class="fedoc-article--read__header__summary__nickname" ng-bind="article.user.nickname"></a>
+			<span class="fedoc-article--read__header__summary__times">
 			&nbsp;•&nbsp;
-			<span class="timeago">
+			<span class="fedoc-article--read__header__summary__times-ago">
 				{{article.createdTime|dateAgo}}
 			</span>
 			</span>
-			<div class="views">
-				<div class="num">{{article.views}}</div>
-				<div class="word">阅读量</div>
+			<div class="fedoc-article--read__header__summary__views">
+				<div class="fedoc-article--read__header__summary__views__num">{{article.views}}</div>
+				<div class="fedoc-article--read__header__summary__views__text">阅读量</div>
 			</div>
-			<a class="pull-right btn-to-edit" ng-if="article.isAuthor" ng-click="article.isEdit = true">编辑</a>
+			<a class="pull-right fedoc-article--read__btn--toedit" ng-if="article.isAuthor" ng-click="article.isEdit = true">编辑</a>
 		</div>
 	</div>
-	<div class="article-content markdown-body" fedoc-markdown="article.content"></div>
+	<div class="fedoc-article--read__content markdown-body" fedoc-markdown="article.content"></div>
 	<div>
-		<div class="row imgs-list">
+		<div class="row edoc-article--read__content__imgs">
 			<div class="col-xs-2" ng-repeat="a in filterAttachmentImgs(article.attachments)">
 				<a ng-href="{{a.fileUrl}}" target="_blank" class="thumbnail">
-					<img ng-src="{{a.fileUrl}}" >
+					<img ng-src="{{a.fileUrl}}">
 				</a>
 			</div>
 		</div>
@@ -93,8 +92,5 @@
 	<div id="duoshuo-box">
 
 	</div>
-	<!-- 多说评论框 start -->
-
-	<!-- 多说评论框 end -->
 
 </div>

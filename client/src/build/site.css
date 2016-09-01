@@ -319,7 +319,7 @@ h1, h2, h3, h4, h5, h6 {
         margin-right: 4px; }
   .fedoc-header .search-box--active {
     border-bottom: 1px solid white; }
-    .fedoc-header .search-box--active input {
+    .fedoc-header .search-box--active .search-box__input {
       width: 150px; }
     .fedoc-header .search-box--active .search-box__submit {
       color: #fc923f; }
@@ -514,41 +514,41 @@ h1, h2, h3, h4, h5, h6 {
       .fedoc__body__articles--left .list .list__item:hover .list__item__btn {
         display: block; }
 
-.btn-simplemde-upload {
+.fedoc-article--edit__btn--uploadattachment {
   display: none; }
 
-.btn-to-edit {
+.fedoc-article--read__btn--toedit {
   position: absolute;
   right: -70px;
   top: -25px;
   background: white;
   padding: 10px 15px 10px 10px; }
 
-.article-form {
+.fedoc-article--edit {
   padding: 0 15px; }
-  .article-form .form-group-content {
+  .fedoc-article--edit .fedoc-article__content__box {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
     border: 1px solid #ddd; }
-  .article-form .form-group-tags label {
+  .fedoc-article--edit .fedoc-article__tags__box label {
     margin-right: 5px; }
-    .article-form .form-group-tags label input {
+    .fedoc-article--edit .fedoc-article__tags__box label input {
       margin-right: 5px; }
-  .article-form .attachment-upload-box {
+  .fedoc-article--edit .fedoc-article__attachment__box--upload {
     margin-bottom: 10px; }
-  .article-form .progress-box {
+  .fedoc-article--edit .progress-box {
     width: 150px; }
 
-.article-box {
+.fedoc-article--read {
   padding: 10px;
   margin: 15px auto; }
-  .article-box .article-header {
+  .fedoc-article--read .fedoc-article--read__header {
     margin: 0 0 30px;
     position: relative; }
-    .article-box .article-header h1 {
+    .fedoc-article--read .fedoc-article--read__header h1 {
       border-bottom: 1px dotted #d4d4d4; }
-    .article-box .article-header .views {
+    .fedoc-article--read .fedoc-article--read__header .fedoc-article--read__header__summary__views {
       position: absolute;
       right: 30px;
       width: 100px;
@@ -561,32 +561,32 @@ h1, h2, h3, h4, h5, h6 {
       color: #999999;
       margin: 0 4px;
       font-size: 0.6rem; }
-      .article-box .article-header .views .num {
-        font-size: 1.3rem;
-        color: #333333; }
-      .article-box .article-header .views .word {
-        color: #999999;
-        font-size: 0.6rem; }
-    .article-box .article-header .article-user {
+    .fedoc-article--read .fedoc-article--read__header .fedoc-article--read__header__summary__views__num {
+      font-size: 1.3rem;
+      color: #333333; }
+    .fedoc-article--read .fedoc-article--read__header .fedoc-article--read__header__summary__views__text {
+      color: #999999;
+      font-size: 0.6rem; }
+    .fedoc-article--read .fedoc-article--read__header .fedoc-article--read__header__summary {
       margin: 15px 0 8px;
       color: #aaaaaa; }
-      .article-box .article-header .article-user .article-user-avatar {
-        vertical-align: middle;
-        display: inline-block;
-        width: 25px;
-        height: 25px;
-        background: no-repeat center center;
-        background-size: cover;
-        margin-right: 6px;
-        border-radius: 50%; }
-      .article-box .article-header .article-user .time {
-        color: #aaaaaa; }
-  .article-box .article-content {
+    .fedoc-article--read .fedoc-article--read__header .fedoc-article--read__header__summary__avatar {
+      vertical-align: middle;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      background: no-repeat center center;
+      background-size: cover;
+      margin-right: 6px;
+      border-radius: 50%; }
+    .fedoc-article--read .fedoc-article--read__header .fedoc-article--read__header__summary__time {
+      color: #aaaaaa; }
+  .fedoc-article--read .fedoc-article--read__content {
     min-height: 400px; }
-  .article-box .imgs-list .thumbnail {
+  .fedoc-article--read .fedoc-article--read__imgs .thumbnail {
     width: 140px;
     height: 140px; }
-    .article-box .imgs-list .thumbnail img {
+    .fedoc-article--read .fedoc-article--read__imgs .thumbnail img {
       width: 100%;
       height: 100%; }
 
