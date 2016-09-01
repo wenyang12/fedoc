@@ -11,8 +11,8 @@ var path = require('path'),
     webpack = require("webpack"),
     del = require('del'),
     $$ = require('gulp-load-plugins')(),
-    webpackDevServer = require("webpack-dev-server");
-
+    webpackDevServer = require("webpack-dev-server"),
+    gulpSequence = require('gulp-sequence')
 var webpackConfig = require("./webpack.config.js");
 
 var paths = {
@@ -129,4 +129,4 @@ gulp.task('watch', function() {
 gulp.task('default', ['watch', 'scss:site', 'restart']);
 gulp.task('compress', ['cssmin', 'uglify', 'htmlmin']);
 
-gulp.task('build-product', ['copy', 'compress']); //,
+gulp.task('build-product', gulpSequence(['copy', 'compress'])); //,
