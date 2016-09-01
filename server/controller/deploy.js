@@ -10,13 +10,13 @@ var mongoose = require('mongoose'),
 
 
 exports.init = function(req, res) {
-    var nowSt = new Date().getTime();
+    var startSt = new Date().getTime();
     res.write('[构建开始]' + dirPath.root);
     exec(dirPath.root + '/deploy.sh', {
         cwd: dirPath.root
     }, function(err) {
         if (!err) {
-            res.write('[构建成功] 耗时：' + (nowSt - new Date().getTime()));
+            res.write('[构建成功] 耗时：' + (new Date().getTime() - startSt));
             res.end();
         } else {
             console.log(err);
