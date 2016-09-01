@@ -281,25 +281,25 @@ h1, h2, h3, h4, h5, h6 {
 .typo img {
   max-width: 100%; }
 
-.site-header {
+.fedoc-header {
   background-color: white;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0; }
-  .site-header .site-header__nav {
+  .fedoc-header .fedoc-header__nav {
     position: relative; }
-  .site-header ul li a, .site-header .navbar-brand {
+  .fedoc-header ul li a, .fedoc-header .navbar-brand {
     color: #666; }
-    .site-header ul li a:hover, .site-header ul li a:focus, .site-header .navbar-brand:hover, .site-header .navbar-brand:focus {
+    .fedoc-header ul li a:hover, .fedoc-header ul li a:focus, .fedoc-header .navbar-brand:hover, .fedoc-header .navbar-brand:focus {
       background: none !important;
       color: #fc923f; }
-  .site-header .search-box {
+  .fedoc-header .search-box {
     height: 30px;
     line-height: 30px;
     float: right;
     margin-right: 30px;
     margin-top: 9px; }
-    .site-header .search-box .search-box__input {
+    .fedoc-header .search-box .search-box__input {
       -moz-transition: all 0.2s ease-in;
       -o-transition: all 0.2s ease-in;
       -webkit-transition: all 0.2s ease-in;
@@ -309,23 +309,23 @@ h1, h2, h3, h4, h5, h6 {
       color: #666;
       outline: none;
       font-size: 12px; }
-    .site-header .search-box .search-box__submit {
+    .fedoc-header .search-box .search-box__submit {
       cursor: pointer;
       color: #666; }
-      .site-header .search-box .search-box__submit:hover {
+      .fedoc-header .search-box .search-box__submit:hover {
         color: #fc923f; }
-      .site-header .search-box .search-box__submit .fa-search {
+      .fedoc-header .search-box .search-box__submit .fa-search {
         font-size: 16px;
         margin-right: 4px; }
-  .site-header .search-box--active {
+  .fedoc-header .search-box--active {
     border-bottom: 1px solid white; }
-    .site-header .search-box--active input {
+    .fedoc-header .search-box--active input {
       width: 150px; }
-    .site-header .search-box--active .search-box__submit {
+    .fedoc-header .search-box--active .search-box__submit {
       color: #fc923f; }
-    .site-header .search-box--active .search-box__tip {
+    .fedoc-header .search-box--active .search-box__tip {
       display: none; }
-  .site-header .avatar {
+  .fedoc-header .avatar {
     width: 20px;
     height: 20px;
     -moz-border-radius: 10px;
@@ -422,24 +422,30 @@ h1, h2, h3, h4, h5, h6 {
   .hot-articles .fa-fire {
     color: #CC3300; }
 
-.articles-box {
+.fedoc__body__articles--right {
+  min-height: 1010px;
   padding: 15px; }
-  .articles-box .article-list {
+
+.fedoc__body__articles--left {
+  border-right: 1px solid #E9E9E9;
+  padding: 15px;
+  min-height: 1010px; }
+  .fedoc__body__articles--left .list {
     margin-top: 15px;
     position: relative; }
-    .articles-box .article-list li {
+    .fedoc__body__articles--left .list .list__item {
       height: 90px;
       position: relative;
       border-bottom: #EEE solid 1px; }
-      .articles-box .article-list li a {
+      .fedoc__body__articles--left .list .list__item a {
         text-decoration: none; }
-      .articles-box .article-list li .title {
+      .fedoc__body__articles--left .list .list__item .list__item__title {
         color: #444; }
-        .articles-box .article-list li .title:hover {
+        .fedoc__body__articles--left .list .list__item .list__item__title:hover {
           cursor: pointer; }
-        .articles-box .article-list li .title .fa-file {
+        .fedoc__body__articles--left .list .list__item .list__item__title .fa-file {
           font-size: 12px; }
-      .articles-box .article-list li .article-user {
+      .fedoc__body__articles--left .list .list__item .list__item__user {
         width: 50px;
         height: 50px;
         position: absolute;
@@ -449,16 +455,16 @@ h1, h2, h3, h4, h5, h6 {
         border-radius: 50%;
         background: #EEE;
         display: block; }
-        .articles-box .article-list li .article-user img {
+        .fedoc__body__articles--left .list .list__item .list__item__user img {
           width: 100%;
           height: 100%; }
-      .articles-box .article-list li .article-summary {
+      .fedoc__body__articles--left .list .list__item .list__item__summary {
         position: absolute;
         top: 17px;
         left: 68px;
         max-width: 658px;
         overflow: hidden; }
-        .articles-box .article-list li .article-summary .title {
+        .fedoc__body__articles--left .list .list__item .list__item__summary .list__item__summary__title {
           font-size: 16px !important;
           line-height: 34px;
           font-weight: 400;
@@ -470,11 +476,11 @@ h1, h2, h3, h4, h5, h6 {
           text-overflow: ellipsis;
           overflow: hidden;
           word-break: keep-all; }
-          .articles-box .article-list li .article-summary .title .title strong {
+          .fedoc__body__articles--left .list .list__item .list__item__summary .list__item__summary__title a {
             color: #424242; }
-        .articles-box .article-list li .article-summary .desc {
+        .fedoc__body__articles--left .list .list__item .list__item__summary .list__item__summary__desc {
           font-size: 12px; }
-          .articles-box .article-list li .article-summary .desc .nickname {
+          .fedoc__body__articles--left .list .list__item .list__item__summary .list__item__summary__desc .list__item__summary__desc__nickname {
             margin-right: 6px;
             padding-right: 11px;
             background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAMCAYAAACji9dXAAAABGdBTUEAALGPC/xhBQAAABNJREFUCB1jePDgwX8mBiAgnQAA0tgDtpOZD7QAAAAASUVORK5CYII=");
@@ -482,30 +488,30 @@ h1, h2, h3, h4, h5, h6 {
             background-position: right;
             color: #8c8c8c;
             cursor: default; }
-          .articles-box .article-list li .article-summary .desc .time {
+          .fedoc__body__articles--left .list .list__item .list__item__summary .list__item__summary__desc .list__item__summary__desc__time {
             color: #b5b5b5; }
-      .articles-box .article-list li .article-info {
+      .fedoc__body__articles--left .list .list__item .list__item__data {
         position: absolute;
         top: 52px;
         right: 0;
         color: #b5b5b5;
         font-size: 12px; }
-      .articles-box .article-list li .btn-operate {
+      .fedoc__body__articles--left .list .list__item .list__item__btn {
         font-size: 12px;
         display: none;
         margin-left: 10px;
         position: absolute;
         right: 0;
         top: 8px; }
-        .articles-box .article-list li .btn-operate .btn-del {
-          margin-left: 10px; }
-      .articles-box .article-list li .put-top {
+      .fedoc__body__articles--left .list .list__item .list__item__btn--del {
+        margin-left: 10px; }
+      .fedoc__body__articles--left .list .list__item .list__item__btn--totop {
         background: #80bd01;
         padding: 2px 4px;
         border-radius: 3px;
         color: #fff;
         font-size: 12px; }
-      .articles-box .article-list li:hover .btn-operate {
+      .fedoc__body__articles--left .list .list__item:hover .list__item__btn {
         display: block; }
 
 .btn-simplemde-upload {
@@ -624,36 +630,28 @@ h1, h2, h3, h4, h5, h6 {
     right: 10px;
     font-size: 20px; }
 
-#site-box {
+.fedoc__body {
   background: white; }
+
+.fedoc__footer {
+  text-align: center;
+  margin: 40px auto 0;
+  padding: 10px 0 30px;
+  border-top: 1px solid #d4d4d4;
+  color: #999; }
+  .fedoc__footer .fedoc__footer__copyright {
+    margin: 0 10px; }
 
 .common-box {
   margin: 15px auto; }
   .common-box.sm {
     width: 450px; }
 
-#footer {
-  text-align: center;
-  margin: 40px auto 0;
-  padding: 10px 0 30px;
-  border-top: 1px solid #d4d4d4;
-  color: #999; }
-  #footer #copyright {
-    margin: 0 10px; }
-
 .cg-busy {
   position: fixed; }
 
 #ds-thread #ds-reset .ds-powered-by {
   display: none; }
-
-.main-right {
-  min-height: 1010px; }
-
-.main-left {
-  border-right: 1px solid #E9E9E9; }
-  .main-left .articles-box {
-    min-height: 1010px; }
 
 .pv150 {
   padding: 150px 0; }

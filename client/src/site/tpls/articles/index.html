@@ -1,46 +1,43 @@
-<div class="row">
-	<div class="col-md-9 main-left">
-		<div class="articles-box" ng-init="init()">
-			<article-tags></article-tags>
-			<div class="fx-loading pv150" ng-if="_loading"></div>
-			<ul class="article-list" ng-if="count">
-				<li ng-repeat="a in articles">
-					<a class="article-user">
-						<img class="author-avatar img-circle" ng-src="{{a.user.avatar}}" />
-					</a>
-					<div class="article-summary">
-						<h3 class="title">
-									<a class="title" ui-sref="viewArticle({_id:a._id})">{{a.title}}
+<div class="row" class="fedoc__body__articles">
+	<div class="col-md-9 fedoc__body__articles--left" ng-init="init()">
+		<article-tags></article-tags>
+		<div class="fx-loading pv150" ng-if="_loading"></div>
+		<ul class="list" ng-if="count">
+			<li class="list__item" ng-repeat="a in articles">
+				<a class="list__item__user">
+					<img class="author-avatar img-circle" ng-src="{{a.user.avatar}}" />
+				</a>
+				<div class="list__item__summary">
+					<h3 class="list__item__summary__title">
+									<a  ui-sref="viewArticle({_id:a._id})">{{a.title}}
 										<i class="fa fa-image" ng-if="filterAttachmentImgs(a.attachments).length"></i>
 										<i class="fa fa-file-o" ng-if="filterAttachment(a.attachments).length"></i>
-										<span ng-if="a.isTop === 1" class="put-top">置顶</span></a>
+										<span ng-if="a.isTop === 1" class="list__item__btn--totop">置顶</span></a>
 							</h3>
-						<div class="desc">
-							<a class="nickname">{{a.user.nickname}}</a>
+					<div class="list__item__summary__desc">
+						<a class="list__item__summary__desc__nickname">{{a.user.nickname}}</a>
 
-							<span class="time">
+						<span class="list__item__summary__time">
 										发表于 {{a.createdTime|dateDisplay}}
 								</span>
 
-						</div>
 					</div>
-					<span class="article-info"><i class="fa fa-eye"></i> {{a.views}}</span>
-					<div class="btn-operate">
+				</div>
+				<span class="list__item__data"><i class="fa fa-eye"></i> {{a.views}}</span>
+				<div class="list__item__btn">
+					<a ng-if="user.isAdmin && a.isTop" ng-click="toTop(a,0)">取消置顶</a>
+					<a ng-if="user.isAdmin && !a.isTop" ng-click="toTop(a,1)">置顶</a>
+					<a class="text-danger list__item__btn-del" ng-if="user.isAdmin||user._id===a.user._id" ng-click="del(a)">删除</a>
+				</div>
+			</li>
+		</ul>
+		<p class="text-muted text-center pv150" ng-if="count === 0"><small>还没有你要的文档，来写一个吧 :)</small></p>
 
-						<a ng-if="user.isAdmin && a.isTop" ng-click="toTop(a,0)">取消置顶</a>
-						<a ng-if="user.isAdmin && !a.isTop" ng-click="toTop(a,1)">置顶</a>
-						<a class="text-danger btn-del" ng-if="user.isAdmin||user._id===a.user._id"  ng-click="del(a)">删除</a>
-					</div>
-				</li>
-			</ul>
-			<p class="text-muted text-center pv150" ng-if="count === 0"><small>还没有你要的文档，来写一个吧 :)</small></p>
-
-			<div class="pull-right">
-				<fedoc-pagination ng-model="pagination"></fedoc-pagination>
-			</div>
+		<div class="pull-right">
+			<fedoc-pagination ng-model="pagination"></fedoc-pagination>
 		</div>
 	</div>
-	<div class="col-md-3 main-right">
+	<div class="col-md-3 fedoc__body__articles--right">
 		<hot-articles></hot-articles>
 	</div>
 </div>
