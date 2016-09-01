@@ -1,15 +1,15 @@
 .site-header {
 	background-color: white;
-	.site-header-nav {
+	.site-header__nav {
 		position: relative;
 	}
 
 	ul li a,.navbar-brand{
-				color:#666;
-				&:hover,&:focus{
-					 background: none!important;
-					 color: #fc923f;
-				}
+			color:#666;
+			&:hover,&:focus{
+				 background: none!important;
+				 color: #fc923f;
+			}
 	}
 	@include border-radius(0);
 	.search-box {
@@ -19,7 +19,7 @@
 		margin-right: 30px;
 		margin-top: 9px;
 
-		input {
+		.search-box__input {
 			@include transition(all .2s ease-in);
 			border-color: transparent;
 			width: 0;

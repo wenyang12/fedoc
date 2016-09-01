@@ -286,7 +286,7 @@ h1, h2, h3, h4, h5, h6 {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0; }
-  .site-header .site-header-nav {
+  .site-header .site-header__nav {
     position: relative; }
   .site-header ul li a, .site-header .navbar-brand {
     color: #666; }
@@ -299,7 +299,7 @@ h1, h2, h3, h4, h5, h6 {
     float: right;
     margin-right: 30px;
     margin-top: 9px; }
-    .site-header .search-box input {
+    .site-header .search-box .search-box__input {
       -moz-transition: all 0.2s ease-in;
       -o-transition: all 0.2s ease-in;
       -webkit-transition: all 0.2s ease-in;
@@ -395,33 +395,31 @@ h1, h2, h3, h4, h5, h6 {
 .btn-gotop--active {
   display: block; }
 
-.hot-articles-box {
+.hot-articles {
   padding: 15px;
   background: #fff; }
-  .hot-articles-box ul {
+  .hot-articles .hot-articles__list {
     margin-top: 10px; }
-  .hot-articles-box li {
+  .hot-articles .hot-articles__list__item {
     position: relative;
     padding: 10px;
     font-size: 14px;
     border-bottom: 1px dotted #ddd; }
-    .hot-articles-box li:hover {
-      background-color: #f4f6fc; }
-  .hot-articles-box .views-num {
+  .hot-articles .hot-articles__list__item__views {
     float: right;
     position: absolute;
     right: 0;
     top: 10px;
     color: #b5b5b5;
     font-size: 12px; }
-  .hot-articles-box a.title {
+  .hot-articles .hot-articles__list__item__title {
     display: inline-block;
     width: 190px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     color: #444; }
-  .hot-articles-box .fa-fire {
+  .hot-articles .fa-fire {
     color: #CC3300; }
 
 .articles-box {
