@@ -348,7 +348,7 @@ h1, h2, h3, h4, h5, h6 {
   .yy-freshman:hover {
     left: -104px; }
 
-.tags-box li {
+.tag-tabs .tag-tabs__item {
   float: left;
   position: relative;
   padding: 0 20px;
@@ -358,27 +358,24 @@ h1, h2, h3, h4, h5, h6 {
   background-repeat: no-repeat;
   background-position: 0 3px;
   vertical-align: top; }
-  .tags-box li .btn-operate {
+  .tag-tabs .tag-tabs__item .tag-tabs__item__btns {
     position: absolute;
     top: -20px;
     right: 0; }
-    .tags-box li .btn-operate .fa {
+    .tag-tabs .tag-tabs__item .tag-tabs__item__btns .fa {
       display: none;
       color: #FC923F; }
-    .tags-box li .btn-operate > span:hover {
+    .tag-tabs .tag-tabs__item .tag-tabs__item__btns > span:hover {
       pointer: cursor; }
-  .tags-box li a {
+  .tag-tabs .tag-tabs__item a {
     color: #999; }
-  .tags-box li:hover .fa {
+  .tag-tabs .tag-tabs__item:hover .fa {
     display: initial; }
-  .tags-box li .tag-hot {
-    font-size: 18px;
-    color: #E04B4B; }
-  .tags-box li.active a {
-    color: #fc923f; }
-.tags-box li:first-child {
-  background-image: none;
-  padding-left: 0; }
+  .tag-tabs .tag-tabs__item:first-child {
+    background-image: none;
+    padding-left: 0; }
+.tag-tabs .tag-tabs__item--active a {
+  color: #fc923f; }
 
 .btn-to-top {
   display: none;
