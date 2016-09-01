@@ -46,48 +46,50 @@
 
 	//加载管理模块
 	__webpack_require__(1)(angular);
-	__webpack_require__(2)(angular);
-	__webpack_require__(4)(angular);
+	__webpack_require__(10)(angular);
+	__webpack_require__(12)(angular);
 	var app = angular.module('app', [
-		'ui.router',
-		'restangular',
-		'ui.bootstrap',
-		'siteModules',
-		'siteServices',
-		'siteFilters',
-		'cgBusy',
-		'angular-toasty',
-		'angularFileUpload'
+	    'ui.router',
+	    'restangular',
+	    'ui.bootstrap',
+	    'siteModules',
+	    'siteServices',
+	    'siteFilters',
+	    'cgBusy',
+	    'angular-toasty',
+	    'angularFileUpload'
 	]);
 	
 	app.run(['$rootScope', '$state', '$stateParams',
-		function($rootScope, $state, $stateParams) {
-			$rootScope.$state = $state;
-			$rootScope.$stateParams = $stateParams;
-		}
+	    function($rootScope, $state, $stateParams) {
+	        $rootScope.$state = $state;
+	        $rootScope.$stateParams = $stateParams;
+	    }
 	]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-		$urlRouterProvider.otherwise('/site');
+	    $urlRouterProvider.otherwise('/site');
 	}]);
 	
 	app.config(['toastyConfigProvider', function(toastyConfigProvider) {
-		toastyConfigProvider.setConfig({
+	    toastyConfigProvider.setConfig({
 	
-		});
+	    });
 	}]);
 	
 	// Restangular
 	app.config(['RestangularProvider', function(RestangularProvider) {
-		RestangularProvider.setBaseUrl('/api');
+	    RestangularProvider.setBaseUrl('/api');
 	}]);
 	
 	app.constant('constant', {
-		ARTICLES: {
-		}
+	    ARTICLES: {}
 	});
-	window.duoshuoQuery = {short_name:"fedoc"};
-	__webpack_require__(5)(app);
+	window.duoshuoQuery = {
+	    short_name: "fedoc"
+	};
+	__webpack_require__(19)(app);
 	
 	angular.bootstrap(document, ['app']);
+
 
 /***/ },
 /* 1 */
@@ -95,154 +97,19 @@
 
 	module.exports = function(angular) {
 		var siteModules = angular.module('siteModules', ['ngSanitize']);
+		__webpack_require__(2)(siteModules);
+		__webpack_require__(3)(siteModules);
+		__webpack_require__(4)(siteModules);
 		__webpack_require__(6)(siteModules);
 		__webpack_require__(7)(siteModules);
 		__webpack_require__(8)(siteModules);
-		__webpack_require__(10)(siteModules);
-		__webpack_require__(11)(siteModules);
-		__webpack_require__(12)(siteModules);
-		__webpack_require__(13)(siteModules);
+		__webpack_require__(9)(siteModules);
 	
 	};
 
 
 /***/ },
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(angular) {
-		var siteFilters = angular.module('siteFilters', []);
-		__webpack_require__(3)(siteFilters);
-	};
-
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.filter('dayDisplay', ['$filter',
-			function($filter) {
-				var standardDateFilterFn = $filter('date');
-				return function(data) {
-					if (data == null || data == '') {
-						return '';
-					} else {
-						return standardDateFilterFn(data, 'yyyy-MM-dd');
-					}
-				};
-			}
-		]);
-		myModule.filter('dateDisplay', ['$filter',
-			function($filter) {
-				var standardDateFilterFn = $filter('date');
-				return function(data) {
-					if (data == null || data == '') {
-						return '';
-					} else {
-						return standardDateFilterFn(data, 'yyyy-MM-dd HH:mm');
-					}
-				};
-			}
-		]);
-	
-		myModule.filter('dateAgo', ['$filter',
-			function($filter) {
-				var standardDateFilterFn = $filter('date');
-				return function(data) {
-					if (data == null || data == '') {
-						return '';
-					} else {
-						var nowSt = new Date().getTime();
-						var meSt = new Date(data).getTime();
-						var timeDistance = parseInt((nowSt - meSt) / 1000); //差距多少秒
-						if (timeDistance < 60) { //小于60秒
-							return parseInt(timeDistance) + '秒前';
-						} else if (timeDistance < 3600) { //小于60分钟
-							return parseInt(timeDistance / 60) + '分钟前';
-						} else if (timeDistance < 3600 * 24) { //小于24小时
-							return parseInt(timeDistance / 3600) + '小时前';
-						} else if (timeDistance < 3600 * 24 * 30) { //小于30天
-							return parseInt(timeDistance / (3600 * 24)) + '天前';
-						} else if (timeDistance < 3600 * 24 * 30 * 365) {
-							return parseInt(timeDistance / (3600 * 24 * 30)) + '月前';
-						} else {
-							return parseInt(timeDistance / (3600 * 24 * 30 * 12)) + '年前';
-						}
-					}
-				};
-			}
-		]);
-	
-	};
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(angular) {
-		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(23)(siteServices);
-		__webpack_require__(24)(siteServices);
-		__webpack_require__(25)(siteServices);
-		__webpack_require__(26)(siteServices);
-		__webpack_require__(27)(siteServices);
-		__webpack_require__(28)(siteServices);
-	
-	};
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(app) {
-	
-	    app.controller('SiteController', ['$scope', '$rootScope', '$http', '$state', '$window',
-	        function($scope, $rootScope, $http, $state, $window) {
-	            $scope.user = {
-	                email: 'zhangc@fxiaoke.com',
-	                pwd: '123456'
-	            };
-	            $state.go('articles');
-	
-	
-	            $rootScope.filterAttachmentImgs = function(attachments) {
-	                return _.filter(attachments, function(item) {
-	                    return /\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
-	                });
-	            };
-	            $rootScope.filterAttachment = function(attachments) {
-	                return _.filter(attachments, function(item) {
-	                    return !/\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
-	                });
-	            };
-	        }
-	    ]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-	        $stateProvider
-	            .state('site', {
-	                url: '/site',
-	                templateUrl: '/site/index.html',
-	                pageTitle: '主页',
-	                controller: 'SiteController'
-	            });
-	    }]);
-	
-	
-	
-	    __webpack_require__(14)(app);
-	    __webpack_require__(15)(app);
-	    __webpack_require__(16)(app);
-	    __webpack_require__(17)(app);
-	    __webpack_require__(18)(app);
-	    __webpack_require__(19)(app);
-	    __webpack_require__(22)(app);
-	
-	};
-
-
-/***/ },
-/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -330,7 +197,7 @@
 
 
 /***/ },
-/* 7 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -375,12 +242,12 @@
 	};
 
 /***/ },
-/* 8 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
 	
-	    var md = __webpack_require__(9)({
+	    var md = __webpack_require__(5)({
 	        html: true,
 	        linkify: true,
 	        typographer: true
@@ -413,13 +280,13 @@
 
 
 /***/ },
-/* 9 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = markdownit;
 
 /***/ },
-/* 10 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -443,7 +310,7 @@
 	};
 
 /***/ },
-/* 11 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -520,7 +387,7 @@
 
 
 /***/ },
-/* 12 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -552,7 +419,7 @@
 
 
 /***/ },
-/* 13 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(myModule) {
@@ -583,7 +450,398 @@
 
 
 /***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(angular) {
+		let siteFilters = angular.module('siteFilters', []);
+		__webpack_require__(11)(siteFilters);
+	};
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.filter('dayDisplay', ['$filter',
+			function($filter) {
+				var standardDateFilterFn = $filter('date');
+				return function(data) {
+					if (data == null || data == '') {
+						return '';
+					} else {
+						return standardDateFilterFn(data, 'yyyy-MM-dd');
+					}
+				};
+			}
+		]);
+		myModule.filter('dateDisplay', ['$filter',
+			function($filter) {
+				var standardDateFilterFn = $filter('date');
+				return function(data) {
+					if (data == null || data == '') {
+						return '';
+					} else {
+						return standardDateFilterFn(data, 'yyyy-MM-dd HH:mm');
+					}
+				};
+			}
+		]);
+	
+		myModule.filter('dateAgo', ['$filter',
+			function($filter) {
+				var standardDateFilterFn = $filter('date');
+				return function(data) {
+					if (data == null || data == '') {
+						return '';
+					} else {
+						var nowSt = new Date().getTime();
+						var meSt = new Date(data).getTime();
+						var timeDistance = parseInt((nowSt - meSt) / 1000); //差距多少秒
+						if (timeDistance < 60) { //小于60秒
+							return parseInt(timeDistance) + '秒前';
+						} else if (timeDistance < 3600) { //小于60分钟
+							return parseInt(timeDistance / 60) + '分钟前';
+						} else if (timeDistance < 3600 * 24) { //小于24小时
+							return parseInt(timeDistance / 3600) + '小时前';
+						} else if (timeDistance < 3600 * 24 * 30) { //小于30天
+							return parseInt(timeDistance / (3600 * 24)) + '天前';
+						} else if (timeDistance < 3600 * 24 * 30 * 365) {
+							return parseInt(timeDistance / (3600 * 24 * 30)) + '月前';
+						} else {
+							return parseInt(timeDistance / (3600 * 24 * 30 * 12)) + '年前';
+						}
+					}
+				};
+			}
+		]);
+	
+	};
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(angular) {
+		var siteServices = angular.module('siteServices', ['restangular']);
+		__webpack_require__(13)(siteServices);
+		__webpack_require__(14)(siteServices);
+		__webpack_require__(15)(siteServices);
+		__webpack_require__(16)(siteServices);
+		__webpack_require__(17)(siteServices);
+		__webpack_require__(18)(siteServices);
+	
+	};
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.factory('ArticleService', ['Restangular', '$timeout',
+	        function(Restangular, $timeout) {
+	            var baseRoute = Restangular.all('articles');
+	            return {
+	                list: function(query) {
+	                    return baseRoute.customGET('', query);
+	                },
+	                listHot: function(query) {
+	                    return baseRoute.customGET('hot', query);
+	                },
+	                getOne: function(articleId) {
+	                    return baseRoute.one(articleId)
+	                        .customGET();
+	                },
+	                remove: function(articleId) {
+	                    return baseRoute.one(articleId)
+	                        .remove();
+	                },
+	                create: function(article) {
+	                    return baseRoute.customPOST(article);
+	                },
+	                update: function(articleId, article) {
+	                    return baseRoute.one(articleId).customPUT(article);
+	                },
+	                toTop: function(articleId, flag) {
+	                    return baseRoute.one(articleId, 'top').customPUT({
+	                        flag: flag
+	                    });
+	                }
+	            };
+	        }
+	    ]);
+	};
+
+
+/***/ },
 /* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.factory('UserService', ['Restangular', '$timeout',
+			function(Restangular, $timeout) {
+				var baseRoute = Restangular.all('users');
+				return {
+					list: function(query) {
+						return baseRoute.customGET('', query);
+					},
+					listAll: function(query) {
+						return baseRoute.customGET('all', query);
+					},
+					getOne: function(userId) {
+						return baseRoute.one(userId)
+							.customGET();
+					},
+					remove: function(userId) {
+						return baseRoute.one(userId)
+							.remove();
+					},
+					create: function(user) {
+						return baseRoute.customPOST(user);
+					},
+					updateInfo: function(userId, user) {
+						return baseRoute.one(userId, 'info').customPUT(user);
+					},
+					updatePwd: function(userId, user) {
+						return baseRoute.one(userId, 'pwd').customPUT(user);
+					}
+				};
+			}
+		]);
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.factory('TagService', ['Restangular', '$timeout',
+			function(Restangular, $timeout) {
+				var baseRoute = Restangular.all('tags');
+				return {
+					listAll: function(query) {
+						return baseRoute.customGET('', query);
+					},
+					getOne: function(tagId) {
+						return baseRoute.one(tagId)
+							.customGET();
+					},
+					remove: function(tagId) {
+						return baseRoute.one(tagId)
+							.remove();
+					},
+					create: function(tag) {
+						return baseRoute.customPOST(tag);
+					},
+					update: function(tagId, tag) {
+						return baseRoute.one(tagId).customPUT(tag);
+					}
+				};
+			}
+		]);
+	};
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+		myModule.factory('$modalService', ['$modal', '$modalStack', function($modal, $modalStack) {
+			var defaultOptions = {
+				backdrop: true,
+				keyboard: true,
+				windowClass: ''
+			};
+			return {
+				show: function(options) {
+					var realOpt = _.cloneDeep(defaultOptions);
+					angular.extend(realOpt, options || {});
+					return $modal.open(realOpt).result;
+				},
+				dismissAll: function() {
+					$modalStack.dismissAll();
+				}
+			};
+		}]);
+	};
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.service('$loginModal', ['$modalService', '$q',
+	        function factory($modalService, $q) {
+	            this.init = function(options) {
+	                options = options || {};
+	                var onLoginedCallback = options.onLogined;
+	                $modalService.show({
+	                    templateUrl: '/site/services/login-modal/index.html',
+	                    width: 600,
+	                    height: 600,
+	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance', '$regModal',
+	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance, $regModal) {
+	                            $scope.close = function() {
+	                                $modalInstance.close();
+	
+	                            };
+	                            $scope.logined = function() {
+	                                $scope.close();
+	                                if (onLoginedCallback) {
+	                                    onLoginedCallback();
+	                                }
+	                            };
+	                            $scope.goReg = function() {
+	                                $modalInstance.close();
+	                                $regModal.init({
+	                                    onReged: onLoginedCallback ? onLoginedCallback : null
+	                                });
+	                            };
+	                            $scope.login = function() {
+	                                $http({
+	                                    method: 'post',
+	                                    url: "/api/sign/login",
+	                                    data: {
+	                                        email: $scope.form.email || '',
+	                                        pwd: $scope.form.pwd || ''
+	                                    }
+	                                }).
+	                                success(function(data, status, headers, config) {
+	                                    if (data.code === 200) {
+	                                        var user = data.msg.user;
+	                                        $rootScope.user = user;
+	                                        toasty.success('登陆成功');
+	                                        $rootScope.$broadcast('userChange', {
+	                                            user: user
+	                                        });
+	                                        $scope.logined();
+	                                    } else {
+	                                        toasty.error(data.msg);
+	                                    }
+	                                });
+	                            };
+	                        }
+	                    ]
+	                });
+	            };
+	        }
+	    ]);
+	};
+
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(myModule) {
+	    myModule.service('$regModal', ['$modalService', '$q',
+	        function factory($modalService, $q) {
+	            this.init = function(options) {
+	                options = options || {};
+	                var onRegedCallback = options.onReged;
+	                $modalService.show({
+	                    templateUrl: '/site/services/reg-modal/index.html',
+	                    width: 600,
+	                    height: 600,
+	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
+	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
+	                            $scope.close = function() {
+	
+	                                $modalInstance.close();
+	                            };
+	                            $scope.reged = function() {
+	                                $scope.close();
+	                                if (onRegedCallback) {
+	                                    onRegedCallback();
+	                                }
+	                            };
+	                            $scope.create = function() {
+	                                $http({
+	                                    method: 'post',
+	                                    url: "/api/sign/reg",
+	                                    data: {
+	                                        email: $scope.form.email || '',
+	                                        pwd: $scope.form.pwd || ''
+	                                    }
+	                                }).
+	                                success(function(data, status, headers, config) {
+	                                    if (data.code === 200) {
+	                                        var user = data.msg.user;
+	                                        $rootScope.user = user;
+	                                        toasty.success('注册成功');
+	                                        $rootScope.$broadcast('userChange', {
+	                                            user: user
+	                                        });
+	                                        $scope.reged();
+	                                    } else {
+	                                        toasty.error(data.msg);
+	                                    }
+	                                });
+	                            };
+	                        }
+	                    ]
+	                });
+	                return delay.promise;
+	            };
+	        }
+	    ]);
+	};
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+	
+	    app.controller('SiteController', ['$scope', '$rootScope', '$http', '$state', '$window',
+	        function($scope, $rootScope, $http, $state, $window) {
+	            $scope.user = {
+	                email: 'zhangc@fxiaoke.com',
+	                pwd: '123456'
+	            };
+	            $state.go('articles');
+	
+	
+	            $rootScope.filterAttachmentImgs = function(attachments) {
+	                return _.filter(attachments, function(item) {
+	                    return /\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
+	                });
+	            };
+	            $rootScope.filterAttachment = function(attachments) {
+	                return _.filter(attachments, function(item) {
+	                    return !/\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
+	                });
+	            };
+	        }
+	    ]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+	        $stateProvider
+	            .state('site', {
+	                url: '/site',
+	                templateUrl: '/site/index.html',
+	                pageTitle: '主页',
+	                controller: 'SiteController'
+	            });
+	    }]);
+	
+	
+	
+	    __webpack_require__(20)(app);
+	    __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"site/tpls/article/index\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))(app);
+	    __webpack_require__(22)(app);
+	    __webpack_require__(23)(app);
+	    __webpack_require__(24)(app);
+	    __webpack_require__(25)(app);
+	    __webpack_require__(28)(app);
+	
+	};
+
+
+/***/ },
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -655,232 +913,8 @@
 
 
 /***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(app) {
-	  app.controller('ArticleController', [
-	    '$scope',
-	    '$state',
-	    '$stateParams',
-	    'ArticleService',
-	    'UserService',
-	    'toasty',
-	    'isAdd',
-	    'constant',
-	    'TagService',
-	    '$upload',
-	    '$rootScope',
-	    function($scope, $state, $stateParams, ArticleService, UserService, toasty, isAdd, constant, TagService, $upload, $rootScope) {
-	      var articleId = $stateParams._id;
-	      var articleEditor;
-	      var editorUploadCallback;
-	      $scope.article = {
-	        tags: [],
-	        isPreview: false
-	      };
-	      $scope.create = function() {
-	        $scope.article.content = articleEditor.value();
-	        ArticleService.create($scope.article).then(function(data) {
-	          if (data.code === 200) {
-	            toasty.success('感谢你贡献新的文档:)');
-	            $state.go('articles');
-	          } else {
-	            toasty.error(data.msg);
-	          }
-	        });
-	      };
-	
-	      $scope.init = function() {
-	        TagService.listAll().then(function(data) {
-	          if (data.code === 200) {
-	            var tags = data.msg.tags;
-	            var tagNames = [];
-	            for (var i = 0, len = tags.length; i < len; i++) {
-	              tagNames.push(tags[i].name.toString());
-	            }
-	            $scope.tagNames = tagNames;
-	          }
-	        });
-	
-	        if (isAdd) {
-	          $scope.article.isAdd = true;
-	        } else {
-	          ArticleService.getOne(articleId).then(function(data) {
-	            if (data.code === 200) {
-	              var article = data.msg;
-	              $scope.article = article;
-	              if ($rootScope.user && $rootScope.user.isAdmin) {
-	                $scope.initAllUsers();
-	              }
-	              $scope.initReplys();
-	            } else {
-	              toasty.error(data.msg);
-	            }
-	          });
-	        }
-	      };
-	      $scope.initReplys = function() {
-	        var el = document.createElement('div'),
-	          $ds = $('#duoshuo-box'),
-	          article = $scope.article;
-	        el.setAttribute('data-thread-key', article._id);
-	        el.setAttribute('data-url', 'http://fe.firstshare.cn/#/articles/' + article._id);
-	        el.setAttribute('data-title', article.title);
-	        DUOSHUO.EmbedThread(el);
-	        $ds.append(el);
-	      };
-	
-	      $scope.initAllUsers = function() {
-	        UserService.listAll().then(function(data) {
-	          if (data.code === 200) {
-	            $scope.users = data.msg.users;
-	          }
-	        });
-	      };
-	
-	      $scope.initEditor = function() {
-	        articleEditor = new SimpleMDE({
-	          element: document.getElementById('editor'),
-	          toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", {
-	            name: "image",
-	            action: function(editor) {
-	              $('.btn-simplemde-upload').click();
-	
-	              editorUploadCallback = function(data) {
-	                editor.value(editor.value() + '![图片](' + data.src + ')');
-	              };
-	            },
-	            className: "fa fa-image"
-	          }, "|", "preview", "side-by-side", "fullscreen", "guide"]
-	        });
-	
-	        articleEditor.value($scope.article.content);
-	      };
-	
-	            // 上传附件
-	      $scope.uploadAttachment = function(files) {
-	        for (var i = 0, len = files.length; i < len; i++) {
-	          _uploadAttachment(files[i]);
-	        }
-	      };
-	      $scope.uploadSimplemdeAttachment = function(files) {
-	        if (!files || files.length === 0) {
-	          return;
-	        }
-	        var file = files[0];
-	        $rootScope.waitPromise = $upload.upload({
-	          url: '/api/attachments/upload',
-	          file: file
-	        })
-	                    .progress(function(evt) {
-	
-	                    })
-	                    .success(function(data, status, headers, config) {
-	                      if (data.code === 200) {
-	                        editorUploadCallback({
-	                          src: data.msg.fileUrl
-	                        });
-	                        editorUploadCallback = null;
-	                      } else {
-	
-	                      }
-	                    })
-	                    .error(function() {});
-	      };
-	
-	      $scope.delAttachment = function(index) {
-	        $scope.article.attachments.splice(index, 1);
-	      };
-	
-	      function _uploadAttachment(file) {
-	        $scope.uploading = true;
-	        $rootScope.waitPromise = $upload.upload({
-	          url: '/api/attachments/upload',
-	          file: file
-	        })
-	                    .progress(function(evt) {
-	
-	                    })
-	                    .success(function(data, status, headers, config) {
-	                      if (data.code === 200) {
-	                        $scope.article.attachments = $scope.article.attachments || [];
-	                        $scope.article.attachments.push({
-	                          fileUrl: data.msg.fileUrl,
-	                          fileName: data.msg.fileName
-	                        });
-	                      } else {
-	
-	                      }
-	                      $scope.uploading = false;
-	                    })
-	                    .error(function() {
-	                      $scope.uploading = false;
-	                    });
-	      }
-	
-	      $scope.init();
-	      $scope.update = function() {
-	        ArticleService.update(articleId, {
-	          title: $scope.article.title,
-	          content: articleEditor.value(),
-	          tags: $scope.article.tags,
-	          user: $scope.article.user._id,
-	          attachments: $scope.article.attachments
-	        }).then(function(data) {
-	          if (data.code === 200) {
-	            toasty.success('更新文档成功');
-	            window.location.reload();
-	          } else {
-	            toasty.error(data.msg);
-	          }
-	        });
-	      };
-	
-	      $scope.isCheckTag = function(tag) {
-	        return $scope.article.tags.indexOf(tag) > -1;
-	      };
-	
-	            // 选择分类
-	      $scope.chooseTag = function($event, tag) {
-	        var curTarget = $event.currentTarget;
-	        var index = $scope.article.tags.indexOf(tag);
-	                // 如果被选中
-	        if (curTarget.checked) {
-	          if (index === -1) $scope.article.tags.push(tag);
-	        } else {
-	          if (index !== -1) $scope.article.tags.splice(index, 1);
-	        }
-	      };
-	    }
-	  ]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
-	    $stateProvider.state('addArticle', {
-	      url: '/article/add',
-	      templateUrl: '/site/tpls/article/index.html',
-	      controller: 'ArticleController',
-	      pageTitle: '新增文章',
-	      resolve: {
-	        isAdd: [function() {
-	          return true;
-	        }]
-	      }
-	    }).state('viewArticle', {
-	      url: '/articles/:_id',
-	      templateUrl: '/site/tpls/article/index.html',
-	      controller: 'ArticleController',
-	      pageTitle: '查看文章',
-	      resolve: {
-	        isAdd: [function() {
-	          return false;
-	        }]
-	      }
-	    });
-	  }]);
-	};
-
-
-/***/ },
-/* 16 */
+/* 21 */,
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -935,7 +969,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -980,7 +1014,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1064,12 +1098,12 @@
 	};
 
 /***/ },
-/* 19 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
-		__webpack_require__(20)(app);
-		__webpack_require__(21)(app);
+		__webpack_require__(26)(app);
+		__webpack_require__(27)(app);
 		
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty',
 			function($scope, $rootScope, $http, $state, toasty) {
@@ -1099,7 +1133,7 @@
 	};
 
 /***/ },
-/* 20 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1124,7 +1158,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1177,7 +1211,7 @@
 	};
 
 /***/ },
-/* 22 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(app) {
@@ -1233,262 +1267,6 @@
 	            controller: 'SitesController'
 	        });
 	    }]);
-	};
-
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-	    myModule.factory('ArticleService', ['Restangular', '$timeout',
-	        function(Restangular, $timeout) {
-	            var baseRoute = Restangular.all('articles');
-	            return {
-	                list: function(query) {
-	                    return baseRoute.customGET('', query);
-	                },
-	                listHot: function(query) {
-	                    return baseRoute.customGET('hot', query);
-	                },
-	                getOne: function(articleId) {
-	                    return baseRoute.one(articleId)
-	                        .customGET();
-	                },
-	                remove: function(articleId) {
-	                    return baseRoute.one(articleId)
-	                        .remove();
-	                },
-	                create: function(article) {
-	                    return baseRoute.customPOST(article);
-	                },
-	                update: function(articleId, article) {
-	                    return baseRoute.one(articleId).customPUT(article);
-	                },
-	                toTop: function(articleId, flag) {
-	                    return baseRoute.one(articleId, 'top').customPUT({
-	                        flag: flag
-	                    });
-	                }
-	            };
-	        }
-	    ]);
-	};
-
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.factory('UserService', ['Restangular', '$timeout',
-			function(Restangular, $timeout) {
-				var baseRoute = Restangular.all('users');
-				return {
-					list: function(query) {
-						return baseRoute.customGET('', query);
-					},
-					listAll: function(query) {
-						return baseRoute.customGET('all', query);
-					},
-					getOne: function(userId) {
-						return baseRoute.one(userId)
-							.customGET();
-					},
-					remove: function(userId) {
-						return baseRoute.one(userId)
-							.remove();
-					},
-					create: function(user) {
-						return baseRoute.customPOST(user);
-					},
-					updateInfo: function(userId, user) {
-						return baseRoute.one(userId, 'info').customPUT(user);
-					},
-					updatePwd: function(userId, user) {
-						return baseRoute.one(userId, 'pwd').customPUT(user);
-					}
-				};
-			}
-		]);
-	};
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.factory('TagService', ['Restangular', '$timeout',
-			function(Restangular, $timeout) {
-				var baseRoute = Restangular.all('tags');
-				return {
-					listAll: function(query) {
-						return baseRoute.customGET('', query);
-					},
-					getOne: function(tagId) {
-						return baseRoute.one(tagId)
-							.customGET();
-					},
-					remove: function(tagId) {
-						return baseRoute.one(tagId)
-							.remove();
-					},
-					create: function(tag) {
-						return baseRoute.customPOST(tag);
-					},
-					update: function(tagId, tag) {
-						return baseRoute.one(tagId).customPUT(tag);
-					}
-				};
-			}
-		]);
-	};
-
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-		myModule.factory('$modalService', ['$modal', '$modalStack', function($modal, $modalStack) {
-			var defaultOptions = {
-				backdrop: true,
-				keyboard: true,
-				windowClass: ''
-			};
-			return {
-				show: function(options) {
-					var realOpt = _.cloneDeep(defaultOptions);
-					angular.extend(realOpt, options || {});
-					return $modal.open(realOpt).result;
-				},
-				dismissAll: function() {
-					$modalStack.dismissAll();
-				}
-			};
-		}]);
-	};
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-	    myModule.service('$loginModal', ['$modalService', '$q',
-	        function factory($modalService, $q) {
-	            this.init = function(options) {
-	                options = options || {};
-	                var onLoginedCallback = options.onLogined;
-	                $modalService.show({
-	                    templateUrl: '/site/services/login-modal/index.html',
-	                    width: 600,
-	                    height: 600,
-	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance', '$regModal',
-	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance, $regModal) {
-	                            $scope.close = function() {
-	                                $modalInstance.close();
-	
-	                            };
-	                            $scope.logined = function() {
-	                                $scope.close();
-	                                if (onLoginedCallback) {
-	                                    onLoginedCallback();
-	                                }
-	                            };
-	                            $scope.goReg = function() {
-	                                $modalInstance.close();
-	                                $regModal.init({
-	                                    onReged: onLoginedCallback ? onLoginedCallback : null
-	                                });
-	                            };
-	                            $scope.login = function() {
-	                                $http({
-	                                    method: 'post',
-	                                    url: "/api/sign/login",
-	                                    data: {
-	                                        email: $scope.form.email || '',
-	                                        pwd: $scope.form.pwd || ''
-	                                    }
-	                                }).
-	                                success(function(data, status, headers, config) {
-	                                    if (data.code === 200) {
-	                                        var user = data.msg.user;
-	                                        $rootScope.user = user;
-	                                        toasty.success('登陆成功');
-	                                        $rootScope.$broadcast('userChange', {
-	                                            user: user
-	                                        });
-	                                        $scope.logined();
-	                                    } else {
-	                                        toasty.error(data.msg);
-	                                    }
-	                                });
-	                            };
-	                        }
-	                    ]
-	                });
-	            };
-	        }
-	    ]);
-	};
-
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(myModule) {
-	    myModule.service('$regModal', ['$modalService', '$q',
-	        function factory($modalService, $q) {
-	            this.init = function(options) {
-	                options = options || {};
-	                var onRegedCallback = options.onReged;
-	                $modalService.show({
-	                    templateUrl: '/site/services/reg-modal/index.html',
-	                    width: 600,
-	                    height: 600,
-	                    controller: ['$scope', '$rootScope', '$http', '$state', 'toasty', '$modalInstance',
-	                        function($scope, $rootScope, $http, $state, toasty, $modalInstance) {
-	                            $scope.close = function() {
-	
-	                                $modalInstance.close();
-	                            };
-	                            $scope.reged = function() {
-	                                $scope.close();
-	                                if (onRegedCallback) {
-	                                    onRegedCallback();
-	                                }
-	                            };
-	                            $scope.create = function() {
-	                                $http({
-	                                    method: 'post',
-	                                    url: "/api/sign/reg",
-	                                    data: {
-	                                        email: $scope.form.email || '',
-	                                        pwd: $scope.form.pwd || ''
-	                                    }
-	                                }).
-	                                success(function(data, status, headers, config) {
-	                                    if (data.code === 200) {
-	                                        var user = data.msg.user;
-	                                        $rootScope.user = user;
-	                                        toasty.success('注册成功');
-	                                        $rootScope.$broadcast('userChange', {
-	                                            user: user
-	                                        });
-	                                        $scope.reged();
-	                                    } else {
-	                                        toasty.error(data.msg);
-	                                    }
-	                                });
-	                            };
-	                        }
-	                    ]
-	                });
-	                return delay.promise;
-	            };
-	        }
-	    ]);
 	};
 
 

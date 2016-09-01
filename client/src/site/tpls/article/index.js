@@ -19,6 +19,10 @@ module.exports = function(app) {
         tags: [],
         isPreview: false
       };
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/es6
       $scope.create = function() {
         $scope.article.content = articleEditor.value();
         ArticleService.create($scope.article).then(function(data) {
@@ -32,7 +36,11 @@ module.exports = function(app) {
       };
 
       $scope.init = function() {
+<<<<<<< HEAD
         TagService.listAll().then(function(data) {
+=======
+        TagService.listAll().then(data => {
+>>>>>>> feature/es6
           if (data.code === 200) {
             var tags = data.msg.tags;
             var tagNames = [];
