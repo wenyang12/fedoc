@@ -6,23 +6,27 @@ var mongoose = require('mongoose'),
     util = context.util,
     config = context.config,
     dirPath = context.dirPath,
-    exec = require('child_process').exec;
+    spawn = require('child_process').spawn;
+
 
 
 exports.init = function(req, res) {
     var startSt = new Date().getTime();
     console.log('[构建开始]' + dirPath.root);
-    exec(dirPath.root + '/deploy.sh', {
-        cwd: dirPath.root
-    }, function(err, stdout) {
-        console.log(stdout);
-        if (!err) {
-            var log = '[构建成功] 耗时：' + (new Date().getTime() - startSt) + 'ms';
-            console.log(log);
-            res.send(log);
-        } else {
-            console.log(err);
-        }
+    var cmd = spawn(dirPath.root + '/deploy.sh');
+
+    cmd.stdout.on('data', function(data) {
+        console.log('stdout: ' + data.toString());
+    });
+
+    cmd.stderr.on('data', function(data) {
+        console.log('stderr: ' + data.toString());
+    });
+
+    cmd.on('exit', function(code) {
+        var log = '[构建成功] 耗时：' + (new Date().getTime() - startSt) + 'ms';
+        console.log(log);
+        res.send(log);
     });
 
 };
