@@ -1,8 +1,8 @@
-<header class="site-header navbar">
+<header class="fedoc-header navbar">
 	<a target="_blank" href="http://fe.firstshare.cn/#/articles/565d0d2b66f363224b786612" class="yy-freshman" title="新人大礼包"></a>
 
 	<div class="container">
-		<nav class="site-header-nav navbar-collapse collapse">
+		<nav class="fedoc-header__nav navbar-collapse collapse">
 			<div class="navbar-header">
 				<a class="navbar-brand" ui-sref="articles">
 					fe.firstshare.cn
@@ -66,11 +66,11 @@
 					</a>
 				</li>
 			</ul>
-			<div class="input-group search-box" ng-class="{'active':searchBox.active}" ng-click="enableSearchBox()">
-				<span class="btn-search" >
-						<i class="fa fa-search"></i><span class="tip">搜索</span>
+			<div class="input-group search-box" ng-class="{'search-box--active':searchBox.active}" ng-click="enableSearchBox()">
+				<span class="search-box__submit" >
+						<i class="fa fa-search"></i><span class="search-box__tip">搜索</span>
 				</span>
-				<input type="text" ng-model="searchBox.keyword" class="j-ipt-search" ng-blur="disableSearchBox()" fedoc-enter="searchKeyword()" >
+				<input type="text" ng-model="searchBox.keyword" class="search-box__input j-search-box__input" ng-blur="disableSearchBox()" fedoc-enter="searchKeyword()" >
 			</div>
 		</nav>
 	</div>

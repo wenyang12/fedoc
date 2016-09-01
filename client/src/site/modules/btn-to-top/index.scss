@@ -1,7 +1,4 @@
-.btn-to-top{
-	&.active{
-		display: block;
-	}
+.btn-gotop{
 	display: none;
 	top: 400px;
     width: 44px;
@@ -15,4 +12,7 @@
     cursor: pointer;
     z-index: 12;
     background: #FFF url(../assets/images/top.png) no-repeat center center;
+}
+.btn-gotop--active{
+	display: block;
 }

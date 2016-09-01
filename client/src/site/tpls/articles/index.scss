@@ -1,16 +1,22 @@
-.articles-box {
+.fedoc__body__articles--right {
+	min-height: 1010px;
 	padding: 15px;
-	.article-list {
+}
+.fedoc__body__articles--left {
+	border-right: 1px solid #E9E9E9;
+	padding: 15px;
+	min-height: 1010px;
+	.list {
 		margin-top: 15px;
 		position: relative;
-		li {
+		.list__item {
 			height: 90px;
 			position: relative;
 			border-bottom: #EEE solid 1px;
 			a {
 				text-decoration: none;
 			}
-			.title {
+			.list__item__title {
 				color: #444;
 				&:hover {
 					cursor: pointer;
@@ -19,7 +25,7 @@
 					font-size: 12px;
 				}
 			}
-			.article-user {
+			.list__item__user {
 				width: 50px;
 				height: 50px;
 				position: absolute;
@@ -32,13 +38,13 @@
 					height: 100%;
 				}
 			}
-			.article-summary {
+			.list__item__summary {
 				position: absolute;
 				top: 17px;
 				left: 68px;
 				max-width: 658px;
 				overflow: hidden;
-				.title {
+				.list__item__summary__title {
 					font-size: 16px!important;
 					line-height: 34px;
 					font-weight: 400;
@@ -50,15 +56,13 @@
 					text-overflow: ellipsis;
 					overflow: hidden;
 					word-break: keep-all;
-					.title {
-						strong {
-							color: #424242;
-						}
+					a {
+						color: #424242;
 					}
 				}
-				.desc {
+				.list__item__summary__desc {
 					font-size: 12px;
-					.nickname {
+					.list__item__summary__desc__nickname {
 						margin-right: 6px;
 						padding-right: 11px;
 						background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAMCAYAAACji9dXAAAABGdBTUEAALGPC/xhBQAAABNJREFUCB1jePDgwX8mBiAgnQAA0tgDtpOZD7QAAAAASUVORK5CYII=");
@@ -67,30 +71,30 @@
 						color: #8c8c8c;
 						cursor: default;
 					}
-					.time {
+					.list__item__summary__desc__time {
 						color: #b5b5b5;
 					}
 				}
 			}
-			.article-info {
+			.list__item__data {
 				position: absolute;
 				top: 52px;
 				right: 0;
 				color: #b5b5b5;
 				font-size: 12px;
 			}
-			.btn-operate {
+			.list__item__btn {
 				font-size: 12px;
 				display: none;
 				margin-left: 10px;
 				position: absolute;
 				right: 0;
 				top: 8px;
-				.btn-del{
-					margin-left: 10px;
-				}
 			}
-			.put-top {
+			.list__item__btn--del {
+				margin-left: 10px;
+			}
+			.list__item__btn--totop {
 				background: #80bd01;
 				padding: 2px 4px;
 				border-radius: 3px;
@@ -98,7 +102,7 @@
 				font-size: 12px;
 			}
 			&:hover {
-				.btn-operate {
+				.list__item__btn {
 					display: block;
 				}
 			}

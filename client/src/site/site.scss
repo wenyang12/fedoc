@@ -4,53 +4,42 @@
 @import "./modules/header/index";
 @import "./modules/article-tags/index";
 @import "./modules/btn-to-top/index";
-@import "./modules/deploy-record/index";
 @import "./modules/hot-articles/index"; // tpls
 @import "./tpls/articles/index";
 @import "./tpls/article/index";
-@import "./tpls/signin/index";
 @import "./tpls/users/index";
-@import "./tpls/deploy/index";
-@import "./tpls/profile/info/index";
-@import "./tpls/profile/pwd/index";
-@import "./tpls/tag/index";
+@import "./tpls/profile/index";
 @import "./tpls/sites/index";
 
-#site-box {
+.fedoc__body {
 	background: white;
 }
+
+.fedoc__footer {
+	text-align: center;
+	margin: 40px auto 0;
+	padding: 10px 0 30px;
+	border-top: 1px solid #d4d4d4;
+	color: #999;
+	.fedoc__footer__copyright {
+		margin: 0 10px;
+	}
+}
+
 .common-box {
 	margin: 15px auto;
 	&.sm {
 		width: 450px;
 	}
 }
-#footer {
-	//width: 1000px;
-	text-align: center;
-	margin: 40px auto 0;
-	padding: 10px 0 30px;
-	border-top: 1px solid #d4d4d4;
-	color: #999;
-	#copyright {
-		margin: 0 10px;
-	}
-}
+
 .cg-busy {
 	position: fixed;
 }
 #ds-thread #ds-reset .ds-powered-by {
 	display: none;
 }
-.main-right {
-	min-height: 1010px;
-}
-.main-left {
-	border-right: 1px solid #E9E9E9;
-	.articles-box {
-		 min-height: 1010px;
-	}
-}
+
 .pv150{
 	padding: 150px 0;
 }

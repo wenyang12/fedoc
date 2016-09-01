@@ -1,19 +1,16 @@
-.hot-articles-box {
+.hot-articles {
     padding: 15px;
     background: #fff;
-    ul {
+    .hot-articles__list {
         margin-top: 10px;
     }
-    li {
+    .hot-articles__list__item {
         position: relative;
         padding: 10px;
         font-size: 14px;
         border-bottom: 1px dotted #ddd;
-        &:hover {
-            background-color: #f4f6fc;
-        }
     }
-    .views-num {
+    .hot-articles__list__item__views {
         float: right;
         position: absolute;
         right: 0;
@@ -21,7 +18,7 @@
         color: #b5b5b5;
         font-size: 12px;
     }
-    a.title {
+    .hot-articles__list__item__title {
         display: inline-block;
         width: 190px;
         white-space: nowrap;

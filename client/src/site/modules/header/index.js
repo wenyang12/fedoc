@@ -62,7 +62,7 @@ module.exports = function(myModule) {
                     };
                     $scope.enableSearchBox = function() {
                         $scope.searchBox.active = true;
-                        $('.j-ipt-search').focus();
+                        $('.j-search-box__input').focus();
                     };
                     $scope.disableSearchBox = function() {
                         $scope.searchBox.active = false;

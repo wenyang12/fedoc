@@ -1,6 +1,5 @@
-.tags-box {
-
-	li {
+.tag-tabs {
+	.tag-tabs__item {
 		float: left;
 		position: relative;
 		padding: 0 20px;
@@ -10,7 +9,7 @@
 		background-repeat: no-repeat;
 		background-position: 0 3px;
 		vertical-align: top;
-		.btn-operate {
+		.tag-tabs__item__btns {
 			position: absolute;
 			top: -20px;
 			right: 0;
@@ -24,7 +23,7 @@
 				}
 			}
 		}
-		a{
+		a {
 			color: #999;
 		}
 		&:hover {
@@ -32,19 +31,14 @@
 				display: initial;
 			}
 		}
-		.tag-hot {
-			font-size: 18px;
-			color: #E04B4B;
-		}
-
-		&.active{
-			a{
-				color:#fc923f;
-			}
+		&:first-child {
+			background-image: none;
+			padding-left: 0;
 		}
 	}
-	li:first-child{
-		background-image: none;
-		padding-left: 0;
+	.tag-tabs__item--active{
+		a {
+			color: #fc923f;
+		}
 	}
 }
