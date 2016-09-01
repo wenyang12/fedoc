@@ -39,6 +39,7 @@
   "scripts": {
     "start": "node server/server",
     "server": "pm2 start pm2/pro.json",
+    "restart-server": "pm2 restart pm2/pro.json",
     "dev": "gulp",
     "build-product": "gulp build-product"
   },

@@ -1,4 +1,7 @@
 #!/bin/bash
+git reset --hard origin/master
+git clean -f
 git pull origin master
-node_modules/gulp/bin/gulp.js copy 
-node_modules/gulp/bin/gulp.js compress
+npm install
+npm run build-product
+npm run restart-server
