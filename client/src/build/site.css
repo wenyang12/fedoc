@@ -414,7 +414,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 12px; }
   .hot-articles .hot-articles__list__item__title {
     display: inline-block;
-    width: 190px;
+    width: 140px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
