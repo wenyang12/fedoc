@@ -1,0 +1,17 @@
+.user-icon {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    width: 60px;
+    height: 60px;
+    overflow: visible;
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: 50%;
+    &:before {
+        content: attr(first-letter);
+        font-size: 28px;
+        height: 60px;
+        line-height: 55px;
+        color: #fc923f;
+    }
+}

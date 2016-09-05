@@ -19,6 +19,9 @@ module.exports = function(app) {
                     return !/\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
                 });
             };
+            $rootScope.getFirstLetter = function(name) {
+                return name.toUpperCase().substr(0, 1);
+            };
         }
     ]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider

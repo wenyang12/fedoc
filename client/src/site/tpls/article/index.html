@@ -48,7 +48,11 @@
 	<div class="fedoc-article--read__header">
 		<h2 ng-bind="article.title"></h2>
 		<div class="fedoc-article--read__header__summary">
-			<span class="fedoc-article--read__header__summary__avatar" style="background-image:url('{{article.user.avatar}}')"></span>
+			<span class="fedoc-article--read__header__summary__avatar" ng-if="article.user.avatar !== 'http://7xohgg.com2.z0.glb.qiniucdn.com/images/avatar_120_120.png'" style="background-image:url('{{article.user.avatar}}')"></span>
+			<span class="fedoc-article--read__header__summary__avatar">
+				<user-icon name="{{getFirstLetter(article.user.nickname)}}" ng-if="article.user.avatar === 'http://7xohgg.com2.z0.glb.qiniucdn.com/images/avatar_120_120.png'"></user-icon>
+			</span>
+
 			<a class="fedoc-article--read__header__summary__nickname" ng-bind="article.user.nickname"></a>
 			<span class="fedoc-article--read__header__summary__times">
 			&nbsp;•&nbsp;

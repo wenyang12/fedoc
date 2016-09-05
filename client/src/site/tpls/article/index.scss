@@ -33,9 +33,21 @@ $article-content-height: 600px;
 .fedoc-article--read {
     padding: 10px;
     margin: 15px auto;
+
+
     .fedoc-article--read__header {
         margin: 0 0 30px;
         position: relative;
+        .user-icon {
+            width: 30px;
+            height: 30px;
+            &:before {
+              content: attr(first-letter);
+                font-size: 14px;
+                height: 30px;
+                line-height: 27px;
+            }
+        }
         h1 {
             border-bottom: 1px dotted #d4d4d4;
         }

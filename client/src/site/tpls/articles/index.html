@@ -5,7 +5,8 @@
 		<ul class="list" ng-if="count">
 			<li class="list__item" ng-repeat="a in articles">
 				<a class="list__item__user">
-					<img class="author-avatar img-circle" ng-src="{{a.user.avatar}}" />
+					<img ng-if="a.user.avatar !== 'http://7xohgg.com2.z0.glb.qiniucdn.com/images/avatar_120_120.png'" class="author-avatar img-circle" ng-src="{{a.user.avatar}}" />
+					<user-icon name="{{getFirstLetter(a.user.nickname)}}" ng-if="a.user.avatar === 'http://7xohgg.com2.z0.glb.qiniucdn.com/images/avatar_120_120.png'"></user-icon>
 				</a>
 				<div class="list__item__summary">
 					<h3 class="list__item__summary__title">

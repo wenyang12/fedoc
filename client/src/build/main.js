@@ -48,8 +48,8 @@
 	
 	//加载管理模块
 	__webpack_require__(1)(angular);
-	__webpack_require__(10)(angular);
-	__webpack_require__(12)(angular);
+	__webpack_require__(11)(angular);
+	__webpack_require__(13)(angular);
 	var app = angular.module('app', ['ui.router', 'restangular', 'ui.bootstrap', 'siteModules', 'siteServices', 'siteFilters', 'cgBusy', 'angular-toasty', 'angularFileUpload']);
 	
 	app.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
@@ -74,7 +74,7 @@
 	window.duoshuoQuery = {
 	    short_name: "fedoc"
 	};
-	__webpack_require__(19)(app);
+	__webpack_require__(20)(app);
 	
 	angular.bootstrap(document, ['app']);
 
@@ -93,6 +93,7 @@
 		__webpack_require__(7)(siteModules);
 		__webpack_require__(8)(siteModules);
 		__webpack_require__(9)(siteModules);
+		__webpack_require__(10)(siteModules);
 	};
 
 /***/ },
@@ -438,13 +439,34 @@
 
 	'use strict';
 	
-	module.exports = function (angular) {
-		var siteFilters = angular.module('siteFilters', []);
-		__webpack_require__(11)(siteFilters);
+	module.exports = function (myModule) {
+	    myModule.directive('userIcon', [function factory() {
+	        var directive = {
+	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	            replace: true, // //是否用模板替换当前元素，若为false，则append在当前元素上
+	            transclude: true, //是否将当前元素的内容转移到模板中
+	            scope: {
+	                name: "@name"
+	            },
+	            templateUrl: '/site/modules/user-icon/index.html'
+	        };
+	        return directive;
+	    }]);
 	};
 
 /***/ },
 /* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (angular) {
+		var siteFilters = angular.module('siteFilters', []);
+		__webpack_require__(12)(siteFilters);
+	};
+
+/***/ },
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -503,23 +525,23 @@
 	};
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = function (angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
-		__webpack_require__(13)(siteServices);
 		__webpack_require__(14)(siteServices);
 		__webpack_require__(15)(siteServices);
 		__webpack_require__(16)(siteServices);
 		__webpack_require__(17)(siteServices);
 		__webpack_require__(18)(siteServices);
+		__webpack_require__(19)(siteServices);
 	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -556,7 +578,7 @@
 	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -591,7 +613,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -620,7 +642,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -646,7 +668,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -705,7 +727,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -760,7 +782,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -785,6 +807,9 @@
 	                return !/\.(gif|jpg|jpeg|bmp|png)$/.test(item.fileName);
 	            });
 	        };
+	        $rootScope.getFirstLetter = function (name) {
+	            return name.toUpperCase().substr(0, 1);
+	        };
 	    }]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 	        $stateProvider.state('site', {
 	            url: '/site',
@@ -794,17 +819,17 @@
 	        });
 	    }]);
 	
-	    __webpack_require__(20)(app);
 	    __webpack_require__(21)(app);
 	    __webpack_require__(22)(app);
 	    __webpack_require__(23)(app);
 	    __webpack_require__(24)(app);
 	    __webpack_require__(25)(app);
-	    __webpack_require__(28)(app);
+	    __webpack_require__(26)(app);
+	    __webpack_require__(29)(app);
 	};
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -869,7 +894,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -897,17 +922,6 @@
 	        };
 	
 	        $scope.init = function () {
-	
-	            TagService.listAll().then(function (data) {
-	                if (data.code === 200) {
-	                    var tags = data.msg.tags;
-	                    var tagNames = [];
-	                    for (var i = 0, len = tags.length; i < len; i++) {
-	                        tagNames.push(tags[i].name.toString());
-	                    }
-	                    $scope.tagNames = tagNames;
-	                }
-	            });
 	            if (isAdd) {
 	                $scope.article.isAdd = true;
 	            } else {
@@ -1069,7 +1083,7 @@
 	};
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1118,7 +1132,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1157,7 +1171,7 @@
 	};
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1232,14 +1246,14 @@
 	};
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = function (app) {
-		__webpack_require__(26)(app);
 		__webpack_require__(27)(app);
+		__webpack_require__(28)(app);
 	
 		app.controller('ProfileController', ['$scope', '$rootScope', '$http', '$state', 'toasty', function ($scope, $rootScope, $http, $state, toasty) {
 			if ($state.is('profile')) $state.go('profile.info');
@@ -1266,7 +1280,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1291,7 +1305,7 @@
 	};
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1334,7 +1348,7 @@
 	};
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

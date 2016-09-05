@@ -22,7 +22,7 @@ module.exports = function(app) {
                     $scope.count = data.msg.count;
                 });
             };
-
+        
             $scope.init = function() {
                 $scope.list();
             };
@@ -38,7 +38,7 @@ module.exports = function(app) {
                                     return;
                                 }
                             }
-                        } 
+                        }
                     });
                 }
             };
