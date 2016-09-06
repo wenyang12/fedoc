@@ -12,6 +12,9 @@
 @import "./tpls/profile/index";
 @import "./tpls/sites/index";
 
+span[id^=cnzz_stat_icon]{
+	display:none;
+}
 .fedoc__body {
 	background: white;
 }
