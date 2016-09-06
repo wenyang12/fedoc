@@ -39,7 +39,7 @@ module.exports = function(myModule) {
                                     if (data.code === 200) {
                                         var user = data.msg.user;
                                         $rootScope.user = user;
-                                        toasty.success('登陆成功');
+                                        toasty.success('登录成功');
                                         $rootScope.$broadcast('userChange', {
                                             user: user
                                         });
