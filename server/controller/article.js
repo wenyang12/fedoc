@@ -62,7 +62,7 @@ exports.delete = function(req, res) {
     var articleId = req.params.articleId;
     var query = {
         _id: articleId,
-        user: userId
+        user: req.user._id
     };
 
     if (req.user.isAdmin) {
