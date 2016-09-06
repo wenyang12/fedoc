@@ -653,6 +653,9 @@ h1, h2, h3, h4, h5, h6 {
     right: 10px;
     font-size: 20px; }
 
+span[id^=cnzz_stat_icon] {
+  display: none; }
+
 .fedoc__body {
   background: white; }
 
