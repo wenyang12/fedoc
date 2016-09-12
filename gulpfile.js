@@ -8,6 +8,7 @@ var path = require('path'),
     minifyCSS = require('gulp-minify-css'),
     minifyHTML = require('gulp-minify-html'),
     uglify = require('gulp-uglify'),
+    concat = require('gulp-concat'),
     webpack = require("webpack"),
     del = require('del'),
     $$ = require('gulp-load-plugins')(),
@@ -28,6 +29,34 @@ var paths = {
         root: 'client/dist/',
         build: 'client/dist/build/',
         site: 'client/dist/site/'
+    },
+    assets: {
+        js: [
+            'client/src/assets/libs/angular/angular.min.js',
+            'client/src/assets/libs/markdown-it/markdown-it.min.js',
+            'client/src/assets/libs/lodash/lodash.min.js',
+            'client/src/assets/libs/angular-sanitize/angular-sanitize.min.js',
+            'client/src/assets/libs/angular-ui-router/angular-ui-router.min.js',
+            'client/src/assets/libs/restangular/restangular.min.js',
+            'client/src/assets/libs/angular-ui-bootstrap/angular-ui-bootstrap.min.js',
+            'client/src/assets/libs/angular-toasty/angular-toasty.min.js',
+            'client/src/assets/libs/angular-file-upload/angular-file-upload.min.js',
+            'client/src/assets/libs/angular-animate/angular-animate.min.js',
+            'client/src/assets/libs/angular-busy/angular-busy.min.js',
+            'client/src/assets/libs/simplemde/simplemde.min.js',
+            'client/src/assets/libs/jquery/dist/jquery.min.js',
+            'client/src/assets/libs/duoshuo/duoshuo.js',
+            'client/src/assets/libs/loading-bar/loading-bar.min.js'
+        ],
+        css: [
+            'client/src/assets/libs/bootstrap//bootstrap.min.css',
+            'client/src/assets/libs/angular-toasty/angular-toasty.min.css',
+            'client/src/assets/libs/Font-Awesome/css/font-awesome.min.css',
+            'client/src/assets/libs/simplemde/simplemde.min.css',
+            'client/src/assets/libs/github-markdown-css/github-markdown.css',
+            'client/src/assets/libs/angular-busy/angular-busy.min.css',
+            'client/src/assets/libs/loading-bar/loading-bar.min.css'
+        ]
     }
 };
 
@@ -36,6 +65,23 @@ var myDevConfig = webpackConfig;
 myDevConfig.devtool = "sourcemap";
 myDevConfig.debug = true;
 var devCompiler = webpack(myDevConfig);
+
+
+//构建js插件集合
+gulp.task('concat:assets:js', function() {
+    return gulp.src(paths.assets.js)
+        .pipe(concat('vendor.js'))
+        .pipe(gulp.dest('client/src/build'));
+});
+
+gulp.task('concat:assets:css', function() {
+    return gulp.src(paths.assets.css)
+        .pipe(concat('vendor.css'))
+        .pipe(gulp.dest('client/src/build'));
+});
+
+
+
 
 gulp.task("webpack:build-dev", function(callback) {
     devCompiler.run(function(err, stats) {
@@ -120,6 +166,7 @@ gulp.task('htmlmin', function(cb) {
         .pipe(gulp.dest(paths.dist.root));
     return cb(null);
 });
+
 
 gulp.task('watch', function() {
     gulp.watch(paths.js, ["webpack:build-dev"]);
