@@ -18,7 +18,7 @@ module.exports = function(myModule) {
                     $element.on('click', function() {
                         $(window.document.body).animate({
                             scrollTop: 0
-                        }, 550);
+                        }, 200);
                     });
                 }
             };
