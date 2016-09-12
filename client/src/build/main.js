@@ -50,17 +50,34 @@
 	__webpack_require__(1)(angular);
 	__webpack_require__(11)(angular);
 	__webpack_require__(13)(angular);
-	var app = angular.module('app', ['ui.router', 'restangular', 'ui.bootstrap', 'siteModules', 'siteServices', 'siteFilters', 'cgBusy', 'angular-toasty', 'angularFileUpload']);
+	var app = angular.module('app', ['ui.router', 'restangular', 'ui.bootstrap', 'siteModules', 'siteServices', 'siteFilters', 'cgBusy', 'angular-toasty', 'angularFileUpload', 'angular-loading-bar']);
 	
 	app.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
 	    $rootScope.$state = $state;
 	    $rootScope.$stateParams = $stateParams;
-	}]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+	}]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 	    $urlRouterProvider.otherwise('/site');
 	}]);
 	
-	app.config(['toastyConfigProvider', function (toastyConfigProvider) {
-	    toastyConfigProvider.setConfig({});
+	app.config(['$httpProvider', function ($httpProvider) {
+	    // reponse拦截器，判断session过期等场景
+	    var interceptor = ['$q', '$rootScope', 'cfpLoadingBar', function ($q, $rootScope, cfpLoadingBar) {
+	        return {
+	            response: function response(resp) {
+	                cfpLoadingBar.complete();
+	                return resp;
+	            },
+	            request: function request(config) {
+	                cfpLoadingBar.start();
+	                return config;
+	            }
+	        };
+	    }];
+	    $httpProvider.interceptors.push(interceptor);
+	}]);
+	
+	app.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+	    cfpLoadingBarProvider.includeSpinner = false;
 	}]);
 	
 	// Restangular
