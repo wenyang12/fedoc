@@ -281,6 +281,7 @@ h1, h2, h3, h4, h5, h6 {
 .typo img {
   max-width: 100%; }
 
+/*modules*/
 .fedoc-header {
   background-color: white;
   -moz-border-radius: 0;
@@ -347,6 +348,12 @@ h1, h2, h3, h4, h5, h6 {
   transition: left 0.2s ease-in; }
   .yy-freshman:hover {
     left: -104px; }
+
+.fedoc-header--fixed {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10; }
 
 .user-icon {
   display: inline-block;
@@ -438,6 +445,11 @@ h1, h2, h3, h4, h5, h6 {
   .hot-articles .fa-fire {
     color: #CC3300; }
 
+/*services*/
+.fedoc-modal {
+  margin-top: 150px; }
+
+/*tpls*/
 .fedoc__body__articles--right {
   min-height: 1010px;
   padding: 15px; }
@@ -658,11 +670,15 @@ h1, h2, h3, h4, h5, h6 {
     right: 10px;
     font-size: 20px; }
 
+/*others*/
 span[id^=cnzz_stat_icon] {
   display: none; }
 
 .fedoc__body {
   background: white; }
+
+.pdt80 {
+  padding-top: 80px; }
 
 .fedoc__footer {
   text-align: center;

@@ -1,4 +1,5 @@
 .fedoc-header {
+
 	background-color: white;
 	.fedoc-header__nav {
 		position: relative;
@@ -71,4 +72,11 @@
 	&:hover {
 		left: -104px;
 	}
+}
+
+.fedoc-header--fixed{
+	position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
 }

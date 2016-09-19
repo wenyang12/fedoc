@@ -1,17 +1,27 @@
 @import "compass"; //base
 //
-@import "./base/index"; // modules
+@import "./base/index";
+
+/*modules*/
 @import "./modules/header/index";
 @import "./modules/user-icon/index";
 @import "./modules/article-tags/index";
 @import "./modules/btn-to-top/index";
-@import "./modules/hot-articles/index"; // tpls
+@import "./modules/hot-articles/index";
+
+/*services*/
+@import "./services/modal/index";
+
+
+/*tpls*/
 @import "./tpls/articles/index";
 @import "./tpls/article/index";
 @import "./tpls/users/index";
 @import "./tpls/profile/index";
 @import "./tpls/sites/index";
 
+
+/*others*/
 span[id^=cnzz_stat_icon]{
 	display:none;
 }
@@ -19,6 +29,9 @@ span[id^=cnzz_stat_icon]{
 	background: white;
 }
 
+.pdt80{
+	padding-top: 80px;
+}
 .fedoc__footer {
 	text-align: center;
 	margin: 40px auto 0;

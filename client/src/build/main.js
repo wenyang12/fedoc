@@ -133,13 +133,13 @@
 	        });
 	    }]);
 	
-	    __webpack_require__(14)(app);
-	    __webpack_require__(15)(app);
-	    __webpack_require__(16)(app);
-	    __webpack_require__(17)(app);
-	    __webpack_require__(18)(app);
-	    __webpack_require__(19)(app);
-	    __webpack_require__(20)(app);
+	    __webpack_require__(5)(app);
+	    __webpack_require__(6)(app);
+	    __webpack_require__(7)(app);
+	    __webpack_require__(8)(app);
+	    __webpack_require__(9)(app);
+	    __webpack_require__(10)(app);
+	    __webpack_require__(11)(app);
 	};
 
 /***/ },
@@ -150,14 +150,14 @@
 	
 	module.exports = function (angular) {
 		var siteModules = angular.module('siteModules', ['ngSanitize']);
-		__webpack_require__(5)(siteModules);
-		__webpack_require__(6)(siteModules);
-		__webpack_require__(7)(siteModules);
-		__webpack_require__(8)(siteModules);
-		__webpack_require__(9)(siteModules);
-		__webpack_require__(10)(siteModules);
-		__webpack_require__(11)(siteModules);
 		__webpack_require__(12)(siteModules);
+		__webpack_require__(13)(siteModules);
+		__webpack_require__(14)(siteModules);
+		__webpack_require__(15)(siteModules);
+		__webpack_require__(16)(siteModules);
+		__webpack_require__(17)(siteModules);
+		__webpack_require__(18)(siteModules);
+		__webpack_require__(19)(siteModules);
 	};
 
 /***/ },
@@ -168,7 +168,7 @@
 	
 	module.exports = function (angular) {
 		var siteFilters = angular.module('siteFilters', []);
-		__webpack_require__(13)(siteFilters);
+		__webpack_require__(20)(siteFilters);
 	};
 
 /***/ },
@@ -180,428 +180,15 @@
 	module.exports = function (angular) {
 		var siteServices = angular.module('siteServices', ['restangular']);
 		__webpack_require__(21)(siteServices);
-		__webpack_require__(24)(siteServices);
 		__webpack_require__(22)(siteServices);
 		__webpack_require__(23)(siteServices);
+		__webpack_require__(24)(siteServices);
 		__webpack_require__(25)(siteServices);
 		__webpack_require__(26)(siteServices);
 	};
 
 /***/ },
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-	    myModule.directive('siteHeader', [function factory() {
-	        var directive = {
-	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-	            replace: 'true',
-	            templateUrl: '/site/modules/header/index.html',
-	            link: function link($scope) {
-	                $scope.userMenus = [{
-	                    title: '管理',
-	                    subMenus: [{
-	                        title: '新增分类',
-	                        sref: 'addTag'
-	                    }, {
-	                        title: '新增成员',
-	                        sref: 'addUser'
-	                    }, {
-	                        title: '成员列表',
-	                        sref: 'users'
-	                    }]
-	                }];
-	            },
-	            scope: false,
-	            controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', '$loginModal', '$regModal', function ($scope, $rootScope, $stateParams, $state, $http, $loginModal, $regModal) {
-	
-	                //监听 - 缩略图被点击
-	                $scope.$on('userChange', function (event, data) {
-	                    if (data) {
-	                        $scope.user = data.user;
-	                    }
-	                });
-	                $scope.isLogin = function () {
-	                    $http({
-	                        method: 'post',
-	                        url: "/api/sign/isLogin"
-	                    }).success(function (data, status, headers, config) {
-	                        if (data.code === 200) {
-	                            var user = data.msg.user;
-	                            $rootScope.user = user;
-	                            $scope.user = user;
-	                        }
-	                    });
-	                };
-	                $scope.isLogin();
-	                $scope.searchBox = {
-	                    keyword: '',
-	                    active: false
-	                };
-	                $scope.searchKeyword = function () {
-	                    $state.go('articles', {
-	                        tag: $stateParams.tag,
-	                        page: $stateParams.page,
-	                        keyword: $scope.searchBox.keyword
-	                    });
-	                };
-	                $scope.signin = function () {
-	                    $loginModal.init();
-	                };
-	                $scope.reg = function () {
-	                    $regModal.init();
-	                };
-	                $scope.enableSearchBox = function () {
-	                    $scope.searchBox.active = true;
-	                    $('.j-search-box__input').focus();
-	                };
-	                $scope.disableSearchBox = function () {
-	                    $scope.searchBox.active = false;
-	                    $scope.searchBox.keyword = '';
-	                };
-	                $scope.signout = function ($event) {
-	                    window.location.replace('\/api\/sign\/out');
-	                    $event.preventDefault();
-	                    $event.stopPropagation();
-	                    return false;
-	                };
-	            }]
-	        };
-	        return directive;
-	    }]);
-	};
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-	    myModule.directive('fedocPagination', ['$location', function factory($location) {
-	        var directive = {
-	            restrict: 'E', //指令的使用方式，包括标签，属性，类，注释
-	            templateUrl: '/site/modules/pagination/index.html', //从指定的url地址加载模板
-	            replace: true, // //是否用模板替换当前元素，若为false，则append在当前元素上
-	            transclude: true, //是否将当前元素的内容转移到模板中
-	            require: "ngModel",
-	            scope: {
-	                ngModel: '=',
-	                turn: '&'
-	            },
-	            link: function link($scope, $element, $attrs, $transclude, ngModel) {
-	                $scope.$watch('ngModel', function (value) {
-	                    if (value) {
-	                        $scope.pagination = value;
-	                    }
-	                });
-	
-	                if (!$attrs.turn) {
-	                    //刷新页面
-	                    $scope.search = function (page) {
-	                        var query = $location.search();
-	                        query.page = page;
-	                        $location.path($location.path()).search(query);
-	                    };
-	                } else {
-	                    $scope.search = function (page) {
-	                        $scope.turn({
-	                            data: page
-	                        });
-	                    };
-	                }
-	            }
-	        };
-	        return directive;
-	    }]);
-	};
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-	
-	    var md = __webpack_require__(27)({
-	        html: true,
-	        linkify: true,
-	        typographer: true
-	    });
-	    var addLinkTarget = function addLinkTarget(code) {
-	        var pattern = /a href=/g;
-	        return code.replace(pattern, "a target='_blank' href=");
-	    };
-	    myModule.directive('fedocMarkdown', ['$sanitize', function ($sanitize) {
-	        return {
-	            restrict: 'AE',
-	            link: function link(scope, element, attrs) {
-	                if (attrs.fedocMarkdown) {
-	                    scope.$watch(attrs.fedocMarkdown, function (newVal) {
-	                        var html = newVal ? $sanitize(md.render(newVal)) : '';
-	                        html = addLinkTarget(html);
-	                        element.html(html);
-	                    });
-	                } else {
-	                    var html = $sanitize(md.render(element.text()));
-	                    html = addLinkTarget(html);
-	                    element.html(html);
-	                }
-	            }
-	        };
-	    }]);
-	};
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-		//回车按钮
-		myModule.directive('fedocEnter', function () {
-			return {
-				restrict: 'AC',
-				link: function link($scope, $element, $attr) {
-					$element.bind("keydown", function ($event) {
-						if (event.which === 13) {
-							$scope.$apply(function () {
-								$scope.$eval($attr.fedocEnter);
-							});
-							$event.stopPropagation();
-							return false;
-						}
-					});
-				}
-			};
-		});
-	};
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-	    myModule.directive('articleTags', [function factory() {
-	        var directive = {
-	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-	            replace: 'true',
-	            templateUrl: '/site/modules/article-tags/index.html',
-	            scope: false,
-	            controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', '$loginModal', function ($scope, toasty, $rootScope, TagService, $stateParams, $state, $loginModal) {
-	
-	                TagService.listAll().then(function (data) {
-	                    if (data.code === 200) {
-	                        window.tags = data.msg.tags;
-	                        $scope.tags = data.msg.tags;
-	                    }
-	                });
-	
-	                $scope.tag = $stateParams.tag || '';
-	
-	                $scope.choose = function ($event, tag) {
-	                    $scope.tag = tag;
-	                    var opts = {
-	                        tag: tag
-	                    };
-	                    if (tag !== $stateParams.tag) {
-	                        opts.page = 1;
-	                    }
-	                    $state.go('articles', opts);
-	                    $event.stopPropagation();
-	                    return;
-	                };
-	
-	                $scope.goWrite = function () {
-	                    if ($rootScope.user) {
-	                        $state.go('addArticle');
-	                    } else {
-	                        $loginModal.init({
-	                            onLogined: function onLogined() {
-	                                $state.go('addArticle');
-	                            }
-	                        });
-	                    }
-	                };
-	                $scope.delTag = function ($event, tag) {
-	                    if (confirm('确认删除该分类吗')) {
-	                        TagService.remove(tag._id).then(function (data) {
-	                            if (data.code === 200) {
-	                                toasty.success('删除分类成功');
-	                                for (var i = 0, len = $scope.tags.length; i < len; i++) {
-	                                    if ($scope.tags[i]._id === tag._id) {
-	                                        $scope.tags.splice(i, 1);
-	                                        if ($scope.tag === tag.name) {
-	                                            $state.go('articles', {
-	                                                tag: ''
-	                                            });
-	                                        }
-	                                        return;
-	                                    }
-	                                }
-	                            }
-	                        });
-	                    }
-	                    $event.stopPropagation();
-	                    return;
-	                };
-	            }]
-	        };
-	        return directive;
-	    }]);
-	};
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-	    myModule.directive('btnToTop', ['$window', function factory($window) {
-	        var directive = {
-	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-	            replace: 'true',
-	            template: ' <div class="btn-gotop"></div>',
-	            scope: false,
-	            link: function link($scope, $element, $attrs) {
-	                angular.element($window).bind("scroll", function (e) {
-	                    var scrollTop = window.document.body.scrollTop;
-	                    if (scrollTop > 40) {
-	                        $element.addClass('btn-gotop--active');
-	                    } else {
-	                        $element.removeClass('btn-gotop--active');
-	                    }
-	                });
-	                $element.on('click', function () {
-	                    $(window.document.body).animate({
-	                        scrollTop: 0
-	                    }, 200);
-	                });
-	            }
-	        };
-	        return directive;
-	    }]);
-	};
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-	    myModule.directive('hotArticles', [function factory() {
-	        var directive = {
-	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-	            replace: 'true',
-	            templateUrl: '/site/modules/hot-articles/index.html',
-	            scope: true,
-	            controller: ['$scope', 'toasty', '$rootScope', 'ArticleService', '$stateParams', '$state', function ($scope, toasty, $rootScope, ArticleService, $stateParams, $state) {
-	                if (window.hotArticles) {
-	                    $scope.articles = window.hotArticles;
-	                } else {
-	                    ArticleService.listHot().then(function (data) {
-	                        if (data.code === 200) {
-	                            window.hotArticles = data.msg.articles;
-	                            $scope.articles = data.msg.articles;
-	                        }
-	                    });
-	                }
-	            }]
-	        };
-	        return directive;
-	    }]);
-	};
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-	    myModule.directive('userIcon', [function factory() {
-	        var directive = {
-	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
-	            replace: true, // //是否用模板替换当前元素，若为false，则append在当前元素上
-	            transclude: true, //是否将当前元素的内容转移到模板中
-	            scope: {
-	                name: "@name"
-	            },
-	            templateUrl: '/site/modules/user-icon/index.html'
-	        };
-	        return directive;
-	    }]);
-	};
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-		myModule.filter('dayDisplay', ['$filter', function ($filter) {
-			var standardDateFilterFn = $filter('date');
-			return function (data) {
-				if (data == null || data == '') {
-					return '';
-				} else {
-					return standardDateFilterFn(data, 'yyyy-MM-dd');
-				}
-			};
-		}]);
-		myModule.filter('dateDisplay', ['$filter', function ($filter) {
-			var standardDateFilterFn = $filter('date');
-			return function (data) {
-				if (data == null || data == '') {
-					return '';
-				} else {
-					return standardDateFilterFn(data, 'yyyy-MM-dd HH:mm');
-				}
-			};
-		}]);
-	
-		myModule.filter('dateAgo', ['$filter', function ($filter) {
-			var standardDateFilterFn = $filter('date');
-			return function (data) {
-				if (data == null || data == '') {
-					return '';
-				} else {
-					var nowSt = new Date().getTime();
-					var meSt = new Date(data).getTime();
-					var timeDistance = parseInt((nowSt - meSt) / 1000); //差距多少秒
-					if (timeDistance < 60) {
-						//小于60秒
-						return parseInt(timeDistance) + '秒前';
-					} else if (timeDistance < 3600) {
-						//小于60分钟
-						return parseInt(timeDistance / 60) + '分钟前';
-					} else if (timeDistance < 3600 * 24) {
-						//小于24小时
-						return parseInt(timeDistance / 3600) + '小时前';
-					} else if (timeDistance < 3600 * 24 * 30) {
-						//小于30天
-						return parseInt(timeDistance / (3600 * 24)) + '天前';
-					} else if (timeDistance < 3600 * 24 * 30 * 365) {
-						return parseInt(timeDistance / (3600 * 24 * 30)) + '月前';
-					} else {
-						return parseInt(timeDistance / (3600 * 24 * 30 * 12)) + '年前';
-					}
-				}
-			};
-		}]);
-	};
-
-/***/ },
-/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -666,7 +253,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -855,7 +442,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -904,7 +491,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -943,7 +530,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1018,7 +605,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1052,7 +639,7 @@
 	};
 
 /***/ },
-/* 20 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1110,6 +697,419 @@
 	};
 
 /***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+	    myModule.directive('siteHeader', [function factory() {
+	        var directive = {
+	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	            replace: 'true',
+	            templateUrl: '/site/modules/header/index.html',
+	            link: function link($scope) {
+	                $scope.userMenus = [{
+	                    title: '管理',
+	                    subMenus: [{
+	                        title: '新增分类',
+	                        sref: 'addTag'
+	                    }, {
+	                        title: '新增成员',
+	                        sref: 'addUser'
+	                    }, {
+	                        title: '成员列表',
+	                        sref: 'users'
+	                    }]
+	                }];
+	            },
+	            scope: false,
+	            controller: ['$scope', '$rootScope', '$stateParams', '$state', '$http', '$loginModal', '$regModal', function ($scope, $rootScope, $stateParams, $state, $http, $loginModal, $regModal) {
+	
+	                //监听 - 缩略图被点击
+	                $scope.$on('userChange', function (event, data) {
+	                    if (data) {
+	                        $scope.user = data.user;
+	                    }
+	                });
+	                $scope.isLogin = function () {
+	                    $http({
+	                        method: 'post',
+	                        url: "/api/sign/isLogin"
+	                    }).success(function (data, status, headers, config) {
+	                        if (data.code === 200) {
+	                            var user = data.msg.user;
+	                            $rootScope.user = user;
+	                            $scope.user = user;
+	                        }
+	                    });
+	                };
+	                $scope.isLogin();
+	                $scope.searchBox = {
+	                    keyword: '',
+	                    active: false
+	                };
+	                $scope.searchKeyword = function () {
+	                    $state.go('articles', {
+	                        tag: $stateParams.tag,
+	                        page: $stateParams.page,
+	                        keyword: $scope.searchBox.keyword
+	                    });
+	                };
+	                $scope.signin = function () {
+	                    $loginModal.init();
+	                };
+	                $scope.reg = function () {
+	                    $regModal.init();
+	                };
+	                $scope.enableSearchBox = function () {
+	                    $scope.searchBox.active = true;
+	                    $('.j-search-box__input').focus();
+	                };
+	                $scope.disableSearchBox = function () {
+	                    $scope.searchBox.active = false;
+	                    $scope.searchBox.keyword = '';
+	                };
+	                $scope.signout = function ($event) {
+	                    window.location.replace('\/api\/sign\/out');
+	                    $event.preventDefault();
+	                    $event.stopPropagation();
+	                    return false;
+	                };
+	            }]
+	        };
+	        return directive;
+	    }]);
+	};
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+	    myModule.directive('fedocPagination', ['$location', function factory($location) {
+	        var directive = {
+	            restrict: 'E', //指令的使用方式，包括标签，属性，类，注释
+	            templateUrl: '/site/modules/pagination/index.html', //从指定的url地址加载模板
+	            replace: true, // //是否用模板替换当前元素，若为false，则append在当前元素上
+	            transclude: true, //是否将当前元素的内容转移到模板中
+	            require: "ngModel",
+	            scope: {
+	                ngModel: '=',
+	                turn: '&'
+	            },
+	            link: function link($scope, $element, $attrs, $transclude, ngModel) {
+	                $scope.$watch('ngModel', function (value) {
+	                    if (value) {
+	                        $scope.pagination = value;
+	                    }
+	                });
+	
+	                if (!$attrs.turn) {
+	                    //刷新页面
+	                    $scope.search = function (page) {
+	                        var query = $location.search();
+	                        query.page = page;
+	                        $location.path($location.path()).search(query);
+	                    };
+	                } else {
+	                    $scope.search = function (page) {
+	                        $scope.turn({
+	                            data: page
+	                        });
+	                    };
+	                }
+	            }
+	        };
+	        return directive;
+	    }]);
+	};
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+	
+	    var md = __webpack_require__(27)({
+	        html: true,
+	        linkify: true,
+	        typographer: true
+	    });
+	    var addLinkTarget = function addLinkTarget(code) {
+	        var pattern = /a href=/g;
+	        return code.replace(pattern, "a target='_blank' href=");
+	    };
+	    myModule.directive('fedocMarkdown', ['$sanitize', function ($sanitize) {
+	        return {
+	            restrict: 'AE',
+	            link: function link(scope, element, attrs) {
+	                if (attrs.fedocMarkdown) {
+	                    scope.$watch(attrs.fedocMarkdown, function (newVal) {
+	                        var html = newVal ? $sanitize(md.render(newVal)) : '';
+	                        html = addLinkTarget(html);
+	                        element.html(html);
+	                    });
+	                } else {
+	                    var html = $sanitize(md.render(element.text()));
+	                    html = addLinkTarget(html);
+	                    element.html(html);
+	                }
+	            }
+	        };
+	    }]);
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+		//回车按钮
+		myModule.directive('fedocEnter', function () {
+			return {
+				restrict: 'AC',
+				link: function link($scope, $element, $attr) {
+					$element.bind("keydown", function ($event) {
+						if (event.which === 13) {
+							$scope.$apply(function () {
+								$scope.$eval($attr.fedocEnter);
+							});
+							$event.stopPropagation();
+							return false;
+						}
+					});
+				}
+			};
+		});
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+	    myModule.directive('articleTags', [function factory() {
+	        var directive = {
+	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	            replace: 'true',
+	            templateUrl: '/site/modules/article-tags/index.html',
+	            scope: false,
+	            controller: ['$scope', 'toasty', '$rootScope', 'TagService', '$stateParams', '$state', '$loginModal', function ($scope, toasty, $rootScope, TagService, $stateParams, $state, $loginModal) {
+	
+	                TagService.listAll().then(function (data) {
+	                    if (data.code === 200) {
+	                        window.tags = data.msg.tags;
+	                        $scope.tags = data.msg.tags;
+	                    }
+	                });
+	
+	                $scope.tag = $stateParams.tag || '';
+	
+	                $scope.choose = function ($event, tag) {
+	                    $scope.tag = tag;
+	                    var opts = {
+	                        tag: tag
+	                    };
+	                    if (tag !== $stateParams.tag) {
+	                        opts.page = 1;
+	                    }
+	                    $state.go('articles', opts);
+	                    $event.stopPropagation();
+	                    return;
+	                };
+	
+	                $scope.goWrite = function () {
+	                    if ($rootScope.user) {
+	                        $state.go('addArticle');
+	                    } else {
+	                        $loginModal.init({
+	                            onLogined: function onLogined() {
+	                                $state.go('addArticle');
+	                            }
+	                        });
+	                    }
+	                };
+	                $scope.delTag = function ($event, tag) {
+	                    if (confirm('确认删除该分类吗')) {
+	                        TagService.remove(tag._id).then(function (data) {
+	                            if (data.code === 200) {
+	                                toasty.success('删除分类成功');
+	                                for (var i = 0, len = $scope.tags.length; i < len; i++) {
+	                                    if ($scope.tags[i]._id === tag._id) {
+	                                        $scope.tags.splice(i, 1);
+	                                        if ($scope.tag === tag.name) {
+	                                            $state.go('articles', {
+	                                                tag: ''
+	                                            });
+	                                        }
+	                                        return;
+	                                    }
+	                                }
+	                            }
+	                        });
+	                    }
+	                    $event.stopPropagation();
+	                    return;
+	                };
+	            }]
+	        };
+	        return directive;
+	    }]);
+	};
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+	    myModule.directive('btnToTop', ['$window', function factory($window) {
+	        var directive = {
+	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	            replace: 'true',
+	            template: ' <div class="btn-gotop"></div>',
+	            scope: false,
+	            link: function link($scope, $element, $attrs) {
+	                angular.element($window).bind("scroll", function (e) {
+	                    var scrollTop = window.document.body.scrollTop;
+	                    if (scrollTop > 40) {
+	                        $element.addClass('btn-gotop--active');
+	                    } else {
+	                        $element.removeClass('btn-gotop--active');
+	                    }
+	                });
+	                $element.on('click', function () {
+	                    $(window.document.body).animate({
+	                        scrollTop: 0
+	                    }, 200);
+	                });
+	            }
+	        };
+	        return directive;
+	    }]);
+	};
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+	    myModule.directive('hotArticles', [function factory() {
+	        var directive = {
+	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	            replace: 'true',
+	            templateUrl: '/site/modules/hot-articles/index.html',
+	            scope: true,
+	            controller: ['$scope', 'toasty', '$rootScope', 'ArticleService', '$stateParams', '$state', function ($scope, toasty, $rootScope, ArticleService, $stateParams, $state) {
+	                if (window.hotArticles) {
+	                    $scope.articles = window.hotArticles;
+	                } else {
+	                    ArticleService.listHot().then(function (data) {
+	                        if (data.code === 200) {
+	                            window.hotArticles = data.msg.articles;
+	                            $scope.articles = data.msg.articles;
+	                        }
+	                    });
+	                }
+	            }]
+	        };
+	        return directive;
+	    }]);
+	};
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+	    myModule.directive('userIcon', [function factory() {
+	        var directive = {
+	            restrict: 'E', // 指令的使用方式，包括标签，属性，类，注释
+	            replace: true, // //是否用模板替换当前元素，若为false，则append在当前元素上
+	            transclude: true, //是否将当前元素的内容转移到模板中
+	            scope: {
+	                name: "@name"
+	            },
+	            templateUrl: '/site/modules/user-icon/index.html'
+	        };
+	        return directive;
+	    }]);
+	};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+		myModule.filter('dayDisplay', ['$filter', function ($filter) {
+			var standardDateFilterFn = $filter('date');
+			return function (data) {
+				if (data == null || data == '') {
+					return '';
+				} else {
+					return standardDateFilterFn(data, 'yyyy-MM-dd');
+				}
+			};
+		}]);
+		myModule.filter('dateDisplay', ['$filter', function ($filter) {
+			var standardDateFilterFn = $filter('date');
+			return function (data) {
+				if (data == null || data == '') {
+					return '';
+				} else {
+					return standardDateFilterFn(data, 'yyyy-MM-dd HH:mm');
+				}
+			};
+		}]);
+	
+		myModule.filter('dateAgo', ['$filter', function ($filter) {
+			var standardDateFilterFn = $filter('date');
+			return function (data) {
+				if (data == null || data == '') {
+					return '';
+				} else {
+					var nowSt = new Date().getTime();
+					var meSt = new Date(data).getTime();
+					var timeDistance = parseInt((nowSt - meSt) / 1000); //差距多少秒
+					if (timeDistance < 60) {
+						//小于60秒
+						return parseInt(timeDistance) + '秒前';
+					} else if (timeDistance < 3600) {
+						//小于60分钟
+						return parseInt(timeDistance / 60) + '分钟前';
+					} else if (timeDistance < 3600 * 24) {
+						//小于24小时
+						return parseInt(timeDistance / 3600) + '小时前';
+					} else if (timeDistance < 3600 * 24 * 30) {
+						//小于30天
+						return parseInt(timeDistance / (3600 * 24)) + '天前';
+					} else if (timeDistance < 3600 * 24 * 30 * 365) {
+						return parseInt(timeDistance / (3600 * 24 * 30)) + '月前';
+					} else {
+						return parseInt(timeDistance / (3600 * 24 * 30 * 12)) + '年前';
+					}
+				}
+			};
+		}]);
+	};
+
+/***/ },
 /* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1153,61 +1153,6 @@
 	'use strict';
 	
 	module.exports = function (myModule) {
-		myModule.factory('TagService', ['Restangular', '$timeout', function (Restangular, $timeout) {
-			var baseRoute = Restangular.all('tags');
-			return {
-				listAll: function listAll(query) {
-					return baseRoute.customGET('', query);
-				},
-				getOne: function getOne(tagId) {
-					return baseRoute.one(tagId).customGET();
-				},
-				remove: function remove(tagId) {
-					return baseRoute.one(tagId).remove();
-				},
-				create: function create(tag) {
-					return baseRoute.customPOST(tag);
-				},
-				update: function update(tagId, tag) {
-					return baseRoute.one(tagId).customPUT(tag);
-				}
-			};
-		}]);
-	};
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
-		myModule.factory('$modalService', ['$modal', '$modalStack', function ($modal, $modalStack) {
-			var defaultOptions = {
-				backdrop: true,
-				keyboard: true,
-				windowClass: ''
-			};
-			return {
-				show: function show(options) {
-					var realOpt = _.cloneDeep(defaultOptions);
-					angular.extend(realOpt, options || {});
-					return $modal.open(realOpt).result;
-				},
-				dismissAll: function dismissAll() {
-					$modalStack.dismissAll();
-				}
-			};
-		}]);
-	};
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = function (myModule) {
 		myModule.factory('UserService', ['Restangular', '$timeout', function (Restangular, $timeout) {
 			var baseRoute = Restangular.all('users');
 			return {
@@ -1231,6 +1176,61 @@
 				},
 				updatePwd: function updatePwd(userId, user) {
 					return baseRoute.one(userId, 'pwd').customPUT(user);
+				}
+			};
+		}]);
+	};
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+		myModule.factory('TagService', ['Restangular', '$timeout', function (Restangular, $timeout) {
+			var baseRoute = Restangular.all('tags');
+			return {
+				listAll: function listAll(query) {
+					return baseRoute.customGET('', query);
+				},
+				getOne: function getOne(tagId) {
+					return baseRoute.one(tagId).customGET();
+				},
+				remove: function remove(tagId) {
+					return baseRoute.one(tagId).remove();
+				},
+				create: function create(tag) {
+					return baseRoute.customPOST(tag);
+				},
+				update: function update(tagId, tag) {
+					return baseRoute.one(tagId).customPUT(tag);
+				}
+			};
+		}]);
+	};
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function (myModule) {
+		myModule.factory('$modalService', ['$modal', '$modalStack', function ($modal, $modalStack) {
+			var defaultOptions = {
+				backdrop: true,
+				keyboard: true,
+				windowClass: 'fedoc-modal'
+			};
+			return {
+				show: function show(options) {
+					var realOpt = _.cloneDeep(defaultOptions);
+					angular.extend(realOpt, options || {});
+					return $modal.open(realOpt).result;
+				},
+				dismissAll: function dismissAll() {
+					$modalStack.dismissAll();
 				}
 			};
 		}]);

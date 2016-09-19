@@ -3,7 +3,7 @@ module.exports = function(myModule) {
 		var defaultOptions = {
 			backdrop: true,
 			keyboard: true,
-			windowClass: ''
+			windowClass: 'fedoc-modal'
 		};
 		return {
 			show: function(options) {
