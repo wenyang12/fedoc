@@ -10,15 +10,16 @@
         border: 1px solid rgba(0,0,0,0.075);
         border-bottom-color: rgba(0,0,0,0.125);
         border-radius: 4px;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05),0 5px 10px rgba(0,0,0,0.05);
+
         text-decoration: none;
-        @include transition(border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out);
+        @include transition(all 0.2s ease-out);
         position: relative;
         h3 {
             margin-bottom: 15px;
         }
         &:hover {
-            background-color: #eee;
+            @include box-shadow(0 1px 2px rgba(0,0,0,0.05),0 5px 10px rgba(0,0,0,0.05));
+            @include translateY(-6px);
         }
         .fa-star {
             color:#ed350a;
@@ -27,5 +28,6 @@
             right: 10px;
             font-size: 20px;
         }
+
     }
 }
