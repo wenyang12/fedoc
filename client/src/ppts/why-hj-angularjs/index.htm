@@ -1,0 +1,270 @@
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.2
+    site: https://github.com/ksky521/nodePPT
+    date:
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 汇聚前端angular架构分享 - By 汇聚前端组</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide" data-transition="zoomin"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>汇聚前端angular架构分享</h1>
+<h2>演讲者：汇聚前端组</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>背景</h1>
+<h2>汇聚业务的特点</h2>
+
+</hgroup><article>
+
+<ol class="rollIn">
+<li>任务多,开发时间紧,典型的CRUD场景</li>
+<li>业务多变,迭代快(每周二,四发版)</li>
+<li>历史backbone架构代码冗余高</li>
+<li>2B面向用户为运营人员,或其他公司代理商,用户人数规范为4000级别(万鹏确认)</li>
+<li>汇聚需要的是一个完整的前端解决方案,而不是一个简单的类库</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h3>为什么要从backbone迁移到angularjs架构</h3>
+
+</hgroup><article>
+
+<ol>
+<li>旧架构历史代码冗余严重，可复用化组件较为粗糙;</li>
+<li>无法很好的更细粒度的抽象出常用功能。比如多功能的表单控件，表格插件，表单验证，多角色访问视图状态控制;</li>
+<li>样式较为呆板，没有像bootstrap这样快速搭建页面布局的样式框架;</li>
+<li>使用人数不超过1000级别的规模，对网站的性能要求较低，对快速实现业务功能的要求较高;
+  用backbone这种以轻量级著称的框架有些不太符合应用场景，相关功能组件库较少;</li>
+<li>数据双向绑定功能较弱，代码较为繁琐，数据与DOM没有很好的分离，大量存在操作dom的代码，历史代码维护性较低;</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>契机</h2>
+<blockquote class="flexbox vleft">
+<p>在实现订单1.0的时候发现，对表单的应用较重，随着业务量的持续加重，新需求的加入，代码可维护性，对其他功能的干扰
+  较为重,不得不考虑新的开发方式.</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>架构规划路线</h2>
+<ul>
+<li>webpack(自动构建打包工具)</li>
+<li>angularjs(前端mvvm)</li>
+<li>angular-bootstrap-ui(成熟的UI组件库)</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>webpack</h1>
+<p><strong>（目前最强大的自动构建工具）</strong></p>
+<ol>
+<li>让我们可以很方便的引用npm上的相关组件</li>
+<li>打包机制让样式与JS合并解决在angular架构中路由处理上的麻烦</li>
+<li>webpack-dev-server极高效的监听及反向代理功能，摆脱了nginx繁琐的配置，让各个项目间proxy配置彼此独立且由自动构建自动运行
+     更有利于开发协作</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>angularjs</h1>
+<ol>
+<li>强大的双向绑定机制（当然也踩过不少坑）</li>
+<li>丰富的组件库</li>
+<li>自定义指令功能非常强大，内置指令ng-form表单验证功能效果极佳</li>
+<li>事情监听机制完善</li>
+<li>纵向切分业务组件，再横向组合，代码逻辑耦合度低</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>angular-bootstrap-ui</h1>
+<ol>
+<li>集成bootstrap3样式框架，能快速的搭建出界面且比之前的美观</li>
+<li>常用的UI组件基本集成，但需要经过二次封装，以便于统一调整及调用</li>
+<li>angularJS目前最强大的UI插件库，侧重点在pc端后台业务系统场景</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>选择angularjs1.X原因</h1>
+<blockquote>
+<p>我们为什么不使用angular2.0,react,vue,这些呼声正高的框架</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>个人思考</h1>
+<ol>
+<li>我们为什么不用react
+react面向移动端为主，相关PC端业务系统的插件较少，只是MVC中的V层，在大型业务系统中，
+     要搭配flux redux以及其他插件实现完整的架构功能，需要在架构开发以及组员培训上投入更多的时间。不符合程度3颗星</li>
+<li>我们为什么不使用vue   ?
+与angular同源，语法功能集多家所长，侧重点是全方向发展，以轻快著称，PC端业务系统应用较少，与业务系统相关的插件较少。
+      不符合程度4颗星</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image:url('./img/bg1.png')"><section class="slide-wrapper"><hgroup>
+<h2>angular的基础架构</h2>
+<h4>目录划分</h4>
+
+</hgroup><article>
+
+<pre><code class="javascript">+---build-scripts       //自动构建目录
++---dist                //生产模式构建生成目录
++---build                //开发模式构建生成目录
++---node_modules        //npm库
+\---src                 //前端目录
+    +---assets          //静态资源目录 如:图片,mp3,此类文件
+    |   \---images
+    +---common          //项目中公共文件 公共的样式,项目中有共性的模块(以指令或者服务的方式)
+    |   +---images
+    |   +---plugins
+    |   +---services
+    |   \---styles
+    +---common-components //git子仓库 多项目间共用 封装常用功能
+    |   +---directives    //多项目公共的指令 比如表格,表单,提示控件的封装
+    |   +---filters       //多项目公共的过滤器
+    |   \---services      //多项目公共的服务 比如:弹窗服务,ibssUtil工具类
+    +---common-frame      //git子仓库 项目的界面框架部分抽离 顶部栏,左侧导航栏,登录退出等
+    |   +---build-scripts //子仓库拥有单独的创建功能能够独立运行,或者嵌入到业务项目中
+    +---configs           //项目的全局性配置,比如ajax超时时间,开发时左侧导航栏菜单
+    +---views             //angular路由页面
+    |---app.js              //单页面入口js
+    |---index.html         //单页面入口html
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>angular的基础架构</h2>
+<h4>页面自动化路由处理</h4>
+<ul>
+<li><p>路由功能由angular-ui-router库提供</p>
+<pre><code class="javascript">//html部分
+&lt;div ui-view&gt;&lt;/div&gt;
+//注册路由
+app.config([&quot;$stateProvider&quot;, function ($stateProvider){
+  $stateProvider
+  .state(&quot;home&quot;, { //导航用的名字，如&lt;a ui-sref=&quot;login&quot;&gt;login&lt;/a&gt;里的login
+      url: &#39;/&#39;,    //访问路径
+      template:&#39;&lt;div&gt;模板内容......&lt;/div&gt;&#39;
+  })
+
+}]);
+</code></pre>
+</li>
+<li>/src/views   下面目录带有controller.js以及index.js会在构建的时候认为是路由页面</li>
+<li>根据文件路径拼装一个唯一性的state以及相应的url</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>遇到较常见的坑</h1>
+<ul>
+<li>指令,事件,过滤器的名称不能重复,否则会发生功能乱掉的问题</li>
+<li>事件绑定$on需要在$scope被销毁的时间进行解绑,否则会出现事件多重触发</li>
+<li>第三方指令尽可能的在二次封装后使用,以实现组件的可控性以降低风险</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>优化与挑战</h1>
+<ul>
+<li>一些较重的UI组件,考虑通过重写的方式,减少或放弃体积较大的库的使用</li>
+<li>支持自定义路由与强制路由的共存</li>
+<li>指令封装的易用性上的改进以统一的规范</li>
+<li>jade与sass的采用</li>
+<li>ES6的使用推广</li>
+<li>css的命令规范的推广</li>
+<li>angular2.0,react,vue等其他框架的技术储备(未来汇聚将会有手机端)</li>
+</ul>
+
+</article></section></slide>
+
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.2</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide2',
+    width: 1100,
+    dir: './',
+
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="./js/demo.js"></script>
+<link rel="stylesheet" href="./css/demo.css">
+
+<!--placeholder-->
+</body>
+</html>
