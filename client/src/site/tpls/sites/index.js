@@ -11,21 +11,27 @@ module.exports = function(app) {
                 name: '私有npm',
                 hot: true
             }, {
+                href: 'http://fe.firstshare.cn',
+                name: '文档平台',
+                hot: true
+            }, {
+                href: 'http://172.31.105.108:8888/?appid=FSAID_5f5e533/',
+                name: 'jsapi实时体验地址',
+                hot: true
+            }, {
                 href: 'http://rap.firstshare.cn/org/index.do',
                 name: '接口mock工具 - RAP',
                 hot: true
             }, {
-                href: 'http://fe.firstshare.cn',
-                name: '文档平台'
+                href: 'http://open.fxiaoke.com/open/uikit/',
+                name: 'uikit',
+                hot: true
             }, {
                 href: 'http://www.fspte.com/crmdoc/index.html#',
                 name: 'CRM前端文档'
             }, {
                 href: 'http://git.firstshare.cn/',
                 name: '基于gitlab代码仓库'
-            }, {
-                href: 'http://172.31.101.23:9080/',
-                name: 'sde,fte,fte2等环境前端部署'
             }, {
                 href: 'http://open.fsfte2.com/open/jsapi/doc/',
                 name: 'jsapi文档'
@@ -42,6 +48,8 @@ module.exports = function(app) {
                 href: 'http://172.31.101.16:12000/signin.html',
                 name: '微营销h5模板制作'
             }];
+
+
         }
     ]).config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider.state('sites', {
