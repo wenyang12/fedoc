@@ -454,6 +454,9 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 1010px;
   padding: 15px; }
 
+.fedoc__body__articles--left__breadcrumb {
+  background-color: #fff; }
+
 .fedoc__body__articles--left {
   border-right: 1px solid #E9E9E9;
   padding: 15px;
@@ -513,8 +516,7 @@ h1, h2, h3, h4, h5, h6 {
             background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAMCAYAAACji9dXAAAABGdBTUEAALGPC/xhBQAAABNJREFUCB1jePDgwX8mBiAgnQAA0tgDtpOZD7QAAAAASUVORK5CYII=");
             background-repeat: no-repeat;
             background-position: right;
-            color: #8c8c8c;
-            cursor: default; }
+            color: #8c8c8c; }
           .fedoc__body__articles--left .list .list__item .list__item__summary .list__item__summary__desc .list__item__summary__desc__time {
             color: #b5b5b5; }
       .fedoc__body__articles--left .list .list__item .list__item__data {

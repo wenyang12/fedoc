@@ -53,7 +53,7 @@
 				<user-icon name="{{getFirstLetter(article.user.nickname)}}" ng-if="article.user.avatar === 'http://7xohgg.com2.z0.glb.qiniucdn.com/images/avatar_120_120.png'"></user-icon>
 			</span>
 
-			<a class="fedoc-article--read__header__summary__nickname" ng-bind="article.user.nickname"></a>
+			<a class="fedoc-article--read__header__summary__nickname" ui-sref="viewUserArticles({userId:article.user._id})" ng-bind="article.user.nickname"></a>
 			<span class="fedoc-article--read__header__summary__times">
 			&nbsp;•&nbsp;
 			<span class="fedoc-article--read__header__summary__times-ago">

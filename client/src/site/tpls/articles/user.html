@@ -1,6 +1,8 @@
 <div class="row" class="fedoc__body__articles">
-	<div class="col-md-9 fedoc__body__articles--left" ng-init="init()">
-		<article-tags></article-tags>
+	<div class="col-md-9 fedoc__body__articles--left" ng-init="initUser()">
+    <ul class="breadcrumb fedoc__body__articles--left__breadcrumb">
+        <li><a href="/">主页</a><span class="divider">/</span></li>
+    </ul>
 		<div class="fx-loading pv150" ng-if="_loading"></div>
 		<ul class="list" ng-if="count">
 			<li class="list__item" ng-repeat="a in articles">

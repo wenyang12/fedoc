@@ -2,6 +2,9 @@
 	min-height: 1010px;
 	padding: 15px;
 }
+.fedoc__body__articles--left__breadcrumb{
+	background-color: #fff;
+}
 .fedoc__body__articles--left {
 	border-right: 1px solid #E9E9E9;
 	padding: 15px;
@@ -68,7 +71,6 @@
 						background-repeat: no-repeat;
 						background-position: right;
 						color: #8c8c8c;
-						cursor: default;
 					}
 					.list__item__summary__desc__time {
 						color: #b5b5b5;

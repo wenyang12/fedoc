@@ -7,11 +7,7 @@ module.exports = function(app) {
         'constant',
         'toasty',
         function($scope, $state, $stateParams, ArticleService, constant, toasty) {
-            $scope.query = {
-                keyword: $stateParams.keyword,
-                page: $stateParams.page,
-                tag: $stateParams.tag
-            };
+
             $scope.list = function(_query) {
                 var query = _.extend($scope.query, _query);
                 $scope._loading = true;
@@ -22,8 +18,21 @@ module.exports = function(app) {
                     $scope.count = data.msg.count;
                 });
             };
-        
+
             $scope.init = function() {
+                $scope.query = {
+                    keyword: $stateParams.keyword,
+                    page: $stateParams.page,
+                    tag: $stateParams.tag
+                };
+                $scope.list();
+            };
+            $scope.initUser = function() {
+                $scope.query = {
+                    keyword: $stateParams.keyword,
+                    page: $stateParams.page,
+                    userId: $stateParams.userId
+                };
                 $scope.list();
             };
 
@@ -61,6 +70,11 @@ module.exports = function(app) {
             templateUrl: '/site/tpls/articles/index.html',
             pageTitle: '文档列表',
             controller: 'ArticleListController'
-        });
+        }).state('viewUserArticles', {
+            url: '/users/:userId/articles?page',
+            templateUrl: '/site/tpls/articles/user.html',
+            controller: 'ArticleListController',
+            pageTitle: '文章'
+        });;
     }]);
 };

@@ -86,7 +86,7 @@ exports.list = function(req, res) {
         limitPage = config.LIST.limitPage,
         keyword = req.param('keyword'),
         tag = req.param('tag');
-    // var userId = req.user._id;
+    var userId = req.param('userId');
     var options = {
         page: page - 1,
         perPage: perPage,
@@ -95,10 +95,10 @@ exports.list = function(req, res) {
     if (keyword) {
         keyword = keyword.toLowerCase();
     }
-    options.criteria = {
-        // user: userId
-    };
-
+    options.criteria = {};
+    if (userId) {
+        options.criteria.user = userId;
+    }
     if (keyword && (typeof keyword !== 'undefined')) {
         options.criteria['$or'] = [];
         var titleObj = {};
@@ -135,6 +135,7 @@ exports.list = function(req, res) {
         }
     });
 };
+
 
 exports.listHot = function(req, res) {
     articleDao.listHot(function(err, data) {
